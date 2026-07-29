@@ -8,12 +8,12 @@ import os
 
 _DUMMY_REQUIRED = {
     "ANTHROPIC_API_KEY": "dummy",
-    "NOTION_API_KEY": "dummy",
-    "NOTION_WATCHLIST_DB_ID": "dummy",
-    "NOTION_CRITERIA_PAGE_ID": "dummy",
-    "NOTION_PARTNERS_DB_ID": "dummy",
-    "NOTION_DB_URL": "dummy",
     "SLACK_WEBHOOK_URL": "dummy",
+    # DATA_SOURCE defaults to "sheets", so its backend vars are the ones required
+    # by default; Notion vars are left unset (optional/lazy per §11).
+    "GOOGLE_SHEETS_ID": "dummy",
+    "GOOGLE_SERVICE_ACCOUNT_JSON": "dummy",
+    "SHEETS_URL": "dummy",
 }
 
 for _key, _value in _DUMMY_REQUIRED.items():

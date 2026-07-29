@@ -1,4 +1,9 @@
-"""Environment configuration for the NOMO Doomscroller pipeline. See SPEC.md §11."""
+"""Environment configuration for the NOMO Doomscroller pipeline. See SPEC.md §11.
+
+Only the env vars for the active DATA_SOURCE backend are required; the inactive
+backend's vars are read but never validated, so an incomplete Notion setup never
+blocks a Sheets-backed run (and vice versa) — see SPEC.md §11's closing note.
+"""
 
 from __future__ import annotations
 
@@ -9,15 +14,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-REQUIRED_VARS = [
-    "ANTHROPIC_API_KEY",
-    "NOTION_API_KEY",
-    "NOTION_WATCHLIST_DB_ID",
-    "NOTION_CRITERIA_PAGE_ID",
-    "NOTION_PARTNERS_DB_ID",
-    "NOTION_DB_URL",
-    "SLACK_WEBHOOK_URL",
-]
+REQUIRED_COMMON_VARS = ["ANTHROPIC_API_KEY", "SLACK_WEBHOOK_URL"]
+
+BACKEND_REQUIRED_VARS = {
+    "sheets": ["GOOGLE_SHEETS_ID", "GOOGLE_SERVICE_ACCOUNT_JSON", "SHEETS_URL"],
+    "notion": [
+        "NOTION_API_KEY",
+        "NOTION_WATCHLIST_DB_ID",
+        "NOTION_CRITERIA_PAGE_ID",
+        "NOTION_PARTNERS_DB_ID",
+        "NOTION_DB_URL",
+    ],
+}
 
 _TRUE_VALUES = {"1", "true", "yes", "on"}
 
@@ -29,19 +37,31 @@ class ConfigError(RuntimeError):
 @dataclass(frozen=True)
 class Config:
     anthropic_api_key: str
-    notion_api_key: str
-    notion_watchlist_db_id: str
-    notion_criteria_page_id: str
-    notion_partners_db_id: str
-    notion_db_url: str
-    slack_webhook_url: str
-
     anthropic_model: str
+    data_source: str  # "sheets" | "notion"
+    slack_webhook_url: str
     news_window_hours: int
     max_items_per_section: int
     monitor_existing_partners: bool
     monitor_max_uses: int
     scout_max_uses: int
+
+    # Sheets backend (§11) — populated if set, required only when data_source == "sheets"
+    google_sheets_id: str | None
+    google_service_account_json: str | None
+    sheets_url: str | None
+
+    # Notion backend (§11) — populated if set, required only when data_source == "notion"
+    notion_api_key: str | None
+    notion_watchlist_db_id: str | None
+    notion_criteria_page_id: str | None
+    notion_partners_db_id: str | None
+    notion_db_url: str | None
+
+    @property
+    def manage_list_url(self) -> str | None:
+        """The 'manage the list' footer link (§9) — resolves per active backend."""
+        return self.sheets_url if self.data_source == "sheets" else self.notion_db_url
 
 
 def _parse_bool(name: str, raw: str, errors: list[str]) -> bool:
@@ -70,11 +90,23 @@ def load_config(env: dict | None = None) -> Config:
     source = os.environ if env is None else env
     errors: list[str] = []
 
-    missing = [name for name in REQUIRED_VARS if not source.get(name)]
+    data_source = source.get("DATA_SOURCE", "sheets").strip().lower()
+    if data_source not in BACKEND_REQUIRED_VARS:
+        errors.append(
+            f"DATA_SOURCE must be one of {sorted(BACKEND_REQUIRED_VARS)}, got {data_source!r}"
+        )
+        backend_required = []
+    else:
+        backend_required = BACKEND_REQUIRED_VARS[data_source]
+
+    required = REQUIRED_COMMON_VARS + backend_required
+    missing = [name for name in required if not source.get(name)]
     if missing:
         errors.append(f"missing required environment variable(s): {', '.join(missing)}")
 
-    required_values = {name: source.get(name, "") for name in REQUIRED_VARS}
+    def optional_str(name: str) -> str | None:
+        value = source.get(name)
+        return value if value else None
 
     anthropic_model = source.get("ANTHROPIC_MODEL", "claude-sonnet-5")
 
@@ -100,19 +132,23 @@ def load_config(env: dict | None = None) -> Config:
         raise ConfigError("; ".join(errors))
 
     return Config(
-        anthropic_api_key=required_values["ANTHROPIC_API_KEY"],
-        notion_api_key=required_values["NOTION_API_KEY"],
-        notion_watchlist_db_id=required_values["NOTION_WATCHLIST_DB_ID"],
-        notion_criteria_page_id=required_values["NOTION_CRITERIA_PAGE_ID"],
-        notion_partners_db_id=required_values["NOTION_PARTNERS_DB_ID"],
-        notion_db_url=required_values["NOTION_DB_URL"],
-        slack_webhook_url=required_values["SLACK_WEBHOOK_URL"],
+        anthropic_api_key=source.get("ANTHROPIC_API_KEY", ""),
         anthropic_model=anthropic_model,
+        data_source=data_source,
+        slack_webhook_url=source.get("SLACK_WEBHOOK_URL", ""),
         news_window_hours=news_window_hours,
         max_items_per_section=max_items_per_section,
         monitor_existing_partners=monitor_existing_partners,
         monitor_max_uses=monitor_max_uses,
         scout_max_uses=scout_max_uses,
+        google_sheets_id=optional_str("GOOGLE_SHEETS_ID"),
+        google_service_account_json=optional_str("GOOGLE_SERVICE_ACCOUNT_JSON"),
+        sheets_url=optional_str("SHEETS_URL"),
+        notion_api_key=optional_str("NOTION_API_KEY"),
+        notion_watchlist_db_id=optional_str("NOTION_WATCHLIST_DB_ID"),
+        notion_criteria_page_id=optional_str("NOTION_CRITERIA_PAGE_ID"),
+        notion_partners_db_id=optional_str("NOTION_PARTNERS_DB_ID"),
+        notion_db_url=optional_str("NOTION_DB_URL"),
     )
 
 

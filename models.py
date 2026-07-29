@@ -75,11 +75,30 @@ class Digest:
 
 @dataclass
 class Criteria:
-    """The parsed criteria/config page (§6.2)."""
+    """The parsed criteria/config source (§6.2) — five sections; industry topics
+    live separately on SourceData (§6.3), not here."""
 
     nomo_context: str = ""
     region_weighting: str = ""
     competitor_criteria: str = ""
     partner_criteria: str = ""
-    industry_topics: list[str] = field(default_factory=list)
     do_not_suggest: list[str] = field(default_factory=list)
+
+
+@dataclass
+class IndustryTopic:
+    """A standing monitoring topic (§6.3), independent of any tracked entity."""
+
+    topic: str
+    notes: str = ""
+
+
+@dataclass
+class SourceData:
+    """The backend-agnostic contract both sources/*.py implementations return (§6.0)."""
+
+    entities: list[Entity] = field(default_factory=list)
+    excluded_names: set[str] = field(default_factory=set)
+    reward_landscape: list[str] = field(default_factory=list)
+    industry_topics: list[IndustryTopic] = field(default_factory=list)
+    criteria: Criteria = field(default_factory=Criteria)

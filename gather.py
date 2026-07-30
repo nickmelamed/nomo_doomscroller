@@ -97,7 +97,7 @@ def _render_prompt(filename: str, **kwargs) -> str:
     return Template(template_text).substitute(**kwargs)
 
 
-def _extract_text(response) -> str:
+def extract_text(response) -> str:
     return "".join(
         block.text for block in response.content if getattr(block, "type", None) == "text"
     )
@@ -108,7 +108,7 @@ def _strip_fences(text: str) -> str:
     return match.group(1).strip() if match else text.strip()
 
 
-def _parse_json_response(text: str) -> dict:
+def parse_json_response(text: str) -> dict:
     candidate = _strip_fences(text)
     try:
         return json.loads(candidate)
@@ -138,7 +138,7 @@ def _call_claude_with_search(client, config: Config, prompt: str, max_uses: int)
             "truncated or an incomplete paused search turn",
             response.stop_reason,
         )
-    return _extract_text(response)
+    return extract_text(response)
 
 
 def _entities_to_monitor(source_data: SourceData, config: Config) -> list[Entity]:
@@ -165,7 +165,7 @@ def monitor_entity(client, entity: Entity, criteria: Criteria, config: Config) -
     )
     try:
         text = _call_claude_with_search(client, config, prompt, config.monitor_max_uses)
-        payload = _parse_json_response(text)
+        payload = parse_json_response(text)
     except Exception:
         logger.exception("monitor call failed for entity %r", entity.name)
         return []
@@ -234,7 +234,7 @@ def monitor_industry_topic(
     )
     try:
         text = _call_claude_with_search(client, config, prompt, INDUSTRY_MAX_USES)
-        payload = _parse_json_response(text)
+        payload = parse_json_response(text)
     except Exception:
         logger.exception("industry call failed for topic %r", topic.topic)
         return []
@@ -304,7 +304,7 @@ def scout_angle(
     )
     try:
         text = _call_claude_with_search(client, config, prompt, config.scout_max_uses)
-        payload = _parse_json_response(text)
+        payload = parse_json_response(text)
     except Exception:
         logger.exception("scout call failed for angle %r", angle)
         return []

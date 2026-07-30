@@ -76,3 +76,39 @@ python main.py
 ```bash
 pytest
 ```
+
+## Scheduling & go-live
+
+`.github/workflows/nomo_doomscroller.yml` runs the pipeline on a weekday cron
+(13:00 UTC ≈ 6:00am PT) and also exposes a manual `workflow_dispatch` trigger for
+testing. One-time setup, in the GitHub repo's **Settings → Secrets and variables →
+Actions**:
+
+- **Secrets** tab — add whichever set your active `DATA_SOURCE` needs (both sets can be
+  populated at once, same as locally): `ANTHROPIC_API_KEY`, `SLACK_WEBHOOK_URL`, and
+  either `GOOGLE_SHEETS_ID` / `GOOGLE_SERVICE_ACCOUNT_JSON` / `SHEETS_URL` or
+  `NOTION_API_KEY` / `NOTION_WATCHLIST_DB_ID` / `NOTION_CRITERIA_PAGE_ID` /
+  `NOTION_TOPICS_DB_ID` / `NOTION_PARTNERS_DB_ID` / `NOTION_DB_URL`.
+- **Variables** tab — add `DATA_SOURCE` (`sheets` or `notion`). This one is a repo
+  **Variable**, not a secret, since it isn't sensitive.
+
+### Before pointing at the real channel
+
+Point `SLACK_WEBHOOK_URL` at a private test channel first and run a few days of
+`workflow_dispatch`, confirming:
+
+- A known-recent-news entity's news actually surfaces.
+- A quiet-week entity does *not* get padded with filler.
+- A do-not-suggest entry never gets surfaced as a candidate.
+- An entity Active only in the Partners source (no Watchlist row) is excluded from
+  scouting.
+- A candidate whose reward category is already covered gets deprioritized versus a
+  genuine gap.
+- Cross-region entities/candidates (including a non-primary-market one) are weighted
+  in ranking, never hard-excluded.
+- If on `DATA_SOURCE=sheets`, the Partners tab's live pull is actually current.
+- The paired-row filter and missing-`Status` fallback on the Partners tab both behave
+  as documented (§6.4).
+
+Only once those hold up: switch `SLACK_WEBHOOK_URL` to the real channel and let the
+`schedule` trigger take over.

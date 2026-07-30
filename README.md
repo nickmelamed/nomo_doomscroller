@@ -36,7 +36,8 @@ Set up **Path A** now. **Path B** can be done whenever Notion workspace access o
    topics database (§6.3), mirroring the Sheets structure.
 2. Create a **Notion internal integration** (requires a **workspace owner**), share the
    new watchlist DB, criteria page, topics DB, and the existing Partners DB with it, and
-   note all four IDs.
+   note all four IDs (`NOTION_TOPICS_DB_ID` isn't in SPEC.md §11's literal var list, but
+   is needed to locate the topics DB — added to close that gap).
 3. To switch over: set `DATA_SOURCE=notion` and fill in the `NOTION_*` secrets below —
    no code changes needed.
 
@@ -54,7 +55,8 @@ See [.env.example](.env.example) for the full list. Required regardless of backe
 `ANTHROPIC_API_KEY`, `SLACK_WEBHOOK_URL`. Required only for the active `DATA_SOURCE`:
 `GOOGLE_SHEETS_ID` / `GOOGLE_SERVICE_ACCOUNT_JSON` / `SHEETS_URL` for `sheets`, or
 `NOTION_API_KEY` / `NOTION_WATCHLIST_DB_ID` / `NOTION_CRITERIA_PAGE_ID` /
-`NOTION_PARTNERS_DB_ID` / `NOTION_DB_URL` for `notion`. Everything else has a
+`NOTION_TOPICS_DB_ID` / `NOTION_PARTNERS_DB_ID` / `NOTION_DB_URL` for `notion`.
+Everything else has a
 code-level default (see `config.py`) and is optional.
 
 > Optional vars are **not** wired into `.github/workflows/nomo_doomscroller.yml`'s

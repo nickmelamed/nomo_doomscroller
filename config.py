@@ -22,6 +22,7 @@ BACKEND_REQUIRED_VARS = {
         "NOTION_API_KEY",
         "NOTION_WATCHLIST_DB_ID",
         "NOTION_CRITERIA_PAGE_ID",
+        "NOTION_TOPICS_DB_ID",
         "NOTION_PARTNERS_DB_ID",
         "NOTION_DB_URL",
     ],
@@ -55,6 +56,10 @@ class Config:
     notion_api_key: str | None
     notion_watchlist_db_id: str | None
     notion_criteria_page_id: str | None
+    # NOTION_TOPICS_DB_ID isn't in §11's literal var list, but §4 Path B says to
+    # "note all four IDs" (watchlist, criteria, topics, partners) — added to
+    # close that gap; confirmed with the user rather than guessed silently.
+    notion_topics_db_id: str | None
     notion_partners_db_id: str | None
     notion_db_url: str | None
 
@@ -147,6 +152,7 @@ def load_config(env: dict | None = None) -> Config:
         notion_api_key=optional_str("NOTION_API_KEY"),
         notion_watchlist_db_id=optional_str("NOTION_WATCHLIST_DB_ID"),
         notion_criteria_page_id=optional_str("NOTION_CRITERIA_PAGE_ID"),
+        notion_topics_db_id=optional_str("NOTION_TOPICS_DB_ID"),
         notion_partners_db_id=optional_str("NOTION_PARTNERS_DB_ID"),
         notion_db_url=optional_str("NOTION_DB_URL"),
     )

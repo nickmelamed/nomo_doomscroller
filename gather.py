@@ -333,11 +333,17 @@ def scout_angle(
     return candidates
 
 
+def known_names(source_data: SourceData) -> set[str]:
+    """All names+aliases NOMO already knows about — tracked entities plus
+    excluded_names (Excluded/Paused/Converted watchlist rows, Active partners).
+    Used both to pre-exclude in scouting prompts (§7 Stage 3, here) and to
+    filter surviving candidates before synthesis (§7 Stage 4, in main.py)."""
+    names = {name for entity in source_data.entities for name in (entity.name, *entity.aliases)}
+    return names | source_data.excluded_names
+
+
 def scout_all(client, source_data: SourceData, config: Config) -> list[Candidate]:
-    tracked_names = {
-        name for entity in source_data.entities for name in (entity.name, *entity.aliases)
-    }
-    tracked_names |= source_data.excluded_names
+    tracked_names = known_names(source_data)
 
     candidates: list[Candidate] = []
     for angle in DISCOVERY_ANGLES:

@@ -15,7 +15,11 @@ from models import Candidate, Digest, DigestItem, Entity, NewsItem, SourceData
 logger = logging.getLogger(__name__)
 
 PROMPTS_DIR = Path(__file__).parent / "prompts"
-SYNTHESIZE_MAX_TOKENS = 8192
+# Generous headroom: a realistic-sized run (a dozen-plus candidates, several
+# news items) plus adaptive thinking can produce a much larger JSON output
+# than small fixtures do — observed a truncated/malformed response at 8192
+# against real data (13 candidates, 8 items).
+SYNTHESIZE_MAX_TOKENS = 16384
 
 DIGEST_SCHEMA = json.dumps(
     {
@@ -122,6 +126,22 @@ def _to_candidate(raw: dict) -> Candidate:
     )
 
 
+def _call_and_parse(client, config: Config, prompt: str) -> dict:
+    response = client.messages.create(
+        model=config.anthropic_model,
+        max_tokens=SYNTHESIZE_MAX_TOKENS,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    if response.stop_reason != "end_turn":
+        logger.warning(
+            "synthesize call ended with stop_reason=%r (not end_turn) — response may be "
+            "truncated mid-JSON",
+            response.stop_reason,
+        )
+    text = extract_text(response)
+    return parse_json_response(text)
+
+
 def synthesize(
     client,
     monitoring_items: list[NewsItem],
@@ -133,7 +153,13 @@ def synthesize(
     """§7 Stage 5 — one Claude call, no tools. Unlike gather.py's per-call
     resilience, a synthesis failure is fatal to the run: it propagates rather
     than being caught, since posting a broken/empty digest is worse than not
-    posting at all (main.py, Phase 7, is where this becomes a non-zero exit)."""
+    posting at all (main.py, Phase 7, is where this becomes a non-zero exit).
+
+    One retry on a JSON parse failure: observed intermittently on large,
+    content-rich payloads (a rare escaping slip in the model's output, not
+    truncation) — a second attempt at the identical prompt is cheap relative
+    to throwing away a whole day's real content. A second consecutive parse
+    failure still propagates."""
     payload = build_payload(monitoring_items, industry_items, candidates, source_data)
     prompt = _render_prompt(
         "synthesize.txt",
@@ -146,13 +172,11 @@ def synthesize(
         payload=json.dumps(payload, indent=2),
     )
 
-    response = client.messages.create(
-        model=config.anthropic_model,
-        max_tokens=SYNTHESIZE_MAX_TOKENS,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = extract_text(response)
-    result = parse_json_response(text)
+    try:
+        result = _call_and_parse(client, config, prompt)
+    except json.JSONDecodeError:
+        logger.warning("synthesize: JSON parse failed, retrying once with the same prompt")
+        result = _call_and_parse(client, config, prompt)
 
     sections = result.get("sections", {})
     return Digest(

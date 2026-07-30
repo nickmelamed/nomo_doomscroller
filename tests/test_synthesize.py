@@ -10,13 +10,18 @@ def text_block(text: str):
 
 
 class FakeMessages:
-    def __init__(self, response_text):
-        self._response_text = response_text
+    """Accepts either a single response text (repeated for every call) or a
+    list of response texts (popped in call order, for testing retries)."""
+
+    def __init__(self, responses):
+        self._queue = list(responses) if isinstance(responses, list) else None
+        self._single = responses if self._queue is None else None
         self.calls = []
 
     def create(self, **kwargs):
         self.calls.append(kwargs)
-        return SimpleNamespace(content=[text_block(self._response_text)], stop_reason="end_turn")
+        text = self._queue.pop(0) if self._queue is not None else self._single
+        return SimpleNamespace(content=[text_block(text)], stop_reason="end_turn")
 
 
 class FakeClient:
@@ -176,10 +181,46 @@ def test_synthesize_strips_leading_prose_before_fenced_json():
 
 def test_synthesize_malformed_json_raises_not_swallowed():
     # Unlike gather.py's per-call resilience, synthesis failures must
-    # propagate — never silently degrade to an empty/broken digest.
-    client = FakeClient("not valid json {{{")
+    # propagate — never silently degrade to an empty/broken digest. Both
+    # attempts (the retry too) return malformed JSON here, so it must raise.
+    client = FakeClient(["not valid json {{{", "still not valid json {{{"])
     try:
         synthesize.synthesize(client, [], [], [], SOURCE_DATA, TEST_CONFIG)
         assert False, "expected an exception to propagate"
     except Exception:
         pass
+    assert len(client.messages.calls) == 2
+
+
+def test_synthesize_retries_once_on_parse_failure_then_succeeds():
+    good_response = json.dumps(
+        {
+            "quiet_day": True,
+            "sections": {
+                "competition": [],
+                "industry": [],
+                "partner_prospects": [],
+                "new_candidates": [],
+            },
+        }
+    )
+    client = FakeClient(["not valid json {{{", good_response])
+
+    digest = synthesize.synthesize(client, [], [], [], SOURCE_DATA, TEST_CONFIG)
+
+    assert digest.quiet_day is True
+    assert len(client.messages.calls) == 2
+
+
+def test_synthesize_does_not_retry_more_than_once():
+    client = FakeClient(["bad {{{", "bad again {{{"])
+
+    raised = False
+    try:
+        synthesize.synthesize(client, [], [], [], SOURCE_DATA, TEST_CONFIG)
+    except Exception:
+        raised = True
+
+    assert raised is True
+    # Exactly 2 calls: the original attempt plus exactly one retry, no more.
+    assert len(client.messages.calls) == 2

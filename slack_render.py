@@ -19,11 +19,23 @@ SECTION_TITLES = {
     "partner_prospects": "Partner prospects",
 }
 
+# Slack rejects a section block whose text exceeds this (400 invalid_blocks).
+# Real content easily gets here with several items; fixture testing with
+# short placeholder text didn't surface it.
+SLACK_SECTION_TEXT_LIMIT = 3000
+
 
 class SlackDeliveryError(RuntimeError):
     """Raised when the Slack webhook POST fails. main.py (Phase 7) is where
     this becomes the program's non-zero exit (§7 Stage 6: "exit non-zero
     only on delivery failure")."""
+
+
+def _escape_mrkdwn(text: str) -> str:
+    """Slack's mrkdwn parser treats &, <, > as syntax (links/mentions) — any
+    dynamic text embedded in an mrkdwn block must have them escaped first, in
+    this order, or Slack rejects the whole payload as invalid_blocks."""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def _truncate(items: list, max_items: int) -> tuple[list, int]:
@@ -33,21 +45,45 @@ def _truncate(items: list, max_items: int) -> tuple[list, int]:
 
 
 def _render_item_line(item: DigestItem) -> str:
-    return f"• *<{item.url}|{item.headline}>* — {item.summary} _({item.source})_"
+    url = _escape_mrkdwn(item.url)
+    headline = _escape_mrkdwn(item.headline)
+    summary = _escape_mrkdwn(item.summary)
+    source = _escape_mrkdwn(item.source)
+    return f"• *<{url}|{headline}>* — {summary} _({source})_"
 
 
 def _render_candidate_line(candidate: Candidate) -> str:
-    return (
-        f"• *{candidate.name}* — {candidate.why_fits} · "
-        f"_proposed {candidate.suggested_type}_ · <{candidate.source_url}|source>"
-    )
+    name = _escape_mrkdwn(candidate.name)
+    why_fits = _escape_mrkdwn(candidate.why_fits)
+    suggested_type = _escape_mrkdwn(candidate.suggested_type)
+    source_url = _escape_mrkdwn(candidate.source_url)
+    return f"• *{name}* — {why_fits} · _proposed {suggested_type}_ · <{source_url}|source>"
 
 
-def _section_block(title: str, lines: list[str], more_count: int) -> dict:
-    text = f"*{title}*\n" + "\n".join(lines)
+def _section_blocks(title: str, lines: list[str], more_count: int) -> list[dict]:
+    """Splits into multiple section blocks if the combined text would exceed
+    Slack's per-block limit — one block per group of lines that fits, with
+    the bold title only on the first."""
+    all_lines = list(lines)
     if more_count:
-        text += f"\n_+{more_count} more_"
-    return {"type": "section", "text": {"type": "mrkdwn", "text": text}}
+        all_lines.append(f"_+{more_count} more_")
+
+    blocks: list[dict] = []
+    current = [f"*{title}*"]
+    current_len = len(current[0])
+
+    for line in all_lines:
+        candidate_len = current_len + 1 + len(line)
+        if candidate_len > SLACK_SECTION_TEXT_LIMIT and len(current) > 1:
+            blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": "\n".join(current)}})
+            current = [line]
+            current_len = len(line)
+        else:
+            current.append(line)
+            current_len = candidate_len
+
+    blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": "\n".join(current)}})
+    return blocks
 
 
 def _header_block(today: date_cls) -> dict:
@@ -59,10 +95,11 @@ def _header_block(today: date_cls) -> dict:
 
 def _footer_block(config: Config, digest: Digest) -> dict:
     counts = digest.tracking_counts
+    manage_list_url = _escape_mrkdwn(config.manage_list_url or "")
     text = (
         f"Tracking {counts.get('competitors', 0)} competitors · "
         f"{counts.get('partner_prospects', 0)} partner prospects · "
-        f"<{config.manage_list_url}|manage the list>"
+        f"<{manage_list_url}|manage the list>"
     )
     return {"type": "context", "elements": [{"type": "mrkdwn", "text": text}]}
 
@@ -91,13 +128,13 @@ def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) 
         if not items:
             continue
         shown, more = _truncate(items, config.max_items_per_section)
-        blocks.append(_section_block(title, [_render_item_line(i) for i in shown], more))
+        blocks.extend(_section_blocks(title, [_render_item_line(i) for i in shown], more))
 
     if digest.new_candidates:
         shown, more = _truncate(digest.new_candidates, config.max_items_per_section)
         blocks.append({"type": "divider"})
-        blocks.append(
-            _section_block("New candidates", [_render_candidate_line(c) for c in shown], more)
+        blocks.extend(
+            _section_blocks("New candidates", [_render_candidate_line(c) for c in shown], more)
         )
         blocks.append(
             {

@@ -117,7 +117,15 @@ def parse_json_response(text: str) -> dict:
         # slice from the first '{' to the last '}' and try again.
         start, end = candidate.find("{"), candidate.rfind("}")
         if start != -1 and end != -1 and end > start:
-            return json.loads(candidate[start : end + 1])
+            try:
+                return json.loads(candidate[start : end + 1])
+            except json.JSONDecodeError:
+                # Both attempts failed — log the raw text so a real (rather
+                # than reproduced) failure is diagnosable from logs alone;
+                # observed intermittently on large, content-rich responses.
+                logger.error("could not parse JSON response, raw text was:\n%s", text)
+                raise
+        logger.error("could not parse JSON response, raw text was:\n%s", text)
         raise
 
 

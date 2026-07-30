@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import date
 
 import pytest
@@ -109,6 +110,77 @@ def test_item_line_format():
         "• *<https://example.com/uber|Uber One expands rewards>* — "
         "One-sentence summary. _(TechCrunch)_" in section["text"]["text"]
     )
+
+
+def test_escapes_ampersand_and_angle_brackets_in_item_text():
+    # Slack's mrkdwn parser treats &, <, > as syntax — real headlines/
+    # summaries routinely contain these (e.g. "Snap & TikTok settle <case>")
+    # and an unescaped one causes Slack to reject the whole payload.
+    digest = Digest(
+        quiet_day=False,
+        competition=[
+            digest_item(
+                "Snap & TikTok settle <landmark> case",
+                summary="Reported at >$1B, per <the filing>.",
+                source="Reuters & AP",
+            )
+        ],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
+    section = next(b for b in blocks if b["type"] == "section" and "Competition" in b["text"]["text"])
+    text = section["text"]["text"]
+
+    assert "Snap &amp; TikTok settle &lt;landmark&gt; case" in text
+    assert "&gt;$1B" in text
+    assert "&lt;the filing&gt;" in text
+    assert "Reuters &amp; AP" in text
+    # No raw unescaped &, <, > from the dynamic content should survive.
+    assert "Snap & TikTok" not in text
+    assert "<landmark>" not in text
+
+
+def test_escapes_candidate_and_footer_text():
+    digest = Digest(
+        quiet_day=False,
+        new_candidates=[
+            candidate("R&D Co", why_fits="Fits because of A&B synergies.")
+        ],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
+    candidates_section = next(
+        b for b in blocks if b["type"] == "section" and "New candidates" in b["text"]["text"]
+    )
+    assert "R&amp;D Co" in candidates_section["text"]["text"]
+    assert "A&amp;B synergies" in candidates_section["text"]["text"]
+
+
+def test_splits_section_into_multiple_blocks_when_over_slack_text_limit():
+    # 6 items with long realistic-length text can exceed Slack's 3000-char
+    # per-block limit when packed into one block, as fixture testing (short
+    # placeholder text) never surfaced.
+    long_config = replace(TEST_CONFIG, max_items_per_section=6)
+    long_summary = "x" * 600
+    items = [
+        digest_item(f"Headline {i}", url=f"https://example.com/{i}", summary=long_summary)
+        for i in range(6)
+    ]
+    digest = Digest(
+        quiet_day=False, competition=items, tracking_counts={"competitors": 6, "partner_prospects": 0}
+    )
+    blocks = slack_render.build_blocks(digest, long_config, today=TODAY)
+    competition_blocks = [
+        b for b in blocks if b["type"] == "section" and "Headline" in b["text"]["text"]
+    ]
+
+    assert len(competition_blocks) > 1
+    for block in competition_blocks:
+        assert len(block["text"]["text"]) <= slack_render.SLACK_SECTION_TEXT_LIMIT
+    # No content lost across the split.
+    combined = "\n".join(b["text"]["text"] for b in competition_blocks)
+    for i in range(6):
+        assert f"Headline {i}" in combined
 
 
 def test_truncates_to_max_items_per_section_with_more_line():

@@ -19,6 +19,7 @@ TEST_CONFIG = Config(
     monitor_existing_partners=False,
     monitor_max_uses=3,
     scout_max_uses=8,
+    synthesis_verbose_log=False,
     google_sheets_id="sheet-id",
     google_service_account_json="{}",
     sheets_url="https://docs.google.com/spreadsheets/d/abc123",

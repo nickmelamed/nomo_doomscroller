@@ -100,6 +100,32 @@ def test_partners_source_only_exclusion_no_watchlist_row():
     assert survivors == []
 
 
+def test_duplicate_candidate_within_batch_is_dropped(caplog):
+    # Different scout angles frequently rediscover the same real entity —
+    # Stage 4 must dedupe candidates against each other, not just against
+    # already-tracked/excluded names.
+    source_data = make_source_data()
+    candidates = [
+        candidate("Dayo (Dayo Deals)", source_url="https://example.com/a"),
+        candidate("Dayo (Dayo Deals)", source_url="https://example.com/b"),
+    ]
+
+    with caplog.at_level(logging.INFO):
+        survivors = main.filter_candidates(candidates, source_data)
+
+    assert len(survivors) == 1
+    assert survivors[0].source_url == "https://example.com/a"
+    assert "duplicate of already-surfaced candidate" in caplog.text
+
+
+def test_fuzzy_duplicate_candidate_within_batch_is_dropped():
+    source_data = make_source_data()
+    candidates = [candidate("Dayo Deals, Inc."), candidate("Dayo Deals")]
+
+    survivors = main.filter_candidates(candidates, source_data)
+    assert len(survivors) == 1
+
+
 def test_multiple_candidates_mixed_survival():
     source_data = make_source_data()
     candidates = [candidate("Uber"), candidate("Fever"), candidate("Lyft")]

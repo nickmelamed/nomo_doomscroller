@@ -52,7 +52,8 @@ SOURCE_DATA = SourceData(
     criteria=Criteria(nomo_context="NOMO context.", region_weighting="BR is primary."),
 )
 
-TEST_CONFIG = SimpleNamespace(anthropic_model="claude-sonnet-5")
+TEST_CONFIG = SimpleNamespace(anthropic_model="claude-sonnet-5", synthesis_verbose_log=False)
+VERBOSE_CONFIG = SimpleNamespace(anthropic_model="claude-sonnet-5", synthesis_verbose_log=True)
 
 
 def test_compute_tracking_counts_only_counts_active_watchlist_rows():
@@ -210,6 +211,231 @@ def test_synthesize_retries_once_on_parse_failure_then_succeeds():
 
     assert digest.quiet_day is True
     assert len(client.messages.calls) == 2
+
+
+def _candidate(name: str, confidence: str, why_fits: str) -> Candidate:
+    return Candidate(
+        name=name,
+        suggested_type="Partner prospect",
+        region="BR",
+        why_fits=why_fits,
+        source_url=f"https://example.com/{name.lower()}",
+        confidence=confidence,
+    )
+
+
+VERBOSE_CANDIDATES = [
+    _candidate("StrongCo", "high", "Concrete overlap with reward lineup gap."),
+    _candidate("SolidCo", "high", "Clear regional fit and tradeable inventory."),
+    _candidate("MaybeCo", "medium", "Plausible but thin why_fits."),
+    _candidate("MaybeTwoCo", "medium", "Some signal, unclear fit."),
+    _candidate("VagueCo", "low", "Generic, little differentiation."),
+    _candidate("OffRegionCo", "low", "Wrong region for current weighting."),
+    _candidate("WeakCo", "low", "Barely resembles a fit."),
+    _candidate("ThinCo", "medium", "Not enough detail to judge."),
+]
+
+
+def _verbose_response(accepted: list[str], rejected: list[tuple[str, str]]) -> str:
+    return json.dumps(
+        {
+            "quiet_day": False,
+            "sections": {
+                "competition": [],
+                "industry": [],
+                "partner_prospects": [],
+                "new_candidates": [
+                    {
+                        "name": name,
+                        "suggested_type": "Partner prospect",
+                        "region": "BR",
+                        "why_fits": "Fits.",
+                        "source_url": f"https://example.com/{name.lower()}",
+                    }
+                    for name in accepted
+                ],
+            },
+            "rejected_candidates": [{"name": name, "reason": reason} for name, reason in rejected],
+        }
+    )
+
+
+def test_synthesize_verbose_off_ignores_rejected_candidates(caplog):
+    response = _verbose_response(
+        accepted=["StrongCo"],
+        rejected=[("VagueCo", "generic why_fits")],
+    )
+    client = FakeClient(response)
+
+    with caplog.at_level("INFO"):
+        digest = synthesize.synthesize(
+            client, [], [], VERBOSE_CANDIDATES, SOURCE_DATA, TEST_CONFIG
+        )
+
+    assert [c.name for c in digest.new_candidates] == ["StrongCo"]
+    assert "verbose: candidate rejected" not in caplog.text
+
+
+def test_synthesize_verbose_on_logs_every_rejected_candidate(caplog):
+    accepted = ["StrongCo", "SolidCo"]
+    rejected = [
+        ("MaybeCo", "thin why_fits"),
+        ("MaybeTwoCo", "unclear fit"),
+        ("VagueCo", "generic, little differentiation"),
+        ("OffRegionCo", "wrong region for current weighting"),
+        ("WeakCo", "barely resembles a fit"),
+        ("ThinCo", "not enough detail to judge"),
+    ]
+    response = _verbose_response(accepted=accepted, rejected=rejected)
+    client = FakeClient(response)
+
+    with caplog.at_level("INFO"):
+        digest = synthesize.synthesize(
+            client, [], [], VERBOSE_CANDIDATES, SOURCE_DATA, VERBOSE_CONFIG
+        )
+
+    assert [c.name for c in digest.new_candidates] == accepted
+    for name, reason in rejected:
+        assert f"name={name!r}" in caplog.text
+        assert f"reason={reason!r}" in caplog.text
+    # Digest's shape is untouched by verbose mode — no new attribute leaks in.
+    assert not hasattr(digest, "rejected_candidates")
+
+    all_accounted_for = set(accepted) | {name for name, _ in rejected}
+    assert all_accounted_for == {c.name for c in VERBOSE_CANDIDATES}
+
+
+def test_synthesize_verbose_on_missing_field_does_not_crash(caplog):
+    # Model ignored the verbose instructions and returned no rejected_candidates
+    # key at all — must not crash, just treated as empty.
+    response = json.dumps(
+        {
+            "quiet_day": False,
+            "sections": {
+                "competition": [],
+                "industry": [],
+                "partner_prospects": [],
+                "new_candidates": [],
+            },
+        }
+    )
+    client = FakeClient(response)
+
+    with caplog.at_level("INFO"):
+        digest = synthesize.synthesize(client, [], [], [], SOURCE_DATA, VERBOSE_CONFIG)
+
+    assert digest.new_candidates == []
+    assert "verbose: candidate rejected" not in caplog.text
+
+
+def test_render_prompt_includes_verbose_instructions_when_enabled():
+    prompt = synthesize._render_prompt(
+        "synthesize.txt",
+        nomo_context="ctx",
+        region_weighting="rw",
+        competitor_criteria_summary="Competes for youth attention.",
+        partner_criteria_summary="Has tradeable reward inventory.",
+        reward_landscape="none yet",
+        schema=synthesize.DIGEST_SCHEMA,
+        verbose_instructions=synthesize.VERBOSE_INSTRUCTIONS_BLOCK,
+        payload="{}",
+    )
+    assert "rejected_candidates" in prompt
+
+
+def test_render_prompt_omits_verbose_instructions_when_disabled():
+    prompt = synthesize._render_prompt(
+        "synthesize.txt",
+        nomo_context="ctx",
+        region_weighting="rw",
+        competitor_criteria_summary="Competes for youth attention.",
+        partner_criteria_summary="Has tradeable reward inventory.",
+        reward_landscape="none yet",
+        schema=synthesize.DIGEST_SCHEMA,
+        verbose_instructions="",
+        payload="{}",
+    )
+    assert "rejected_candidates" not in prompt
+
+
+def test_one_line_summary_takes_first_sentence():
+    text = "Competes for youth loyalty attention. Also consider adjacent EdTech."
+    assert synthesize._one_line_summary(text) == "Competes for youth loyalty attention."
+
+
+def test_one_line_summary_truncates_long_single_sentence():
+    text = "x" * 300
+    summary = synthesize._one_line_summary(text, max_len=20)
+    assert summary == "x" * 20 + "..."
+
+
+def test_one_line_summary_handles_empty_text():
+    assert synthesize._one_line_summary("") == "none specified"
+
+
+def test_synthesize_prompt_includes_confidence_guidance_and_criteria_summary():
+    criteria = Criteria(
+        nomo_context="NOMO context.",
+        region_weighting="BR is primary.",
+        competitor_criteria="Competes for youth loyalty attention. More detail here.",
+        partner_criteria="Has tradeable reward inventory. More detail here.",
+    )
+    source_data = SourceData(entities=[], excluded_names=set(), criteria=criteria)
+
+    captured = {}
+    real_render = synthesize._render_prompt
+
+    def spy(filename, **kwargs):
+        captured.update(kwargs)
+        return real_render(filename, **kwargs)
+
+    synthesize._render_prompt = spy
+    try:
+        response = json.dumps(
+            {
+                "quiet_day": True,
+                "sections": {
+                    "competition": [],
+                    "industry": [],
+                    "partner_prospects": [],
+                    "new_candidates": [],
+                },
+            }
+        )
+        client = FakeClient(response)
+        synthesize.synthesize(client, [], [], [], source_data, TEST_CONFIG)
+    finally:
+        synthesize._render_prompt = real_render
+
+    assert captured["competitor_criteria_summary"] == "Competes for youth loyalty attention."
+    assert captured["partner_criteria_summary"] == "Has tradeable reward inventory."
+    assert "confidence" in real_render(
+        "synthesize.txt",
+        nomo_context="ctx",
+        region_weighting="rw",
+        competitor_criteria_summary="c",
+        partner_criteria_summary="p",
+        reward_landscape="none yet",
+        schema=synthesize.DIGEST_SCHEMA,
+        verbose_instructions="",
+        payload="{}",
+    )
+
+
+def test_render_prompt_includes_recency_ranking_guidance():
+    prompt = synthesize._render_prompt(
+        "synthesize.txt",
+        nomo_context="ctx",
+        region_weighting="rw",
+        competitor_criteria_summary="c",
+        partner_criteria_summary="p",
+        reward_landscape="none yet",
+        schema=synthesize.DIGEST_SCHEMA,
+        verbose_instructions="",
+        payload="{}",
+    )
+    assert "published" in prompt
+    assert "more recently published items higher" in prompt
 
 
 def test_synthesize_does_not_retry_more_than_once():

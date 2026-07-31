@@ -36,6 +36,7 @@ def test_documented_defaults():
     assert cfg.monitor_existing_partners is False
     assert cfg.monitor_max_uses == 3
     assert cfg.scout_max_uses == 8
+    assert cfg.synthesis_verbose_log is True
 
 
 def test_optional_vars_override_defaults():
@@ -47,6 +48,7 @@ def test_optional_vars_override_defaults():
         "MONITOR_EXISTING_PARTNERS": "true",
         "MONITOR_MAX_USES": "4",
         "SCOUT_MAX_USES": "12",
+        "SYNTHESIS_VERBOSE_LOG": "false",
     }
     cfg = load_config(env=env)
 
@@ -56,6 +58,7 @@ def test_optional_vars_override_defaults():
     assert cfg.monitor_existing_partners is True
     assert cfg.monitor_max_uses == 4
     assert cfg.scout_max_uses == 12
+    assert cfg.synthesis_verbose_log is False
 
 
 def test_missing_common_required_vars_raises_combined_error():

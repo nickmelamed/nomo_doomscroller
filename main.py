@@ -55,10 +55,13 @@ def _headlines_match(a: str, b: str) -> bool:
 def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> list[Candidate]:
     """§7 Stage 4: drop candidates whose name fuzzy-matches anything already
     tracked (Watchlist + aliases) or excluded (Excluded/Paused/Converted
-    watchlist rows, Active Partners-source rows)."""
+    watchlist rows, Active Partners-source rows) — and also drop candidates
+    that duplicate another candidate already surfaced in this same batch
+    (different scout angles frequently rediscover the same entity), so
+    synthesis doesn't have to notice and self-merge duplicates itself."""
     known = known_names(source_data)
 
-    survivors = []
+    survivors: list[Candidate] = []
     for candidate in candidates:
         match = next((name for name in known if _names_match(candidate.name, name)), None)
         if match is not None:
@@ -66,6 +69,17 @@ def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> l
                 "dedup: dropping candidate %r — matches already-known name %r",
                 candidate.name,
                 match,
+            )
+            continue
+        duplicate = next(
+            (existing for existing in survivors if _names_match(candidate.name, existing.name)),
+            None,
+        )
+        if duplicate is not None:
+            logger.info(
+                "dedup: dropping candidate %r — duplicate of already-surfaced candidate %r",
+                candidate.name,
+                duplicate.name,
             )
             continue
         survivors.append(candidate)

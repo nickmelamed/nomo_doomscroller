@@ -21,6 +21,16 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 # against real data (13 candidates, 8 items).
 SYNTHESIZE_MAX_TOKENS = 16384
 
+VERBOSE_INSTRUCTIONS_BLOCK = (
+    "\nAlso include a top-level `rejected_candidates` array: one entry "
+    '{"name": "...", "reason": "..."} for every candidate in the input '
+    '`candidates` list that did NOT survive into `new_candidates`, with a '
+    "one-line reason it was cut (e.g. off-criteria, vague why_fits, weak "
+    "region fit, too similar to an existing partner/competitor). Every input "
+    "candidate must appear in exactly one of `new_candidates` or "
+    "`rejected_candidates`, never both, never neither.\n"
+)
+
 DIGEST_SCHEMA = json.dumps(
     {
         "quiet_day": False,
@@ -52,6 +62,19 @@ DIGEST_SCHEMA = json.dumps(
 def _render_prompt(filename: str, **kwargs) -> str:
     template_text = (PROMPTS_DIR / filename).read_text()
     return Template(template_text).substitute(**kwargs)
+
+
+def _one_line_summary(text: str, max_len: int = 160) -> str:
+    """Compresses a criteria section down to roughly its first sentence, so
+    synthesis can be anchored to the same fit bar scouting used without
+    re-feeding the full criteria text. Deterministic — no extra Claude call."""
+    text = text.strip()
+    if not text:
+        return "none specified"
+    first_sentence = text.split(". ")[0].split("\n")[0].strip().rstrip(".")
+    if len(first_sentence) > max_len:
+        return first_sentence[:max_len].rstrip() + "..."
+    return first_sentence + "."
 
 
 def _entity_lookup(source_data: SourceData) -> dict[str, Entity]:
@@ -165,10 +188,13 @@ def synthesize(
         "synthesize.txt",
         nomo_context=source_data.criteria.nomo_context,
         region_weighting=source_data.criteria.region_weighting,
+        competitor_criteria_summary=_one_line_summary(source_data.criteria.competitor_criteria),
+        partner_criteria_summary=_one_line_summary(source_data.criteria.partner_criteria),
         reward_landscape=(
             "; ".join(source_data.reward_landscape) if source_data.reward_landscape else "none yet"
         ),
         schema=DIGEST_SCHEMA,
+        verbose_instructions=VERBOSE_INSTRUCTIONS_BLOCK if config.synthesis_verbose_log else "",
         payload=json.dumps(payload, indent=2),
     )
 
@@ -177,6 +203,14 @@ def synthesize(
     except json.JSONDecodeError:
         logger.warning("synthesize: JSON parse failed, retrying once with the same prompt")
         result = _call_and_parse(client, config, prompt)
+
+    if config.synthesis_verbose_log:
+        for entry in result.get("rejected_candidates", []):
+            logger.info(
+                "verbose: candidate rejected name=%r reason=%r",
+                entry.get("name"),
+                entry.get("reason"),
+            )
 
     sections = result.get("sections", {})
     return Digest(

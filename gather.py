@@ -8,6 +8,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from string import Template
+from urllib.parse import urlparse
 
 from config import Config
 from models import Candidate, Criteria, Entity, IndustryTopic, NewsItem, SourceData
@@ -131,6 +132,33 @@ def parse_json_response(text: str) -> dict:
 
 def _valid_url(url) -> bool:
     return isinstance(url, str) and url.strip().lower().startswith(("http://", "https://"))
+
+
+_SOURCE_STOPWORDS = {"the", "news", "daily", "times", "post", "press", "online", "magazine"}
+
+
+def _slugify_source(source: str) -> str:
+    words = re.sub(r"[^a-z0-9\s]", "", source.lower()).split()
+    return "".join(word for word in words if word not in _SOURCE_STOPWORDS)
+
+
+def _domain_for_url(url: str) -> str:
+    domain = urlparse(url).netloc.lower()
+    return domain[4:] if domain.startswith("www.") else domain
+
+
+def _source_plausibly_matches_domain(source: str, url: str) -> bool:
+    """Cheap, permissive sanity check (§7 v2 item 4): flags an obviously wrong
+    outlet/URL attribution for visibility, without a curated outlet registry
+    to safely drop on — so this only ever logs, never drops an item. A false
+    positive here (dropping a real item) is worse than a false negative
+    (letting an unverifiable-but-real one through)."""
+    slug = _slugify_source(source)
+    domain = _domain_for_url(url)
+    if not slug or not domain:
+        return True
+    domain_label = domain.split(".")[0]
+    return slug in domain or domain_label in slug
 
 
 def _call_claude_with_search(client, config: Config, prompt: str, max_uses: int) -> str:

@@ -46,6 +46,7 @@ class Config:
     monitor_existing_partners: bool
     monitor_max_uses: int
     scout_max_uses: int
+    synthesis_verbose_log: bool
 
     # Sheets backend (§11) — populated if set, required only when data_source == "sheets"
     google_sheets_id: str | None
@@ -132,6 +133,9 @@ def load_config(env: dict | None = None) -> Config:
     scout_max_uses = _parse_int(
         "SCOUT_MAX_USES", source.get("SCOUT_MAX_USES", "8"), errors
     )
+    synthesis_verbose_log = _parse_bool(
+        "SYNTHESIS_VERBOSE_LOG", source.get("SYNTHESIS_VERBOSE_LOG", "true"), errors
+    )
 
     if errors:
         raise ConfigError("; ".join(errors))
@@ -146,6 +150,7 @@ def load_config(env: dict | None = None) -> Config:
         monitor_existing_partners=monitor_existing_partners,
         monitor_max_uses=monitor_max_uses,
         scout_max_uses=scout_max_uses,
+        synthesis_verbose_log=synthesis_verbose_log,
         google_sheets_id=optional_str("GOOGLE_SHEETS_ID"),
         google_service_account_json=optional_str("GOOGLE_SERVICE_ACCOUNT_JSON"),
         sheets_url=optional_str("SHEETS_URL"),

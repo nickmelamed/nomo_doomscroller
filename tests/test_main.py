@@ -20,8 +20,9 @@ EMPTY_STATE = {"seen_stories": {}, "last_success": None}
 
 def install_state(monkeypatch, initial_state=None):
     """Stubs state persistence so tests never touch the real filesystem;
-    returns a dict tracking whether save_state was called and with what."""
-    saved = {"called": False, "state": None}
+    returns a dict tracking whether save_state/save_digest_archive were
+    called and with what."""
+    saved = {"called": False, "state": None, "archive_called": False, "archived_digest": None}
 
     def fake_load_state():
         return dict(initial_state) if initial_state is not None else dict(EMPTY_STATE)
@@ -30,8 +31,13 @@ def install_state(monkeypatch, initial_state=None):
         saved["called"] = True
         saved["state"] = state
 
+    def fake_save_digest_archive(digest, run_date):
+        saved["archive_called"] = True
+        saved["archived_digest"] = digest
+
     monkeypatch.setattr(main.state_module, "load_state", fake_load_state)
     monkeypatch.setattr(main.state_module, "save_state", fake_save_state)
+    monkeypatch.setattr(main.state_module, "save_digest_archive", fake_save_digest_archive)
     return saved
 
 
@@ -183,6 +189,8 @@ def test_state_is_saved_only_after_full_success(monkeypatch):
     assert exit_code == 0
     assert saved_state["called"] is True
     assert saved_state["state"]["last_success"] is not None
+    assert saved_state["archive_called"] is True
+    assert saved_state["archived_digest"] is EMPTY_DIGEST
 
 
 def test_state_is_not_saved_when_stage5_fails(monkeypatch):
@@ -209,6 +217,7 @@ def test_state_is_not_saved_when_stage5_fails(monkeypatch):
 
     assert exit_code == 1
     assert saved_state["called"] is False
+    assert saved_state["archive_called"] is False
 
 
 def test_state_is_not_saved_when_stage6_fails(monkeypatch):
@@ -224,6 +233,7 @@ def test_state_is_not_saved_when_stage6_fails(monkeypatch):
 
     assert exit_code == 1
     assert saved_state["called"] is False
+    assert saved_state["archive_called"] is False
 
 
 def test_record_seen_stories_adds_new_entries():

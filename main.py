@@ -274,6 +274,11 @@ def run() -> int:
         # posted digest into a failing run — log and move on.
         logger.exception("failed to save persisted state — digest was still posted successfully")
 
+    try:
+        state_module.save_digest_archive(digest, today)
+    except Exception:
+        logger.exception("failed to archive digest — digest was still posted successfully")
+
     return 0
 
 

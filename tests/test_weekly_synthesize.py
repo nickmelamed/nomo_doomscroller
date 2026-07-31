@@ -104,6 +104,18 @@ def test_build_weekly_rollup_empty_week_returns_empty_rollup():
     assert rollup.themes == []
 
 
+def test_render_prompt_warns_against_overstating_recurrence():
+    prompt = weekly_synthesize._render_prompt(
+        "weekly_rollup.txt",
+        week_of="2026-07-20",
+        days_covered=5,
+        schema=weekly_synthesize.WEEKLY_ROLLUP_SCHEMA,
+        payload="[]",
+    )
+    assert "only" in prompt and "genuinely" in prompt
+    assert "more than one day's digest" in prompt
+
+
 def test_build_weekly_rollup_sends_daily_digests_in_payload():
     response = json.dumps(
         {

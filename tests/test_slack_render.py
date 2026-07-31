@@ -351,6 +351,30 @@ def test_weekly_sections_and_notable_candidates_render():
     assert any(b["type"] == "divider" for b in blocks)
 
 
+def test_weekly_notable_candidates_has_proposed_only_note():
+    rollup = WeeklyRollup(week_of="2026-07-20", notable_candidates=[candidate("ExampleCo")])
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    note_block = next(
+        b
+        for b in blocks
+        if b["type"] == "context" and "Proposed only" in b["elements"][0]["text"]
+    )
+    assert "add via the watchlist" in note_block["elements"][0]["text"]
+
+
+def test_weekly_footer_present_normal_and_quiet():
+    normal = WeeklyRollup(week_of="2026-07-20", competition=[digest_item("Uber news")])
+    quiet = WeeklyRollup(week_of="2026-07-20")
+
+    for rollup in (normal, quiet):
+        blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+        footer = blocks[-1]
+        assert footer["type"] == "context"
+        assert "manage the list" in footer["elements"][0]["text"]
+        assert TEST_CONFIG.sheets_url in footer["elements"][0]["text"]
+
+
 def test_weekly_partial_coverage_note():
     rollup = WeeklyRollup(week_of="2026-07-20", competition=[digest_item("Uber news")])
     blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG, days_covered=3)

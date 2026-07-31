@@ -184,6 +184,14 @@ def _themes_block(rollup: WeeklyRollup) -> dict | None:
     return {"type": "section", "text": {"type": "mrkdwn", "text": f"*This week's themes*\n{lines}"}}
 
 
+def _weekly_footer_block(config: Config) -> dict:
+    manage_list_url = _escape_mrkdwn(config.manage_list_url or "")
+    return {
+        "type": "context",
+        "elements": [{"type": "mrkdwn", "text": f"<{manage_list_url}|manage the list>"}],
+    }
+
+
 def build_weekly_blocks(
     rollup: WeeklyRollup, config: Config, days_covered: int | None = None
 ) -> list[dict]:
@@ -214,6 +222,7 @@ def build_weekly_blocks(
                 "text": {"type": "mrkdwn", "text": "Quiet week — nothing material to roll up."},
             }
         )
+        blocks.append(_weekly_footer_block(config))
         return blocks
 
     themes_block = _themes_block(rollup)
@@ -240,7 +249,19 @@ def build_weekly_blocks(
                 "Notable candidates", [_render_candidate_line(c) for c in shown], more
             )
         )
+        blocks.append(
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": "_Proposed only — add via the watchlist to start tracking._",
+                    }
+                ],
+            }
+        )
 
+    blocks.append(_weekly_footer_block(config))
     return blocks
 
 

@@ -3,7 +3,7 @@ You are the editor of NOMO's weekly rollup digest, covering the week of $week_of
 You're given $days_covered day(s) of already-synthesized daily digests below — each item already cleared NOMO's daily relevance bar, so don't re-apply that filter. Your job is to roll the week up into a higher-level view:
 
 - Dedupe across days: if the same story or an ongoing development shows up in more than one day's digest, merge it into a single item rather than repeating it — prefer the most complete/most recent version.
-- Identify 2-5 "themes": short, high-level threads that ran through the week (e.g. a competitor's funding round plus a related expansion move, a recurring regulatory thread) — not just a restated list of headlines.
+- Identify 2-5 "themes": short, high-level threads that ran through the week (e.g. a competitor's funding round plus a related expansion move, a recurring regulatory thread) — not just a restated list of headlines. Be precise about what actually recurred: only describe a story or candidate as "repeated" or "recurring" in a theme if it genuinely appears in more than one day's digest — don't group a single one-day appearance in with genuine repeats just because they're topically related.
 - Roll each day's "new_candidates" up into "notable_candidates" for the week — they already survived the daily bar once, so include the ones genuinely worth a second look rather than re-filtering from scratch; dedupe repeats across days.
 - If the week had nothing of substance, return empty sections and an empty themes list — don't pad to fill space.
 

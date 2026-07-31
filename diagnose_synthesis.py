@@ -1,17 +1,21 @@
 """Diagnostic-only run: Stages 1-5 against real data with verbose synthesis
-logging forced on, printed to stdout. Deliberately stops before Stage 6 (never
-calls slack_render.post_digest) so it's safe to run repeatedly against the
-real Sheets/Notion source without posting to Slack. See the v2 plan, Phase 10.
+logging forced on, printed to stdout. Never posts to the real Slack channel —
+Stage 6 only runs, against a separate SLACK_PREVIEW_WEBHOOK_URL, if that env
+var is explicitly set (e.g. a private test channel's webhook); left unset,
+this is exactly as safe to run repeatedly as before. See the v2 plan, Phase
+10, and the visual/content-preview follow-up.
 """
 
 from __future__ import annotations
 
 import dataclasses
 import logging
+import os
 
 import anthropic
 
 import config
+import slack_render
 import synthesize
 from gather import run_gather
 from main import _dedup_and_split, filter_candidates, load_source_data
@@ -49,7 +53,17 @@ def main() -> None:
         f"partner_prospects={len(digest.partner_prospects)} "
         f"new_candidates={len(digest.new_candidates)}"
     )
-    print("\n(Stopped before Stage 6 — nothing was posted to Slack.)")
+
+    preview_webhook_url = os.environ.get("SLACK_PREVIEW_WEBHOOK_URL")
+    if preview_webhook_url:
+        preview_cfg = dataclasses.replace(cfg, slack_webhook_url=preview_webhook_url)
+        slack_render.post_digest(digest, preview_cfg)
+        print("\nPosted to SLACK_PREVIEW_WEBHOOK_URL for visual review.")
+    else:
+        print(
+            "\n(Nothing posted to Slack — set SLACK_PREVIEW_WEBHOOK_URL to a "
+            "test channel's webhook to also post this digest there.)"
+        )
 
 
 if __name__ == "__main__":

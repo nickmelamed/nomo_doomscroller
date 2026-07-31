@@ -8,7 +8,7 @@ from datetime import date as date_cls
 import httpx
 
 from config import Config
-from models import Candidate, Digest, DigestItem
+from models import Candidate, Digest, DigestItem, WeeklyRollup
 
 logger = logging.getLogger(__name__)
 
@@ -165,3 +165,97 @@ def post_digest(digest: Digest, config: Config, today: date_cls | None = None) -
             f"Slack webhook returned {response.status_code}: {response.text}"
         )
     logger.info("posted digest to Slack (%d blocks)", len(blocks))
+
+
+def _weekly_header_block(rollup: WeeklyRollup) -> dict:
+    return {
+        "type": "header",
+        "text": {
+            "type": "plain_text",
+            "text": f"\U0001f4f1 NOMO Doomscroller — Week of {rollup.week_of} (here's what you missed)",
+        },
+    }
+
+
+def _themes_block(rollup: WeeklyRollup) -> dict | None:
+    if not rollup.themes:
+        return None
+    lines = "\n".join(f"• {_escape_mrkdwn(t)}" for t in rollup.themes)
+    return {"type": "section", "text": {"type": "mrkdwn", "text": f"*This week's themes*\n{lines}"}}
+
+
+def build_weekly_blocks(
+    rollup: WeeklyRollup, config: Config, days_covered: int | None = None
+) -> list[dict]:
+    """v2 Phase 19 — reuses the same section-rendering helpers as the daily
+    digest (_render_item_line, _render_candidate_line, _section_blocks)."""
+    blocks: list[dict] = [_weekly_header_block(rollup)]
+
+    if days_covered is not None and days_covered < 5:
+        blocks.append(
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": f"_Covering {days_covered} of 5 weekdays archived this period._",
+                    }
+                ],
+            }
+        )
+
+    has_content = bool(
+        rollup.competition or rollup.industry or rollup.partner_prospects or rollup.notable_candidates
+    )
+    if not has_content:
+        blocks.append(
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": "Quiet week — nothing material to roll up."},
+            }
+        )
+        return blocks
+
+    themes_block = _themes_block(rollup)
+    if themes_block:
+        blocks.append(themes_block)
+
+    section_items = {
+        "competition": rollup.competition,
+        "industry": rollup.industry,
+        "partner_prospects": rollup.partner_prospects,
+    }
+    for key, title in SECTION_TITLES.items():
+        items = section_items[key]
+        if not items:
+            continue
+        shown, more = _truncate(items, config.max_items_per_section)
+        blocks.extend(_section_blocks(title, [_render_item_line(i) for i in shown], more))
+
+    if rollup.notable_candidates:
+        shown, more = _truncate(rollup.notable_candidates, config.max_items_per_section)
+        blocks.append({"type": "divider"})
+        blocks.extend(
+            _section_blocks(
+                "Notable candidates", [_render_candidate_line(c) for c in shown], more
+            )
+        )
+
+    return blocks
+
+
+def post_weekly_rollup(
+    rollup: WeeklyRollup, config: Config, days_covered: int | None = None
+) -> None:
+    """Renders and POSTs the weekly rollup to the same Slack webhook (v2 Phase 19)."""
+    blocks = build_weekly_blocks(rollup, config, days_covered)
+    fallback_text = blocks[0]["text"]["text"]
+
+    response = httpx.post(
+        config.slack_webhook_url, json={"text": fallback_text, "blocks": blocks}, timeout=10.0
+    )
+    if response.status_code != 200:
+        raise SlackDeliveryError(
+            f"Slack webhook returned {response.status_code}: {response.text}"
+        )
+    logger.info("posted weekly rollup to Slack (%d blocks)", len(blocks))

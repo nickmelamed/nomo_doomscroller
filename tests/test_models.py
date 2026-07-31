@@ -9,6 +9,7 @@ from models import (
     IndustryTopic,
     NewsItem,
     SourceData,
+    WeeklyRollup,
 )
 
 
@@ -124,6 +125,38 @@ def test_digest_synthesis_output_sec8_3():
     assert payload["tracking_counts"] == {"competitors": 12, "partner_prospects": 8}
     assert payload["quiet_day"] is False
     assert len(payload["new_candidates"]) == 1
+
+
+def test_weekly_rollup_sec19():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        competition=[DigestItem(headline="...", url="...", source="...", summary="...")],
+        industry=[DigestItem(headline="...", url="...", source="...", summary="...")],
+        partner_prospects=[DigestItem(headline="...", url="...", source="...", summary="...")],
+        notable_candidates=[
+            Candidate(
+                name="ExampleCo",
+                suggested_type="Partner prospect",
+                region="BR",
+                why_fits="...",
+                source_url="...",
+            )
+        ],
+        themes=["Competitor funding wave"],
+    )
+    assert rollup.week_of == "2026-07-20"
+    assert len(rollup.competition) == 1
+    assert len(rollup.notable_candidates) == 1
+    assert rollup.themes == ["Competitor funding wave"]
+
+
+def test_weekly_rollup_defaults_to_empty():
+    rollup = WeeklyRollup(week_of="2026-07-20")
+    assert rollup.competition == []
+    assert rollup.industry == []
+    assert rollup.partner_prospects == []
+    assert rollup.notable_candidates == []
+    assert rollup.themes == []
 
 
 def test_digest_quiet_day_defaults_to_empty_sections():

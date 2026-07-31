@@ -5,7 +5,7 @@ import pytest
 
 import slack_render
 from config import Config
-from models import Candidate, Digest, DigestItem
+from models import Candidate, Digest, DigestItem, WeeklyRollup
 
 TODAY = date(2026, 7, 29)
 
@@ -299,6 +299,111 @@ def test_post_digest_success(monkeypatch):
     assert url == TEST_CONFIG.slack_webhook_url
     assert "blocks" in payload
     assert "text" in payload
+
+
+def test_weekly_header_block_format():
+    rollup = WeeklyRollup(week_of="2026-07-20")
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    assert blocks[0]["type"] == "header"
+    assert "Week of 2026-07-20" in blocks[0]["text"]["text"]
+    assert "what you missed" in blocks[0]["text"]["text"]
+
+
+def test_weekly_quiet_week_when_no_content():
+    rollup = WeeklyRollup(week_of="2026-07-20")
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+    assert any("Quiet week" in t for t in section_texts)
+
+
+def test_weekly_themes_rendered_before_sections():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        competition=[digest_item("Uber news")],
+        themes=["Competitor funding wave", "Youth privacy regulation heating up"],
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+
+    assert "*This week's themes*" in section_texts[0]
+    assert "Competitor funding wave" in section_texts[0]
+    assert "Youth privacy regulation heating up" in section_texts[0]
+    assert section_texts[1].startswith("*Competition*")
+
+
+def test_weekly_sections_and_notable_candidates_render():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        competition=[digest_item("Uber news")],
+        industry=[digest_item("Policy news")],
+        partner_prospects=[digest_item("Fever update")],
+        notable_candidates=[candidate("ExampleCo")],
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+
+    assert any(t.startswith("*Competition*") for t in section_texts)
+    assert any(t.startswith("*Industry*") for t in section_texts)
+    assert any(t.startswith("*Partner prospects*") for t in section_texts)
+    assert any("*Notable candidates*" in t for t in section_texts)
+    assert any(b["type"] == "divider" for b in blocks)
+
+
+def test_weekly_partial_coverage_note():
+    rollup = WeeklyRollup(week_of="2026-07-20", competition=[digest_item("Uber news")])
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG, days_covered=3)
+
+    context_texts = [
+        b["elements"][0]["text"] for b in blocks if b["type"] == "context"
+    ]
+    assert any("3 of 5 weekdays" in t for t in context_texts)
+
+
+def test_weekly_full_coverage_has_no_partial_note():
+    rollup = WeeklyRollup(week_of="2026-07-20", competition=[digest_item("Uber news")])
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG, days_covered=5)
+
+    context_texts = [b["elements"][0]["text"] for b in blocks if b["type"] == "context"]
+    assert not any("weekdays archived" in t for t in context_texts)
+
+
+def test_post_weekly_rollup_success(monkeypatch):
+    calls = []
+
+    class FakeResponse:
+        status_code = 200
+        text = "ok"
+
+    def fake_post(url, json, timeout):
+        calls.append((url, json, timeout))
+        return FakeResponse()
+
+    monkeypatch.setattr(slack_render.httpx, "post", fake_post)
+
+    rollup = WeeklyRollup(week_of="2026-07-20")
+    slack_render.post_weekly_rollup(rollup, TEST_CONFIG, days_covered=5)
+
+    assert len(calls) == 1
+    url, payload, _ = calls[0]
+    assert url == TEST_CONFIG.slack_webhook_url
+    assert "blocks" in payload
+
+
+def test_post_weekly_rollup_raises_on_non_200(monkeypatch):
+    class FakeResponse:
+        status_code = 500
+        text = "internal error"
+
+    def fake_post(url, json, timeout):
+        return FakeResponse()
+
+    monkeypatch.setattr(slack_render.httpx, "post", fake_post)
+
+    rollup = WeeklyRollup(week_of="2026-07-20")
+    with pytest.raises(slack_render.SlackDeliveryError):
+        slack_render.post_weekly_rollup(rollup, TEST_CONFIG)
 
 
 def test_post_digest_raises_on_non_200(monkeypatch):

@@ -74,6 +74,19 @@ class Digest:
 
 
 @dataclass
+class WeeklyRollup:
+    """v2 Phase 19 — the weekly "what you missed" rollup, built from a week
+    of already-archived daily Digest JSON rather than raw gathered items."""
+
+    week_of: str
+    competition: list[DigestItem] = field(default_factory=list)
+    industry: list[DigestItem] = field(default_factory=list)
+    partner_prospects: list[DigestItem] = field(default_factory=list)
+    notable_candidates: list[Candidate] = field(default_factory=list)
+    themes: list[str] = field(default_factory=list)
+
+
+@dataclass
 class Criteria:
     """The parsed criteria/config source (§6.2) — five sections; industry topics
     live separately on SourceData (§6.3), not here."""

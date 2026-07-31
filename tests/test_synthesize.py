@@ -1,6 +1,8 @@
 import json
+from datetime import date
 from types import SimpleNamespace
 
+import state
 import synthesize
 from models import Candidate, Criteria, Entity, NewsItem, SourceData
 
@@ -96,6 +98,107 @@ def test_build_payload_handles_item_with_unknown_entity():
     enriched = payload["monitoring_items"][0]
     assert enriched["entity_type"] is None
     assert enriched["priority"] is None
+
+
+def test_build_payload_first_seen_days_ago_null_for_new_item():
+    item = NewsItem(
+        headline="Uber news",
+        url="https://example.com/a",
+        source="X",
+        published="2026-07-29",
+        summary="S",
+        why_it_matters="W",
+        relevance="high",
+        entity="Uber",
+    )
+    payload = synthesize.build_payload([item], [], [], SOURCE_DATA, seen_stories={})
+    assert payload["monitoring_items"][0]["first_seen_days_ago"] is None
+
+
+def test_build_payload_first_seen_days_ago_computed_for_repeat_item():
+    item = NewsItem(
+        headline="Uber One expands rewards",
+        url="https://example.com/a",
+        source="X",
+        published="2026-07-29",
+        summary="S",
+        why_it_matters="W",
+        relevance="high",
+        entity="Uber",
+    )
+    story_hash = state.hash_story("Uber", "Uber One expands rewards")
+    seen_stories = {story_hash: {"first_seen": "2026-07-27", "headline": item.headline, "entity_or_topic": "Uber"}}
+
+    payload = synthesize.build_payload(
+        [item], [], [], SOURCE_DATA, seen_stories=seen_stories, today=date(2026, 7, 30)
+    )
+    assert payload["monitoring_items"][0]["first_seen_days_ago"] == 3
+
+
+def test_synthesize_passes_seen_stories_from_state_into_payload():
+    item = NewsItem(
+        headline="Uber One expands rewards",
+        url="https://example.com/a",
+        source="X",
+        published="2026-07-29",
+        summary="S",
+        why_it_matters="W",
+        relevance="high",
+        entity="Uber",
+    )
+    story_hash = state.hash_story("Uber", item.headline)
+    pipeline_state = {
+        "seen_stories": {
+            story_hash: {"first_seen": "2026-07-27", "headline": item.headline, "entity_or_topic": "Uber"}
+        },
+        "last_success": None,
+    }
+
+    captured = {}
+    real_build_payload = synthesize.build_payload
+
+    def spy(*args, **kwargs):
+        result = real_build_payload(*args, **kwargs)
+        captured["payload"] = result
+        return result
+
+    synthesize.build_payload = spy
+    try:
+        response = json.dumps(
+            {
+                "quiet_day": True,
+                "sections": {
+                    "competition": [],
+                    "industry": [],
+                    "partner_prospects": [],
+                    "new_candidates": [],
+                },
+            }
+        )
+        client = FakeClient(response)
+        synthesize.synthesize(
+            client, [item], [], [], SOURCE_DATA, TEST_CONFIG, state=pipeline_state
+        )
+    finally:
+        synthesize.build_payload = real_build_payload
+
+    assert captured["payload"]["monitoring_items"][0]["first_seen_days_ago"] is not None
+
+
+def test_render_prompt_includes_repeat_story_guidance():
+    prompt = synthesize._render_prompt(
+        "synthesize.txt",
+        nomo_context="ctx",
+        region_weighting="rw",
+        competitor_criteria_summary="c",
+        partner_criteria_summary="p",
+        reward_landscape="none yet",
+        schema=synthesize.DIGEST_SCHEMA,
+        verbose_instructions="",
+        payload="{}",
+    )
+    assert "first_seen_days_ago" in prompt
+    assert "ongoing" in prompt
 
 
 def test_synthesize_parses_full_digest():

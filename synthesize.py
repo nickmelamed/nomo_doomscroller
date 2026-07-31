@@ -5,9 +5,11 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import asdict
+from datetime import date
 from pathlib import Path
 from string import Template
 
+import state as state_module
 from config import Config
 from gather import extract_text, parse_json_response
 from models import Candidate, Digest, DigestItem, Entity, NewsItem, SourceData
@@ -81,7 +83,20 @@ def _entity_lookup(source_data: SourceData) -> dict[str, Entity]:
     return {entity.name: entity for entity in source_data.entities}
 
 
-def _enrich_news_item(item: NewsItem, entity_lookup: dict[str, Entity]) -> dict:
+def _first_seen_days_ago(item: NewsItem, seen_stories: dict, today: date) -> int | None:
+    """Deterministic Python lookup, not trusted to LLM date math — mirrors
+    the compute_tracking_counts pattern below."""
+    entity_or_topic = item.entity or item.topic or ""
+    story_hash = state_module.hash_story(entity_or_topic, item.headline)
+    entry = seen_stories.get(story_hash)
+    if entry is None:
+        return None
+    return (today - date.fromisoformat(entry["first_seen"])).days
+
+
+def _enrich_news_item(
+    item: NewsItem, entity_lookup: dict[str, Entity], seen_stories: dict, today: date
+) -> dict:
     entity = entity_lookup.get(item.entity) if item.entity else None
     return {
         "headline": item.headline,
@@ -95,6 +110,7 @@ def _enrich_news_item(item: NewsItem, entity_lookup: dict[str, Entity]) -> dict:
         "entity_type": entity.type if entity else None,
         "priority": entity.priority if entity else None,
         "topic": item.topic,
+        "first_seen_days_ago": _first_seen_days_ago(item, seen_stories, today),
     }
 
 
@@ -117,11 +133,19 @@ def build_payload(
     industry_items: list[NewsItem],
     candidates: list[Candidate],
     source_data: SourceData,
+    seen_stories: dict | None = None,
+    today: date | None = None,
 ) -> dict:
     entity_lookup = _entity_lookup(source_data)
+    seen_stories = seen_stories or {}
+    today = today or date.today()
     return {
-        "monitoring_items": [_enrich_news_item(i, entity_lookup) for i in monitoring_items],
-        "industry_items": [_enrich_news_item(i, entity_lookup) for i in industry_items],
+        "monitoring_items": [
+            _enrich_news_item(i, entity_lookup, seen_stories, today) for i in monitoring_items
+        ],
+        "industry_items": [
+            _enrich_news_item(i, entity_lookup, seen_stories, today) for i in industry_items
+        ],
         "candidates": [asdict(c) for c in candidates],
         "reward_landscape": source_data.reward_landscape,
         "tracking_counts": compute_tracking_counts(source_data),
@@ -172,6 +196,7 @@ def synthesize(
     candidates: list[Candidate],
     source_data: SourceData,
     config: Config,
+    state: dict | None = None,
 ) -> Digest:
     """§7 Stage 5 — one Claude call, no tools. Unlike gather.py's per-call
     resilience, a synthesis failure is fatal to the run: it propagates rather
@@ -182,8 +207,13 @@ def synthesize(
     content-rich payloads (a rare escaping slip in the model's output, not
     truncation) — a second attempt at the identical prompt is cheap relative
     to throwing away a whole day's real content. A second consecutive parse
-    failure still propagates."""
-    payload = build_payload(monitoring_items, industry_items, candidates, source_data)
+    failure still propagates.
+
+    `state` (v2 Phase 16) carries `seen_stories` for cross-day repeat-story
+    suppression — optional so callers that don't have persisted state yet
+    (tests, diagnose_synthesis.py) can omit it."""
+    seen_stories = (state or {}).get("seen_stories", {})
+    payload = build_payload(monitoring_items, industry_items, candidates, source_data, seen_stories)
     prompt = _render_prompt(
         "synthesize.txt",
         nomo_context=source_data.criteria.nomo_context,

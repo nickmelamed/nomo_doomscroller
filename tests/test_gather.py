@@ -105,6 +105,18 @@ def test_monitor_entity_parses_valid_items():
     assert items[0].headline == "Uber One expands rewards"
 
 
+def test_monitor_entity_prompt_uses_configured_window_hours():
+    widened_config = replace(TEST_CONFIG, news_window_hours=50)
+    payload = json.dumps({"entity": "Uber", "items": []})
+    client = FakeClient([payload])
+
+    gather.monitor_entity(client, UBER, TEST_CRITERIA, widened_config)
+
+    prompt = client.messages.calls[0]["messages"][0]["content"]
+    assert "last 50 hours" in prompt
+    assert "last 24 hours" not in prompt
+
+
 def test_monitor_entity_strips_markdown_fences():
     payload = "```json\n" + json.dumps({"entity": "Uber", "items": []}) + "\n```"
     client = FakeClient([payload])
@@ -128,6 +140,51 @@ def test_monitor_entity_extracts_json_with_prose_and_no_fence():
     client = FakeClient([payload])
     items = gather.monitor_entity(client, UBER, TEST_CRITERIA, TEST_CONFIG)
     assert items == []
+
+
+def test_source_plausibly_matches_domain_obvious_match():
+    assert gather._source_plausibly_matches_domain("TechCrunch", "https://techcrunch.com/a")
+
+
+def test_source_plausibly_matches_domain_obvious_mismatch():
+    assert not gather._source_plausibly_matches_domain(
+        "TechCrunch", "https://totallyunrelatedsite.example/a"
+    )
+
+
+def test_source_plausibly_matches_domain_permissive_on_unknown():
+    # No registry to check against — an outlet whose brand name doesn't
+    # textually resemble its domain must not be flagged as a mismatch.
+    assert gather._source_plausibly_matches_domain("Reuters", "https://reuters.com/a")
+
+
+def test_monitor_entity_logs_but_keeps_mismatched_source(caplog):
+    payload = json.dumps(
+        {
+            "entity": "Uber",
+            "items": [
+                {
+                    "headline": "Uber news",
+                    "url": "https://totallyunrelatedsite.example/a",
+                    "source": "TechCrunch",
+                    "published": "2026-07-26",
+                    "summary": "S",
+                    "why_it_matters": "W",
+                    "relevance": "high",
+                }
+            ],
+        }
+    )
+    client = FakeClient([payload])
+
+    with caplog.at_level(logging.WARNING):
+        items = gather.monitor_entity(client, UBER, TEST_CRITERIA, TEST_CONFIG)
+
+    # Log-only per the v2 plan — no registry exists yet to safely drop on,
+    # so a plausibility mismatch is visibility, never a filter.
+    assert len(items) == 1
+    assert items[0].source == "TechCrunch"
+    assert "source/url plausibility mismatch" in caplog.text
 
 
 def test_monitor_entity_drops_items_with_missing_url():

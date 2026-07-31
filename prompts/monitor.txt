@@ -1,6 +1,6 @@
 You monitor news for NOMO. NOMO context: $nomo_context
 
-Search the web for news from the last 24 hours about $entity_name (also known as: $aliases), a tracked $type relevant to $regions. Why it's tracked: $why_tracked
+Search the web for news from the last $window_hours hours about $entity_name (also known as: $aliases), a tracked $type relevant to $regions. Why it's tracked: $why_tracked
 
 Look for anything relevant to NOMO's competitive, partnership, or industry-risk picture — product moves, funding, partnerships, and sales, as well as regulatory, legal, or policy developments (e.g. lawsuits, youth social media or data-privacy regulation, age-verification laws) involving this entity.
 
@@ -9,4 +9,4 @@ Ignore routine coverage, listicles, and SEO filler. Prefer primary sources (comp
 Return ONLY JSON matching this schema, with no prose and no markdown code fences:
 $schema
 
-If nothing in the last 24 hours clears the bar, return an empty items array.
+If nothing in the last $window_hours hours clears the bar, return an empty items array.

@@ -197,6 +197,7 @@ def monitor_entity(client, entity: Entity, criteria: Criteria, config: Config) -
         type=entity.type,
         regions=", ".join(entity.region) if entity.region else "unspecified",
         why_tracked=entity.why_tracked or "not specified",
+        window_hours=config.news_window_hours,
         schema=MONITOR_SCHEMA,
     )
     try:
@@ -216,11 +217,19 @@ def monitor_entity(client, entity: Entity, criteria: Criteria, config: Config) -
                 raw.get("headline"),
             )
             continue
+        source = raw.get("source", "")
+        if not _source_plausibly_matches_domain(source, url):
+            logger.warning(
+                "monitor(%s): source/url plausibility mismatch: source=%r url=%r",
+                entity.name,
+                source,
+                url,
+            )
         items.append(
             NewsItem(
                 headline=raw.get("headline", ""),
                 url=url,
-                source=raw.get("source", ""),
+                source=source,
                 published=raw.get("published", ""),
                 summary=raw.get("summary", ""),
                 why_it_matters=raw.get("why_it_matters", ""),
@@ -285,11 +294,19 @@ def monitor_industry_topic(
                 raw.get("headline"),
             )
             continue
+        source = raw.get("source", "")
+        if not _source_plausibly_matches_domain(source, url):
+            logger.warning(
+                "industry(%s): source/url plausibility mismatch: source=%r url=%r",
+                topic.topic,
+                source,
+                url,
+            )
         items.append(
             NewsItem(
                 headline=raw.get("headline", ""),
                 url=url,
-                source=raw.get("source", ""),
+                source=source,
                 published=raw.get("published", ""),
                 summary=raw.get("summary", ""),
                 why_it_matters=raw.get("why_it_matters", ""),

@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 import main
 from models import Candidate, Criteria, Digest, Entity, NewsItem, SourceData
 
@@ -13,6 +15,25 @@ BASE_SOURCE_DATA = SourceData(
 
 EMPTY_DIGEST = Digest(quiet_day=True, tracking_counts={"competitors": 1, "partner_prospects": 0})
 
+EMPTY_STATE = {"seen_stories": {}, "last_success": None}
+
+
+def install_state(monkeypatch, initial_state=None):
+    """Stubs state persistence so tests never touch the real filesystem;
+    returns a dict tracking whether save_state was called and with what."""
+    saved = {"called": False, "state": None}
+
+    def fake_load_state():
+        return dict(initial_state) if initial_state is not None else dict(EMPTY_STATE)
+
+    def fake_save_state(state):
+        saved["called"] = True
+        saved["state"] = state
+
+    monkeypatch.setattr(main.state_module, "load_state", fake_load_state)
+    monkeypatch.setattr(main.state_module, "save_state", fake_save_state)
+    return saved
+
 
 def install_happy_path(monkeypatch, source_data=BASE_SOURCE_DATA, digest=EMPTY_DIGEST):
     calls = {"gather": None, "synthesize": None, "post": None}
@@ -24,8 +45,8 @@ def install_happy_path(monkeypatch, source_data=BASE_SOURCE_DATA, digest=EMPTY_D
         calls["gather"] = (sd, cfg)
         return [], [], []
 
-    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg):
-        calls["synthesize"] = (monitoring, industry, candidates, sd, cfg)
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        calls["synthesize"] = (monitoring, industry, candidates, sd, cfg, state)
         return digest
 
     def fake_post_digest(d, cfg):
@@ -35,6 +56,7 @@ def install_happy_path(monkeypatch, source_data=BASE_SOURCE_DATA, digest=EMPTY_D
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
     monkeypatch.setattr(main.slack_render, "post_digest", fake_post_digest)
+    install_state(monkeypatch)
     return calls
 
 
@@ -87,7 +109,7 @@ def test_stage2_gather_failure_continues_with_empty_results(monkeypatch):
 
     synthesize_args = {}
 
-    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg):
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
         synthesize_args["monitoring"] = monitoring
         synthesize_args["industry"] = industry
         synthesize_args["candidates"] = candidates
@@ -102,6 +124,7 @@ def test_stage2_gather_failure_continues_with_empty_results(monkeypatch):
     monkeypatch.setattr(main, "run_gather", failing_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
     monkeypatch.setattr(main.slack_render, "post_digest", fake_post_digest)
+    install_state(monkeypatch)
 
     exit_code = main.run()
 
@@ -121,7 +144,7 @@ def test_stage5_synthesize_failure_is_fatal_and_never_posts(monkeypatch):
     def fake_run_gather(client, sd, cfg):
         return [], [], []
 
-    def failing_synthesize(client, monitoring, industry, candidates, sd, cfg):
+    def failing_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
         raise RuntimeError("malformed synthesis JSON")
 
     def fake_post_digest(d, cfg):
@@ -131,6 +154,7 @@ def test_stage5_synthesize_failure_is_fatal_and_never_posts(monkeypatch):
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", failing_synthesize)
     monkeypatch.setattr(main.slack_render, "post_digest", fake_post_digest)
+    install_state(monkeypatch)
 
     exit_code = main.run()
 
@@ -148,6 +172,197 @@ def test_stage6_slack_failure_is_reported_as_nonzero_exit(monkeypatch):
 
     exit_code = main.run()
     assert exit_code == 1
+
+
+def test_state_is_saved_only_after_full_success(monkeypatch):
+    install_happy_path(monkeypatch)
+    saved_state = install_state(monkeypatch)  # re-patch to get a fresh tracker
+
+    exit_code = main.run()
+
+    assert exit_code == 0
+    assert saved_state["called"] is True
+    assert saved_state["state"]["last_success"] is not None
+
+
+def test_state_is_not_saved_when_stage5_fails(monkeypatch):
+    def fake_load_source_data(cfg):
+        return BASE_SOURCE_DATA
+
+    def fake_run_gather(client, sd, cfg):
+        return [], [], []
+
+    def failing_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        raise RuntimeError("malformed synthesis JSON")
+
+    monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
+    monkeypatch.setattr(main, "run_gather", fake_run_gather)
+    monkeypatch.setattr(main.synthesize, "synthesize", failing_synthesize)
+    monkeypatch.setattr(
+        main.slack_render,
+        "post_digest",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not be called")),
+    )
+    saved_state = install_state(monkeypatch)
+
+    exit_code = main.run()
+
+    assert exit_code == 1
+    assert saved_state["called"] is False
+
+
+def test_state_is_not_saved_when_stage6_fails(monkeypatch):
+    install_happy_path(monkeypatch)
+    saved_state = install_state(monkeypatch)
+
+    def failing_post_digest(d, cfg):
+        raise main.slack_render.SlackDeliveryError("Slack webhook returned 500")
+
+    monkeypatch.setattr(main.slack_render, "post_digest", failing_post_digest)
+
+    exit_code = main.run()
+
+    assert exit_code == 1
+    assert saved_state["called"] is False
+
+
+def test_record_seen_stories_adds_new_entries():
+    from datetime import date
+
+    item = NewsItem(
+        headline="Uber One expands rewards",
+        url="https://example.com/a",
+        source="X",
+        published="2026-07-29",
+        summary="S",
+        why_it_matters="W",
+        relevance="high",
+        entity="Uber",
+    )
+
+    updated = main._record_seen_stories({}, [item], today=date(2026, 7, 30))
+
+    assert len(updated) == 1
+    entry = next(iter(updated.values()))
+    assert entry["first_seen"] == "2026-07-30"
+    assert entry["entity_or_topic"] == "Uber"
+
+
+def test_record_seen_stories_preserves_existing_first_seen():
+    import state as state_module
+    from datetime import date
+
+    item = NewsItem(
+        headline="Uber One expands rewards",
+        url="https://example.com/a",
+        source="X",
+        published="2026-07-29",
+        summary="S",
+        why_it_matters="W",
+        relevance="high",
+        entity="Uber",
+    )
+    story_hash = state_module.hash_story("Uber", item.headline)
+    existing = {story_hash: {"first_seen": "2026-07-20", "headline": item.headline, "entity_or_topic": "Uber"}}
+
+    updated = main._record_seen_stories(existing, [item], today=date(2026, 7, 30))
+
+    assert updated[story_hash]["first_seen"] == "2026-07-20"
+
+
+def test_effective_gather_config_widens_window_after_a_stale_gap():
+    from config import Config
+
+    cfg = Config(
+        anthropic_api_key="dummy",
+        anthropic_model="claude-sonnet-5",
+        data_source="sheets",
+        slack_webhook_url="dummy",
+        news_window_hours=24,
+        max_items_per_section=6,
+        monitor_existing_partners=False,
+        monitor_max_uses=3,
+        scout_max_uses=8,
+        synthesis_verbose_log=False,
+        google_sheets_id=None,
+        google_service_account_json=None,
+        sheets_url=None,
+        notion_api_key=None,
+        notion_watchlist_db_id=None,
+        notion_criteria_page_id=None,
+        notion_topics_db_id=None,
+        notion_partners_db_id=None,
+        notion_db_url=None,
+    )
+    now = datetime(2026, 7, 30, 15, 0, tzinfo=timezone.utc)
+    stale_state = {"seen_stories": {}, "last_success": "2026-07-28T13:00:00+00:00"}  # 50h ago
+
+    effective = main._effective_gather_config(cfg, stale_state, now)
+
+    assert effective.news_window_hours == 50
+
+
+def test_effective_gather_config_unchanged_within_normal_gap():
+    from config import Config
+
+    cfg = Config(
+        anthropic_api_key="dummy",
+        anthropic_model="claude-sonnet-5",
+        data_source="sheets",
+        slack_webhook_url="dummy",
+        news_window_hours=24,
+        max_items_per_section=6,
+        monitor_existing_partners=False,
+        monitor_max_uses=3,
+        scout_max_uses=8,
+        synthesis_verbose_log=False,
+        google_sheets_id=None,
+        google_service_account_json=None,
+        sheets_url=None,
+        notion_api_key=None,
+        notion_watchlist_db_id=None,
+        notion_criteria_page_id=None,
+        notion_topics_db_id=None,
+        notion_partners_db_id=None,
+        notion_db_url=None,
+    )
+    now = datetime(2026, 7, 30, 13, 30, tzinfo=timezone.utc)
+    recent_state = {"seen_stories": {}, "last_success": "2026-07-30T13:00:00+00:00"}  # 30m ago
+
+    effective = main._effective_gather_config(cfg, recent_state, now)
+
+    assert effective is cfg
+
+
+def test_effective_gather_config_unchanged_with_no_prior_success():
+    from config import Config
+
+    cfg = Config(
+        anthropic_api_key="dummy",
+        anthropic_model="claude-sonnet-5",
+        data_source="sheets",
+        slack_webhook_url="dummy",
+        news_window_hours=24,
+        max_items_per_section=6,
+        monitor_existing_partners=False,
+        monitor_max_uses=3,
+        scout_max_uses=8,
+        synthesis_verbose_log=False,
+        google_sheets_id=None,
+        google_service_account_json=None,
+        sheets_url=None,
+        notion_api_key=None,
+        notion_watchlist_db_id=None,
+        notion_criteria_page_id=None,
+        notion_topics_db_id=None,
+        notion_partners_db_id=None,
+        notion_db_url=None,
+    )
+    now = datetime(2026, 7, 30, 13, 30, tzinfo=timezone.utc)
+
+    effective = main._effective_gather_config(cfg, EMPTY_STATE, now)
+
+    assert effective is cfg
 
 
 def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
@@ -208,7 +423,7 @@ def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
 
     captured = {}
 
-    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg):
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
         captured["monitoring"] = monitoring
         captured["industry"] = industry
         captured["candidates"] = candidates
@@ -218,6 +433,7 @@ def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
     monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    install_state(monkeypatch)
 
     exit_code = main.run()
 

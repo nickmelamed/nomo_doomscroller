@@ -2,54 +2,22 @@
 
 from __future__ import annotations
 
+import dataclasses
 import logging
-import re
-from difflib import SequenceMatcher
+from datetime import date, datetime, timezone
 
 import anthropic
 
 import config
 import slack_render
+import state as state_module
 import synthesize
 from gather import known_names, run_gather
 from models import Candidate, Digest, NewsItem, SourceData
+from text_match import headlines_match as _headlines_match
+from text_match import names_match as _names_match
 
 logger = logging.getLogger(__name__)
-
-NAME_MATCH_THRESHOLD = 0.85
-# Looser than name matching — two outlets phrase the same story differently.
-HEADLINE_MATCH_THRESHOLD = 0.80
-
-_NAME_SUFFIXES = (" inc", " llc", " ltd", " corp", " co")
-
-
-def _normalize_name(name: str) -> str:
-    text = name.casefold().strip()
-    text = re.sub(r"[.,]", "", text)
-    for suffix in _NAME_SUFFIXES:
-        if text.endswith(suffix):
-            text = text[: -len(suffix)]
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def _normalize_headline(text: str) -> str:
-    normalized = text.casefold().strip()
-    normalized = re.sub(r"[^\w\s]", "", normalized)
-    return re.sub(r"\s+", " ", normalized).strip()
-
-
-def _fuzzy_match(a: str, b: str, threshold: float) -> bool:
-    if a == b:
-        return True
-    return SequenceMatcher(None, a, b).ratio() >= threshold
-
-
-def _names_match(a: str, b: str) -> bool:
-    return _fuzzy_match(_normalize_name(a), _normalize_name(b), NAME_MATCH_THRESHOLD)
-
-
-def _headlines_match(a: str, b: str) -> bool:
-    return _fuzzy_match(_normalize_headline(a), _normalize_headline(b), HEADLINE_MATCH_THRESHOLD)
 
 
 def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> list[Candidate]:
@@ -147,6 +115,47 @@ def load_source_data(cfg: config.Config) -> SourceData:
     return backend.load_all()
 
 
+def _record_seen_stories(
+    seen_stories: dict, items: list[NewsItem], today: date
+) -> dict:
+    """v2 Phase 16: adds a first-seen entry for each item not already known;
+    preserves the original first_seen for stories seen in a prior run."""
+    updated = dict(seen_stories)
+    for item in items:
+        entity_or_topic = item.entity or item.topic or ""
+        story_hash = state_module.hash_story(entity_or_topic, item.headline)
+        if story_hash not in updated:
+            updated[story_hash] = {
+                "first_seen": today.isoformat(),
+                "headline": item.headline,
+                "entity_or_topic": entity_or_topic,
+            }
+    return updated
+
+
+def _effective_gather_config(
+    cfg: config.Config, pipeline_state: dict, now: datetime
+) -> config.Config:
+    """v2 Phase 17: if the last successful run was longer ago than
+    NEWS_WINDOW_HOURS (e.g. a prior run failed outright), widen the
+    effective gather window to cover the gap instead of missing news that
+    fell between the two runs. No prior last_success -> unchanged."""
+    last_success = pipeline_state.get("last_success")
+    if not last_success:
+        return cfg
+    gap_hours = state_module.hours_since(last_success, now)
+    if gap_hours <= cfg.news_window_hours:
+        return cfg
+    logger.info(
+        "run-gap recovery: last success %.1fh ago (> NEWS_WINDOW_HOURS=%d) — "
+        "widening gather window to %.1fh",
+        gap_hours,
+        cfg.news_window_hours,
+        gap_hours,
+    )
+    return dataclasses.replace(cfg, news_window_hours=int(gap_hours))
+
+
 def _dedup_and_split(
     monitoring_items: list[NewsItem], industry_items: list[NewsItem]
 ) -> tuple[list[NewsItem], list[NewsItem]]:
@@ -184,7 +193,15 @@ def run() -> int:
     )
 
     try:
-        monitoring_items, industry_items, candidates = run_gather(client, source_data, cfg)
+        pipeline_state = state_module.load_state()
+    except Exception:
+        logger.exception("failed to load persisted state — continuing with empty state")
+        pipeline_state = {"seen_stories": {}, "last_success": None}
+
+    gather_cfg = _effective_gather_config(cfg, pipeline_state, datetime.now(timezone.utc))
+
+    try:
+        monitoring_items, industry_items, candidates = run_gather(client, source_data, gather_cfg)
     except Exception:
         # gather.py already logs and continues on a per-call basis; this is a
         # defensive fallback for a genuinely unexpected failure at the batch
@@ -209,7 +226,13 @@ def run() -> int:
 
     try:
         digest: Digest = synthesize.synthesize(
-            client, deduped_monitoring, deduped_industry, filtered_candidates, source_data, cfg
+            client,
+            deduped_monitoring,
+            deduped_industry,
+            filtered_candidates,
+            source_data,
+            cfg,
+            state=pipeline_state,
         )
     except Exception:
         logger.exception("Stage 5 (synthesize) failed — aborting run without posting")
@@ -232,6 +255,25 @@ def run() -> int:
         return 1
 
     logger.info("Stage 6: digest posted successfully")
+
+    today = date.today()
+    updated_seen_stories = _record_seen_stories(
+        pipeline_state["seen_stories"], deduped_monitoring + deduped_industry, today
+    )
+    updated_state = state_module.prune_state(
+        {
+            "seen_stories": updated_seen_stories,
+            "last_success": datetime.now(timezone.utc).isoformat(),
+        },
+        now=today,
+    )
+    try:
+        state_module.save_state(updated_state)
+    except Exception:
+        # A persisted-state write failure shouldn't turn a successfully
+        # posted digest into a failing run — log and move on.
+        logger.exception("failed to save persisted state — digest was still posted successfully")
+
     return 0
 
 

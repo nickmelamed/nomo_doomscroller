@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: "0 13 * * 1-5"   # 13:00 UTC ≈ 6:00am PT, weekdays
   workflow_dispatch: {}        # manual test runs
+permissions:
+  contents: write   # needed to commit state/ back to the repo after a successful run
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -25,3 +27,26 @@ jobs:
           NOTION_TOPICS_DB_ID: ${{ secrets.NOTION_TOPICS_DB_ID }}
           NOTION_PARTNERS_DB_ID: ${{ secrets.NOTION_PARTNERS_DB_ID }}
           NOTION_DB_URL: ${{ secrets.NOTION_DB_URL }}
+      # Commit state/ (seen-story hashes, last-success timestamp, daily digest
+      # archive) back to the repo — only after a successful run, so a failed
+      # run never commits half-written state. Rebase-and-retry handles the
+      # rare case of an overlapping manual dispatch racing the scheduled run.
+      - if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- state/ && [ -z "$(git status --porcelain -- state/)" ]; then
+            echo "no state changes to commit"
+            exit 0
+          fi
+          git add state/
+          git commit -m "Update pipeline state [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt/3) — rebasing and retrying"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "failed to push state after 3 attempts" >&2
+          exit 1

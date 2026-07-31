@@ -1,0 +1,35 @@
+{
+  "last_success": "2026-07-31T15:20:48.328257+00:00",
+  "seen_stories": {
+    "1816a5660311328c": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-07-31",
+      "headline": "Families of four teens sue Meta, TikTok, Snap and YouTube over suicide deaths"
+    },
+    "483bc04f38b59d3d": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-07-31",
+      "headline": "UK and Australia social media restrictions for under-16s continue to shape global policy debate"
+    },
+    "8b0c355b97caf556": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-07-31",
+      "headline": "New York finalizes SAFE for Kids Act rules requiring age verification and default-off algorithmic feeds for minors"
+    },
+    "b81c0d2b2a1ea9dc": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-07-31",
+      "headline": "Roblox hit with class action over children's data collection and unauthorized charges"
+    },
+    "c1416abfec9848b6": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-07-31",
+      "headline": "UAE-based Bundle raises $5.5M pre-seed to launch Web3 rewards platform"
+    },
+    "c8b09a5265dbfe44": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-07-31",
+      "headline": "Florida teen drops second bellwether addiction case against Meta after settling with YouTube, Snap and TikTok"
+    }
+  }
+}

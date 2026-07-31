@@ -62,6 +62,9 @@ class Config:
     # close that gap; confirmed with the user rather than guessed silently.
     notion_topics_db_id: str | None
     notion_partners_db_id: str | None
+    # §6.4a — optional even when data_source == "notion": the GTM Partners DB
+    # may not exist yet, so it's read but never required (see BACKEND_REQUIRED_VARS).
+    notion_gtm_partners_db_id: str | None
     notion_db_url: str | None
 
     @property
@@ -159,6 +162,7 @@ def load_config(env: dict | None = None) -> Config:
         notion_criteria_page_id=optional_str("NOTION_CRITERIA_PAGE_ID"),
         notion_topics_db_id=optional_str("NOTION_TOPICS_DB_ID"),
         notion_partners_db_id=optional_str("NOTION_PARTNERS_DB_ID"),
+        notion_gtm_partners_db_id=optional_str("NOTION_GTM_PARTNERS_DB_ID"),
         notion_db_url=optional_str("NOTION_DB_URL"),
     )
 

@@ -32,7 +32,7 @@ def _item(headline: str, url: str, source: str, summary: str) -> DigestItem:
 def _candidate(name: str, why_fits: str, url: str) -> Candidate:
     return Candidate(
         name=name,
-        suggested_type="Partner prospect",
+        suggested_type="Rewards partner prospect",
         region="US",
         why_fits=why_fits,
         source_url=url,

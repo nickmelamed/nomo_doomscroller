@@ -10,7 +10,8 @@ def test_parse_criteria_all_sections_present():
         "NOMO context": "NOMO is a rewards app for teens.",
         "Region weighting": "BR is primary; US, UK, AU are growing.",
         "Competitor criteria": "Anything competing for youth loyalty attention.",
-        "Partner criteria": "Has tradeable reward inventory.",
+        "Rewards partners criteria": "Has tradeable reward inventory.",
+        "GTM partners criteria": "School districts\nTelecom carriers",
         "Do-not-suggest": "Meta\nTikTok\n- Snap",
     }
     criteria = parse_criteria(sections)
@@ -18,7 +19,8 @@ def test_parse_criteria_all_sections_present():
     assert criteria.nomo_context == "NOMO is a rewards app for teens."
     assert criteria.region_weighting == "BR is primary; US, UK, AU are growing."
     assert criteria.competitor_criteria == "Anything competing for youth loyalty attention."
-    assert criteria.partner_criteria == "Has tradeable reward inventory."
+    assert criteria.reward_partner_criteria == "Has tradeable reward inventory."
+    assert criteria.gtm_partner_criteria == "School districts\nTelecom carriers"
     assert criteria.do_not_suggest == ["Meta", "TikTok", "Snap"]
 
 

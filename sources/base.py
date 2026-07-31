@@ -68,13 +68,14 @@ def check_columns(
         )
 
 
-# §6.2 — the five canonical Criteria sections, field name -> the label the team
+# §6.2 — the six canonical Criteria sections, field name -> the label the team
 # is expected to author as a heading/Section value.
 CRITERIA_SECTION_LABELS = {
     "nomo_context": "NOMO context",
     "region_weighting": "Region weighting",
     "competitor_criteria": "Competitor criteria",
-    "partner_criteria": "Partner criteria",
+    "reward_partner_criteria": "Rewards partners criteria",
+    "gtm_partner_criteria": "GTM partners criteria",
     "do_not_suggest": "Do-not-suggest",
 }
 
@@ -99,7 +100,11 @@ def _match_section(raw_header: str) -> str | None:
     return best_field if best_ratio >= _SECTION_MATCH_THRESHOLD else None
 
 
-def _split_list_field(text: str) -> list[str]:
+def split_list_field(text: str) -> list[str]:
+    """Splits a free-text block into one entry per non-empty line, stripping
+    leading bullet/dash markers. Used for do_not_suggest (§6.2) and reused by
+    gather.py to parse GTM target verticals out of the gtm_partner_criteria
+    section."""
     entries = []
     for raw_line in text.splitlines():
         line = raw_line.strip().lstrip("-*•").strip()
@@ -135,6 +140,7 @@ def parse_criteria(sections: dict[str, str]) -> Criteria:
         nomo_context=matched.get("nomo_context", ""),
         region_weighting=matched.get("region_weighting", ""),
         competitor_criteria=matched.get("competitor_criteria", ""),
-        partner_criteria=matched.get("partner_criteria", ""),
-        do_not_suggest=_split_list_field(matched.get("do_not_suggest", "")),
+        reward_partner_criteria=matched.get("reward_partner_criteria", ""),
+        gtm_partner_criteria=matched.get("gtm_partner_criteria", ""),
+        do_not_suggest=split_list_field(matched.get("do_not_suggest", "")),
     )

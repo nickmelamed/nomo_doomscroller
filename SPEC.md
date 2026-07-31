@@ -150,9 +150,9 @@ One row per tracked entity. Logical schema (the table below shows Notion propert
 | Property | Type | Notes |
 |---|---|---|
 | **Name** | Title | The entity (e.g. "Uber"). |
-| **Type** | Select | `Competitor` · `Partner prospect` · `Excluded` |
+| **Type** | Select | `Competitor` · `Rewards partner prospect` · `GTM partner prospect` · `Excluded` |
 | **Status** | Select | `Active` · `Paused` · `Converted` |
-| **Category** | Multi-select | For partners: `sports`, `concerts`, `app credits`, `travel`, `dining`, `retail`, … (extensible) |
+| **Category** | Multi-select | Split into two logical fields — `Rewards Category` for rewards partner prospects: `sports`, `concerts`, `app credits`, `travel`, `dining`, `retail`, … (extensible); `GTM Category` for GTM partner prospects: the vertical it falls into (school district, telecom carrier, …), matching the verticals in §6.2's GTM partners criteria. A row populates whichever applies to its Type. |
 | **Region** | Multi-select | `US` · `UK` · `BR` · `AU` · `Other` — market(s) this entity is relevant to. Feeds ranking weight, not a hard filter (see §6.2). |
 | **Aliases / keywords** | Rich text | Comma-separated variants, e.g. `Uber One, Uber Technologies, Uber Rewards`. |
 | **Source URL** | URL | Optional press/blog page for higher-signal monitoring. |
@@ -163,19 +163,20 @@ One row per tracked entity. Logical schema (the table below shows Notion propert
 
 **Query at runtime:** all rows where `Status = Active` (Paused/Converted are ignored). `Excluded` type rows are loaded but only used as a suppression list.
 
-> **Note:** `Existing partner` is no longer a Type here — real partners live in the **Partners source** (see §6.4), so there's no need to duplicate the ~50 active partner rows into this DB. When a `Partner prospect` converts to an actual partner, set its Watchlist `Status` to `Converted` (stops monitoring/scouting it) and add it to the Partners source through NOMO's normal onboarding process — that's what makes it permanently excluded from future scouting (see §10).
+> **Note:** `Existing partner` / `Existing GTM partner` are not Types here — real partners live in the **rewards** or **GTM** Partners sources (see §6.4, §6.4a), so there's no need to duplicate their rows into this DB. When a `Rewards partner prospect` or `GTM partner prospect` converts to an actual partner, set its Watchlist `Status` to `Converted` (stops monitoring/scouting it) and add it to the appropriate Partners source through NOMO's normal onboarding process — that's what makes it permanently excluded from future scouting (see §10).
 
-**Sheets mapping:** one row per tracked entity on the **Watchlist** tab, columns matching the property names above 1:1, with two exceptions. Type/Status/Priority use **Data Validation** dropdowns (strict lists — see table below). **Region** is five boolean checkbox columns — `All` / `US` / `UK` / `BR` / `AU` — matching the convention already used on the Partners tab (§6.4), since Sheets has no native multi-select-in-one-cell; `All` means global regardless of the individual flags. `Category` stays a single comma-separated column with a **non-restrictive** suggested list (warn, don't reject, on unlisted values) since that set is expected to keep growing.
+**Sheets mapping:** one row per tracked entity on the **Watchlist** tab, columns matching the property names above 1:1, with two exceptions. Type/Status/Priority use **Data Validation** dropdowns (strict lists — see table below). **Region** is five boolean checkbox columns — `All` / `US` / `UK` / `BR` / `AU` — matching the convention already used on the Partners tabs (§6.4, §6.4a), since Sheets has no native multi-select-in-one-cell; `All` means global regardless of the individual flags. `Category` is split into two comma-separated columns, `Rewards Category` and `GTM Category`, each with a **non-restrictive** suggested list (warn, don't reject, on unlisted values) since both sets are expected to keep growing — a row populates whichever column matches its Type.
 
 **Dropdown / validation options:**
 
 | Field | Kind | Options |
 |---|---|---|
-| Type | strict, single | `Competitor` · `Partner prospect` · `Excluded` |
+| Type | strict, single | `Competitor` · `Rewards partner prospect` · `GTM partner prospect` · `Excluded` |
 | Status | strict, single | `Active` · `Paused` · `Converted` |
 | Priority | strict, single | `High` · `Medium` · `Low` |
 | Region | strict, multi (checkboxes) | `All` · `US` · `UK` · `BR` · `AU` |
-| Category | open, multi (comma-separated) | starter list: `sports`, `concerts`, `app credits`, `travel`, `dining`, `retail`, `gaming`, `streaming`, `education`, `other` — extensible |
+| Rewards Category | open, multi (comma-separated) | starter list: `sports`, `concerts`, `app credits`, `travel`, `dining`, `retail`, `gaming`, `streaming`, `education`, `other` — extensible |
+| GTM Category | open, multi (comma-separated) | verticals from the GTM partners criteria (§6.2) — e.g. `school district`, `telecom carrier` — extensible |
 
 ### 6.2 Criteria / config
 
@@ -184,7 +185,8 @@ A team-editable text source the agent reads and passes into prompts. Should cont
 - **NOMO context** — 3–5 sentences on what NOMO does and who its users are. Feeds every relevance judgement.
 - **Region weighting** — NOMO's active markets and their relative priority (e.g. "BR is the primary market; US, UK, and AU are growing; any other region is exploratory signal only"). Used to **weight, not filter** — an item about a market NOMO doesn't operate in yet can still be worth surfacing if it signals competitor/partner expansion into a region NOMO cares about.
 - **Competitor criteria** — what makes something a competitor worth flagging.
-- **Partner criteria** — what makes a good rewards partner (has tradeable reward inventory — tickets, travel, app credits — audience fit, dealability).
+- **Rewards partners criteria** — what makes a good rewards partner (has tradeable reward inventory — tickets, travel, app credits — audience fit, dealability).
+- **GTM partners criteria** — what makes a good GTM/implementation partner: the target verticals to pursue (e.g. school districts, telecom carriers), one per line. Scouting (§7 Stage 3) parses this list into one discovery angle per vertical — falls back to a single generic GTM angle if left unstructured or empty.
 - **Do-not-suggest** — categories or names to never surface as candidates.
 
 Parse as plain text blocks; do not require rigid structure beyond the section headers.
@@ -204,9 +206,9 @@ A team-editable list of standing themes to monitor, independent of any tracked e
 
 **Notion mapping:** a small database (or a plain page with one line per topic) with the same two fields.
 
-### 6.4 Partners source (read-only)
+### 6.4 Rewards partners source (read-only)
 
-NOMO already maintains a **"Partners and perks"** list (business-owned; not created or edited by this agent). The agent reads it at runtime alongside the Watchlist, Criteria, and Industry Topics sources, but never writes to it.
+NOMO already maintains a **"Partners and perks"** list (business-owned; not created or edited by this agent) — entities that supply redeemable rewards *inside* the app (tickets, credits, experiences). The agent reads it at runtime alongside the Watchlist, Criteria, and Industry Topics sources, but never writes to it.
 
 **Fields the agent needs** (a subset of the full sheet):
 
@@ -227,31 +229,52 @@ Everything else (Badge, color, card images, codes) is a product/UI concern with 
 
 **Notion mapping:** the live "Partners and perks" Notion database itself, read directly — always current, and without the paired-row or missing-Status quirks, since those are artifacts of how the Sheets mirror was built, not of the underlying database.
 
-**Sheets mapping (v1):** a **Partners** tab that auto-pulls from the live Notion database (already connected — not a manual copy). This resolves the original freshness concern: since it's a live formula-driven pull rather than a hand-maintained copy, staleness isn't a standing risk the way a manual sync would be — the main things to watch for now are structural drift (a renamed or reordered column) and the `Status` gap above, both handled by §6.0's column-name map and fallback.
+**Sheets mapping (v1):** a **Rewards Partnerships** tab that auto-pulls from the live Notion database (already connected — not a manual copy). This resolves the original freshness concern: since it's a live formula-driven pull rather than a hand-maintained copy, staleness isn't a standing risk the way a manual sync would be — the main things to watch for now are structural drift (a renamed or reordered column) and the `Status` gap above, both handled by §6.0's column-name map and fallback.
+
+### 6.4a GTM partners source (read-only, optional)
+
+A second, distinct partners source: entities that actually **distribute/implement** NOMO (school districts, phone/telecom carriers, other youth-serving institutions), as opposed to §6.4's rewards-supplying partners. Same read-only contract, but **optional** — this source is newer than the other four and the tab/DB may not exist yet, so its absence must not fail the run.
+
+**Fields the agent needs:**
+
+| Field | Used for |
+|---|---|
+| **Entity** | Name matching for the exclusion list. |
+| **Status** | Only `Active` rows are used. Same missing-`Status`-column fallback as §6.4 (treat all rows as Active, with a warning). |
+| **Region flags** (`All` / `US` / `UK` / `BR` / `AU`) | Same region-weighting convention as §6.4. |
+| **Notes** | Plain free-text description of the relationship (e.g. "NYC public schools pilot, 500 students") — rolled up into a `gtm_landscape` summary, used for gap-analysis in GTM scouting and for grounding `why_fits` in synthesis. No bilingual `sentence`/`title` pair like §6.4 — GTM partners don't have in-app reward copy. |
+
+**Query at runtime:** all rows where Status = Active. These names feed `excluded_names` exactly like §6.4's active rewards partners.
+
+> **Optional-source fallback.** Unlike the other four sources (§7 Stage 1: "fail loudly if any of the four sources is unreachable"), a missing GTM Partners tab/DB logs a clear warning and falls back to an empty `gtm_landscape` / no additional exclusions, rather than aborting the run. This lets the rest of the pipeline (including GTM scouting/discovery) ship before the team has populated any real GTM partners.
+
+**Sheets mapping:** a **GTM Partners** tab, columns `Partner (entity)` | `Status` | region flag columns (`All`/`US`/`UK`/`BR`/`AU`) | `Notes`.
+
+**Notion mapping:** a GTM Partners database with the equivalent properties (`Entity`, `Status`, `Region`, `Notes`), identified by `NOTION_GTM_PARTNERS_DB_ID` (§11) — optional, same fallback as above when unset.
 
 ---
 
 ## 7. Pipeline detail
 
 **Stage 1 — Load config** (`sources/sheets_source.py` or `sources/notion_source.py`, selected by `DATA_SOURCE`)
-Read the four sources — Watchlist, Criteria, Industry Topics, Partners (§6.0–6.4) — via whichever backend is active. Return a `SourceData` object: `entities: list[Entity]` (active Competitor/Partner prospect rows, each with Region), `excluded_names: set[str]` (from Excluded Watchlist rows + all Active rows in the Partners source), `reward_landscape: list[str]` (one line per active partner, built from the perk description fields), `industry_topics: list[str]` (one entry per row in the Industry Topics source), and `criteria: Criteria` (parsed text sections, including region weighting). Fail loudly if any of the four sources is unreachable.
+Read the four required sources — Watchlist, Criteria, Industry Topics, Rewards Partners (§6.0–6.4) — plus the optional GTM Partners source (§6.4a), via whichever backend is active. Return a `SourceData` object: `entities: list[Entity]` (active Competitor/Rewards partner prospect/GTM partner prospect rows, each with Region), `excluded_names: set[str]` (from Excluded Watchlist rows + all Active rows in both Partners sources), `reward_landscape: list[str]` (one line per active rewards partner, built from the perk description fields), `gtm_landscape: list[str]` (one line per active GTM partner, built from its Notes field), `industry_topics: list[str]` (one entry per row in the Industry Topics source), and `criteria: Criteria` (parsed text sections, including region weighting). Fail loudly if any of the **four required** sources is unreachable; the GTM Partners source falls back to empty with a warning if missing (§6.4a).
 
 **Stage 2 — Monitoring pass** (`gather.py`)
 Two parts, run together:
-- **(a) Per-entity:** for each active Watchlist `Competitor` and `Partner prospect` row (plus every Active row in the Partners source, if `MONITOR_EXISTING_PARTNERS` is on), one Claude call with web search using `prompts/monitor.txt`. Run entities concurrently (bounded, e.g. 5 at a time — comfortably inside standard rate limits at this scale).
+- **(a) Per-entity:** for each active Watchlist `Competitor`, `Rewards partner prospect`, and `GTM partner prospect` row (plus every Active row in either Partners source, if `MONITOR_EXISTING_PARTNERS` is on), one Claude call with web search using `prompts/monitor.txt`. Run entities concurrently (bounded, e.g. 5 at a time — comfortably inside standard rate limits at this scale).
 - **(b) Industry trends:** one Claude call with web search per entry in `industry_topics` (§6.3 — e.g. youth social media policy, platform litigation, rewards-fintech funding), using `prompts/industry.txt`. Not tied to any tracked entity — this is what feeds the digest's Industry section with standalone policy/regulatory/market news.
 
 Each call returns JSON — §8.1 for (a), §8.1b for (b). On any per-call failure, log and continue — never abort the run.
 
 **Stage 3 — Scouting pass** (`gather.py`)
-2–4 discovery Claude calls with web search using `prompts/scout.txt`, one per discovery angle derived from criteria: (a) new entrants/competitors in NOMO's category, (b) recent rewards/loyalty funding or launches, (c) potential partners with reward inventory by category — reasoned against `reward_landscape` to surface categories NOMO doesn't already cover, not just any company with reward inventory. Pass the full tracked-name+alias list (Watchlist + Partners source) so Claude can pre-exclude, plus each candidate's apparent region. Returns §8.2 (now including a `region` field).
+Discovery Claude calls with web search using `prompts/scout.txt`, one per discovery angle derived from criteria: (a) new entrants/competitors in NOMO's category, (b) recent rewards/loyalty funding or launches, (c) potential rewards partners with reward inventory by category — reasoned against `reward_landscape` to surface categories NOMO doesn't already cover, not just any company with reward inventory — and (d) one angle **per GTM target vertical** listed in `criteria.gtm_partner_criteria` (falls back to a single generic GTM angle if that section is empty or unstructured) — reasoned against `gtm_landscape` the same way. Pass the full tracked-name+alias list (Watchlist + both Partners sources) so Claude can pre-exclude, plus each candidate's apparent region. Returns §8.2 (now including a `region` field).
 
 **Stage 4 — Dedup & filter** (`main.py`)
 - Drop candidates whose name/alias fuzzy-matches anything in the watchlist or `excluded_names` (normalize case/punctuation; use a simple ratio match).
 - Dedup news items — both entity monitoring items and industry trend items — by URL and near-duplicate headline.
 
 **Stage 5 — Synthesize & rank** (`synthesize.py`)
-One Claude call, no tools, using `prompts/synthesize.txt`. Input: all monitoring items, all industry trend items, all surviving candidates, `criteria.nomo_context`, `criteria.region_weighting`, priority hints, `reward_landscape` (to ground candidate `why_fits` in concrete comparisons), and tracking counts. Output: the digest JSON in §8.3 — monitoring items populate **Competition** (and partner-relationship news, if `MONITOR_EXISTING_PARTNERS` is on), industry trend items populate **Industry**, and candidates populate **New candidates**. The prompt enforces the relevance bar, weights (never excludes) by region, and `quiet_day` behavior.
+One Claude call, no tools, using `prompts/synthesize.txt`. Input: all monitoring items, all industry trend items, all surviving candidates, `criteria.nomo_context`, `criteria.region_weighting`, priority hints, `reward_landscape` and `gtm_landscape` (to ground candidate `why_fits` in concrete comparisons), and tracking counts. Output: the digest JSON in §8.3 — monitoring items populate **Competition**, **Partner prospects**, or **GTM prospects** by entity type (and relationship news, if `MONITOR_EXISTING_PARTNERS` is on), industry trend items populate **Industry**, and candidates populate **New candidates**. The prompt enforces the relevance bar, weights (never excludes) by region, and `quiet_day` behavior.
 
 **Stage 6 — Render & post** (`slack_render.py`)
 Convert digest JSON to Slack Block Kit (§9) and POST to the webhook. If `quiet_day` is true, post the short quiet-day message. Exit non-zero only on delivery failure.
@@ -319,7 +342,7 @@ Same shape as §8.1, keyed by `topic` instead of `entity` — no named entity re
   "candidates": [
     {
       "name": "ExampleCo",
-      "suggested_type": "Partner prospect",
+      "suggested_type": "Competitor|Rewards partner prospect|GTM partner prospect",
       "category": "travel",
       "region": "BR",
       "why_fits": "One sentence against the criteria.",
@@ -338,11 +361,12 @@ Same shape as §8.1, keyed by `topic` instead of `entity` — no named entity re
     "competition": [{"headline": "...", "url": "...", "source": "...", "summary": "..."}],
     "industry":    [{"headline": "...", "url": "...", "source": "...", "summary": "..."}],
     "partner_prospects": [{"headline": "...", "url": "...", "source": "...", "summary": "..."}],
+    "gtm_prospects": [{"headline": "...", "url": "...", "source": "...", "summary": "..."}],
     "new_candidates": [
-      {"name": "ExampleCo", "suggested_type": "Partner prospect", "region": "BR", "why_fits": "...", "source_url": "..."}
+      {"name": "ExampleCo", "suggested_type": "Rewards partner prospect", "region": "BR", "why_fits": "...", "source_url": "..."}
     ]
   },
-  "tracking_counts": {"competitors": 12, "partner_prospects": 8}
+  "tracking_counts": {"competitors": 12, "partner_prospects": 8, "gtm_prospects": 3}
 }
 ```
 
@@ -355,10 +379,10 @@ Same shape as §8.1, keyed by `topic` instead of `entity` — no named entity re
 > You monitor industry trends for NOMO. NOMO context: `{nomo_context}`. Region weighting: `{region_weighting}`. Search the web for news from the **last {window_hours} hours** on this industry topic: **{topic}** (notes: {notes}) — things like youth social media policy and regulation, lawsuits or enforcement actions against major tech/social platforms, loyalty and rewards-program trends, or ticketing/experiential partnerships, depending on which topic this is. This is **not** about a specific tracked company — it's broader market, regulatory, or industry signal that could affect NOMO's positioning, its school/EdTech partnerships, or its partner-prize strategy. Ignore routine coverage, listicles, and SEO filler. Prefer primary sources (regulatory filings, court records, reputable industry press) over aggregators. Return ONLY JSON matching this schema: `{schema}`. If nothing clears the bar, return an empty items array.
 
 **`prompts/scout.txt`**
-> You scout for NOMO. NOMO context: `{nomo_context}`. Partner/competitor criteria: `{criteria}`. Region weighting: `{region_weighting}`. Discovery angle: `{angle}`. NOMO's current reward partner lineup (for gap analysis on the partner angle): `{reward_landscape}`. Find entities that fit but are **NOT** in this already-tracked list: `{tracked_names}`. Also honor this do-not-suggest list: `{do_not_suggest}`. Prefer recent (last ~30 days) signals. Return ONLY JSON matching `{schema}`, including each candidate's apparent region. Be conservative — quality over quantity; return few, strong candidates.
+> You scout for NOMO. NOMO context: `{nomo_context}`. Partner/competitor criteria: `{criteria}`. Region weighting: `{region_weighting}`. Discovery angle: `{angle}`. NOMO's current reward partner lineup (for gap analysis on the rewards partner angle): `{reward_landscape}`. NOMO's current GTM/implementation partner lineup (for gap analysis on the GTM angle): `{gtm_landscape}`. Find entities that fit but are **NOT** in this already-tracked list: `{tracked_names}`. Also honor this do-not-suggest list: `{do_not_suggest}`. Prefer recent (last ~30 days) signals. Return ONLY JSON matching `{schema}`, including each candidate's apparent region. Be conservative — quality over quantity; return few, strong candidates.
 
 **`prompts/synthesize.txt`**
-> You are the editor of NOMO's daily digest. Given the monitoring items, industry trend items, and scouted candidates below, produce the final digest. Apply a hard relevance bar: cut anything marginal, dedupe overlapping stories, and rank by importance to NOMO (respect priority hints and region weighting: `{region_weighting}` — weight by region, never exclude solely for it). Use NOMO's current reward lineup (`{reward_landscape}`) to ground candidate `why_fits` in concrete comparisons where useful. Organize into Competition, Industry, and Partner prospects, plus a New candidates section (clearly proposed, not yet tracked). If, after filtering, there is little of substance, set `quiet_day` to true. Return ONLY JSON matching `{schema}`. Data: `{payload}`.
+> You are the editor of NOMO's daily digest. Given the monitoring items, industry trend items, and scouted candidates below, produce the final digest. Apply a hard relevance bar: cut anything marginal, dedupe overlapping stories, and rank by importance to NOMO (respect priority hints and region weighting: `{region_weighting}` — weight by region, never exclude solely for it). Use NOMO's current reward lineup (`{reward_landscape}`) and GTM lineup (`{gtm_landscape}`) to ground candidate `why_fits` in concrete comparisons where useful. Organize into Competition, Industry, Partner prospects, and GTM prospects, plus a New candidates section (clearly proposed, not yet tracked). If, after filtering, there is little of substance, set `quiet_day` to true. Return ONLY JSON matching `{schema}`. Data: `{payload}`.
 
 ---
 
@@ -371,7 +395,7 @@ Same shape as §8.1, keyed by `topic` instead of `entity` — no named entity re
   `• *{name}* — {why_fits} · _proposed {suggested_type}_ · <{source_url}|source>`
   with a note: `_Proposed only — add via the watchlist to start tracking._`
 - **Footer (context block), every day:**
-  `Tracking {competitors} competitors · {partner_prospects} partner prospects · <{manage_list_url}|manage the list>`
+  `Tracking {competitors} competitors · {partner_prospects} partner prospects · {gtm_prospects} GTM prospects · <{manage_list_url}|manage the list>`
   `{manage_list_url}` resolves to `SHEETS_URL` or `NOTION_DB_URL` depending on `DATA_SOURCE`.
 - **Quiet day:** header + a single line, e.g. `Quiet day — nothing material to report. (Tracking … · manage the list)`.
 
@@ -381,17 +405,19 @@ Keep messages concise; truncate any section to a max item count (config, default
 
 ## 10. Status → behavior rules (the Uber example)
 
-Behavior is driven by the Watchlist's `Type`/`Status` fields *and* the Partners source's `Status` field, so the team controls it entirely by editing the active backend — no code changes needed either way:
+Behavior is driven by the Watchlist's `Type`/`Status` fields *and* each Partners source's `Status` field, so the team controls it entirely by editing the active backend — no code changes needed either way:
 
 | Source | Type / Status | Monitored? | Scouted as candidate? | In digest as |
 |---|---|---|---|---|
 | Watchlist | `Competitor` (Active) | yes | already tracked → excluded | Competition |
-| Watchlist | `Partner prospect` (Active) | yes | already tracked → excluded | Partner prospects |
+| Watchlist | `Rewards partner prospect` (Active) | yes | already tracked → excluded | Partner prospects |
+| Watchlist | `GTM partner prospect` (Active) | yes | already tracked → excluded | GTM prospects |
 | Watchlist | `Excluded` | no | never suggested | — |
 | Watchlist | any, `Status = Paused/Converted` | no | excluded | — |
-| Partners source | Active | optional (`MONITOR_EXISTING_PARTNERS`), relationship news only | **never suggested** — always excluded | Partner news, or omitted |
+| Rewards Partners source | Active | optional (`MONITOR_EXISTING_PARTNERS`), relationship news only | **never suggested** — always excluded | Partner prospects, or omitted |
+| GTM Partners source (§6.4a, optional) | Active | optional (`MONITOR_EXISTING_PARTNERS`), relationship news only | **never suggested** — always excluded | GTM prospects, or omitted |
 
-When NOMO partners with Uber: someone sets Uber's Watchlist row `Status` to `Converted` (it stops being monitored/scouted from the Watchlist side) and separately adds Uber to the Partners source through NOMO's normal partner-onboarding process — outside this agent's scope. From the next morning on, Uber is excluded from prospect scouting because it now appears in the Partners source's Active list, independent of its old Watchlist row.
+When NOMO partners with Uber: someone sets Uber's Watchlist row `Status` to `Converted` (it stops being monitored/scouted from the Watchlist side) and separately adds Uber to the appropriate Partners source through NOMO's normal partner-onboarding process — outside this agent's scope. From the next morning on, Uber is excluded from prospect scouting because it now appears in that Partners source's Active list, independent of its old Watchlist row.
 
 ---
 
@@ -418,6 +444,7 @@ NOTION_API_KEY
 NOTION_WATCHLIST_DB_ID
 NOTION_CRITERIA_PAGE_ID
 NOTION_PARTNERS_DB_ID
+NOTION_GTM_PARTNERS_DB_ID    # optional even when notion is active — §6.4a
 NOTION_DB_URL                # for the "manage the list" footer link
 ```
 `config.py` should only *require* the env vars for whichever `DATA_SOURCE` is active — validate the inactive backend's vars lazily (or not at all) so an incomplete Notion setup never blocks a Sheets-backed run.
@@ -453,6 +480,7 @@ jobs:
           NOTION_WATCHLIST_DB_ID: ${{ secrets.NOTION_WATCHLIST_DB_ID }}
           NOTION_CRITERIA_PAGE_ID: ${{ secrets.NOTION_CRITERIA_PAGE_ID }}
           NOTION_PARTNERS_DB_ID: ${{ secrets.NOTION_PARTNERS_DB_ID }}
+          NOTION_GTM_PARTNERS_DB_ID: ${{ secrets.NOTION_GTM_PARTNERS_DB_ID }}
           NOTION_DB_URL: ${{ secrets.NOTION_DB_URL }}
 ```
 `workflow_dispatch` gives a one-click manual run for testing. Production alternative: package as a Lambda, schedule with EventBridge `cron`, secrets in SSM/Secrets Manager.
@@ -479,12 +507,14 @@ Mirror the query-layer discipline: build a small **fixture set** and confirm the
 - Seed the watchlist with a few known entities that had **real recent news**, and confirm the monitoring pass surfaces those stories.
 - Include an entity with a **quiet week** and confirm it does *not* get padded.
 - Add a **do-not-suggest** entry and confirm scouting never surfaces it.
-- Confirm an entity already Active in the **Partners source** is excluded from prospect scouting, without needing a corresponding Watchlist row.
+- Confirm an entity already Active in the **Rewards Partners source** is excluded from prospect scouting, without needing a corresponding Watchlist row.
 - Seed a candidate whose reward category is **already covered** in `reward_landscape` and confirm scouting deprioritizes it versus a genuine gap.
 - Include entities/candidates across **different regions** (including a non-US/UK/BR one) and confirm ranking reflects region weighting rather than hard-excluding any of them.
-- If running on `DATA_SOURCE=sheets`, confirm the **Partners** tab's live pull is actually current before trusting exclusion results — see §6.4.
+- If running on `DATA_SOURCE=sheets`, confirm the **Rewards Partnerships** tab's live pull is actually current before trusting exclusion results — see §6.4.
 - Confirm the **paired-row filter** works: seed a fixture with a blank-entity translation row directly beneath a real one, and confirm only the real row is read.
-- Confirm the **missing-Status fallback**: with no `Status` column present, confirm the agent logs a warning and treats all Partners rows as Active, rather than failing or silently excluding nothing.
+- Confirm the **missing-Status fallback**: with no `Status` column present, confirm the agent logs a warning and treats all Rewards Partners rows as Active, rather than failing or silently excluding nothing.
+- Confirm the **GTM Partners optional-source fallback** (§6.4a): with the `GTM Partners` tab/DB absent, confirm the run still succeeds with a logged warning and an empty `gtm_landscape`, rather than failing Stage 1.
+- Seed the `GTM partners criteria` section with several vertical lines and confirm scouting runs one discovery angle per vertical (§7 Stage 3); confirm it falls back to a single generic angle when that section is empty.
 - Rename or reorder one non-required column in a test copy of a sheet/DB and confirm the column-name map (§6.0) surfaces a clear error (for a required field) or a warning (for an optional one) rather than misreading data silently.
 - Exercise the **inactive backend** against mocked fixtures too, not just the active one — it shouldn't silently bit-rot before the eventual switch (§16 Phase 2).
 - Run via `workflow_dispatch` into a **test channel** for a few days before pointing at the real channel and enabling the schedule.

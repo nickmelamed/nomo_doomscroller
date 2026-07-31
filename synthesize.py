@@ -46,17 +46,20 @@ DIGEST_SCHEMA = json.dumps(
             "partner_prospects": [
                 {"headline": "string", "url": "string", "source": "string", "summary": "string"}
             ],
+            "gtm_prospects": [
+                {"headline": "string", "url": "string", "source": "string", "summary": "string"}
+            ],
             "new_candidates": [
                 {
                     "name": "string",
-                    "suggested_type": "Competitor|Partner prospect",
+                    "suggested_type": "Competitor|Rewards partner prospect|GTM partner prospect",
                     "region": "string",
                     "why_fits": "string",
                     "source_url": "string",
                 }
             ],
         },
-        "tracking_counts": {"competitors": 0, "partner_prospects": 0},
+        "tracking_counts": {"competitors": 0, "partner_prospects": 0, "gtm_prospects": 0},
     }
 )
 
@@ -123,9 +126,20 @@ def compute_tracking_counts(source_data: SourceData) -> dict[str, int]:
         1 for e in source_data.entities if e.source == "watchlist" and e.type == "Competitor"
     )
     partner_prospects = sum(
-        1 for e in source_data.entities if e.source == "watchlist" and e.type == "Partner prospect"
+        1
+        for e in source_data.entities
+        if e.source == "watchlist" and e.type == "Rewards partner prospect"
     )
-    return {"competitors": competitors, "partner_prospects": partner_prospects}
+    gtm_prospects = sum(
+        1
+        for e in source_data.entities
+        if e.source == "watchlist" and e.type == "GTM partner prospect"
+    )
+    return {
+        "competitors": competitors,
+        "partner_prospects": partner_prospects,
+        "gtm_prospects": gtm_prospects,
+    }
 
 
 def build_payload(
@@ -148,6 +162,7 @@ def build_payload(
         ],
         "candidates": [asdict(c) for c in candidates],
         "reward_landscape": source_data.reward_landscape,
+        "gtm_landscape": source_data.gtm_landscape,
         "tracking_counts": compute_tracking_counts(source_data),
     }
 
@@ -219,9 +234,15 @@ def synthesize(
         nomo_context=source_data.criteria.nomo_context,
         region_weighting=source_data.criteria.region_weighting,
         competitor_criteria_summary=_one_line_summary(source_data.criteria.competitor_criteria),
-        partner_criteria_summary=_one_line_summary(source_data.criteria.partner_criteria),
+        reward_partner_criteria_summary=_one_line_summary(
+            source_data.criteria.reward_partner_criteria
+        ),
+        gtm_partner_criteria_summary=_one_line_summary(source_data.criteria.gtm_partner_criteria),
         reward_landscape=(
             "; ".join(source_data.reward_landscape) if source_data.reward_landscape else "none yet"
+        ),
+        gtm_landscape=(
+            "; ".join(source_data.gtm_landscape) if source_data.gtm_landscape else "none yet"
         ),
         schema=DIGEST_SCHEMA,
         verbose_instructions=VERBOSE_INSTRUCTIONS_BLOCK if config.synthesis_verbose_log else "",
@@ -248,6 +269,7 @@ def synthesize(
         competition=[_to_digest_item(d) for d in sections.get("competition", [])],
         industry=[_to_digest_item(d) for d in sections.get("industry", [])],
         partner_prospects=[_to_digest_item(d) for d in sections.get("partner_prospects", [])],
+        gtm_prospects=[_to_digest_item(d) for d in sections.get("gtm_prospects", [])],
         new_candidates=[_to_candidate(d) for d in sections.get("new_candidates", [])],
         tracking_counts=compute_tracking_counts(source_data),
     )

@@ -83,6 +83,17 @@ def partners_page(**overrides) -> dict:
     return {"properties": properties}
 
 
+def gtm_partners_page(**overrides) -> dict:
+    properties = {
+        "Entity": {"title": rich_text("Lincoln High")},
+        "Status": {"select": {"name": "Active"}},
+        "Region": {"multi_select": [{"name": "US"}]},
+        "Notes": {"rich_text": rich_text("500-student pilot")},
+    }
+    properties.update(overrides)
+    return {"properties": properties}
+
+
 def topic_page(topic: str, notes: str = "") -> dict:
     return {
         "properties": {
@@ -99,8 +110,10 @@ CRITERIA_BLOCKS = [
     paragraph("BR is primary; US, UK, AU are growing."),
     heading("1", "Competitor criteria"),
     paragraph("Competes for youth loyalty attention."),
-    heading("1", "Partner criteria"),
+    heading("1", "Rewards partners criteria"),
     paragraph("Has tradeable reward inventory."),
+    heading("1", "GTM partners criteria"),
+    paragraph("School districts\nTelecom carriers"),
     heading("2", "Do-not-suggest"),
     bullet("Meta"),
     bullet("TikTok"),
@@ -112,12 +125,15 @@ def make_source(
     partners_pages=None,
     topics_pages=None,
     criteria_blocks=None,
+    gtm_partners_pages=None,
+    gtm_partners_db_id=None,
 ) -> NotionSource:
     source = NotionSource.__new__(NotionSource)
     source._watchlist_db_id = "watchlist-db"
     source._criteria_page_id = "criteria-page"
     source._topics_db_id = "topics-db"
     source._partners_db_id = "partners-db"
+    source._gtm_partners_db_id = gtm_partners_db_id
     source._client = FakeNotionClient(
         databases_data={
             "watchlist-db": watchlist_pages if watchlist_pages is not None else [watchlist_page()],
@@ -125,6 +141,9 @@ def make_source(
             "topics-db": topics_pages
             if topics_pages is not None
             else [topic_page("youth social media policy", "Age-verification laws.")],
+            "gtm-partners-db": gtm_partners_pages
+            if gtm_partners_pages is not None
+            else [gtm_partners_page()],
         },
         blocks_data={"criteria-page": criteria_blocks or CRITERIA_BLOCKS},
     )
@@ -202,5 +221,43 @@ def test_notion_source_data_matches_shape_of_equivalent_sheets_fixture():
     assert {e.source for e in notion_data.entities} == {e.source for e in sheets_data.entities}
     assert notion_data.excluded_names == sheets_data.excluded_names
     assert notion_data.reward_landscape == sheets_data.reward_landscape
+    assert notion_data.gtm_landscape == sheets_data.gtm_landscape
     assert notion_data.criteria == sheets_data.criteria
     assert [t.topic for t in notion_data.industry_topics] == ["youth social media policy"]
+
+
+def test_gtm_partners_db_id_unset_falls_back_to_empty_with_warning(caplog):
+    source = make_source(gtm_partners_db_id=None)
+
+    with caplog.at_level("WARNING"):
+        data = source.load_all()
+
+    assert data.gtm_landscape == []
+    assert [e for e in data.entities if e.source == "gtm_partners_db"] == []
+    assert "GTM Partners" in caplog.text
+
+
+def test_gtm_partners_db_id_set_loads_entities_and_landscape():
+    source = make_source(gtm_partners_db_id="gtm-partners-db")
+    data = source.load_all()
+
+    gtm_entities = [e for e in data.entities if e.source == "gtm_partners_db"]
+    assert len(gtm_entities) == 1
+    assert gtm_entities[0].name == "Lincoln High"
+    assert gtm_entities[0].type == "Existing GTM partner"
+    assert "Lincoln High: 500-student pilot" in data.gtm_landscape
+    assert "Lincoln High" in data.excluded_names
+
+
+def test_gtm_partner_prospect_type_is_tracked():
+    pages = [
+        watchlist_page(
+            Name={"title": rich_text("Lincoln High")},
+            Type={"select": {"name": "GTM partner prospect"}},
+        )
+    ]
+    source = make_source(watchlist_pages=pages)
+    data = source.load_all()
+
+    tracked = [e for e in data.entities if e.source == "watchlist"]
+    assert [e.name for e in tracked] == ["Lincoln High"]

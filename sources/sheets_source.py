@@ -27,14 +27,21 @@ WATCHLIST_TAB = "Watchlist"
 CRITERIA_TAB = "Criteria"
 INDUSTRY_TOPICS_TAB = "Industry Topics"
 # §6.4 calls this source "Partners" — the real workbook's tab is titled
-# "Partnerships", confirmed against the live workbook (Phase 2 verify).
-PARTNERS_TAB = "Partnerships"
+# "Rewards Partnerships", to distinguish it from the separate GTM Partners
+# source (§6.4a) added alongside it.
+PARTNERS_TAB = "Rewards Partnerships"
+# §6.4a — GTM partners (schools, telecom carriers, etc. that implement NOMO,
+# as opposed to reward-supplying partners). Optional: the tab may not exist
+# yet, see _load_gtm_partners. Confirmed against the live workbook: titled
+# "GTM Partnerships", matching "Rewards Partnerships"'s naming convention.
+GTM_PARTNERS_TAB = "GTM Partnerships"
 
 WATCHLIST_COLUMNS = {
     "name": "Name",
     "type": "Type",
     "status": "Status",
-    "category": "Category",
+    "category_rewards": "Rewards Category",
+    "category_gtm": "GTM Category",
     "region_flags": {"All": "All", "US": "US", "UK": "UK", "BR": "BR", "AUS": "AU"},
     "aliases": "Aliases / keywords",
     "source_url": "Source URL",
@@ -44,6 +51,10 @@ WATCHLIST_COLUMNS = {
     "date_added": "Date added",
 }
 WATCHLIST_REQUIRED = {"name", "type", "status"}
+
+# Watchlist Type values that represent something actively tracked/monitored/
+# scouted-against, as opposed to "Excluded" (§6.1, §7 Stage 3-4).
+TRACKED_WATCHLIST_TYPES = {"Competitor", "Rewards partner prospect", "GTM partner prospect"}
 
 CRITERIA_COLUMNS = {
     "section": "Section",
@@ -69,6 +80,19 @@ PARTNERS_COLUMNS = {
     "region_flags": {"All": "All", "US": "US", "UK": "UK", "BR": "BR", "AU": "AU"},
 }
 PARTNERS_REQUIRED = {"entity"}
+
+# §6.4a — GTM Partnerships tab. Simpler than Rewards Partnerships: no
+# paired-row bilingual UI copy (sentence/title), just a plain notes field,
+# since GTM partners (schools, telecom carriers) don't have in-app reward
+# copy. Lowercase "notes" confirmed against the live workbook, matching
+# Rewards Partnerships' own lowercase "sentence"/"title" convention.
+GTM_PARTNERS_COLUMNS = {
+    "entity": "Partner (entity)",
+    "status": "Status",  # optional — same missing-Status fallback as §6.4
+    "notes": "notes",
+    "region_flags": {"All": "All", "US": "US", "UK": "UK", "BR": "BR", "AU": "AU"},
+}
+GTM_PARTNERS_REQUIRED = {"entity"}
 
 
 class SheetsSourceError(RuntimeError):
@@ -118,6 +142,7 @@ class SheetsSource:
         criteria = self._load_criteria(workbook)
         industry_topics = self._load_industry_topics(workbook)
         partner_entities, reward_landscape, active_partner_names = self._load_partners(workbook)
+        gtm_entities, gtm_landscape, active_gtm_names = self._load_gtm_partners(workbook)
 
         excluded_watchlist = [
             entity
@@ -128,17 +153,19 @@ class SheetsSource:
             name for entity in excluded_watchlist for name in (entity.name, *entity.aliases)
         }
         excluded_names |= active_partner_names
+        excluded_names |= active_gtm_names
 
         tracked_watchlist_entities = [
             entity
             for entity in watchlist_entities
-            if entity.type in {"Competitor", "Partner prospect"} and entity.status == "Active"
+            if entity.type in TRACKED_WATCHLIST_TYPES and entity.status == "Active"
         ]
 
         return SourceData(
-            entities=[*tracked_watchlist_entities, *partner_entities],
+            entities=[*tracked_watchlist_entities, *partner_entities, *gtm_entities],
             excluded_names=excluded_names,
             reward_landscape=reward_landscape,
+            gtm_landscape=gtm_landscape,
             industry_topics=industry_topics,
             criteria=criteria,
         )
@@ -160,12 +187,16 @@ class SheetsSource:
             if not name:
                 continue
 
+            category = _split_comma_list(
+                str(row.get(WATCHLIST_COLUMNS["category_rewards"], ""))
+            ) + _split_comma_list(str(row.get(WATCHLIST_COLUMNS["category_gtm"], "")))
+
             entities.append(
                 Entity(
                     name=name,
                     type=str(row.get(WATCHLIST_COLUMNS["type"], "")).strip(),
                     status=str(row.get(WATCHLIST_COLUMNS["status"], "")).strip(),
-                    category=_split_comma_list(str(row.get(WATCHLIST_COLUMNS["category"], ""))),
+                    category=category,
                     region=_parse_region_flags(row, WATCHLIST_COLUMNS["region_flags"]),
                     aliases=_split_comma_list(str(row.get(WATCHLIST_COLUMNS["aliases"], ""))),
                     source_url=str(row.get(WATCHLIST_COLUMNS["source_url"], "")).strip() or None,
@@ -211,12 +242,12 @@ class SheetsSource:
     def _load_partners(self, workbook) -> tuple[list[Entity], list[str], set[str]]:
         worksheet = self._get_worksheet(workbook, PARTNERS_TAB)
         headers = set(worksheet.row_values(1))
-        check_columns(headers, PARTNERS_COLUMNS, PARTNERS_REQUIRED, "Partnerships tab")
+        check_columns(headers, PARTNERS_COLUMNS, PARTNERS_REQUIRED, "Rewards Partnerships tab")
 
         status_column_present = PARTNERS_COLUMNS["status"] in headers
         if not status_column_present:
             logger.warning(
-                "Partners tab: 'Status' column not found — treating all rows as Active (§6.4)"
+                "Rewards Partnerships tab: 'Status' column not found — treating all rows as Active (§6.4)"
             )
 
         entities: list[Entity] = []
@@ -260,6 +291,66 @@ class SheetsSource:
             )
 
         return entities, reward_landscape, active_names
+
+    def _load_gtm_partners(self, workbook) -> tuple[list[Entity], list[str], set[str]]:
+        """§6.4a — optional: the GTM Partners tab may not exist yet (it's a
+        newer addition than the other four sources), so a missing tab logs a
+        warning and falls back to empty rather than failing the run, unlike
+        every other required source in this backend."""
+        try:
+            worksheet = self._get_worksheet(workbook, GTM_PARTNERS_TAB)
+        except SheetsSourceError:
+            logger.warning(
+                "GTM Partnerships tab (%r) not found — treating as empty until it's added",
+                GTM_PARTNERS_TAB,
+            )
+            return [], [], set()
+
+        headers = set(worksheet.row_values(1))
+        check_columns(headers, GTM_PARTNERS_COLUMNS, GTM_PARTNERS_REQUIRED, "GTM Partnerships tab")
+
+        status_column_present = GTM_PARTNERS_COLUMNS["status"] in headers
+        if not status_column_present:
+            logger.warning(
+                "GTM Partnerships tab: 'Status' column not found — treating all rows as Active (§6.4a)"
+            )
+
+        entities: list[Entity] = []
+        gtm_landscape: list[str] = []
+        active_names: set[str] = set()
+
+        for row in worksheet.get_all_records():
+            name = str(row.get(GTM_PARTNERS_COLUMNS["entity"], "")).strip()
+            if not name:
+                continue
+
+            if status_column_present:
+                status = str(row.get(GTM_PARTNERS_COLUMNS["status"], "")).strip() or "Active"
+            else:
+                status = "Active"
+            if status != "Active":
+                continue
+
+            notes = _normalize_text(str(row.get(GTM_PARTNERS_COLUMNS["notes"], "")))
+
+            active_names.add(name)
+            if notes:
+                gtm_landscape.append(f"{name}: {notes}")
+
+            entities.append(
+                Entity(
+                    name=name,
+                    type="Existing GTM partner",
+                    status=status,
+                    region=_parse_region_flags(row, GTM_PARTNERS_COLUMNS["region_flags"]),
+                    why_tracked=(
+                        f"Active GTM partner — {notes}" if notes else "Active GTM partner."
+                    ),
+                    source="gtm_partners_db",
+                )
+            )
+
+        return entities, gtm_landscape, active_names
 
 
 if __name__ == "__main__":

@@ -51,6 +51,7 @@ def main() -> None:
         f"\nDigest summary: quiet_day={digest.quiet_day} "
         f"competition={len(digest.competition)} industry={len(digest.industry)} "
         f"partner_prospects={len(digest.partner_prospects)} "
+        f"gtm_prospects={len(digest.gtm_prospects)} "
         f"new_candidates={len(digest.new_candidates)}"
     )
 

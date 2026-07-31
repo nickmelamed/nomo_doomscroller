@@ -28,6 +28,7 @@ TEST_CONFIG = Config(
     notion_criteria_page_id=None,
     notion_topics_db_id=None,
     notion_partners_db_id=None,
+    notion_gtm_partners_db_id=None,
     notion_db_url=None,
 )
 
@@ -46,7 +47,7 @@ def digest_item(headline: str, **overrides) -> DigestItem:
 def candidate(name: str, **overrides) -> Candidate:
     fields = {
         "name": name,
-        "suggested_type": "Partner prospect",
+        "suggested_type": "Rewards partner prospect",
         "region": "BR",
         "why_fits": "Fits the criteria.",
         "source_url": "https://example.com/news",
@@ -82,13 +83,32 @@ def test_section_rendering_and_ordering():
         competition=[digest_item("Uber news")],
         industry=[digest_item("Policy news")],
         partner_prospects=[digest_item("Fever update")],
-        tracking_counts={"competitors": 1, "partner_prospects": 1},
+        gtm_prospects=[digest_item("Lincoln High update")],
+        tracking_counts={"competitors": 1, "partner_prospects": 1, "gtm_prospects": 1},
     )
     blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
 
     section_blocks = [b for b in blocks if b["type"] == "section"]
     titles_in_order = [b["text"]["text"].splitlines()[0] for b in section_blocks]
-    assert titles_in_order == ["*Competition*", "*Industry*", "*Partner prospects*"]
+    assert titles_in_order == [
+        "*Competition*",
+        "*Industry*",
+        "*Partner prospects*",
+        "*GTM prospects*",
+    ]
+
+
+def test_gtm_prospects_section_omitted_when_empty():
+    digest = Digest(
+        quiet_day=False,
+        competition=[digest_item("Uber news")],
+        gtm_prospects=[],
+        tracking_counts={"competitors": 1, "partner_prospects": 0, "gtm_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+
+    assert not any("*GTM prospects*" in t for t in section_texts)
 
 
 def test_item_line_format():
@@ -221,7 +241,7 @@ def test_new_candidates_section_is_visually_distinct_with_note():
             candidate(
                 "ExampleCo",
                 why_fits="Great fit.",
-                suggested_type="Partner prospect",
+                suggested_type="Rewards partner prospect",
                 source_url="https://example.com/news",
             )
         ],
@@ -234,7 +254,7 @@ def test_new_candidates_section_is_visually_distinct_with_note():
         b for b in blocks if b["type"] == "section" and "New candidates" in b["text"]["text"]
     )
     assert (
-        "• *ExampleCo* — Great fit. · _proposed Partner prospect_ · "
+        "• *ExampleCo* — Great fit. · _proposed Rewards partner prospect_ · "
         "<https://example.com/news|source>" in candidates_section["text"]["text"]
     )
     note_block = next(
@@ -249,9 +269,12 @@ def test_footer_present_every_day_normal_and_quiet():
     normal = Digest(
         quiet_day=False,
         competition=[digest_item("Uber news")],
-        tracking_counts={"competitors": 4, "partner_prospects": 6},
+        tracking_counts={"competitors": 4, "partner_prospects": 6, "gtm_prospects": 2},
     )
-    quiet = Digest(quiet_day=True, tracking_counts={"competitors": 4, "partner_prospects": 6})
+    quiet = Digest(
+        quiet_day=True,
+        tracking_counts={"competitors": 4, "partner_prospects": 6, "gtm_prospects": 2},
+    )
 
     for digest in (normal, quiet):
         blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
@@ -260,6 +283,7 @@ def test_footer_present_every_day_normal_and_quiet():
         text = footer["elements"][0]["text"]
         assert "4 competitors" in text
         assert "6 partner prospects" in text
+        assert "2 GTM prospects" in text
         assert "manage the list" in text
         assert TEST_CONFIG.sheets_url in text
 
@@ -339,6 +363,7 @@ def test_weekly_sections_and_notable_candidates_render():
         competition=[digest_item("Uber news")],
         industry=[digest_item("Policy news")],
         partner_prospects=[digest_item("Fever update")],
+        gtm_prospects=[digest_item("Lincoln High update")],
         notable_candidates=[candidate("ExampleCo")],
     )
     blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
@@ -347,8 +372,18 @@ def test_weekly_sections_and_notable_candidates_render():
     assert any(t.startswith("*Competition*") for t in section_texts)
     assert any(t.startswith("*Industry*") for t in section_texts)
     assert any(t.startswith("*Partner prospects*") for t in section_texts)
+    assert any(t.startswith("*GTM prospects*") for t in section_texts)
     assert any("*Notable candidates*" in t for t in section_texts)
     assert any(b["type"] == "divider" for b in blocks)
+
+
+def test_weekly_has_content_true_when_only_gtm_prospects_present():
+    rollup = WeeklyRollup(week_of="2026-07-20", gtm_prospects=[digest_item("Lincoln High update")])
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+
+    assert not any("Quiet week" in t for t in section_texts)
+    assert any(t.startswith("*GTM prospects*") for t in section_texts)
 
 
 def test_weekly_notable_candidates_has_proposed_only_note():

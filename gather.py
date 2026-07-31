@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 
 from config import Config
 from models import Candidate, Criteria, Entity, IndustryTopic, NewsItem, SourceData
+from sources.base import split_list_field
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,83 @@ DISCOVERY_ANGLES = [
     "reason against the current reward lineup to find genuine gaps, not just "
     "any company with reward inventory.",
 ]
+
+_GENERIC_GTM_ANGLE = (
+    "Potential GTM/implementation partners (school districts, phone/telecom "
+    "carriers, other youth-serving institutions) that could deploy NOMO "
+    "directly to their population — reason against the current GTM partner "
+    "lineup to find genuine gaps."
+)
+
+
+def _parse_gtm_table_rows(lines: list[str]) -> list[tuple[str, str]] | None:
+    """Detects the shape actually used to author gtm_partner_criteria in
+    practice: a small table (header row, then one data row per vertical,
+    typically '#' | 'Vertical' | 'Owner' | 'GTM Motion' | 'Why it matters /
+    Example accounts') pasted into a single Sheets/Notion text cell, which
+    flattens to one line per table *cell* rather than one line per vertical —
+    e.g. '#', 'Vertical', 'Owner', 'GTM Motion', 'Why it matters...', '1',
+    '6-12 Education', 'João', 'Direct', 'Districts...', '2', ...
+
+    Detected via the numeric row-index column ('1', '2', ...) that starts
+    each data row: its position marks the header width, so the remaining
+    lines can be chunked back into rows. Returns None (not a tabular shape)
+    if there's no such numeric marker, or the data doesn't divide evenly into
+    rows of that width — the caller falls back to a simpler format."""
+    numeric_index = next((i for i, line in enumerate(lines) if line.isdigit()), None)
+    if not numeric_index:  # None or 0 (a leading number isn't a header row)
+        return None
+
+    header, data, row_width = lines[:numeric_index], lines[numeric_index:], numeric_index
+    if len(data) % row_width != 0:
+        return None
+
+    vertical_col = next(
+        (i for i, h in enumerate(header) if h.strip().lower() == "vertical"),
+        1 if row_width > 1 else 0,
+    )
+    why_col = next(
+        (i for i, h in enumerate(header) if "why" in h.strip().lower()), row_width - 1
+    )
+
+    rows = []
+    for start in range(0, len(data), row_width):
+        row = data[start : start + row_width]
+        vertical = row[vertical_col] if vertical_col < len(row) else None
+        why = row[why_col] if why_col < len(row) else ""
+        if vertical:
+            rows.append((vertical, why))
+    return rows or None
+
+
+def gtm_discovery_angles(criteria: Criteria) -> list[str]:
+    """Builds one discovery angle per target vertical listed in the
+    gtm_partner_criteria section (§6.2), mirroring how industry_topics drives
+    one Claude call per row rather than one static call.
+
+    Handles the table shape described in _parse_gtm_table_rows (the format
+    actually used on the live sheet) first; falls back to treating each
+    non-empty line as its own vertical for a simpler one-per-line list; falls
+    back further to a single generic angle if the section is empty, so GTM
+    scouting still runs rather than silently doing nothing."""
+    lines = split_list_field(criteria.gtm_partner_criteria)
+    if not lines:
+        return [_GENERIC_GTM_ANGLE]
+
+    table_rows = _parse_gtm_table_rows(lines)
+    if table_rows is not None:
+        return [
+            f"Potential GTM/implementation partners in this vertical: {vertical}"
+            + (f" — {why}" if why else "")
+            + " — reason against the current GTM partner lineup to find genuine gaps."
+            for vertical, why in table_rows
+        ]
+
+    return [
+        f"Potential GTM/implementation partners in this vertical: {vertical} — "
+        "reason against the current GTM partner lineup to find genuine gaps."
+        for vertical in lines
+    ]
 
 MONITOR_SCHEMA = json.dumps(
     {
@@ -78,7 +156,7 @@ SCOUT_SCHEMA = json.dumps(
         "candidates": [
             {
                 "name": "string",
-                "suggested_type": "Competitor|Partner prospect",
+                "suggested_type": "Competitor|Rewards partner prospect|GTM partner prospect",
                 "category": "string",
                 "region": "US|UK|BR|AU|Other|All",
                 "why_fits": "string",
@@ -337,12 +415,14 @@ def scout_angle(
     criteria: Criteria,
     tracked_names: set[str],
     reward_landscape: list[str],
+    gtm_landscape: list[str],
     config: Config,
 ) -> list[Candidate]:
     """One discovery call for a single angle — §7 Stage 3, §8.2."""
     combined_criteria = (
         f"Competitor criteria: {criteria.competitor_criteria}\n"
-        f"Partner criteria: {criteria.partner_criteria}"
+        f"Rewards partner criteria: {criteria.reward_partner_criteria}\n"
+        f"GTM partner criteria: {criteria.gtm_partner_criteria}"
     )
     prompt = _render_prompt(
         "scout.txt",
@@ -351,6 +431,7 @@ def scout_angle(
         region_weighting=criteria.region_weighting,
         angle=angle,
         reward_landscape="; ".join(reward_landscape) if reward_landscape else "none yet",
+        gtm_landscape="; ".join(gtm_landscape) if gtm_landscape else "none yet",
         tracked_names=", ".join(sorted(tracked_names)) if tracked_names else "none",
         do_not_suggest=", ".join(criteria.do_not_suggest) if criteria.do_not_suggest else "none",
         schema=SCOUT_SCHEMA,
@@ -397,22 +478,21 @@ def known_names(source_data: SourceData) -> set[str]:
 
 def scout_all(client, source_data: SourceData, config: Config) -> list[Candidate]:
     tracked_names = known_names(source_data)
+    angles = DISCOVERY_ANGLES + gtm_discovery_angles(source_data.criteria)
 
     candidates: list[Candidate] = []
-    for angle in DISCOVERY_ANGLES:
+    for angle in angles:
         try:
             candidates.extend(
                 scout_angle(
                     client, angle, source_data.criteria, tracked_names,
-                    source_data.reward_landscape, config,
+                    source_data.reward_landscape, source_data.gtm_landscape, config,
                 )
             )
         except Exception:
             logger.exception("unexpected error on scouting angle %r", angle)
 
-    logger.info(
-        "scouting: %d angles run, %d candidates surfaced", len(DISCOVERY_ANGLES), len(candidates)
-    )
+    logger.info("scouting: %d angles run, %d candidates surfaced", len(angles), len(candidates))
     return candidates
 
 

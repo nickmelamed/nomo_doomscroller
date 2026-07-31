@@ -28,6 +28,19 @@ def test_loads_notion_backend_when_selected():
     assert cfg.manage_list_url == "dummy-notion_db_url"
 
 
+def test_gtm_partners_db_id_optional_even_when_notion_active():
+    # §6.4a — NOTION_GTM_PARTNERS_DB_ID isn't in BACKEND_REQUIRED_VARS, so the
+    # notion backend must load fine without it.
+    cfg = load_config(env=NOTION_ENV)
+    assert cfg.notion_gtm_partners_db_id is None
+
+
+def test_gtm_partners_db_id_loaded_when_present():
+    env = {**NOTION_ENV, "NOTION_GTM_PARTNERS_DB_ID": "dummy-gtm-db"}
+    cfg = load_config(env=env)
+    assert cfg.notion_gtm_partners_db_id == "dummy-gtm-db"
+
+
 def test_documented_defaults():
     cfg = load_config(env=SHEETS_ENV)
     assert cfg.anthropic_model == "claude-sonnet-5"

@@ -36,7 +36,7 @@ ONE_DAY = {
     "new_candidates": [
         {
             "name": "ExampleCo",
-            "suggested_type": "Partner prospect",
+            "suggested_type": "Rewards partner prospect",
             "region": "BR",
             "why_fits": "Fits.",
             "source_url": "https://example.com/b",
@@ -65,7 +65,7 @@ def test_build_weekly_rollup_parses_full_response():
             "notable_candidates": [
                 {
                     "name": "ExampleCo",
-                    "suggested_type": "Partner prospect",
+                    "suggested_type": "Rewards partner prospect",
                     "region": "BR",
                     "why_fits": "Fits.",
                     "source_url": "https://example.com/b",
@@ -84,6 +84,35 @@ def test_build_weekly_rollup_parses_full_response():
     assert len(rollup.notable_candidates) == 1
     assert rollup.notable_candidates[0].name == "ExampleCo"
     assert rollup.themes == ["Competitor funding wave"]
+
+
+def test_build_weekly_rollup_parses_gtm_prospects_section():
+    response = json.dumps(
+        {
+            "week_of": "2026-07-20",
+            "sections": {
+                "competition": [],
+                "industry": [],
+                "partner_prospects": [],
+                "gtm_prospects": [
+                    {
+                        "headline": "Lincoln High pilot update",
+                        "url": "https://example.com/c",
+                        "source": "X",
+                        "summary": "S",
+                    }
+                ],
+            },
+            "notable_candidates": [],
+            "themes": [],
+        }
+    )
+    client = FakeClient(response)
+
+    rollup = weekly_synthesize.build_weekly_rollup(client, [ONE_DAY], "2026-07-20", TEST_CONFIG)
+
+    assert len(rollup.gtm_prospects) == 1
+    assert rollup.gtm_prospects[0].headline == "Lincoln High pilot update"
 
 
 def test_build_weekly_rollup_empty_week_returns_empty_rollup():

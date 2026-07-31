@@ -302,6 +302,7 @@ def test_effective_gather_config_widens_window_after_a_stale_gap():
         notion_criteria_page_id=None,
         notion_topics_db_id=None,
         notion_partners_db_id=None,
+        notion_gtm_partners_db_id=None,
         notion_db_url=None,
     )
     now = datetime(2026, 7, 30, 15, 0, tzinfo=timezone.utc)
@@ -334,6 +335,7 @@ def test_effective_gather_config_unchanged_within_normal_gap():
         notion_criteria_page_id=None,
         notion_topics_db_id=None,
         notion_partners_db_id=None,
+        notion_gtm_partners_db_id=None,
         notion_db_url=None,
     )
     now = datetime(2026, 7, 30, 13, 30, tzinfo=timezone.utc)
@@ -366,6 +368,7 @@ def test_effective_gather_config_unchanged_with_no_prior_success():
         notion_criteria_page_id=None,
         notion_topics_db_id=None,
         notion_partners_db_id=None,
+        notion_gtm_partners_db_id=None,
         notion_db_url=None,
     )
     now = datetime(2026, 7, 30, 13, 30, tzinfo=timezone.utc)
@@ -408,7 +411,7 @@ def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
     )
     known_candidate = Candidate(
         name="Fever",  # already an active partner — must be filtered out
-        suggested_type="Partner prospect",
+        suggested_type="Rewards partner prospect",
         region="BR",
         why_fits="...",
         source_url="https://example.com/c",

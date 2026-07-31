@@ -7,7 +7,7 @@ from models import Candidate, Criteria, Entity, NewsItem, SourceData
 def candidate(name: str, **overrides) -> Candidate:
     fields = {
         "name": name,
-        "suggested_type": "Partner prospect",
+        "suggested_type": "Rewards partner prospect",
         "region": "US",
         "why_fits": "Fits the criteria.",
         "source_url": "https://example.com/news",

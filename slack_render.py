@@ -17,6 +17,7 @@ SECTION_TITLES = {
     "competition": "Competition",
     "industry": "Industry",
     "partner_prospects": "Partner prospects",
+    "gtm_prospects": "GTM prospects",
 }
 
 # Slack rejects a section block whose text exceeds this (400 invalid_blocks).
@@ -99,6 +100,7 @@ def _footer_block(config: Config, digest: Digest) -> dict:
     text = (
         f"Tracking {counts.get('competitors', 0)} competitors · "
         f"{counts.get('partner_prospects', 0)} partner prospects · "
+        f"{counts.get('gtm_prospects', 0)} GTM prospects · "
         f"<{manage_list_url}|manage the list>"
     )
     return {"type": "context", "elements": [{"type": "mrkdwn", "text": text}]}
@@ -122,6 +124,7 @@ def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) 
         "competition": digest.competition,
         "industry": digest.industry,
         "partner_prospects": digest.partner_prospects,
+        "gtm_prospects": digest.gtm_prospects,
     }
     for key, title in SECTION_TITLES.items():
         items = section_items[key]
@@ -213,7 +216,11 @@ def build_weekly_blocks(
         )
 
     has_content = bool(
-        rollup.competition or rollup.industry or rollup.partner_prospects or rollup.notable_candidates
+        rollup.competition
+        or rollup.industry
+        or rollup.partner_prospects
+        or rollup.gtm_prospects
+        or rollup.notable_candidates
     )
     if not has_content:
         blocks.append(
@@ -233,6 +240,7 @@ def build_weekly_blocks(
         "competition": rollup.competition,
         "industry": rollup.industry,
         "partner_prospects": rollup.partner_prospects,
+        "gtm_prospects": rollup.gtm_prospects,
     }
     for key, title in SECTION_TITLES.items():
         items = section_items[key]

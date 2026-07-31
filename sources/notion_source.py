@@ -52,6 +52,17 @@ PARTNERS_PROPERTIES = {
     "title": "en | title",
 }
 
+# GTM Partners DB property names (§6.4a) — mirrors the Sheets GTM Partners
+# tab's shape (no bilingual sentence/title pair, just a plain Notes field).
+GTM_PARTNERS_PROPERTIES = {
+    "entity": "Entity",
+    "status": "Status",
+    "region": "Region",
+    "notes": "Notes",
+}
+
+TRACKED_WATCHLIST_TYPES = {"Competitor", "Rewards partner prospect", "GTM partner prospect"}
+
 
 class NotionSourceError(RuntimeError):
     """Raised when a required Notion object is unreachable (§7 Stage 1)."""
@@ -106,18 +117,23 @@ class NotionSource:
         criteria_page_id: str,
         topics_db_id: str,
         partners_db_id: str,
+        gtm_partners_db_id: str | None = None,
     ):
         self._client = Client(auth=api_key)
         self._watchlist_db_id = watchlist_db_id
         self._criteria_page_id = criteria_page_id
         self._topics_db_id = topics_db_id
         self._partners_db_id = partners_db_id
+        # §6.4a — optional: the GTM Partners DB may not exist yet, mirroring
+        # the Sheets backend's optional-tab fallback (sources/sheets_source.py).
+        self._gtm_partners_db_id = gtm_partners_db_id
 
     def load_all(self) -> SourceData:
         watchlist_entities = self._load_watchlist()
         criteria = self._load_criteria()
         industry_topics = self._load_industry_topics()
         partner_entities, reward_landscape, active_partner_names = self._load_partners()
+        gtm_entities, gtm_landscape, active_gtm_names = self._load_gtm_partners()
 
         excluded_watchlist = [
             entity
@@ -128,17 +144,19 @@ class NotionSource:
             name for entity in excluded_watchlist for name in (entity.name, *entity.aliases)
         }
         excluded_names |= active_partner_names
+        excluded_names |= active_gtm_names
 
         tracked_watchlist_entities = [
             entity
             for entity in watchlist_entities
-            if entity.type in {"Competitor", "Partner prospect"} and entity.status == "Active"
+            if entity.type in TRACKED_WATCHLIST_TYPES and entity.status == "Active"
         ]
 
         return SourceData(
-            entities=[*tracked_watchlist_entities, *partner_entities],
+            entities=[*tracked_watchlist_entities, *partner_entities, *gtm_entities],
             excluded_names=excluded_names,
             reward_landscape=reward_landscape,
+            gtm_landscape=gtm_landscape,
             industry_topics=industry_topics,
             criteria=criteria,
         )
@@ -283,6 +301,53 @@ class NotionSource:
 
         return entities, reward_landscape, active_names
 
+    def _load_gtm_partners(self) -> tuple[list[Entity], list[str], set[str]]:
+        """§6.4a — optional: no DB id means the GTM Partners DB hasn't been
+        created/shared yet, mirroring the Sheets backend's missing-tab
+        fallback. Logs a warning and returns empty rather than failing."""
+        if not self._gtm_partners_db_id:
+            logger.warning(
+                "GTM Partners DB id not configured — treating as empty until it's added"
+            )
+            return [], [], set()
+
+        pages = self._query_all(self._gtm_partners_db_id, "GTM Partners database")
+
+        entities: list[Entity] = []
+        gtm_landscape: list[str] = []
+        active_names: set[str] = set()
+
+        for page in pages:
+            properties = page.get("properties", {})
+            name = _get_title(properties, GTM_PARTNERS_PROPERTIES["entity"]).strip()
+            if not name:
+                continue
+
+            status = _get_select(properties, GTM_PARTNERS_PROPERTIES["status"]) or "Active"
+            if status != "Active":
+                continue
+
+            notes = _get_rich_text(properties, GTM_PARTNERS_PROPERTIES["notes"]).strip()
+
+            active_names.add(name)
+            if notes:
+                gtm_landscape.append(f"{name}: {notes}")
+
+            entities.append(
+                Entity(
+                    name=name,
+                    type="Existing GTM partner",
+                    status=status,
+                    region=_get_multi_select(properties, GTM_PARTNERS_PROPERTIES["region"]),
+                    why_tracked=(
+                        f"Active GTM partner — {notes}" if notes else "Active GTM partner."
+                    ),
+                    source="gtm_partners_db",
+                )
+            )
+
+        return entities, gtm_landscape, active_names
+
 
 if __name__ == "__main__":
     import config
@@ -294,5 +359,6 @@ if __name__ == "__main__":
         criteria_page_id=config.config.notion_criteria_page_id,
         topics_db_id=config.config.notion_topics_db_id,
         partners_db_id=config.config.notion_partners_db_id,
+        gtm_partners_db_id=config.config.notion_gtm_partners_db_id,
     )
     pprint(source.load_all())

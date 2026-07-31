@@ -26,6 +26,7 @@ TEST_CONFIG = Config(
     notion_criteria_page_id=None,
     notion_topics_db_id=None,
     notion_partners_db_id=None,
+    notion_gtm_partners_db_id=None,
     notion_db_url=None,
 )
 
@@ -33,7 +34,8 @@ TEST_CRITERIA = Criteria(
     nomo_context="NOMO is a rewards app for teens.",
     region_weighting="BR is primary.",
     competitor_criteria="Competes for youth loyalty attention.",
-    partner_criteria="Has tradeable reward inventory.",
+    reward_partner_criteria="Has tradeable reward inventory.",
+    gtm_partner_criteria="",
     do_not_suggest=["Meta"],
 )
 
@@ -311,7 +313,7 @@ def test_scout_angle_parses_candidates_and_uses_scout_max_uses():
             "candidates": [
                 {
                     "name": "ExampleCo",
-                    "suggested_type": "Partner prospect",
+                    "suggested_type": "Rewards partner prospect",
                     "category": "travel",
                     "region": "BR",
                     "why_fits": "Fits the criteria.",
@@ -323,7 +325,13 @@ def test_scout_angle_parses_candidates_and_uses_scout_max_uses():
     )
     client = FakeClient([payload])
     candidates = gather.scout_angle(
-        client, "New entrants angle", TEST_CRITERIA, {"Uber"}, ["Fever: tickets"], TEST_CONFIG
+        client,
+        "New entrants angle",
+        TEST_CRITERIA,
+        {"Uber"},
+        ["Fever: tickets"],
+        ["Lincoln High: pilot"],
+        TEST_CONFIG,
     )
 
     assert len(candidates) == 1
@@ -346,20 +354,95 @@ def test_scout_angle_drops_candidates_without_source_url():
         }
     )
     client = FakeClient([payload])
-    candidates = gather.scout_angle(client, "angle", TEST_CRITERIA, set(), [], TEST_CONFIG)
+    candidates = gather.scout_angle(client, "angle", TEST_CRITERIA, set(), [], [], TEST_CONFIG)
     assert candidates == []
 
 
-def test_scout_all_runs_exactly_three_angles():
+def test_scout_all_runs_static_plus_gtm_angles():
+    # TEST_CRITERIA.gtm_partner_criteria is empty, so GTM falls back to
+    # exactly one generic angle: 3 static angles + 1 GTM angle = 4.
     payload = json.dumps({"candidates": []})
-    client = FakeClient([payload, payload, payload])
+    client = FakeClient([payload, payload, payload, payload])
     source_data = SourceData(
-        entities=[UBER], excluded_names={"Meta"}, reward_landscape=[], criteria=TEST_CRITERIA
+        entities=[UBER],
+        excluded_names={"Meta"},
+        reward_landscape=[],
+        gtm_landscape=[],
+        criteria=TEST_CRITERIA,
     )
     candidates = gather.scout_all(client, source_data, TEST_CONFIG)
 
     assert candidates == []
-    assert len(client.messages.calls) == 3
+    assert len(client.messages.calls) == len(gather.DISCOVERY_ANGLES) + 1
+    assert len(client.messages.calls) == 4
+
+
+def test_gtm_discovery_angles_one_per_vertical():
+    criteria = replace(
+        TEST_CRITERIA, gtm_partner_criteria="School districts\nTelecom carriers\n- Youth nonprofits"
+    )
+    angles = gather.gtm_discovery_angles(criteria)
+
+    assert len(angles) == 3
+    assert any("School districts" in a for a in angles)
+    assert any("Telecom carriers" in a for a in angles)
+    assert any("Youth nonprofits" in a for a in angles)
+
+
+def test_gtm_discovery_angles_falls_back_to_generic_when_empty():
+    criteria = replace(TEST_CRITERIA, gtm_partner_criteria="")
+    angles = gather.gtm_discovery_angles(criteria)
+
+    assert angles == [gather._GENERIC_GTM_ANGLE]
+
+
+# The real GTM partners criteria cell is authored as a small table (header +
+# one row per vertical) pasted into a single sheet cell, which flattens to
+# one line per table *cell* rather than one line per vertical.
+GTM_TABLE_CRITERIA = "\n".join(
+    [
+        "#",
+        "Vertical",
+        "Owner",
+        "GTM Motion",
+        "Why it matters / Example accounts",
+        "1",
+        "6-12 Education (Grade 6-12)",
+        "Joao",
+        "Direct",
+        "Districts (LAUSD, NYC DOE), private school groups — high student counts",
+        "2",
+        "Faith-based & Youth Orgs",
+        "Eric",
+        "Direct",
+        "Boys & Girls Club, YMCA, Scouts — relationship-driven, community trust",
+        "3",
+        "US Telcos & MVNOs",
+        "Leo",
+        "Distribution Partner",
+        "Regional carriers + MVNOs — distribution at scale",
+    ]
+)
+
+
+def test_gtm_discovery_angles_parses_real_table_shape():
+    criteria = replace(TEST_CRITERIA, gtm_partner_criteria=GTM_TABLE_CRITERIA)
+    angles = gather.gtm_discovery_angles(criteria)
+
+    assert len(angles) == 3
+    assert any(
+        "6-12 Education (Grade 6-12)" in a and "high student counts" in a for a in angles
+    )
+    assert any("Faith-based & Youth Orgs" in a for a in angles)
+    assert any("US Telcos & MVNOs" in a for a in angles)
+    # Row-internal fields that aren't the vertical name/why-it-matters must
+    # not leak in as their own bogus "angles".
+    assert not any(a for a in angles if a.strip() in {"Joao", "Eric", "Leo", "Direct"})
+
+
+def test_parse_gtm_table_rows_returns_none_for_non_tabular_input():
+    lines = ["School districts", "Telecom carriers", "Youth nonprofits"]
+    assert gather._parse_gtm_table_rows(lines) is None
 
 
 def test_entities_to_monitor_excludes_partners_by_default():

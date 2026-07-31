@@ -111,6 +111,7 @@ def load_source_data(cfg: config.Config) -> SourceData:
             criteria_page_id=cfg.notion_criteria_page_id,
             topics_db_id=cfg.notion_topics_db_id,
             partners_db_id=cfg.notion_partners_db_id,
+            gtm_partners_db_id=cfg.notion_gtm_partners_db_id,
         )
     return backend.load_all()
 

@@ -40,7 +40,7 @@ UBER = Entity(
 )
 LONG_GAME = Entity(
     name="Long Game",
-    type="Partner prospect",
+    type="Rewards partner prospect",
     status="Active",
     priority="Medium",
     source="watchlist",
@@ -60,7 +60,7 @@ VERBOSE_CONFIG = SimpleNamespace(anthropic_model="claude-sonnet-5", synthesis_ve
 
 def test_compute_tracking_counts_only_counts_active_watchlist_rows():
     counts = synthesize.compute_tracking_counts(SOURCE_DATA)
-    assert counts == {"competitors": 1, "partner_prospects": 1}
+    assert counts == {"competitors": 1, "partner_prospects": 1, "gtm_prospects": 0}
 
 
 def test_build_payload_enriches_items_with_entity_type_and_priority():
@@ -79,7 +79,7 @@ def test_build_payload_enriches_items_with_entity_type_and_priority():
     enriched = payload["monitoring_items"][0]
     assert enriched["entity_type"] == "Competitor"
     assert enriched["priority"] == "High"
-    assert payload["tracking_counts"] == {"competitors": 1, "partner_prospects": 1}
+    assert payload["tracking_counts"] == {"competitors": 1, "partner_prospects": 1, "gtm_prospects": 0}
     assert payload["reward_landscape"] == ["Fever: live-events redemption"]
 
 
@@ -191,8 +191,10 @@ def test_render_prompt_includes_repeat_story_guidance():
         nomo_context="ctx",
         region_weighting="rw",
         competitor_criteria_summary="c",
-        partner_criteria_summary="p",
+        reward_partner_criteria_summary="p",
+        gtm_partner_criteria_summary="g",
         reward_landscape="none yet",
+        gtm_landscape="none yet",
         schema=synthesize.DIGEST_SCHEMA,
         verbose_instructions="",
         payload="{}",
@@ -219,7 +221,7 @@ def test_synthesize_parses_full_digest():
                 "new_candidates": [
                     {
                         "name": "ExampleCo",
-                        "suggested_type": "Partner prospect",
+                        "suggested_type": "Rewards partner prospect",
                         "region": "BR",
                         "why_fits": "Fits.",
                         "source_url": "https://example.com/b",
@@ -239,7 +241,7 @@ def test_synthesize_parses_full_digest():
     assert digest.new_candidates[0].name == "ExampleCo"
     # tracking_counts is always the deterministic computed value, never the
     # model's echoed (possibly wrong) numbers.
-    assert digest.tracking_counts == {"competitors": 1, "partner_prospects": 1}
+    assert digest.tracking_counts == {"competitors": 1, "partner_prospects": 1, "gtm_prospects": 0}
 
 
 def test_synthesize_quiet_day_true_with_empty_sections():
@@ -319,7 +321,7 @@ def test_synthesize_retries_once_on_parse_failure_then_succeeds():
 def _candidate(name: str, confidence: str, why_fits: str) -> Candidate:
     return Candidate(
         name=name,
-        suggested_type="Partner prospect",
+        suggested_type="Rewards partner prospect",
         region="BR",
         why_fits=why_fits,
         source_url=f"https://example.com/{name.lower()}",
@@ -350,7 +352,7 @@ def _verbose_response(accepted: list[str], rejected: list[tuple[str, str]]) -> s
                 "new_candidates": [
                     {
                         "name": name,
-                        "suggested_type": "Partner prospect",
+                        "suggested_type": "Rewards partner prospect",
                         "region": "BR",
                         "why_fits": "Fits.",
                         "source_url": f"https://example.com/{name.lower()}",
@@ -437,8 +439,10 @@ def test_render_prompt_includes_verbose_instructions_when_enabled():
         nomo_context="ctx",
         region_weighting="rw",
         competitor_criteria_summary="Competes for youth attention.",
-        partner_criteria_summary="Has tradeable reward inventory.",
+        reward_partner_criteria_summary="Has tradeable reward inventory.",
+        gtm_partner_criteria_summary="none specified",
         reward_landscape="none yet",
+        gtm_landscape="none yet",
         schema=synthesize.DIGEST_SCHEMA,
         verbose_instructions=synthesize.VERBOSE_INSTRUCTIONS_BLOCK,
         payload="{}",
@@ -452,8 +456,10 @@ def test_render_prompt_omits_verbose_instructions_when_disabled():
         nomo_context="ctx",
         region_weighting="rw",
         competitor_criteria_summary="Competes for youth attention.",
-        partner_criteria_summary="Has tradeable reward inventory.",
+        reward_partner_criteria_summary="Has tradeable reward inventory.",
+        gtm_partner_criteria_summary="none specified",
         reward_landscape="none yet",
+        gtm_landscape="none yet",
         schema=synthesize.DIGEST_SCHEMA,
         verbose_instructions="",
         payload="{}",
@@ -481,7 +487,7 @@ def test_synthesize_prompt_includes_confidence_guidance_and_criteria_summary():
         nomo_context="NOMO context.",
         region_weighting="BR is primary.",
         competitor_criteria="Competes for youth loyalty attention. More detail here.",
-        partner_criteria="Has tradeable reward inventory. More detail here.",
+        reward_partner_criteria="Has tradeable reward inventory. More detail here.",
     )
     source_data = SourceData(entities=[], excluded_names=set(), criteria=criteria)
 
@@ -511,14 +517,16 @@ def test_synthesize_prompt_includes_confidence_guidance_and_criteria_summary():
         synthesize._render_prompt = real_render
 
     assert captured["competitor_criteria_summary"] == "Competes for youth loyalty attention."
-    assert captured["partner_criteria_summary"] == "Has tradeable reward inventory."
+    assert captured["reward_partner_criteria_summary"] == "Has tradeable reward inventory."
     assert "confidence" in real_render(
         "synthesize.txt",
         nomo_context="ctx",
         region_weighting="rw",
         competitor_criteria_summary="c",
-        partner_criteria_summary="p",
+        reward_partner_criteria_summary="p",
+        gtm_partner_criteria_summary="g",
         reward_landscape="none yet",
+        gtm_landscape="none yet",
         schema=synthesize.DIGEST_SCHEMA,
         verbose_instructions="",
         payload="{}",
@@ -531,8 +539,10 @@ def test_render_prompt_includes_recency_ranking_guidance():
         nomo_context="ctx",
         region_weighting="rw",
         competitor_criteria_summary="c",
-        partner_criteria_summary="p",
+        reward_partner_criteria_summary="p",
+        gtm_partner_criteria_summary="g",
         reward_landscape="none yet",
+        gtm_landscape="none yet",
         schema=synthesize.DIGEST_SCHEMA,
         verbose_instructions="",
         payload="{}",

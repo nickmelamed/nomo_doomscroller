@@ -4,14 +4,16 @@ Region weighting: $region_weighting
 
 NOMO's current reward partner lineup (for grounding candidate why_fits in concrete comparisons): $reward_landscape
 
-The fit bar scouting already used to source these candidates — ground your candidate relevance judgment in the same bar, don't apply a fresh independent standard: Competitor fit — $competitor_criteria_summary Partner fit — $partner_criteria_summary
+NOMO's current GTM/implementation partner lineup (schools, telecom carriers, etc. — for grounding GTM candidate why_fits): $gtm_landscape
+
+The fit bar scouting already used to source these candidates — ground your candidate relevance judgment in the same bar, don't apply a fresh independent standard: Competitor fit — $competitor_criteria_summary Rewards partner fit — $reward_partner_criteria_summary GTM partner fit — $gtm_partner_criteria_summary
 
 Given the monitoring items, industry trend items, and scouted candidates in the data below, produce the final digest:
 
 - Apply a hard relevance bar: cut anything marginal, dedupe overlapping stories, and rank by importance to NOMO. Respect each item's priority hint. Weight — never hard-exclude — by region per the region weighting above: an item about a market NOMO doesn't operate in yet can still be worth surfacing if it signals competitor or partner expansion into a region NOMO cares about. All else equal, rank more recently published items higher, using each item's `published` field — but don't let a missing or unparseable `published` value bias ranking in either direction.
-- Route each monitoring item by its entity_type: items about a Competitor go in "competition"; items about a Partner prospect OR an Existing partner (relationship/update news) go in "partner_prospects".
+- Route each monitoring item by its entity_type: items about a Competitor go in "competition"; items about a Rewards partner prospect OR an Existing partner (relationship/update news) go in "partner_prospects"; items about a GTM partner prospect OR an Existing GTM partner (relationship/update news) go in "gtm_prospects".
 - Industry trend items always go in "industry".
-- Scouted candidates that survive the relevance bar go in "new_candidates" (clearly proposed, not yet tracked) — use the reward lineup above to ground each why_fits in a concrete comparison where useful. Use each candidate's `confidence` (high/medium/low, set by scouting) as a signal: a high-confidence candidate with a concrete, specific why_fits should generally survive; treat low-confidence as the default case to cut absent a strong reason to keep it.
+- Scouted candidates that survive the relevance bar go in "new_candidates" (clearly proposed, not yet tracked) — use the reward lineup or GTM lineup above (whichever matches the candidate's suggested_type) to ground each why_fits in a concrete comparison where useful. Use each candidate's `confidence` (high/medium/low, set by scouting) as a signal: a high-confidence candidate with a concrete, specific why_fits should generally survive; treat low-confidence as the default case to cut absent a strong reason to keep it.
 - If, after filtering, there is little of substance across all sections, set quiet_day to true. It's fine for sections to be empty on a quiet day — don't pad with marginal items to fill space.
 - If an item's `first_seen_days_ago` is not null, it's an ongoing story from a prior digest: suppress it outright if it's a pure repeat with nothing new to add, or if it's worth keeping because there's genuinely new development, fold "(ongoing — first covered N days ago)" into its own summary.
 

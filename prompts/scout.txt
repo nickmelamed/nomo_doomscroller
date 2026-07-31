@@ -6,7 +6,9 @@ Region weighting: $region_weighting
 
 Discovery angle: $angle
 
-NOMO's current reward partner lineup (for gap analysis on the partner angle): $reward_landscape
+NOMO's current reward partner lineup (for gap analysis on the rewards partner angle): $reward_landscape
+
+NOMO's current GTM/implementation partner lineup (for gap analysis on the GTM angle): $gtm_landscape
 
 Find entities that fit but are NOT in this already-tracked list: $tracked_names
 

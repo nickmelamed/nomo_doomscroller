@@ -10,7 +10,7 @@ class Entity:
     """A tracked row — either a Watchlist DB row (§6.1) or a Partners DB row (§6.3)."""
 
     name: str
-    type: str  # "Competitor" | "Partner prospect" | "Excluded"
+    type: str  # "Competitor" | "Rewards partner prospect" | "GTM partner prospect" | "Excluded"
     status: str  # "Active" | "Paused" | "Converted"
     category: list[str] = field(default_factory=list)
     region: list[str] = field(default_factory=list)
@@ -69,6 +69,7 @@ class Digest:
     competition: list[DigestItem] = field(default_factory=list)
     industry: list[DigestItem] = field(default_factory=list)
     partner_prospects: list[DigestItem] = field(default_factory=list)
+    gtm_prospects: list[DigestItem] = field(default_factory=list)
     new_candidates: list[Candidate] = field(default_factory=list)
     tracking_counts: dict[str, int] = field(default_factory=dict)
 
@@ -82,19 +83,21 @@ class WeeklyRollup:
     competition: list[DigestItem] = field(default_factory=list)
     industry: list[DigestItem] = field(default_factory=list)
     partner_prospects: list[DigestItem] = field(default_factory=list)
+    gtm_prospects: list[DigestItem] = field(default_factory=list)
     notable_candidates: list[Candidate] = field(default_factory=list)
     themes: list[str] = field(default_factory=list)
 
 
 @dataclass
 class Criteria:
-    """The parsed criteria/config source (§6.2) — five sections; industry topics
+    """The parsed criteria/config source (§6.2) — six sections; industry topics
     live separately on SourceData (§6.3), not here."""
 
     nomo_context: str = ""
     region_weighting: str = ""
     competitor_criteria: str = ""
-    partner_criteria: str = ""
+    reward_partner_criteria: str = ""
+    gtm_partner_criteria: str = ""
     do_not_suggest: list[str] = field(default_factory=list)
 
 
@@ -113,5 +116,6 @@ class SourceData:
     entities: list[Entity] = field(default_factory=list)
     excluded_names: set[str] = field(default_factory=set)
     reward_landscape: list[str] = field(default_factory=list)
+    gtm_landscape: list[str] = field(default_factory=list)
     industry_topics: list[IndustryTopic] = field(default_factory=list)
     criteria: Criteria = field(default_factory=Criteria)

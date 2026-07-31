@@ -34,7 +34,7 @@ def test_entity_matches_watchlist_schema_sec6_1():
 def test_entity_partners_db_row_sec6_3():
     entity = Entity(
         name="Fever",
-        type="Partner prospect",
+        type="Rewards partner prospect",
         status="Active",
         region=["US"],
         why_tracked="Active reward partner — live-events redemption.",
@@ -77,7 +77,7 @@ def test_news_item_industry_trends_output_sec8_1b():
 def test_candidate_scouting_output_sec8_2():
     candidate = Candidate(
         name="ExampleCo",
-        suggested_type="Partner prospect",
+        suggested_type="Rewards partner prospect",
         category="travel",
         region="BR",
         why_fits="One sentence against the criteria.",
@@ -91,7 +91,7 @@ def test_candidate_new_candidates_trimmed_shape_sec8_3():
     # §8.3's new_candidates example omits category/confidence.
     candidate = Candidate(
         name="ExampleCo",
-        suggested_type="Partner prospect",
+        suggested_type="Rewards partner prospect",
         region="BR",
         why_fits="...",
         source_url="...",
@@ -113,7 +113,7 @@ def test_digest_synthesis_output_sec8_3():
         new_candidates=[
             Candidate(
                 name="ExampleCo",
-                suggested_type="Partner prospect",
+                suggested_type="Rewards partner prospect",
                 region="BR",
                 why_fits="...",
                 source_url="...",
@@ -136,7 +136,7 @@ def test_weekly_rollup_sec19():
         notable_candidates=[
             Candidate(
                 name="ExampleCo",
-                suggested_type="Partner prospect",
+                suggested_type="Rewards partner prospect",
                 region="BR",
                 why_fits="...",
                 source_url="...",
@@ -155,6 +155,7 @@ def test_weekly_rollup_defaults_to_empty():
     assert rollup.competition == []
     assert rollup.industry == []
     assert rollup.partner_prospects == []
+    assert rollup.gtm_prospects == []
     assert rollup.notable_candidates == []
     assert rollup.themes == []
 
@@ -164,17 +165,19 @@ def test_digest_quiet_day_defaults_to_empty_sections():
     assert digest.competition == []
     assert digest.industry == []
     assert digest.partner_prospects == []
+    assert digest.gtm_prospects == []
     assert digest.new_candidates == []
 
 
-def test_criteria_five_sections_sec6_2():
+def test_criteria_six_sections_sec6_2():
     # Industry topics is its own source (§6.3) as of the latest spec revision —
     # no longer a Criteria field.
     criteria = Criteria(
         nomo_context="NOMO is a rewards app for teens...",
         region_weighting="BR is primary; US, UK, and AU are growing.",
         competitor_criteria="Anything competing for youth loyalty attention.",
-        partner_criteria="Has tradeable reward inventory and audience fit.",
+        reward_partner_criteria="Has tradeable reward inventory and audience fit.",
+        gtm_partner_criteria="School districts, telecom carriers.",
         do_not_suggest=["Meta", "TikTok"],
     )
     assert not hasattr(criteria, "industry_topics")

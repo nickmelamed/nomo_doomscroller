@@ -31,11 +31,14 @@ WEEKLY_ROLLUP_SCHEMA = json.dumps(
             "partner_prospects": [
                 {"headline": "string", "url": "string", "source": "string", "summary": "string"}
             ],
+            "gtm_prospects": [
+                {"headline": "string", "url": "string", "source": "string", "summary": "string"}
+            ],
         },
         "notable_candidates": [
             {
                 "name": "string",
-                "suggested_type": "Competitor|Partner prospect",
+                "suggested_type": "Competitor|Rewards partner prospect|GTM partner prospect",
                 "region": "string",
                 "why_fits": "string",
                 "source_url": "string",
@@ -73,6 +76,7 @@ def build_weekly_rollup(
         competition=[_to_digest_item(d) for d in sections.get("competition", [])],
         industry=[_to_digest_item(d) for d in sections.get("industry", [])],
         partner_prospects=[_to_digest_item(d) for d in sections.get("partner_prospects", [])],
+        gtm_prospects=[_to_digest_item(d) for d in sections.get("gtm_prospects", [])],
         notable_candidates=[_to_candidate(d) for d in result.get("notable_candidates", [])],
         themes=result.get("themes", []),
     )

@@ -461,12 +461,19 @@ def test_entities_to_monitor_includes_partners_when_flag_on():
     partner_entity = Entity(
         name="Fever", type="Existing partner", status="Active", source="partners_db"
     )
-    source_data = SourceData(entities=[watchlist_entity, partner_entity])
+    gtm_partner_entity = Entity(
+        name="Springfield School District",
+        type="Existing GTM partner",
+        status="Active",
+        source="gtm_partners_db",
+    )
+    source_data = SourceData(entities=[watchlist_entity, partner_entity, gtm_partner_entity])
     config_with_flag = replace(TEST_CONFIG, monitor_existing_partners=True)
 
     monitored = gather._entities_to_monitor(source_data, config_with_flag)
     assert watchlist_entity in monitored
     assert partner_entity in monitored
+    assert gtm_partner_entity in monitored
 
 
 def test_monitor_uses_configured_max_uses():

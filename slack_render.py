@@ -90,7 +90,7 @@ def _section_blocks(title: str, lines: list[str], more_count: int) -> list[dict]
 def _header_block(today: date_cls) -> dict:
     return {
         "type": "header",
-        "text": {"type": "plain_text", "text": f"\U0001f4f1 NOMO Doomscroller — {today.isoformat()}"},
+        "text": {"type": "plain_text", "text": f"NOMO News Updates — {today.isoformat()}"},
     }
 
 
@@ -175,7 +175,7 @@ def _weekly_header_block(rollup: WeeklyRollup) -> dict:
         "type": "header",
         "text": {
             "type": "plain_text",
-            "text": f"\U0001f4f1 NOMO Doomscroller — Week of {rollup.week_of} (here's what you missed)",
+            "text": f"NOMO News Updates — Week of {rollup.week_of} (here's what you missed)",
         },
     }
 

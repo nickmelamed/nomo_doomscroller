@@ -388,7 +388,7 @@ Same shape as §8.1, keyed by `topic` instead of `entity` — no named entity re
 
 ## 9. Slack output format (Block Kit)
 
-- **Header:** `📱 NOMO Doomscroller — {date}`
+- **Header:** `NOMO News Updates — {date}`
 - One **section per category** with a bold subheader; each item rendered as:
   `• *<{url}|{headline}>* — {summary} _({source})_`
 - **New candidates** section, visually distinct, each:

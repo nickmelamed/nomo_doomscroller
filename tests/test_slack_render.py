@@ -61,7 +61,7 @@ def test_header_block_format():
     blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
 
     assert blocks[0]["type"] == "header"
-    assert blocks[0]["text"]["text"] == "\U0001f4f1 NOMO Doomscroller — 2026-07-29"
+    assert blocks[0]["text"]["text"] == "NOMO News Updates — 2026-07-29"
 
 
 def test_quiet_day_is_header_plus_line_plus_footer():

@@ -256,12 +256,15 @@ def _call_claude_with_search(client, config: Config, prompt: str, max_uses: int)
 
 
 def _entities_to_monitor(source_data: SourceData, config: Config) -> list[Entity]:
-    """§7 Stage 2a: Watchlist entities always; Partners-source entities only
-    when MONITOR_EXISTING_PARTNERS is on. SourceData.entities carries both,
-    tagged by `source` — this is where that gate is applied."""
+    """§7 Stage 2a: Watchlist entities always; entities from either Partners
+    source (rewards or GTM) only when MONITOR_EXISTING_PARTNERS is on.
+    SourceData.entities carries all three, tagged by `source` — this is where
+    that gate is applied."""
     entities = [e for e in source_data.entities if e.source == "watchlist"]
     if config.monitor_existing_partners:
-        entities += [e for e in source_data.entities if e.source == "partners_db"]
+        entities += [
+            e for e in source_data.entities if e.source in ("partners_db", "gtm_partners_db")
+        ]
     return entities
 
 

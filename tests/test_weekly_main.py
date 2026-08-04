@@ -2,10 +2,22 @@ import json
 from datetime import date
 from types import SimpleNamespace
 
+import pytest
+
 import metrics
 import state as state_module
 import weekly_main
 from models import RejectedCandidate, WeeklyRollup
+
+
+@pytest.fixture(autouse=True)
+def _never_write_real_metrics_files(monkeypatch):
+    """See the identical fixture in test_main.py — metrics._calls is a
+    process-global list, so this file's tests calling the real
+    weekly_main.run() must not flush cross-test leftovers to a real
+    state/metrics/*.jsonl. A test asserting on append_metrics itself can
+    still override this via its own monkeypatch.setattr in the test body."""
+    monkeypatch.setattr(weekly_main.state_module, "append_metrics", lambda calls, run_date: None)
 
 
 def test_prior_week_weekdays_from_a_monday():

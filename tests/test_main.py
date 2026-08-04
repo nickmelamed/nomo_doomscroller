@@ -1,10 +1,27 @@
 from datetime import date, datetime, timezone
 from types import SimpleNamespace
 
+import pytest
+
 import main
 import metrics
 import state as state_module
 from models import Candidate, Criteria, Digest, Entity, NewsItem, RejectedCandidate, SourceData
+
+
+@pytest.fixture(autouse=True)
+def _never_write_real_metrics_files(monkeypatch):
+    """metrics._calls is a process-global list — leftover entries from other
+    test modules (test_gather.py, test_synthesize.py, which exercise the
+    real _call_claude_with_search/_call_and_parse) accumulate there and get
+    flushed to a real state/metrics/*.jsonl the moment any test calls the
+    real main.run() without mocking append_metrics. Autouse so every test in
+    this file is covered, not just ones that remember to call install_state().
+    A test that wants to assert on append_metrics (e.g. the "saved before a
+    failure" test) can still override this with its own monkeypatch.setattr
+    inside the test body — that call wins since it runs after this fixture."""
+    monkeypatch.setattr(main.state_module, "append_metrics", lambda calls, run_date: None)
+
 
 UBER = Entity(name="Uber", type="Competitor", status="Active", source="watchlist")
 FEVER = Entity(name="Fever", type="Existing partner", status="Active", source="partners_db")

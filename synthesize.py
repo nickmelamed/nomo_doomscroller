@@ -22,12 +22,15 @@ logger = logging.getLogger(__name__)
 PROMPTS_DIR = Path(__file__).parent / "prompts"
 # Generous headroom: a realistic-sized run (a dozen-plus candidates, several
 # news items) plus adaptive thinking can produce a much larger JSON output
-# than small fixtures do — observed a truncated/malformed response at 8192
-# against real data (13 candidates, 8 items), and again at 16384 against a
-# candidate-heavy day (45 candidates after filtering, verbose rejection
-# reasons for each) that still overflowed even after main.py's low-confidence
-# pre-filter trims the typical case.
-SYNTHESIZE_MAX_TOKENS = 24576
+# than small fixtures do — observed truncated/malformed responses at 8192,
+# then again at 16384, then again at 24576 (40 candidates after filtering,
+# verbose rejection reasons for each, 9 industry items) — each bump still
+# overflowed on a big-enough day. Now that synthesize streams (see
+# _call_and_parse), there's no SDK-imposed ceiling forcing a tight number
+# here, so this is sized to the documented streaming default with real
+# headroom rather than the smallest value that happened to survive the last
+# observed failure.
+SYNTHESIZE_MAX_TOKENS = 65536
 
 VERBOSE_INSTRUCTIONS_BLOCK = (
     "\nAlso include a top-level `rejected_candidates` array: one entry "
@@ -205,6 +208,14 @@ def _call_and_parse(client, config: Config, prompt: str, stage: str = "synthesiz
     with client.messages.stream(
         model=config.anthropic_model,
         max_tokens=SYNTHESIZE_MAX_TOKENS,
+        # Explicit, not relying on the model's default: this call applies a
+        # hard relevance bar, dedupes, weighs region/priority signals against
+        # each other, and makes per-candidate include/exclude judgment calls
+        # — real editorial reasoning, not extraction — so it stays at high
+        # effort even though that happens to match Sonnet 5's current
+        # default. Pinned so the choice doesn't silently change if that
+        # default ever does.
+        output_config={"effort": "high"},
         messages=[{"role": "user", "content": prompt}],
     ) as stream:
         response = stream.get_final_message()

@@ -286,6 +286,8 @@ def test_build_reconsider_prefers_never_shown_then_marks_shown():
 
     assert [c.name for c in reconsider] == ["B", "A"]
     assert updated_state["b"]["last_shown"] == "2026-07-30"
+    assert updated_state["b"]["shown_count"] == 1
+    assert updated_state["a"]["shown_count"] == 2  # was already shown once before this pick
 
 
 def test_build_reconsider_no_rejected_candidates_for_empty_category():

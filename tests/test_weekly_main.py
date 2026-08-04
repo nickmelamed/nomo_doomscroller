@@ -154,10 +154,26 @@ def test_run_end_to_end_with_fixture_archive_and_fake_client(monkeypatch, tmp_pa
         }
     )
 
+    class FakeStream:
+        def __init__(self, message):
+            self._message = message
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc_info):
+            return False
+
+        def get_final_message(self):
+            return self._message
+
     class FakeMessages:
-        def create(self, **kwargs):
-            return SimpleNamespace(
-                content=[SimpleNamespace(type="text", text=response_text)], stop_reason="end_turn"
+        def stream(self, **kwargs):
+            return FakeStream(
+                SimpleNamespace(
+                    content=[SimpleNamespace(type="text", text=response_text)],
+                    stop_reason="end_turn",
+                )
             )
 
     class FakeAnthropicClient:

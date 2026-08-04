@@ -138,9 +138,9 @@ def build_reconsider(
                 _confidence_rank(item[1].get("confidence")),
             )
         )
-        for key, entry in pool[:RECONSIDER_PER_CATEGORY]:
+        for _, entry in pool[:RECONSIDER_PER_CATEGORY]:
             reconsider.append(state_module.entry_to_candidate(entry))
-            updated_state[key] = {**updated_state[key], "last_shown": today.isoformat()}
+            updated_state = state_module.mark_shown(updated_state, entry["name"], today)
 
     return reconsider, updated_state
 

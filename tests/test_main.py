@@ -513,6 +513,7 @@ def test_rejected_today_is_upserted_and_saved(monkeypatch):
     entry = saved["rejected_state"]["bolt"]
     assert entry["reason"] == "Too similar to an existing competitor."
     assert entry["last_rejected"] == date.today().isoformat()
+    assert entry["reject_count"] == 1
 
 
 def test_reconsider_is_populated_from_persisted_state_when_category_empty(monkeypatch):

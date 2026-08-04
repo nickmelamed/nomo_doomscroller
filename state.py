@@ -100,6 +100,8 @@ def upsert_rejected_candidate(state: dict, candidate: RejectedCandidate, today: 
         "first_rejected": existing["first_rejected"] if existing else today.isoformat(),
         "last_rejected": today.isoformat(),
         "last_shown": existing.get("last_shown") if existing else None,
+        "reject_count": (existing.get("reject_count", 0) if existing else 0) + 1,
+        "shown_count": existing.get("shown_count", 0) if existing else 0,
     }
     return updated
 
@@ -127,7 +129,12 @@ def mark_shown(state: dict, name: str, today: date) -> dict:
     if key not in state:
         return state
     updated = dict(state)
-    updated[key] = {**updated[key], "last_shown": today.isoformat()}
+    entry = updated[key]
+    updated[key] = {
+        **entry,
+        "last_shown": today.isoformat(),
+        "shown_count": entry.get("shown_count", 0) + 1,
+    }
     return updated
 
 
@@ -141,4 +148,6 @@ def entry_to_candidate(entry: dict) -> RejectedCandidate:
         reason=entry["reason"],
         category=entry.get("category"),
         confidence=entry.get("confidence"),
+        reject_count=entry.get("reject_count", 0),
+        shown_count=entry.get("shown_count", 0),
     )

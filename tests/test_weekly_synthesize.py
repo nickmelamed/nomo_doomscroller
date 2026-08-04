@@ -10,14 +10,33 @@ def text_block(text: str):
     return SimpleNamespace(type="text", text=text)
 
 
+class FakeStream:
+    """Mimics the client.messages.stream(...) context manager — synthesize.py
+    (reused by weekly_synthesize.py) streams rather than using .create()."""
+
+    def __init__(self, message):
+        self._message = message
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc_info):
+        return False
+
+    def get_final_message(self):
+        return self._message
+
+
 class FakeMessages:
     def __init__(self, response_text):
         self._response_text = response_text
         self.calls = []
 
-    def create(self, **kwargs):
+    def stream(self, **kwargs):
         self.calls.append(kwargs)
-        return SimpleNamespace(content=[text_block(self._response_text)], stop_reason="end_turn")
+        return FakeStream(
+            SimpleNamespace(content=[text_block(self._response_text)], stop_reason="end_turn")
+        )
 
 
 class FakeClient:

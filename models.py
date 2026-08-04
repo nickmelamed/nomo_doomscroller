@@ -67,6 +67,13 @@ class RejectedCandidate:
     reason: str
     category: str | None = None
     confidence: str | None = None
+    # Data-collection counters (not rendered yet): how many times this
+    # candidate has been re-scouted and rejected again, and how many times
+    # it's been surfaced in a reconsider block — signal for whether the
+    # suppression/retention windows are calibrated right and whether the
+    # reconsider list is actually getting looked at.
+    reject_count: int = 0
+    shown_count: int = 0
 
 
 @dataclass

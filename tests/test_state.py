@@ -161,6 +161,8 @@ def test_upsert_rejected_candidate_new_entry_sets_first_and_last_rejected():
     assert entry["last_rejected"] == "2026-07-30"
     assert entry["last_shown"] is None
     assert entry["reason"] == "Too similar to an existing competitor."
+    assert entry["reject_count"] == 1
+    assert entry["shown_count"] == 0
 
 
 def test_upsert_rejected_candidate_repeat_preserves_first_rejected_and_last_shown():
@@ -179,6 +181,8 @@ def test_upsert_rejected_candidate_repeat_preserves_first_rejected_and_last_show
             "first_rejected": "2026-07-01",
             "last_rejected": "2026-07-01",
             "last_shown": "2026-07-10",
+            "reject_count": 2,
+            "shown_count": 3,
         }
     }
 
@@ -191,6 +195,8 @@ def test_upsert_rejected_candidate_repeat_preserves_first_rejected_and_last_show
     assert entry["last_rejected"] == "2026-07-30"  # refreshed
     assert entry["last_shown"] == "2026-07-10"  # preserved
     assert entry["reason"] == "Still no traction."  # refreshed
+    assert entry["reject_count"] == 3  # incremented
+    assert entry["shown_count"] == 3  # preserved (only mark_shown touches this)
 
 
 def test_is_suppressed_true_within_window():
@@ -222,6 +228,22 @@ def test_mark_shown_sets_last_shown_for_matching_entry():
     assert updated["bolt"]["last_shown"] == "2026-07-30"
 
 
+def test_mark_shown_increments_shown_count():
+    data = {"bolt": {"name": "Bolt", "last_shown": "2026-07-10", "shown_count": 2}}
+
+    updated = state.mark_shown(data, "Bolt", today=date(2026, 7, 30))
+
+    assert updated["bolt"]["shown_count"] == 3
+
+
+def test_mark_shown_defaults_shown_count_to_zero_when_absent():
+    data = {"bolt": {"name": "Bolt", "last_shown": None}}
+
+    updated = state.mark_shown(data, "Bolt", today=date(2026, 7, 30))
+
+    assert updated["bolt"]["shown_count"] == 1
+
+
 def test_mark_shown_no_matching_entry_is_a_noop():
     data = {"bolt": {"name": "Bolt", "last_shown": None}}
 
@@ -240,6 +262,8 @@ def test_entry_to_candidate_round_trips_fields():
         "reason": "Weak fit.",
         "category": "mobility",
         "confidence": "medium",
+        "reject_count": 4,
+        "shown_count": 2,
     }
 
     candidate = state.entry_to_candidate(entry)
@@ -253,4 +277,22 @@ def test_entry_to_candidate_round_trips_fields():
         reason="Weak fit.",
         category="mobility",
         confidence="medium",
+        reject_count=4,
+        shown_count=2,
     )
+
+
+def test_entry_to_candidate_defaults_counts_to_zero_when_absent():
+    entry = {
+        "name": "Bolt",
+        "suggested_type": "Competitor",
+        "region": "US",
+        "why_fits": "Fits.",
+        "source_url": "https://example.com/a",
+        "reason": "Weak fit.",
+    }
+
+    candidate = state.entry_to_candidate(entry)
+
+    assert candidate.reject_count == 0
+    assert candidate.shown_count == 0

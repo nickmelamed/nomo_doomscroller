@@ -11,6 +11,24 @@ def text_block(text: str):
     return SimpleNamespace(type="text", text=text)
 
 
+class FakeStream:
+    """Mimics the client.messages.stream(...) context manager — synthesize.py
+    uses streaming, not .create(), so the message is only available via
+    get_final_message() after the `with` block is entered."""
+
+    def __init__(self, message):
+        self._message = message
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc_info):
+        return False
+
+    def get_final_message(self):
+        return self._message
+
+
 class FakeMessages:
     """Accepts either a single response text (repeated for every call) or a
     list of response texts (popped in call order, for testing retries)."""
@@ -20,10 +38,10 @@ class FakeMessages:
         self._single = responses if self._queue is None else None
         self.calls = []
 
-    def create(self, **kwargs):
+    def stream(self, **kwargs):
         self.calls.append(kwargs)
         text = self._queue.pop(0) if self._queue is not None else self._single
-        return SimpleNamespace(content=[text_block(text)], stop_reason="end_turn")
+        return FakeStream(SimpleNamespace(content=[text_block(text)], stop_reason="end_turn"))
 
 
 class FakeClient:

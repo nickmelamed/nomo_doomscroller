@@ -1,15 +1,30 @@
 {
-  "last_success": "2026-07-31T15:20:48.328257+00:00",
+  "last_success": "2026-08-04T20:57:19.010294+00:00",
   "seen_stories": {
     "1816a5660311328c": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-07-31",
       "headline": "Families of four teens sue Meta, TikTok, Snap and YouTube over suicide deaths"
     },
+    "1e65b77cc5bf2b92": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-08-04",
+      "headline": "Families of four teens who died by suicide sue Meta, TikTok, Snapchat and YouTube"
+    },
+    "2ad6df088482ef18": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-04",
+      "headline": "Australia's Social Media Ban Sees Only Small Dip in Teen Users"
+    },
     "483bc04f38b59d3d": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-07-31",
       "headline": "UK and Australia social media restrictions for under-16s continue to shape global policy debate"
+    },
+    "804f60eeb3e6ebb9": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-04",
+      "headline": "Australia's under-16 social media ban failing, eSafety study shows"
     },
     "8b0c355b97caf556": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -30,6 +45,16 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-07-31",
       "headline": "Florida teen drops second bellwether addiction case against Meta after settling with YouTube, Snap and TikTok"
+    },
+    "da45e9f4afa57579": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-04",
+      "headline": "Social media companies sued over deaths of four teens as pressure, lawsuits over child safety mount"
+    },
+    "f441677472aec6ad": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-04",
+      "headline": "Most Australian teens still online three months after under-16 ban, eSafety finds"
     }
   }
 }

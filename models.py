@@ -120,6 +120,9 @@ class WeeklyRollup:
     # rejected-candidates state (not by the LLM) — no extra token cost.
     rejected_candidates: list[RejectedCandidate] = field(default_factory=list)
     themes: list[str] = field(default_factory=list)
+    # Populated deterministically by weekly_main.py from state/metrics/*.jsonl
+    # (not by the LLM) — see metrics.summarize()/summarize_by_stage().
+    metrics_summary: dict | None = None
 
 
 @dataclass

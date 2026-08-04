@@ -5,11 +5,13 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from string import Template
 from urllib.parse import urlparse
 
+import metrics
 from config import Config
 from models import Candidate, Criteria, Entity, IndustryTopic, NewsItem, SourceData
 from sources.base import split_list_field
@@ -239,13 +241,18 @@ def _source_plausibly_matches_domain(source: str, url: str) -> bool:
     return slug in domain or domain_label in slug
 
 
-def _call_claude_with_search(client, config: Config, prompt: str, max_uses: int) -> str:
+def _call_claude_with_search(
+    client, config: Config, prompt: str, max_uses: int, stage: str, label: str
+) -> str:
+    started = time.monotonic()
     response = client.messages.create(
         model=config.anthropic_model,
         max_tokens=GATHER_MAX_TOKENS,
         messages=[{"role": "user", "content": prompt}],
         tools=[{"type": WEB_SEARCH_TOOL_TYPE, "name": "web_search", "max_uses": max_uses}],
     )
+    latency_ms = (time.monotonic() - started) * 1000
+    metrics.record(stage, label, config.anthropic_model, latency_ms, response)
     if response.stop_reason != "end_turn":
         logger.warning(
             "gather call ended with stop_reason=%r (not end_turn) — response may be "
@@ -282,7 +289,9 @@ def monitor_entity(client, entity: Entity, criteria: Criteria, config: Config) -
         schema=MONITOR_SCHEMA,
     )
     try:
-        text = _call_claude_with_search(client, config, prompt, config.monitor_max_uses)
+        text = _call_claude_with_search(
+            client, config, prompt, config.monitor_max_uses, stage="monitor", label=entity.name
+        )
         payload = parse_json_response(text)
     except Exception:
         logger.exception("monitor call failed for entity %r", entity.name)
@@ -359,7 +368,9 @@ def monitor_industry_topic(
         schema=INDUSTRY_SCHEMA,
     )
     try:
-        text = _call_claude_with_search(client, config, prompt, INDUSTRY_MAX_USES)
+        text = _call_claude_with_search(
+            client, config, prompt, INDUSTRY_MAX_USES, stage="industry", label=topic.topic
+        )
         payload = parse_json_response(text)
     except Exception:
         logger.exception("industry call failed for topic %r", topic.topic)
@@ -440,7 +451,9 @@ def scout_angle(
         schema=SCOUT_SCHEMA,
     )
     try:
-        text = _call_claude_with_search(client, config, prompt, config.scout_max_uses)
+        text = _call_claude_with_search(
+            client, config, prompt, config.scout_max_uses, stage="scout", label=angle[:80]
+        )
         payload = parse_json_response(text)
     except Exception:
         logger.exception("scout call failed for angle %r", angle)

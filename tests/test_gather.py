@@ -18,6 +18,7 @@ TEST_CONFIG = Config(
     monitor_max_uses=3,
     scout_max_uses=8,
     synthesis_verbose_log=False,
+    github_repo=None,
     google_sheets_id=None,
     google_service_account_json=None,
     sheets_url=None,

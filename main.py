@@ -9,6 +9,7 @@ from datetime import date, datetime, timezone
 import anthropic
 
 import config
+import metrics
 import slack_render
 import state as state_module
 import synthesize
@@ -258,10 +259,25 @@ def _dedup_and_split(
 
 
 def run() -> int:
-    """Runs the full pipeline end to end (§7). Returns the process exit code."""
+    """Runs the full pipeline end to end (§7). Returns the process exit code.
+    Thin wrapper around _run() so metrics recorded before a mid-run failure
+    (e.g. gather calls that completed before synthesize errored) still get
+    persisted — main.py's stages have several early `return 1`s, and a
+    finally here is simpler than threading a save call before each one."""
+    today = date.today()
+    try:
+        return _run(today)
+    finally:
+        calls = metrics.drain()
+        try:
+            state_module.append_metrics(calls, today)
+        except Exception:
+            logger.exception("failed to save call metrics — run outcome unaffected")
+
+
+def _run(today: date) -> int:
     cfg = config.config
     client = anthropic.Anthropic(api_key=cfg.anthropic_api_key)
-    today = date.today()
 
     try:
         source_data = load_source_data(cfg)
@@ -353,8 +369,10 @@ def run() -> int:
         len(digest.reconsider),
     )
 
+    metrics_summary = metrics.summarize(metrics.peek())
+
     try:
-        slack_render.post_digest(digest, cfg)
+        slack_render.post_digest(digest, cfg, metrics_summary=metrics_summary)
     except Exception:
         logger.exception("Stage 6 (Slack post) failed")
         return 1

@@ -47,6 +47,10 @@ class Config:
     monitor_max_uses: int
     scout_max_uses: int
     synthesis_verbose_log: bool
+    # "owner/repo" — GitHub Actions sets this automatically (GITHUB_REPOSITORY);
+    # unset for local/manual runs, in which case the metrics footnote just
+    # omits its "full breakdown" link rather than pointing at a dead URL.
+    github_repo: str | None
 
     # Sheets backend (§11) — populated if set, required only when data_source == "sheets"
     google_sheets_id: str | None
@@ -154,6 +158,7 @@ def load_config(env: dict | None = None) -> Config:
         monitor_max_uses=monitor_max_uses,
         scout_max_uses=scout_max_uses,
         synthesis_verbose_log=synthesis_verbose_log,
+        github_repo=optional_str("GITHUB_REPOSITORY"),
         google_sheets_id=optional_str("GOOGLE_SHEETS_ID"),
         google_service_account_json=optional_str("GOOGLE_SERVICE_ACCOUNT_JSON"),
         sheets_url=optional_str("SHEETS_URL"),

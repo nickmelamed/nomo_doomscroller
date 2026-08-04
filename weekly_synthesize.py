@@ -68,7 +68,7 @@ def build_weekly_rollup(
         schema=WEEKLY_ROLLUP_SCHEMA,
         payload=json.dumps(daily_digests, indent=2),
     )
-    result = _call_and_parse(client, config, prompt)
+    result = _call_and_parse(client, config, prompt, stage="weekly_synthesize", label=f"week_of={week_of}")
 
     sections = result.get("sections", {})
     return WeeklyRollup(

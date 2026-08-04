@@ -20,6 +20,7 @@ TEST_CONFIG = Config(
     monitor_max_uses=3,
     scout_max_uses=8,
     synthesis_verbose_log=False,
+    github_repo="acme/nomo_doomscroller",
     google_sheets_id="sheet-id",
     google_service_account_json="{}",
     sheets_url="https://docs.google.com/spreadsheets/d/abc123",
@@ -327,6 +328,85 @@ def test_reconsider_section_omitted_when_empty():
     )
 
 
+METRICS_SUMMARY = {
+    "call_count": 17,
+    "input_tokens": 42345,
+    "output_tokens": 8123,
+    "web_search_requests": 22,
+    "total_latency_ms": 128000.0,
+    "estimated_cost_usd": 0.8421,
+}
+
+
+def test_metrics_footnote_renders_compact_line_with_link():
+    digest = Digest(
+        quiet_day=False,
+        competition=[digest_item("Uber news")],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(
+        digest, TEST_CONFIG, today=TODAY, metrics_summary=METRICS_SUMMARY
+    )
+
+    footnote = next(
+        b
+        for b in blocks
+        if b["type"] == "context" and "model calls" in b["elements"][0]["text"]
+    )
+    text = footnote["elements"][0]["text"]
+    assert "17 model calls" in text
+    assert "42.3K in" in text
+    assert "8.1K out" in text
+    assert "~$0.84 est." in text
+    assert (
+        "<https://github.com/acme/nomo_doomscroller/blob/main/state/metrics/2026-07-29.jsonl|full breakdown>"
+        in text
+    )
+
+
+def test_metrics_footnote_omitted_when_no_calls():
+    digest = Digest(
+        quiet_day=False,
+        competition=[digest_item("Uber news")],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(
+        digest, TEST_CONFIG, today=TODAY, metrics_summary={"call_count": 0}
+    )
+
+    assert not any(
+        b["type"] == "context" and "model calls" in b["elements"][0]["text"] for b in blocks
+    )
+
+
+def test_metrics_footnote_omits_link_without_github_repo():
+    no_repo_config = replace(TEST_CONFIG, github_repo=None)
+    digest = Digest(quiet_day=True, tracking_counts={"competitors": 0, "partner_prospects": 0})
+
+    blocks = slack_render.build_blocks(
+        digest, no_repo_config, today=TODAY, metrics_summary=METRICS_SUMMARY
+    )
+
+    footnote = next(
+        b
+        for b in blocks
+        if b["type"] == "context" and "model calls" in b["elements"][0]["text"]
+    )
+    assert "github.com" not in footnote["elements"][0]["text"]
+
+
+def test_metrics_footnote_present_on_quiet_day():
+    digest = Digest(quiet_day=True, tracking_counts={"competitors": 0, "partner_prospects": 0})
+
+    blocks = slack_render.build_blocks(
+        digest, TEST_CONFIG, today=TODAY, metrics_summary=METRICS_SUMMARY
+    )
+
+    assert any(
+        b["type"] == "context" and "model calls" in b["elements"][0]["text"] for b in blocks
+    )
+
+
 def test_footer_present_every_day_normal_and_quiet():
     normal = Digest(
         quiet_day=False,
@@ -483,6 +563,77 @@ def test_weekly_has_content_true_when_only_rejected_candidates_present():
 
     section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
     assert not any("Quiet week" in t for t in section_texts)
+
+
+WEEKLY_METRICS_SUMMARY = {
+    "call_count": 142,
+    "input_tokens": 890300,
+    "output_tokens": 210500,
+    "web_search_requests": 310,
+    "total_latency_ms": 987000.0,
+    "estimated_cost_usd": 8.4231,
+    "by_stage": {
+        "monitor": {
+            "call_count": 45,
+            "input_tokens": 100000,
+            "output_tokens": 20000,
+            "web_search_requests": 90,
+            "total_latency_ms": 300000.0,
+            "estimated_cost_usd": 1.2,
+        },
+        "scout": {
+            "call_count": 63,
+            "input_tokens": 500000,
+            "output_tokens": 150000,
+            "web_search_requests": 200,
+            "total_latency_ms": 500000.0,
+            "estimated_cost_usd": 4.1,
+        },
+    },
+}
+
+
+def test_weekly_metrics_block_renders_totals_and_by_stage():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        competition=[digest_item("Uber news")],
+        metrics_summary=WEEKLY_METRICS_SUMMARY,
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    metrics_block = next(
+        b for b in blocks if b["type"] == "context" and "This week:" in b["elements"][0]["text"]
+    )
+    text = metrics_block["elements"][0]["text"]
+    assert "142 model calls" in text
+    assert "890.3K in" in text
+    assert "210.5K out" in text
+    assert "~$8.42 est." in text
+    assert "By stage:" in text
+    assert "monitor 45 (~$1.20)" in text
+    assert "scout 63 (~$4.10)" in text
+
+
+def test_weekly_metrics_block_present_on_quiet_week():
+    rollup = WeeklyRollup(week_of="2026-07-20", metrics_summary=WEEKLY_METRICS_SUMMARY)
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    assert any(
+        b["type"] == "context" and "This week:" in b["elements"][0]["text"] for b in blocks
+    )
+
+
+def test_weekly_metrics_block_omitted_when_no_calls():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        competition=[digest_item("Uber news")],
+        metrics_summary={"call_count": 0},
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    assert not any(
+        b["type"] == "context" and "This week:" in b["elements"][0]["text"] for b in blocks
+    )
 
 
 def test_weekly_footer_present_normal_and_quiet():

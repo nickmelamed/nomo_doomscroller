@@ -1,6 +1,8 @@
 from datetime import date, datetime, timezone
+from types import SimpleNamespace
 
 import main
+import metrics
 import state as state_module
 from models import Candidate, Criteria, Digest, Entity, NewsItem, RejectedCandidate, SourceData
 
@@ -72,7 +74,7 @@ def install_happy_path(monkeypatch, source_data=BASE_SOURCE_DATA, digest=EMPTY_D
         calls["synthesize"] = (monitoring, industry, candidates, sd, cfg, state)
         return digest
 
-    def fake_post_digest(d, cfg):
+    def fake_post_digest(d, cfg, **kwargs):
         calls["post"] = (d, cfg)
 
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
@@ -123,6 +125,45 @@ def test_stage1_failure_aborts_before_any_other_stage(monkeypatch):
     assert calls["gather"] is False
 
 
+def test_metrics_recorded_before_a_failure_are_still_saved(monkeypatch):
+    """The motivating case: a run that fails partway through (e.g. Stage 5
+    erroring after Stage 2-3's real, billed API calls already completed)
+    must not lose the record of what it already spent."""
+    metrics.drain()  # clear any leftover state from other tests
+
+    def failing_load_source_data(cfg):
+        # Simulate calls that already happened and were billed before this
+        # stage's failure.
+        response = SimpleNamespace(
+            stop_reason="end_turn",
+            usage=SimpleNamespace(
+                input_tokens=500,
+                output_tokens=100,
+                cache_creation_input_tokens=0,
+                cache_read_input_tokens=0,
+                server_tool_use=SimpleNamespace(web_search_requests=2),
+            ),
+        )
+        metrics.record("monitor", "Uber", "claude-sonnet-5", 800.0, response)
+        raise RuntimeError("Sheets unreachable")
+
+    saved = {"calls": None}
+
+    def fake_append_metrics(calls, run_date):
+        saved["calls"] = calls
+
+    monkeypatch.setattr(main, "load_source_data", failing_load_source_data)
+    monkeypatch.setattr(main.state_module, "append_metrics", fake_append_metrics)
+
+    exit_code = main.run()
+
+    assert exit_code == 1
+    assert saved["calls"] is not None
+    assert len(saved["calls"]) == 1
+    assert saved["calls"][0]["stage"] == "monitor"
+    assert saved["calls"][0]["label"] == "Uber"
+
+
 def test_stage2_gather_failure_continues_with_empty_results(monkeypatch):
     def fake_load_source_data(cfg):
         return BASE_SOURCE_DATA
@@ -140,7 +181,7 @@ def test_stage2_gather_failure_continues_with_empty_results(monkeypatch):
 
     posted = {}
 
-    def fake_post_digest(d, cfg):
+    def fake_post_digest(d, cfg, **kwargs):
         posted["digest"] = d
 
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
@@ -170,7 +211,7 @@ def test_stage5_synthesize_failure_is_fatal_and_never_posts(monkeypatch):
     def failing_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
         raise RuntimeError("malformed synthesis JSON")
 
-    def fake_post_digest(d, cfg):
+    def fake_post_digest(d, cfg, **kwargs):
         post_called["value"] = True
 
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
@@ -311,6 +352,7 @@ def test_effective_gather_config_widens_window_after_a_stale_gap():
         monitor_max_uses=3,
         scout_max_uses=8,
         synthesis_verbose_log=False,
+        github_repo=None,
         google_sheets_id=None,
         google_service_account_json=None,
         sheets_url=None,
@@ -344,6 +386,7 @@ def test_effective_gather_config_unchanged_within_normal_gap():
         monitor_max_uses=3,
         scout_max_uses=8,
         synthesis_verbose_log=False,
+        github_repo=None,
         google_sheets_id=None,
         google_service_account_json=None,
         sheets_url=None,
@@ -377,6 +420,7 @@ def test_effective_gather_config_unchanged_with_no_prior_success():
         monitor_max_uses=3,
         scout_max_uses=8,
         synthesis_verbose_log=False,
+        github_repo=None,
         google_sheets_id=None,
         google_service_account_json=None,
         sheets_url=None,
@@ -462,7 +506,7 @@ def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
-    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg, **kwargs: None)
     install_state(monkeypatch)
 
     exit_code = main.run()
@@ -502,7 +546,7 @@ def test_rejected_today_is_upserted_and_saved(monkeypatch):
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
-    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg, **kwargs: None)
     saved = install_state(monkeypatch)
 
     exit_code = main.run()
@@ -548,7 +592,7 @@ def test_reconsider_is_populated_from_persisted_state_when_category_empty(monkey
 
     posted = {}
 
-    def fake_post_digest(d, cfg):
+    def fake_post_digest(d, cfg, **kwargs):
         posted["digest"] = d
 
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
@@ -607,10 +651,54 @@ def test_exclude_previously_rejected_applied_before_synthesize(monkeypatch):
     monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
     monkeypatch.setattr(main, "run_gather", fake_run_gather)
     monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
-    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg, **kwargs: None)
     install_state(monkeypatch, initial_rejected_state=rejected_state)
 
     exit_code = main.run()
 
     assert exit_code == 0
     assert [c.name for c in captured["candidates"]] == ["Lyft"]
+
+
+def test_metrics_summary_computed_from_this_runs_calls_reaches_post_digest(monkeypatch):
+    metrics.drain()  # clear any leftover state from other tests
+
+    def fake_load_source_data(cfg):
+        return BASE_SOURCE_DATA
+
+    def fake_run_gather(client, sd, cfg):
+        response = SimpleNamespace(
+            stop_reason="end_turn",
+            usage=SimpleNamespace(
+                input_tokens=1000,
+                output_tokens=200,
+                cache_creation_input_tokens=0,
+                cache_read_input_tokens=0,
+                server_tool_use=SimpleNamespace(web_search_requests=3),
+            ),
+        )
+        metrics.record("monitor", "Uber", "claude-sonnet-5", 700.0, response)
+        return [], [], []
+
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        return EMPTY_DIGEST
+
+    captured = {}
+
+    def fake_post_digest(d, cfg, **kwargs):
+        captured["metrics_summary"] = kwargs.get("metrics_summary")
+
+    monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
+    monkeypatch.setattr(main, "run_gather", fake_run_gather)
+    monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
+    monkeypatch.setattr(main.slack_render, "post_digest", fake_post_digest)
+    install_state(monkeypatch)
+
+    exit_code = main.run()
+
+    assert exit_code == 0
+    summary = captured["metrics_summary"]
+    assert summary["call_count"] == 1
+    assert summary["input_tokens"] == 1000
+    assert summary["output_tokens"] == 200
+    assert summary["web_search_requests"] == 3

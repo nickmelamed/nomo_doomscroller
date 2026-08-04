@@ -52,6 +52,17 @@ def test_documented_defaults():
     assert cfg.synthesis_verbose_log is True
 
 
+def test_github_repo_absent_by_default():
+    cfg = load_config(env=SHEETS_ENV)
+    assert cfg.github_repo is None
+
+
+def test_github_repo_loaded_from_github_actions_env_var():
+    env = {**SHEETS_ENV, "GITHUB_REPOSITORY": "acme/nomo_doomscroller"}
+    cfg = load_config(env=env)
+    assert cfg.github_repo == "acme/nomo_doomscroller"
+
+
 def test_optional_vars_override_defaults():
     env = {
         **SHEETS_ENV,

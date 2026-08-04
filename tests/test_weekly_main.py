@@ -2,6 +2,7 @@ import json
 from datetime import date
 from types import SimpleNamespace
 
+import metrics
 import state as state_module
 import weekly_main
 from models import RejectedCandidate, WeeklyRollup
@@ -101,6 +102,41 @@ def test_run_synthesis_failure_never_posts(monkeypatch):
 
     assert exit_code == 1
     assert post_called["value"] is False
+
+
+def test_metrics_recorded_before_a_failure_are_still_saved(monkeypatch):
+    metrics.drain()  # clear any leftover state from other tests
+    one_day = {"date": "2026-07-20", "quiet_day": False}
+    monkeypatch.setattr(weekly_main, "_load_week_digests", lambda dir, weekdays: [one_day])
+
+    def failing_build(client, daily_digests, week_of, cfg):
+        response = SimpleNamespace(
+            stop_reason="end_turn",
+            usage=SimpleNamespace(
+                input_tokens=200,
+                output_tokens=50,
+                cache_creation_input_tokens=0,
+                cache_read_input_tokens=0,
+                server_tool_use=None,
+            ),
+        )
+        metrics.record("weekly_synthesize", "week_of=2026-07-20", "claude-sonnet-5", 400.0, response)
+        raise RuntimeError("malformed rollup JSON")
+
+    saved = {"calls": None}
+
+    def fake_append_metrics(calls, run_date):
+        saved["calls"] = calls
+
+    monkeypatch.setattr(weekly_main, "build_weekly_rollup", failing_build)
+    monkeypatch.setattr(weekly_main.state_module, "append_metrics", fake_append_metrics)
+
+    exit_code = weekly_main.run()
+
+    assert exit_code == 1
+    assert saved["calls"] is not None
+    assert len(saved["calls"]) == 1
+    assert saved["calls"][0]["stage"] == "weekly_synthesize"
 
 
 def test_run_end_to_end_with_fixture_archive_and_fake_client(monkeypatch, tmp_path):
@@ -277,6 +313,69 @@ def test_run_attaches_rejected_candidates_to_posted_rollup(monkeypatch):
 
     assert exit_code == 0
     assert [c.name for c in posted["rollup"].rejected_candidates] == ["Bolt"]
+
+
+def test_metrics_this_week_reads_jsonl_files_for_the_week(tmp_path, monkeypatch):
+    monkeypatch.setattr(weekly_main.state_module, "DEFAULT_METRICS_DIR", tmp_path)
+    weekdays = [date(2026, 7, 20), date(2026, 7, 21), date(2026, 7, 22)]
+
+    (tmp_path / "2026-07-20.jsonl").write_text(
+        json.dumps({"stage": "monitor", "input_tokens": 100}) + "\n"
+        + json.dumps({"stage": "scout", "input_tokens": 200}) + "\n"
+    )
+    (tmp_path / "2026-07-22.jsonl").write_text(
+        json.dumps({"stage": "synthesize", "input_tokens": 300}) + "\n"
+    )
+    # 2026-07-21 has no file — a day with a failed run, skipped not errored.
+
+    calls = weekly_main._metrics_this_week(weekdays)
+
+    assert len(calls) == 3
+    assert {c["stage"] for c in calls} == {"monitor", "scout", "synthesize"}
+
+
+def test_metrics_this_week_missing_dir_returns_empty(tmp_path, monkeypatch):
+    monkeypatch.setattr(weekly_main.state_module, "DEFAULT_METRICS_DIR", tmp_path / "does_not_exist")
+    assert weekly_main._metrics_this_week([date(2026, 7, 20)]) == []
+
+
+def test_run_populates_rollup_metrics_summary_from_the_week(monkeypatch, tmp_path):
+    monkeypatch.setattr(weekly_main.state_module, "DEFAULT_METRICS_DIR", tmp_path)
+    one_day = {"date": "2026-07-20", "quiet_day": False}
+    monkeypatch.setattr(weekly_main, "_load_week_digests", lambda dir, weekdays: [one_day])
+    monkeypatch.setattr(
+        weekly_main, "build_weekly_rollup", lambda client, dd, wk, cfg: WeeklyRollup(week_of=wk)
+    )
+    monkeypatch.setattr(weekly_main, "_rejected_this_week", lambda weekdays: [])
+
+    def fake_metrics_this_week(weekdays):
+        return [
+            {
+                "stage": "monitor",
+                "input_tokens": 100,
+                "output_tokens": 20,
+                "web_search_requests": 1,
+                "latency_ms": 500.0,
+                "estimated_cost_usd": 0.01,
+            }
+        ]
+
+    monkeypatch.setattr(weekly_main, "_metrics_this_week", fake_metrics_this_week)
+
+    posted = {}
+
+    def fake_post(rollup, cfg, days_covered=None):
+        posted["rollup"] = rollup
+
+    monkeypatch.setattr(weekly_main.slack_render, "post_weekly_rollup", fake_post)
+
+    exit_code = weekly_main.run()
+
+    assert exit_code == 0
+    summary = posted["rollup"].metrics_summary
+    assert summary["call_count"] == 1
+    assert summary["input_tokens"] == 100
+    assert summary["by_stage"]["monitor"]["call_count"] == 1
 
 
 def test_run_slack_failure_is_nonzero_exit(monkeypatch):

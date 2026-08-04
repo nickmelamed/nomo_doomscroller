@@ -17,6 +17,7 @@ from text_match import normalize_headline, normalize_name
 DEFAULT_STATE_PATH = Path("state/seen_stories.json")
 DEFAULT_DIGEST_ARCHIVE_DIR = Path("state/digests")
 DEFAULT_REJECTED_CANDIDATES_PATH = Path("state/rejected_candidates.json")
+DEFAULT_METRICS_DIR = Path("state/metrics")
 
 # How long a rejected candidate is suppressed from re-entering synthesis
 # (excluded in main.py's exclude_previously_rejected). After this, it's
@@ -151,3 +152,18 @@ def entry_to_candidate(entry: dict) -> RejectedCandidate:
         reject_count=entry.get("reject_count", 0),
         shown_count=entry.get("shown_count", 0),
     )
+
+
+def append_metrics(
+    calls: list[dict], run_date: date, dir: Path = DEFAULT_METRICS_DIR
+) -> None:
+    """Appends one JSON line per recorded API call to state/metrics/<date>.jsonl
+    — a day can have multiple runs (manual re-triggers, weekly rollup), so
+    this appends rather than overwrites like save_digest_archive does."""
+    if not calls:
+        return
+    dir.mkdir(parents=True, exist_ok=True)
+    path = dir / f"{run_date.isoformat()}.jsonl"
+    with path.open("a") as f:
+        for call in calls:
+            f.write(json.dumps(call, sort_keys=True) + "\n")

@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 from string import Template
 
+import metrics
 import state as state_module
 from config import Config
 from gather import extract_text, parse_json_response
@@ -192,19 +194,22 @@ def _to_candidate(raw: dict) -> Candidate:
     )
 
 
-def _call_and_parse(client, config: Config, prompt: str) -> dict:
+def _call_and_parse(client, config: Config, prompt: str, stage: str = "synthesize", label: str = "digest") -> dict:
     # Streaming, not .create(): the Anthropic SDK refuses a plain
     # non-streaming call once max_tokens implies a response that could take
     # longer than 10 minutes to generate (max_tokens > ~21,333 at its assumed
     # generation rate) — SYNTHESIZE_MAX_TOKENS is comfortably above that on a
     # candidate-heavy day, so this call must stream regardless of how fast
     # the actual response comes back.
+    started = time.monotonic()
     with client.messages.stream(
         model=config.anthropic_model,
         max_tokens=SYNTHESIZE_MAX_TOKENS,
         messages=[{"role": "user", "content": prompt}],
     ) as stream:
         response = stream.get_final_message()
+    latency_ms = (time.monotonic() - started) * 1000
+    metrics.record(stage, label, config.anthropic_model, latency_ms, response)
     if response.stop_reason != "end_turn":
         logger.warning(
             "synthesize call ended with stop_reason=%r (not end_turn) — response may be "

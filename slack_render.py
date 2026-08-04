@@ -124,7 +124,39 @@ def _footer_block(config: Config, digest: Digest) -> dict:
     return {"type": "context", "elements": [{"type": "mrkdwn", "text": text}]}
 
 
-def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) -> list[dict]:
+def _metrics_footnote_block(
+    summary: dict | None, config: Config, today: date_cls
+) -> dict | None:
+    """Compact, single-line footnote — call counts/tokens/cost so it's a
+    glance, not a section, with a link out to the full per-call JSONL for
+    anyone who wants to dig in. Omitted entirely when there's nothing to
+    show (e.g. no calls were made, or metrics weren't computed for this
+    render)."""
+    if not summary or not summary.get("call_count"):
+        return None
+
+    text = (
+        f"_{summary['call_count']} model calls · "
+        f"{summary['input_tokens'] / 1000:.1f}K in / {summary['output_tokens'] / 1000:.1f}K out tokens"
+    )
+    if summary["estimated_cost_usd"] is not None:
+        text += f" · ~${summary['estimated_cost_usd']:.2f} est."
+    if config.github_repo:
+        url = (
+            f"https://github.com/{config.github_repo}/blob/main/"
+            f"state/metrics/{today.isoformat()}.jsonl"
+        )
+        text += f" · <{url}|full breakdown>"
+    text += "_"
+    return {"type": "context", "elements": [{"type": "mrkdwn", "text": text}]}
+
+
+def build_blocks(
+    digest: Digest,
+    config: Config,
+    today: date_cls | None = None,
+    metrics_summary: dict | None = None,
+) -> list[dict]:
     today = today or date_cls.today()
     blocks: list[dict] = [_header_block(today)]
 
@@ -136,6 +168,9 @@ def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) 
             }
         )
         blocks.append(_footer_block(config, digest))
+        footnote = _metrics_footnote_block(metrics_summary, config, today)
+        if footnote:
+            blocks.append(footnote)
         return blocks
 
     section_items = {
@@ -182,12 +217,20 @@ def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) 
         blocks.append({"type": "context", "elements": [{"type": "mrkdwn", "text": _RECONSIDER_NOTE}]})
 
     blocks.append(_footer_block(config, digest))
+    footnote = _metrics_footnote_block(metrics_summary, config, today)
+    if footnote:
+        blocks.append(footnote)
     return blocks
 
 
-def post_digest(digest: Digest, config: Config, today: date_cls | None = None) -> None:
+def post_digest(
+    digest: Digest,
+    config: Config,
+    today: date_cls | None = None,
+    metrics_summary: dict | None = None,
+) -> None:
     """Renders and POSTs the digest to the Slack incoming webhook (§7 Stage 6)."""
-    blocks = build_blocks(digest, config, today)
+    blocks = build_blocks(digest, config, today, metrics_summary)
     fallback_text = blocks[0]["text"]["text"]
 
     response = httpx.post(
@@ -222,6 +265,40 @@ def _weekly_footer_block(config: Config) -> dict:
     return {
         "type": "context",
         "elements": [{"type": "mrkdwn", "text": f"<{manage_list_url}|manage the list>"}],
+    }
+
+
+def _weekly_metrics_block(rollup: WeeklyRollup) -> dict | None:
+    """Weekly's richer counterpart to the daily footnote — worth a per-stage
+    breakdown at this cadence, since a week's worth of calls (~100+) makes
+    "which stage is actually expensive" a useful question the daily count
+    alone can't answer. rollup.metrics_summary is set by weekly_main.py from
+    state/metrics/*.jsonl, not by the LLM."""
+    summary = rollup.metrics_summary
+    if not summary or not summary.get("call_count"):
+        return None
+
+    lines = [
+        f"_This week: {summary['call_count']} model calls · "
+        f"{summary['input_tokens'] / 1000:.1f}K in / {summary['output_tokens'] / 1000:.1f}K out tokens"
+        + (
+            f" · ~${summary['estimated_cost_usd']:.2f} est._"
+            if summary["estimated_cost_usd"] is not None
+            else "_"
+        )
+    ]
+    by_stage = summary.get("by_stage") or {}
+    if by_stage:
+        stage_parts = []
+        for stage, stage_summary in sorted(by_stage.items()):
+            cost = stage_summary["estimated_cost_usd"]
+            cost_str = f"~${cost:.2f}" if cost is not None else "cost n/a"
+            stage_parts.append(f"{stage} {stage_summary['call_count']} ({cost_str})")
+        lines.append("_By stage: " + " · ".join(stage_parts) + "_")
+
+    return {
+        "type": "context",
+        "elements": [{"type": "mrkdwn", "text": "\n".join(lines)}],
     }
 
 
@@ -261,6 +338,9 @@ def build_weekly_blocks(
             }
         )
         blocks.append(_weekly_footer_block(config))
+        metrics_block = _weekly_metrics_block(rollup)
+        if metrics_block:
+            blocks.append(metrics_block)
         return blocks
 
     themes_block = _themes_block(rollup)
@@ -313,6 +393,9 @@ def build_weekly_blocks(
         blocks.append({"type": "context", "elements": [{"type": "mrkdwn", "text": _RECONSIDER_NOTE}]})
 
     blocks.append(_weekly_footer_block(config))
+    metrics_block = _weekly_metrics_block(rollup)
+    if metrics_block:
+        blocks.append(metrics_block)
     return blocks
 
 

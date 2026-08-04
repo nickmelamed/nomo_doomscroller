@@ -13,11 +13,16 @@ import slack_render
 import state as state_module
 import synthesize
 from gather import known_names, run_gather
-from models import Candidate, Digest, NewsItem, SourceData
+from models import Candidate, Digest, NewsItem, RejectedCandidate, SourceData
 from text_match import headlines_match as _headlines_match
 from text_match import names_match as _names_match
 
 logger = logging.getLogger(__name__)
+
+# suggested_type values a candidate can carry (§8.2) — the categories the
+# reconsider list is built per.
+CANDIDATE_TYPES = ("Competitor", "Rewards partner prospect", "GTM partner prospect")
+RECONSIDER_PER_CATEGORY = 3
 
 
 def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> list[Candidate]:
@@ -26,11 +31,22 @@ def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> l
     watchlist rows, Active Partners-source rows) — and also drop candidates
     that duplicate another candidate already surfaced in this same batch
     (different scout angles frequently rediscover the same entity), so
-    synthesis doesn't have to notice and self-merge duplicates itself."""
+    synthesis doesn't have to notice and self-merge duplicates itself.
+
+    Also drops low-confidence candidates outright: synthesize.txt already
+    tells the model to treat low confidence as "cut by default absent a
+    strong reason to keep it," so sending them through just inflates the
+    synthesize payload/output for candidates that were going to be cut
+    anyway — a large scouting batch (dozens of low-confidence candidates
+    across several angles) can push the synthesize response past its token
+    budget and truncate the whole digest (§7 Stage 5)."""
     known = known_names(source_data)
 
     survivors: list[Candidate] = []
     for candidate in candidates:
+        if candidate.confidence == "low":
+            logger.info("dedup: dropping candidate %r — low confidence", candidate.name)
+            continue
         match = next((name for name in known if _names_match(candidate.name, name)), None)
         if match is not None:
             logger.info(
@@ -56,6 +72,77 @@ def filter_candidates(candidates: list[Candidate], source_data: SourceData) -> l
         "dedup: %d candidates in, %d survived filtering", len(candidates), len(survivors)
     )
     return survivors
+
+
+def exclude_previously_rejected(
+    candidates: list[Candidate], rejected_state: dict, today: date
+) -> list[Candidate]:
+    """Drops candidates whose name fuzzy-matches an entry in the persisted
+    rejected-candidates state that's still within its suppression window
+    (state.REJECTION_SUPPRESSION_DAYS since it was last rejected) — keeps
+    synthesis from re-litigating the same recently-rejected candidate on
+    every run. A candidate past the suppression window is left alone so a
+    genuine change in its story isn't stuck behind a stale rejection."""
+    survivors = []
+    for candidate in candidates:
+        match = next(
+            (
+                entry
+                for entry in rejected_state.values()
+                if state_module.is_suppressed(entry, today)
+                and _names_match(candidate.name, entry["name"])
+            ),
+            None,
+        )
+        if match is not None:
+            logger.info(
+                "dedup: dropping candidate %r — still suppressed (last rejected %s)",
+                candidate.name,
+                match["last_rejected"],
+            )
+            continue
+        survivors.append(candidate)
+    return survivors
+
+
+def _confidence_rank(confidence: str | None) -> int:
+    return {"high": 0, "medium": 1}.get(confidence, 2)
+
+
+def build_reconsider(
+    new_candidates: list[Candidate], rejected_state: dict, today: date
+) -> tuple[list[RejectedCandidate], dict]:
+    """For each of CANDIDATE_TYPES that has zero survivors in today's
+    new_candidates, resurfaces up to RECONSIDER_PER_CATEGORY previously-
+    rejected candidates of that type from persisted state — never-shown
+    first, then longest since last shown, then confidence — so a category
+    that stays empty for a while rotates through the pool instead of
+    repeating the same picks every day. Returns the reconsider list plus the
+    state with last_shown stamped for whichever entries were picked."""
+    present_types = {c.suggested_type for c in new_candidates}
+    updated_state = dict(rejected_state)
+    reconsider: list[RejectedCandidate] = []
+
+    for suggested_type in CANDIDATE_TYPES:
+        if suggested_type in present_types:
+            continue
+        pool = [
+            (key, entry)
+            for key, entry in rejected_state.items()
+            if entry["suggested_type"] == suggested_type
+        ]
+        pool.sort(
+            key=lambda item: (
+                item[1]["last_shown"] is not None,
+                item[1]["last_shown"] or "",
+                _confidence_rank(item[1].get("confidence")),
+            )
+        )
+        for key, entry in pool[:RECONSIDER_PER_CATEGORY]:
+            reconsider.append(state_module.entry_to_candidate(entry))
+            updated_state[key] = {**updated_state[key], "last_shown": today.isoformat()}
+
+    return reconsider, updated_state
 
 
 def dedup_news_items(items: list[NewsItem]) -> list[NewsItem]:
@@ -174,6 +261,7 @@ def run() -> int:
     """Runs the full pipeline end to end (§7). Returns the process exit code."""
     cfg = config.config
     client = anthropic.Anthropic(api_key=cfg.anthropic_api_key)
+    today = date.today()
 
     try:
         source_data = load_source_data(cfg)
@@ -199,6 +287,12 @@ def run() -> int:
         logger.exception("failed to load persisted state — continuing with empty state")
         pipeline_state = {"seen_stories": {}, "last_success": None}
 
+    try:
+        rejected_state = state_module.load_rejected_candidates()
+    except Exception:
+        logger.exception("failed to load persisted rejected-candidates state — continuing with empty state")
+        rejected_state = {}
+
     gather_cfg = _effective_gather_config(cfg, pipeline_state, datetime.now(timezone.utc))
 
     try:
@@ -219,6 +313,7 @@ def run() -> int:
 
     deduped_monitoring, deduped_industry = _dedup_and_split(monitoring_items, industry_items)
     filtered_candidates = filter_candidates(candidates, source_data)
+    filtered_candidates = exclude_previously_rejected(filtered_candidates, rejected_state, today)
     logger.info(
         "Stage 4: %d news items after dedup, %d candidates after filtering",
         len(deduped_monitoring) + len(deduped_industry),
@@ -249,6 +344,15 @@ def run() -> int:
         len(digest.new_candidates),
     )
 
+    for rejected in digest.rejected_today:
+        rejected_state = state_module.upsert_rejected_candidate(rejected_state, rejected, today)
+    digest.reconsider, rejected_state = build_reconsider(digest.new_candidates, rejected_state, today)
+    logger.info(
+        "Stage 5b: %d candidates rejected today, %d reconsider picks surfaced",
+        len(digest.rejected_today),
+        len(digest.reconsider),
+    )
+
     try:
         slack_render.post_digest(digest, cfg)
     except Exception:
@@ -257,7 +361,6 @@ def run() -> int:
 
     logger.info("Stage 6: digest posted successfully")
 
-    today = date.today()
     updated_seen_stories = _record_seen_stories(
         pipeline_state["seen_stories"], deduped_monitoring + deduped_industry, today
     )
@@ -279,6 +382,14 @@ def run() -> int:
         state_module.save_digest_archive(digest, today)
     except Exception:
         logger.exception("failed to archive digest — digest was still posted successfully")
+
+    rejected_state = state_module.prune_rejected_candidates(rejected_state, today)
+    try:
+        state_module.save_rejected_candidates(rejected_state)
+    except Exception:
+        logger.exception(
+            "failed to save persisted rejected-candidates state — digest was still posted successfully"
+        )
 
     return 0
 

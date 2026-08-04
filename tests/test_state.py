@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
 import state
-from models import Digest
+from models import Digest, RejectedCandidate
 
 
 def test_hash_story_stable_for_identical_input():
@@ -109,3 +109,148 @@ def test_hours_since_computes_elapsed_hours():
     then = "2026-07-28T13:00:00+00:00"
     now = datetime.fromisoformat("2026-07-30T15:00:00+00:00")
     assert state.hours_since(then, now) == 50.0
+
+
+def _rejected(name="Bolt", **overrides) -> RejectedCandidate:
+    fields = {
+        "name": name,
+        "suggested_type": "Competitor",
+        "region": "US",
+        "why_fits": "Fits the criteria.",
+        "source_url": "https://example.com/news",
+        "reason": "Too similar to an existing competitor.",
+    }
+    fields.update(overrides)
+    return RejectedCandidate(**fields)
+
+
+def test_save_and_load_rejected_candidates_round_trips(tmp_path):
+    path = tmp_path / "rejected_candidates.json"
+    original = {
+        "bolt": {
+            "name": "Bolt",
+            "suggested_type": "Competitor",
+            "region": "US",
+            "why_fits": "Fits.",
+            "source_url": "https://example.com/a",
+            "reason": "Weak fit.",
+            "category": None,
+            "confidence": "medium",
+            "first_rejected": "2026-07-20",
+            "last_rejected": "2026-07-20",
+            "last_shown": None,
+        }
+    }
+
+    state.save_rejected_candidates(original, path=path)
+    loaded = state.load_rejected_candidates(path=path)
+
+    assert loaded == original
+
+
+def test_load_rejected_candidates_missing_file_returns_empty_dict(tmp_path):
+    path = tmp_path / "does_not_exist.json"
+    assert state.load_rejected_candidates(path=path) == {}
+
+
+def test_upsert_rejected_candidate_new_entry_sets_first_and_last_rejected():
+    updated = state.upsert_rejected_candidate({}, _rejected(), today=date(2026, 7, 30))
+
+    entry = updated["bolt"]
+    assert entry["first_rejected"] == "2026-07-30"
+    assert entry["last_rejected"] == "2026-07-30"
+    assert entry["last_shown"] is None
+    assert entry["reason"] == "Too similar to an existing competitor."
+
+
+def test_upsert_rejected_candidate_repeat_preserves_first_rejected_and_last_shown():
+    existing = {
+        "bolt": {
+            **{
+                "name": "Bolt",
+                "suggested_type": "Competitor",
+                "region": "US",
+                "why_fits": "Fits.",
+                "source_url": "https://example.com/a",
+                "category": None,
+                "confidence": "medium",
+            },
+            "reason": "Weak fit.",
+            "first_rejected": "2026-07-01",
+            "last_rejected": "2026-07-01",
+            "last_shown": "2026-07-10",
+        }
+    }
+
+    updated = state.upsert_rejected_candidate(
+        existing, _rejected(reason="Still no traction."), today=date(2026, 7, 30)
+    )
+
+    entry = updated["bolt"]
+    assert entry["first_rejected"] == "2026-07-01"  # preserved
+    assert entry["last_rejected"] == "2026-07-30"  # refreshed
+    assert entry["last_shown"] == "2026-07-10"  # preserved
+    assert entry["reason"] == "Still no traction."  # refreshed
+
+
+def test_is_suppressed_true_within_window():
+    entry = {"last_rejected": "2026-07-25"}
+    assert state.is_suppressed(entry, today=date(2026, 7, 30), window_days=14) is True
+
+
+def test_is_suppressed_false_past_window():
+    entry = {"last_rejected": "2026-07-10"}
+    assert state.is_suppressed(entry, today=date(2026, 7, 30), window_days=14) is False
+
+
+def test_prune_rejected_candidates_drops_entries_past_window():
+    data = {
+        "recent": {"last_rejected": "2026-07-25"},
+        "stale": {"last_rejected": "2026-04-01"},
+    }
+
+    pruned = state.prune_rejected_candidates(data, today=date(2026, 7, 30), window_days=90)
+
+    assert set(pruned) == {"recent"}
+
+
+def test_mark_shown_sets_last_shown_for_matching_entry():
+    data = {"bolt": {"name": "Bolt", "last_shown": None}}
+
+    updated = state.mark_shown(data, "Bolt", today=date(2026, 7, 30))
+
+    assert updated["bolt"]["last_shown"] == "2026-07-30"
+
+
+def test_mark_shown_no_matching_entry_is_a_noop():
+    data = {"bolt": {"name": "Bolt", "last_shown": None}}
+
+    updated = state.mark_shown(data, "Lyft", today=date(2026, 7, 30))
+
+    assert updated == data
+
+
+def test_entry_to_candidate_round_trips_fields():
+    entry = {
+        "name": "Bolt",
+        "suggested_type": "Competitor",
+        "region": "US",
+        "why_fits": "Fits.",
+        "source_url": "https://example.com/a",
+        "reason": "Weak fit.",
+        "category": "mobility",
+        "confidence": "medium",
+    }
+
+    candidate = state.entry_to_candidate(entry)
+
+    assert candidate == RejectedCandidate(
+        name="Bolt",
+        suggested_type="Competitor",
+        region="US",
+        why_fits="Fits.",
+        source_url="https://example.com/a",
+        reason="Weak fit.",
+        category="mobility",
+        confidence="medium",
+    )

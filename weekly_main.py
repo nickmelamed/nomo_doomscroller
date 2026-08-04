@@ -22,6 +22,25 @@ from weekly_synthesize import build_weekly_rollup
 logger = logging.getLogger(__name__)
 
 
+def _rejected_this_week(weekdays: list[date]) -> list:
+    """Deterministic, no LLM call: pulls the week's rejected candidates
+    straight from persisted state (state.rejected_candidates.json) rather
+    than asking the model to reprocess them, so this section costs nothing
+    in tokens."""
+    try:
+        rejected_state = state_module.load_rejected_candidates()
+    except Exception:
+        logger.exception("failed to load persisted rejected-candidates state — continuing with none")
+        return []
+
+    week_start, week_end = weekdays[0], weekdays[-1]
+    return [
+        state_module.entry_to_candidate(entry)
+        for entry in rejected_state.values()
+        if week_start <= date.fromisoformat(entry["last_rejected"]) <= week_end
+    ]
+
+
 def _prior_week_weekdays(today: date) -> list[date]:
     """The 5 weekdays of the most recently completed Mon-Fri period before
     today's week — works whether this runs on a Monday-morning cron or an
@@ -71,6 +90,8 @@ def run() -> int:
     except Exception:
         logger.exception("weekly rollup synthesis failed — aborting without posting")
         return 1
+
+    rollup.rejected_candidates = _rejected_this_week(weekdays)
 
     try:
         slack_render.post_weekly_rollup(rollup, cfg, days_covered=len(daily_digests))

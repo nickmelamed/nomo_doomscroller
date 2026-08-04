@@ -52,6 +52,24 @@ class Candidate:
 
 
 @dataclass
+class RejectedCandidate:
+    """A scouted candidate that synthesis rejected (§7 Stage 5) — persisted
+    across runs (state.rejected_candidates) so it can be suppressed from
+    re-entering synthesis while the rejection is fresh, become eligible again
+    once it goes stale, and be offered back for manual reconsideration when a
+    digest section comes up empty."""
+
+    name: str
+    suggested_type: str
+    region: str
+    why_fits: str
+    source_url: str
+    reason: str
+    category: str | None = None
+    confidence: str | None = None
+
+
+@dataclass
 class DigestItem:
     """A rendered digest entry (§8.3 competition/industry/partner_prospects, §9)."""
 
@@ -71,6 +89,12 @@ class Digest:
     partner_prospects: list[DigestItem] = field(default_factory=list)
     gtm_prospects: list[DigestItem] = field(default_factory=list)
     new_candidates: list[Candidate] = field(default_factory=list)
+    # Bookkeeping for main.py, not rendered directly: today's rejections
+    # (matched back to full candidate data) feed the persisted
+    # rejected-candidates state; reconsider is populated by main.py from that
+    # state, for suggested_types where new_candidates came up empty.
+    rejected_today: list[RejectedCandidate] = field(default_factory=list)
+    reconsider: list[RejectedCandidate] = field(default_factory=list)
     tracking_counts: dict[str, int] = field(default_factory=dict)
 
 
@@ -85,6 +109,9 @@ class WeeklyRollup:
     partner_prospects: list[DigestItem] = field(default_factory=list)
     gtm_prospects: list[DigestItem] = field(default_factory=list)
     notable_candidates: list[Candidate] = field(default_factory=list)
+    # Populated deterministically by weekly_main.py from the persisted
+    # rejected-candidates state (not by the LLM) — no extra token cost.
+    rejected_candidates: list[RejectedCandidate] = field(default_factory=list)
     themes: list[str] = field(default_factory=list)
 
 

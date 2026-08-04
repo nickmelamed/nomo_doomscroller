@@ -2,8 +2,9 @@ import json
 from datetime import date
 from types import SimpleNamespace
 
+import state as state_module
 import weekly_main
-from models import WeeklyRollup
+from models import RejectedCandidate, WeeklyRollup
 
 
 def test_prior_week_weekdays_from_a_monday():
@@ -180,6 +181,86 @@ def test_run_end_to_end_with_fixture_archive_and_fake_client(monkeypatch, tmp_pa
     assert posted["rollup"].week_of == "2026-07-20"
     assert len(posted["rollup"].competition) == 1
     assert posted["rollup"].themes == ["Steady competitor activity all week"]
+
+
+def test_rejected_this_week_filters_to_week_range(monkeypatch):
+    weekdays = [date(2026, 7, 20), date(2026, 7, 21), date(2026, 7, 22), date(2026, 7, 23), date(2026, 7, 24)]
+    rejected_state = {}
+    rejected_state = state_module.upsert_rejected_candidate(
+        rejected_state,
+        RejectedCandidate(
+            name="InWeek",
+            suggested_type="Competitor",
+            region="US",
+            why_fits="Fits.",
+            source_url="https://example.com/a",
+            reason="Weak fit.",
+        ),
+        today=date(2026, 7, 22),  # inside the week
+    )
+    rejected_state = state_module.upsert_rejected_candidate(
+        rejected_state,
+        RejectedCandidate(
+            name="BeforeWeek",
+            suggested_type="Competitor",
+            region="US",
+            why_fits="Fits.",
+            source_url="https://example.com/b",
+            reason="Weak fit.",
+        ),
+        today=date(2026, 7, 10),  # before the week
+    )
+
+    monkeypatch.setattr(weekly_main.state_module, "load_rejected_candidates", lambda: rejected_state)
+
+    result = weekly_main._rejected_this_week(weekdays)
+
+    assert [c.name for c in result] == ["InWeek"]
+
+
+def test_rejected_this_week_load_failure_returns_empty(monkeypatch):
+    def failing_load():
+        raise RuntimeError("disk error")
+
+    monkeypatch.setattr(weekly_main.state_module, "load_rejected_candidates", failing_load)
+
+    result = weekly_main._rejected_this_week([date(2026, 7, 20), date(2026, 7, 24)])
+
+    assert result == []
+
+
+def test_run_attaches_rejected_candidates_to_posted_rollup(monkeypatch):
+    one_day = {"date": "2026-07-20", "quiet_day": False}
+    monkeypatch.setattr(weekly_main, "_load_week_digests", lambda dir, weekdays: [one_day])
+    monkeypatch.setattr(
+        weekly_main, "build_weekly_rollup", lambda client, dd, wk, cfg: WeeklyRollup(week_of=wk)
+    )
+    monkeypatch.setattr(
+        weekly_main,
+        "_rejected_this_week",
+        lambda weekdays: [
+            RejectedCandidate(
+                name="Bolt",
+                suggested_type="Competitor",
+                region="US",
+                why_fits="Fits.",
+                source_url="https://example.com/a",
+                reason="Weak fit.",
+            )
+        ],
+    )
+
+    posted = {}
+
+    def fake_post(rollup, cfg, days_covered=None):
+        posted["rollup"] = rollup
+
+    monkeypatch.setattr(weekly_main.slack_render, "post_weekly_rollup", fake_post)
+
+    exit_code = weekly_main.run()
+
+    assert exit_code == 0
+    assert [c.name for c in posted["rollup"].rejected_candidates] == ["Bolt"]
 
 
 def test_run_slack_failure_is_nonzero_exit(monkeypatch):

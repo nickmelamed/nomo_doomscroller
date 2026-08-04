@@ -5,7 +5,7 @@ import pytest
 
 import slack_render
 from config import Config
-from models import Candidate, Digest, DigestItem, WeeklyRollup
+from models import Candidate, Digest, DigestItem, RejectedCandidate, WeeklyRollup
 
 TODAY = date(2026, 7, 29)
 
@@ -265,6 +265,68 @@ def test_new_candidates_section_is_visually_distinct_with_note():
     assert "add via the watchlist" in note_block["elements"][0]["text"]
 
 
+def rejected_candidate(name: str, **overrides) -> RejectedCandidate:
+    fields = {
+        "name": name,
+        "suggested_type": "Competitor",
+        "region": "US",
+        "why_fits": "Fits the criteria.",
+        "source_url": "https://example.com/news",
+        "reason": "Too similar to an existing competitor.",
+    }
+    fields.update(overrides)
+    return RejectedCandidate(**fields)
+
+
+def test_reconsider_section_is_visually_distinct_with_note():
+    digest = Digest(
+        quiet_day=False,
+        reconsider=[
+            rejected_candidate(
+                "Bolt",
+                why_fits="Fits.",
+                suggested_type="Competitor",
+                reason="Weak differentiation.",
+                source_url="https://example.com/bolt",
+            )
+        ],
+        tracking_counts={"competitors": 0, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
+
+    assert any(b["type"] == "divider" for b in blocks)
+    reconsider_section = next(
+        b
+        for b in blocks
+        if b["type"] == "section" and "worth a second look" in b["text"]["text"]
+    )
+    assert (
+        "• *Bolt* — Fits. · _proposed Competitor_ · rejected: Weak differentiation. · "
+        "<https://example.com/bolt|source>" in reconsider_section["text"]["text"]
+    )
+    note_block = next(
+        b
+        for b in blocks
+        if b["type"] == "context" and "Previously rejected" in b["elements"][0]["text"]
+    )
+    assert "add via the watchlist" in note_block["elements"][0]["text"]
+
+
+def test_reconsider_section_omitted_when_empty():
+    digest = Digest(
+        quiet_day=False,
+        competition=[digest_item("Uber news")],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+    blocks = slack_render.build_blocks(digest, TEST_CONFIG, today=TODAY)
+
+    assert not any(
+        b["type"] == "section" and "worth a second look" in b["text"]["text"]
+        for b in blocks
+        if b["type"] == "section"
+    )
+
+
 def test_footer_present_every_day_normal_and_quiet():
     normal = Digest(
         quiet_day=False,
@@ -396,6 +458,31 @@ def test_weekly_notable_candidates_has_proposed_only_note():
         if b["type"] == "context" and "Proposed only" in b["elements"][0]["text"]
     )
     assert "add via the watchlist" in note_block["elements"][0]["text"]
+
+
+def test_weekly_rejected_candidates_section_renders():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20",
+        rejected_candidates=[rejected_candidate("Bolt", reason="Weak differentiation.")],
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    section = next(
+        b
+        for b in blocks
+        if b["type"] == "section" and "Considered but rejected this week" in b["text"]["text"]
+    )
+    assert "rejected: Weak differentiation." in section["text"]["text"]
+
+
+def test_weekly_has_content_true_when_only_rejected_candidates_present():
+    rollup = WeeklyRollup(
+        week_of="2026-07-20", rejected_candidates=[rejected_candidate("Bolt")]
+    )
+    blocks = slack_render.build_weekly_blocks(rollup, TEST_CONFIG)
+
+    section_texts = [b["text"]["text"] for b in blocks if b["type"] == "section"]
+    assert not any("Quiet week" in t for t in section_texts)
 
 
 def test_weekly_footer_present_normal_and_quiet():

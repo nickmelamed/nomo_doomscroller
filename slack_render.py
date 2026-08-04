@@ -8,7 +8,7 @@ from datetime import date as date_cls
 import httpx
 
 from config import Config
-from models import Candidate, Digest, DigestItem, WeeklyRollup
+from models import Candidate, Digest, DigestItem, RejectedCandidate, WeeklyRollup
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +59,24 @@ def _render_candidate_line(candidate: Candidate) -> str:
     suggested_type = _escape_mrkdwn(candidate.suggested_type)
     source_url = _escape_mrkdwn(candidate.source_url)
     return f"• *{name}* — {why_fits} · _proposed {suggested_type}_ · <{source_url}|source>"
+
+
+def _render_reconsider_line(candidate: RejectedCandidate) -> str:
+    name = _escape_mrkdwn(candidate.name)
+    why_fits = _escape_mrkdwn(candidate.why_fits)
+    reason = _escape_mrkdwn(candidate.reason)
+    suggested_type = _escape_mrkdwn(candidate.suggested_type)
+    source_url = _escape_mrkdwn(candidate.source_url)
+    return (
+        f"• *{name}* — {why_fits} · _proposed {suggested_type}_ · "
+        f"rejected: {reason} · <{source_url}|source>"
+    )
+
+
+_RECONSIDER_NOTE = (
+    "_Previously rejected, resurfaced because this category was empty — "
+    "add via the watchlist if you disagree._"
+)
 
 
 def _section_blocks(title: str, lines: list[str], more_count: int) -> list[dict]:
@@ -151,6 +169,18 @@ def build_blocks(digest: Digest, config: Config, today: date_cls | None = None) 
             }
         )
 
+    if digest.reconsider:
+        shown, more = _truncate(digest.reconsider, config.max_items_per_section)
+        blocks.append({"type": "divider"})
+        blocks.extend(
+            _section_blocks(
+                "Didn't clear the bar — worth a second look?",
+                [_render_reconsider_line(c) for c in shown],
+                more,
+            )
+        )
+        blocks.append({"type": "context", "elements": [{"type": "mrkdwn", "text": _RECONSIDER_NOTE}]})
+
     blocks.append(_footer_block(config, digest))
     return blocks
 
@@ -221,6 +251,7 @@ def build_weekly_blocks(
         or rollup.partner_prospects
         or rollup.gtm_prospects
         or rollup.notable_candidates
+        or rollup.rejected_candidates
     )
     if not has_content:
         blocks.append(
@@ -268,6 +299,18 @@ def build_weekly_blocks(
                 ],
             }
         )
+
+    if rollup.rejected_candidates:
+        shown, more = _truncate(rollup.rejected_candidates, config.max_items_per_section)
+        blocks.append({"type": "divider"})
+        blocks.extend(
+            _section_blocks(
+                "Considered but rejected this week",
+                [_render_reconsider_line(c) for c in shown],
+                more,
+            )
+        )
+        blocks.append({"type": "context", "elements": [{"type": "mrkdwn", "text": _RECONSIDER_NOTE}]})
 
     blocks.append(_weekly_footer_block(config))
     return blocks

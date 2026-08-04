@@ -1,7 +1,8 @@
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 import main
-from models import Candidate, Criteria, Digest, Entity, NewsItem, SourceData
+import state as state_module
+from models import Candidate, Criteria, Digest, Entity, NewsItem, RejectedCandidate, SourceData
 
 UBER = Entity(name="Uber", type="Competitor", status="Active", source="watchlist")
 FEVER = Entity(name="Fever", type="Existing partner", status="Active", source="partners_db")
@@ -18,11 +19,18 @@ EMPTY_DIGEST = Digest(quiet_day=True, tracking_counts={"competitors": 1, "partne
 EMPTY_STATE = {"seen_stories": {}, "last_success": None}
 
 
-def install_state(monkeypatch, initial_state=None):
+def install_state(monkeypatch, initial_state=None, initial_rejected_state=None):
     """Stubs state persistence so tests never touch the real filesystem;
-    returns a dict tracking whether save_state/save_digest_archive were
-    called and with what."""
-    saved = {"called": False, "state": None, "archive_called": False, "archived_digest": None}
+    returns a dict tracking whether save_state/save_digest_archive/
+    save_rejected_candidates were called and with what."""
+    saved = {
+        "called": False,
+        "state": None,
+        "archive_called": False,
+        "archived_digest": None,
+        "rejected_saved_called": False,
+        "rejected_state": None,
+    }
 
     def fake_load_state():
         return dict(initial_state) if initial_state is not None else dict(EMPTY_STATE)
@@ -35,9 +43,18 @@ def install_state(monkeypatch, initial_state=None):
         saved["archive_called"] = True
         saved["archived_digest"] = digest
 
+    def fake_load_rejected_candidates():
+        return dict(initial_rejected_state) if initial_rejected_state is not None else {}
+
+    def fake_save_rejected_candidates(state):
+        saved["rejected_saved_called"] = True
+        saved["rejected_state"] = state
+
     monkeypatch.setattr(main.state_module, "load_state", fake_load_state)
     monkeypatch.setattr(main.state_module, "save_state", fake_save_state)
     monkeypatch.setattr(main.state_module, "save_digest_archive", fake_save_digest_archive)
+    monkeypatch.setattr(main.state_module, "load_rejected_candidates", fake_load_rejected_candidates)
+    monkeypatch.setattr(main.state_module, "save_rejected_candidates", fake_save_rejected_candidates)
     return saved
 
 
@@ -454,3 +471,145 @@ def test_dedup_and_filter_are_actually_applied_before_synthesize(monkeypatch):
     assert len(captured["monitoring"]) == 1  # duplicate URL collapsed
     assert len(captured["industry"]) == 1
     assert [c.name for c in captured["candidates"]] == ["GenuinelyNewCo"]
+
+
+def test_rejected_today_is_upserted_and_saved(monkeypatch):
+    digest_with_rejection = Digest(
+        quiet_day=False,
+        new_candidates=[],
+        rejected_today=[
+            RejectedCandidate(
+                name="Bolt",
+                suggested_type="Competitor",
+                region="US",
+                why_fits="Some fit.",
+                source_url="https://example.com/bolt",
+                reason="Too similar to an existing competitor.",
+            )
+        ],
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+
+    def fake_load_source_data(cfg):
+        return BASE_SOURCE_DATA
+
+    def fake_run_gather(client, sd, cfg):
+        return [], [], []
+
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        return digest_with_rejection
+
+    monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
+    monkeypatch.setattr(main, "run_gather", fake_run_gather)
+    monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
+    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    saved = install_state(monkeypatch)
+
+    exit_code = main.run()
+
+    assert exit_code == 0
+    assert saved["rejected_saved_called"] is True
+    assert "bolt" in saved["rejected_state"]
+    entry = saved["rejected_state"]["bolt"]
+    assert entry["reason"] == "Too similar to an existing competitor."
+    assert entry["last_rejected"] == date.today().isoformat()
+
+
+def test_reconsider_is_populated_from_persisted_state_when_category_empty(monkeypatch):
+    today = date.today()
+    rejected_state = state_module.upsert_rejected_candidate(
+        {},
+        RejectedCandidate(
+            name="Bolt",
+            suggested_type="Competitor",
+            region="US",
+            why_fits="Some fit.",
+            source_url="https://example.com/bolt",
+            reason="Weak fit.",
+        ),
+        today=today,
+    )
+
+    digest_empty_competition = Digest(
+        quiet_day=False,
+        new_candidates=[],  # no Competitor survives today -> category is empty
+        tracking_counts={"competitors": 1, "partner_prospects": 0},
+    )
+
+    def fake_load_source_data(cfg):
+        return BASE_SOURCE_DATA
+
+    def fake_run_gather(client, sd, cfg):
+        return [], [], []
+
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        return digest_empty_competition
+
+    posted = {}
+
+    def fake_post_digest(d, cfg):
+        posted["digest"] = d
+
+    monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
+    monkeypatch.setattr(main, "run_gather", fake_run_gather)
+    monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
+    monkeypatch.setattr(main.slack_render, "post_digest", fake_post_digest)
+    install_state(monkeypatch, initial_rejected_state=rejected_state)
+
+    exit_code = main.run()
+
+    assert exit_code == 0
+    assert [c.name for c in posted["digest"].reconsider] == ["Bolt"]
+
+
+def test_exclude_previously_rejected_applied_before_synthesize(monkeypatch):
+    today = date.today()
+    rejected_state = state_module.upsert_rejected_candidate(
+        {},
+        RejectedCandidate(
+            name="Bolt",
+            suggested_type="Competitor",
+            region="US",
+            why_fits="Some fit.",
+            source_url="https://example.com/bolt",
+            reason="Weak fit.",
+        ),
+        today=today,
+    )
+    still_suppressed_candidate = Candidate(
+        name="Bolt",
+        suggested_type="Competitor",
+        region="US",
+        why_fits="Resurfaced by scouting again.",
+        source_url="https://example.com/bolt2",
+    )
+    fresh_candidate = Candidate(
+        name="Lyft",
+        suggested_type="Competitor",
+        region="US",
+        why_fits="New entrant.",
+        source_url="https://example.com/lyft",
+    )
+
+    def fake_load_source_data(cfg):
+        return BASE_SOURCE_DATA
+
+    def fake_run_gather(client, sd, cfg):
+        return [], [], [still_suppressed_candidate, fresh_candidate]
+
+    captured = {}
+
+    def fake_synthesize(client, monitoring, industry, candidates, sd, cfg, state=None):
+        captured["candidates"] = candidates
+        return EMPTY_DIGEST
+
+    monkeypatch.setattr(main, "load_source_data", fake_load_source_data)
+    monkeypatch.setattr(main, "run_gather", fake_run_gather)
+    monkeypatch.setattr(main.synthesize, "synthesize", fake_synthesize)
+    monkeypatch.setattr(main.slack_render, "post_digest", lambda d, cfg: None)
+    install_state(monkeypatch, initial_rejected_state=rejected_state)
+
+    exit_code = main.run()
+
+    assert exit_code == 0
+    assert [c.name for c in captured["candidates"]] == ["Lyft"]

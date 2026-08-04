@@ -410,6 +410,53 @@ def test_synthesize_verbose_on_logs_every_rejected_candidate(caplog):
     assert all_accounted_for == {c.name for c in VERBOSE_CANDIDATES}
 
 
+def test_synthesize_verbose_on_populates_rejected_today_matched_to_full_candidate():
+    response = _verbose_response(
+        accepted=["StrongCo"],
+        rejected=[("MaybeCo", "thin why_fits")],
+    )
+    client = FakeClient(response)
+
+    digest = synthesize.synthesize(client, [], [], VERBOSE_CANDIDATES, SOURCE_DATA, VERBOSE_CONFIG)
+
+    assert len(digest.rejected_today) == 1
+    rejected = digest.rejected_today[0]
+    assert rejected.name == "MaybeCo"
+    assert rejected.reason == "thin why_fits"
+    # Fields beyond name/reason come from the matched input Candidate, not
+    # from the model's rejected_candidates entry (which only has name+reason).
+    assert rejected.suggested_type == "Rewards partner prospect"
+    assert rejected.region == "BR"
+    assert rejected.confidence == "medium"
+    assert rejected.source_url == "https://example.com/maybeco"
+
+
+def test_synthesize_verbose_off_leaves_rejected_today_empty():
+    response = _verbose_response(
+        accepted=["StrongCo"],
+        rejected=[("MaybeCo", "thin why_fits")],
+    )
+    client = FakeClient(response)
+
+    digest = synthesize.synthesize(client, [], [], VERBOSE_CANDIDATES, SOURCE_DATA, TEST_CONFIG)
+
+    assert digest.rejected_today == []
+
+
+def test_synthesize_verbose_on_unmatched_rejected_name_is_skipped():
+    # Model returns a rejected_candidates entry whose name doesn't match any
+    # input candidate (e.g. it mangled the name) — must not crash or fabricate.
+    response = _verbose_response(
+        accepted=["StrongCo"],
+        rejected=[("SomeUnknownName", "reason")],
+    )
+    client = FakeClient(response)
+
+    digest = synthesize.synthesize(client, [], [], VERBOSE_CANDIDATES, SOURCE_DATA, VERBOSE_CONFIG)
+
+    assert digest.rejected_today == []
+
+
 def test_synthesize_verbose_on_missing_field_does_not_crash(caplog):
     # Model ignored the verbose instructions and returned no rejected_candidates
     # key at all — must not crash, just treated as empty.

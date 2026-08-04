@@ -12,7 +12,8 @@ from string import Template
 import state as state_module
 from config import Config
 from gather import extract_text, parse_json_response
-from models import Candidate, Digest, DigestItem, Entity, NewsItem, SourceData
+from models import Candidate, Digest, DigestItem, Entity, NewsItem, RejectedCandidate, SourceData
+from text_match import names_match
 
 logger = logging.getLogger(__name__)
 
@@ -20,8 +21,11 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 # Generous headroom: a realistic-sized run (a dozen-plus candidates, several
 # news items) plus adaptive thinking can produce a much larger JSON output
 # than small fixtures do — observed a truncated/malformed response at 8192
-# against real data (13 candidates, 8 items).
-SYNTHESIZE_MAX_TOKENS = 16384
+# against real data (13 candidates, 8 items), and again at 16384 against a
+# candidate-heavy day (45 candidates after filtering, verbose rejection
+# reasons for each) that still overflowed even after main.py's low-confidence
+# pre-filter trims the typical case.
+SYNTHESIZE_MAX_TOKENS = 24576
 
 VERBOSE_INSTRUCTIONS_BLOCK = (
     "\nAlso include a top-level `rejected_candidates` array: one entry "
@@ -255,12 +259,30 @@ def synthesize(
         logger.warning("synthesize: JSON parse failed, retrying once with the same prompt")
         result = _call_and_parse(client, config, prompt)
 
+    rejected_today: list[RejectedCandidate] = []
     if config.synthesis_verbose_log:
         for entry in result.get("rejected_candidates", []):
             logger.info(
                 "verbose: candidate rejected name=%r reason=%r",
                 entry.get("name"),
                 entry.get("reason"),
+            )
+            matched = next(
+                (c for c in candidates if names_match(c.name, entry.get("name", ""))), None
+            )
+            if matched is None:
+                continue
+            rejected_today.append(
+                RejectedCandidate(
+                    name=matched.name,
+                    suggested_type=matched.suggested_type,
+                    region=matched.region,
+                    why_fits=matched.why_fits,
+                    source_url=matched.source_url,
+                    reason=entry.get("reason", ""),
+                    category=matched.category,
+                    confidence=matched.confidence,
+                )
             )
 
     sections = result.get("sections", {})
@@ -271,5 +293,6 @@ def synthesize(
         partner_prospects=[_to_digest_item(d) for d in sections.get("partner_prospects", [])],
         gtm_prospects=[_to_digest_item(d) for d in sections.get("gtm_prospects", [])],
         new_candidates=[_to_candidate(d) for d in sections.get("new_candidates", [])],
+        rejected_today=rejected_today,
         tracking_counts=compute_tracking_counts(source_data),
     )

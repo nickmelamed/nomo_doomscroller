@@ -1,10 +1,15 @@
 {
-  "last_success": "2026-08-04T20:57:19.010294+00:00",
+  "last_success": "2026-08-05T15:25:44.376249+00:00",
   "seen_stories": {
     "1816a5660311328c": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-07-31",
       "headline": "Families of four teens sue Meta, TikTok, Snap and YouTube over suicide deaths"
+    },
+    "1a959a6814dcc583": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-05",
+      "headline": "Tennessee Takes Meta to Trial Over Instagram Addiction Allegations"
     },
     "1e65b77cc5bf2b92": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -21,6 +26,16 @@
       "first_seen": "2026-07-31",
       "headline": "UK and Australia social media restrictions for under-16s continue to shape global policy debate"
     },
+    "499499dd3eda9685": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-05",
+      "headline": "UK Proposes Midnight Curfew and Infinite-Scroll Limits for Older Teens on Social Media"
+    },
+    "71501bd723fb3b51": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-05",
+      "headline": "Majority of Americans Now Support Banning Social Media for Kids Under 16"
+    },
     "804f60eeb3e6ebb9": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-04",
@@ -30,6 +45,16 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-07-31",
       "headline": "New York finalizes SAFE for Kids Act rules requiring age verification and default-off algorithmic feeds for minors"
+    },
+    "a5ad142d55e52805": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-05",
+      "headline": "Meta Says States Seeking $1.4 Trillion in Penalties Ahead of August Youth Safety Trial"
+    },
+    "b22a03eeee250593": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-05",
+      "headline": "Georgia Becomes 8th State Sued Over Youth Age-Verification Law"
     },
     "b81c0d2b2a1ea9dc": {
       "entity_or_topic": "Litigation against major platforms",
@@ -46,10 +71,30 @@
       "first_seen": "2026-07-31",
       "headline": "Florida teen drops second bellwether addiction case against Meta after settling with YouTube, Snap and TikTok"
     },
+    "d1d12f5a2b80695a": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-05",
+      "headline": "Social Media Companies Sued Over Deaths of Four Teens as Child-Safety Litigation Pressure Mounts"
+    },
+    "d411c68a90ebd3f9": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-05",
+      "headline": "Most Australian Teens Still on Social Media Three Months After Under-16 Ban"
+    },
     "da45e9f4afa57579": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-04",
       "headline": "Social media companies sued over deaths of four teens as pressure, lawsuits over child safety mount"
+    },
+    "e8a500e927b10f4d": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-05",
+      "headline": "EFF Warns UK's Under-16 Social Media Ban, Set for Spring 2027, Will Cause Harm"
+    },
+    "ef1af340c40b29ae": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-08-05",
+      "headline": "Parents Sue Meta, TikTok, Snapchat and YouTube Over Deaths of Four Teens as Child-Safety Litigation Intensifies"
     },
     "f441677472aec6ad": {
       "entity_or_topic": "Youth social media policy and regulation",

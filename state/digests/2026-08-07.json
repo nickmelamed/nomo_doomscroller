@@ -1,0 +1,240 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "New Mexico Court Orders Meta to Pay $567 Million Over Youth Mental Health Harms; Meta to Appeal",
+      "source": "NPR",
+      "summary": "A New Mexico court's second-phase ruling orders Meta to pay $567M (with $420M earmarked for youth treatment services and the rest for prevention/screening) over youth mental-health harms; the underlying abatement plan sought roughly $1B, partly for school-based digital-wellness education programs. Meta has announced it will appeal to the Court of Appeals (per Albuquerque Journal reporting), reinforcing that courts and states are formalizing remediation frameworks NOMO's school partnerships could plug into.",
+      "url": "https://www.npr.org/2026/08/07/nx-s1-5924581/court-orders-instagram-and-facebooks-meta-to-pay-567m-to-address-kids-mental-health-online"
+    },
+    {
+      "headline": "Meta Faces 29-State Trial Over Alleged Child-Addictive Design, Set to Begin August 18 in Oakland",
+      "source": "US News (AP)",
+      "summary": "Meta faces a federal trial in Oakland from the first four of 29 states alleging addictive-by-design platform features, alongside separate state-court trials and wrongful-death suits from families of teens who died by suicide. The coordinated wave of litigation against Meta, TikTok, Snap and YouTube signals sustained pressure that strengthens the case for vetted digital-wellbeing partners like NOMO in the US school pipeline.",
+      "url": "https://www.usnews.com/news/business/articles/2026-08-06/court-orders-meta-to-pay-567-million-to-address-kids-mental-health-and-safety-on-its-platforms"
+    },
+    {
+      "headline": "Senate Commerce Committee Advances SCREEN Act, Expanding Age-Verification Mandates",
+      "source": "Electronic Frontier Foundation (EFF)",
+      "summary": "The Senate Commerce Committee voted 15-13 to advance the SCREEN Act, which would expand mandatory online age-verification requirements; it still needs full Senate approval, and EFF warns of broad privacy implications. A federal push toward verifiable youth engagement models could give regulatory tailwind to NOMO's opt-in, school-linked accountability structure in the US market.",
+      "url": "https://www.eff.org/deeplinks/2026/07/screen-act-threatens-privacy-far-beyond-adult-websites"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "Teen screen-time reward app / brand-funded incentive platform",
+      "confidence": "high",
+      "name": "Dayo Deals",
+      "reason": "Duplicate of the Dayo candidate (same company and cash-incentive mechanic).",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.fastcompany.com/91507495/dayo-app-teen-phone-screen-time-reduction-parents-reward-starbucks-adidas",
+      "suggested_type": "Competitor",
+      "why_fits": "Dayo Deals is an app-based service that lets parents and teens strike monetary bargains to reduce screen time and social media use, directly competing with NOMO's reward-for-reduced-screen-time model. It has already signed brand partners similar to NOMO's reward-partner strategy."
+    },
+    {
+      "category": "Rewards/gamified phone-free app for students",
+      "confidence": "medium",
+      "name": "Lock&Stock",
+      "reason": "Redundant gamified reward/phone-free-app competitor, generic, adds little beyond Dayo/Pocket Points already covered.",
+      "region": "Other",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://en.wikipedia.org/wiki/Lock%26Stock",
+      "suggested_type": "Competitor",
+      "why_fits": "A near-direct model match to NOMO \u2014 a mobile app 'intended at helping students by discouraging the use of mobile phones during classes' that aims 'to reduce the use of cell phones by students and encourage their digital wellbeing by providing rewards and points when they stay off their phones,' i.e. it literally gamifies/rewards reduced phone use, meeting the core competitor criterion."
+    },
+    {
+      "category": "Gamified screen-time app with social accountability",
+      "confidence": "medium",
+      "name": "Screen Time Buddy",
+      "reason": "not rejected",
+      "region": "Other",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.screentimebuddy.com/blog/best-screen-time-apps-2026",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"13-12,13-13\">Screen Time Buddy combines gamification, social accountability, and in-the-moment intervention into a single app, using character tiers, coins for hitting targets, and Powergroups with friends for shared accountability</cite>, plus <cite index=\"13-15\">coins earned through daily goals can be spent to plant real trees through reforestation partners</cite> \u2014 a near-direct structural overlap with NOMO's Moments/leaderboard/rewards loop."
+    },
+    {
+      "category": "Multi-attraction city pass / travel experiences",
+      "confidence": "medium",
+      "name": "Go City",
+      "reason": "Medium confidence; multi-attraction pass largely overlaps with NOMO's existing GetYourGuide partner and isn't teen-specific.",
+      "region": "All",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://gocity.com/en/work-with-us",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Go City sells multi-attraction city passes covering museums, tours and activities across 25+ global destinations, which is a genuine gap versus NOMO's current single-venue ticket partners (Fever, GetYourGuide, Odeon) \u2014 it matches the 'city greenpass' style reward inventory NOMO is looking to add."
+    },
+    {
+      "category": "Event/ticket inventory for teens",
+      "confidence": "medium",
+      "name": "State Fair of Texas",
+      "reason": "Overlapping with the Dallas Teen All-Access Pass story already covered; weak standalone reward inventory (single annual regional event).",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.aol.com/news/free-state-fair-texas-admission-033550615.html",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"59-4,59-6\">Free admission to the State Fair of Texas will return to Dallas ISD teens in 2026 through the city's Teen All Access Pass program, with the Fair's president confirming it would \"happily participate\" in the initiative.</cite> A large-scale ticketed event actively donating teen-targeted admission inventory is a realistic, tradeable reward fit adjacent to NOMO's existing ticket/experience partners."
+    },
+    {
+      "category": "Arts & culture ticket pass (teen-focused)",
+      "confidence": "medium",
+      "name": "Teen Arts Pass (TAP) \u2013 Chicago",
+      "reason": "Redundant teen arts/culture ticket-pass category already covered by TeenTix; single-city scope, medium confidence.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://northsidechicago.macaronikid.com/guides/6410c069820b8f72bfdb21eb/2026-deals-for-students-teens-in-chicagoland",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A ready-made teen rewards inventory network spanning major venues; Steppenwolf is described as 'a proud arts partner of the Teen Arts Pass (TAP) initiative, which allows teens to experience live arts performances all around Chicago for only $5,' with the network including 'The Goodman Theatre, The Lyric Opera of Chicago, and Lookingglass Theatre Company' \u2014 comparable ticket-reward category to NOMO's existing Ticketmaster/Fever/Odeon partners but city-specific and easy to tap for local rollouts."
+    },
+    {
+      "category": "Municipality youth engagement program",
+      "confidence": "medium",
+      "name": "Dallas Teen All-Access Pass",
+      "reason": "Duplicate of the Dallas Park & Recreation Department candidate covering the same Teen All Access Pass program.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "The City of Dallas runs a Teen All-Access Pass giving teens (plus up to three guests) free access to local cultural, recreational and entertainment venues, with new 2026 additions like Dave & Buster's, Dallas Love Field and the State Fair of Texas \u2014 a strong model account for NOMO's Municipalities GTM vertical (owned by Leo) and a potential source of reward inventory."
+    },
+    {
+      "category": "US Telcos & MVNOs (kid-safe phone/MVNO)",
+      "confidence": "medium",
+      "name": "Gabb Wireless",
+      "reason": "Weak sourcing (marketing blog) and redundant with stronger telco/MVNO candidate (Verizon) already kept.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://canvasbusinessmodel.com/blogs/marketing-strategy/gabb-wireless-marketing-strategy",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Gabb is a kid/teen-focused MVNO-style phone provider that already runs school and nonprofit distribution partnerships and device donation programs, making it a strong distribution-partner fit for NOMO's Telco/MVNO GTM vertical to embed rewards on teen-safe devices."
+    },
+    {
+      "category": "State-level school phone policy",
+      "confidence": "medium",
+      "name": "New York State Education Department (Distraction-Free Schools policy)",
+      "reason": "not rejected",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.governor.ny.gov/news/distraction-free-schools-governor-hochul-announces-new-york-become-largest-state-nation",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"46-1,46-2\">New York State's distraction-free schools policy takes effect for the 2025-2026 school year, building on Governor Hochul's commitment to protecting youth mental health after a first-in-the-nation law restricting addictive social media feeds for minors.</cite> A statewide mandate creates a structured procurement moment for a positive-incentive complement to bans \u2014 fitting the Municipalities/States GTM vertical directly."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "Phone-free school program / device pouches",
+      "confidence": "medium",
+      "name": "Yondr",
+      "reason": "Physical phone-pouch hardware for schools, not an app-based screen-time/reward competitor matching NOMO's fit bar (Opal/Brick/Forest-style); different product category despite adjacent school-procurement overlap.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.overyondr.com/blog/phone-free-legislation/california",
+      "suggested_type": "Competitor",
+      "why_fits": "Yondr is actively signing California districts to its Phone-Free Schools Program ahead of the state's AB 3216 deadline, competing directly with NOMO for school district contracts in the same 6-12 education GTM vertical."
+    },
+    {
+      "category": "Carrier-built kids screentime + rewards device",
+      "confidence": "medium",
+      "name": "AT&T amiGO Jr.",
+      "reason": "Kids phone/watch hardware targeting younger children, not a direct app-based competitor to NOMO's teen reward model; weak product fit, medium confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://about.att.com/story/2026/att-amigo-jr-phone.html",
+      "suggested_type": "Competitor",
+      "why_fits": "AT&T's amiGO Jr. Phone and Watch let parents manage screentime and app access, and the new Watch 2 adds native \"games, and rewards,\" meaning a major US telco is now bundling gamified screen-time reduction directly into a kids device \u2014 a competitive product from a carrier NOMO might otherwise court as a distribution partner."
+    },
+    {
+      "category": "Screen-time reward/gamification app",
+      "confidence": "medium",
+      "name": "Zenze",
+      "reason": "Generic, less-detailed mechanic description that largely duplicates the stronger, higher-confidence Zenera candidate already captured.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=org.atmana.zenze",
+      "suggested_type": "Competitor",
+      "why_fits": "App-blocking tool that layers in a community leaderboard and unlockable rewards for restricting screen time, directly overlapping with NOMO's accountability + rewards positioning and not present in the currently tracked competitor set."
+    },
+    {
+      "category": "City attraction/experience pass",
+      "confidence": "medium",
+      "name": "Go City Pass",
+      "reason": "Redundant with CityPASS, which offers a more concrete, higher-confidence version of the same bundled city-attraction-pass reward category.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.chicagochildrensmuseum.org/exclusive-member-benefits",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"37-6,37-8\">5% off Go City Passes... Go City Pass offers discounts on your chosen attractions, with the freedom to do what you want, when you want and without multiple entry fees or paper tickets!</cite> This is exactly the 'city greenpass'-style tradeable, multi-attraction inventory NOMO doesn't yet have (current lineup has single-venue tickets like Fever/GetYourGuide but no bundled city pass product), and it's a natural fit for a teen/Gen Z audience wanting real-world experiences."
+    },
+    {
+      "category": "Museum tickets/passes",
+      "confidence": "medium",
+      "name": "The Met Explorer Membership (NYC Dept. of Cultural Affairs)",
+      "reason": "Redundant with the Carnegie Museums teen membership already captured in the same single-museum-pass category; lower confidence and narrower (NYC-only) scope.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://patch.com/new-york/upper-east-side-nyc/new-program-gives-1-7m-new-yorkers-free-met-museum-access",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A newly launched city-backed program gives eligible New Yorkers, including free admission for children 17 and younger, a full annual Met membership, making it a realistic, scalable teen-facing reward inventory partner similar to NOMO's Fever museum-ticket reward."
+    },
+    {
+      "category": "Museum tickets/passes",
+      "confidence": "medium",
+      "name": "Columbus Museum of Art (Access 150 initiative)",
+      "reason": "Redundant local single-museum program that duplicates the stronger Carnegie Museums and CityPASS museum-pass candidates already surfaced.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.columbusmuseum.org/newsroom/posts/columbus-museum-of-art-to-offer-free-admission-for-visitors-25-and-under",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "CMA's newly funded Access 150 initiative offers free admission for visitors 25 and under plus a new Teen Arts Council, signaling an institution actively building teen-focused access and programming that could supply tradeable ticket inventory for NOMO rewards."
+    },
+    {
+      "category": "Insurance \u2014 digital wellness partnerships",
+      "confidence": "medium",
+      "name": "Health insurer / wellness-app partnership trend (sector signal)",
+      "reason": "Generic industry survey statistic, not a named/concrete prospect; redundant with the more concrete Elevance Health/Anthem candidate already covering the Insurance vertical.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.lifeinsuranceinternational.com/analyst-comment/digital-health-partnerships-most-important-insurers-over-next-three-years/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Recent industry polling confirms strong near-term appetite among health insurers for exactly the kind of partnership NOMO could offer: \"41.1% of respondents identified partnerships between health insurers and mental health and wellness apps as the most important non-traditional partnership over the next three years,\" reinforcing that Insurance remains an underexploited vertical for NOMO given it has no GTM partners there yet."
+    },
+    {
+      "category": "Faith-based & Youth Orgs",
+      "confidence": "medium",
+      "name": "Boys & Girls Clubs of America (BGC Mindful initiative)",
+      "reason": "Why_fits relies on generic marketing language without concrete metrics (funding, membership scale, specific terms); too vague to clear the relevance bar.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://boysandgirlsclub.com/supporting-healthy-minds-empowering-great-futures/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "BGCA just expanded 'BGC Mindful,' a national mental-wellbeing strategy for members launched in January and scaling through 2026, showing an active, well-funded appetite for youth digital/mental wellness programming that NOMO's rewards model could plug into."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

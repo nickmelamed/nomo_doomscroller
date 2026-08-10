@@ -1,10 +1,15 @@
 {
-  "last_success": "2026-08-07T14:23:28.348131+00:00",
+  "last_success": "2026-08-10T14:32:38.140754+00:00",
   "seen_stories": {
     "1816a5660311328c": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-07-31",
       "headline": "Families of four teens sue Meta, TikTok, Snap and YouTube over suicide deaths"
+    },
+    "186f4dc554021815": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-10",
+      "headline": "Meta faces parallel trials in Tennessee and Oakland federal court as new teen-death suits pile up"
     },
     "1a959a6814dcc583": {
       "entity_or_topic": "Litigation against major platforms",
@@ -21,6 +26,11 @@
       "first_seen": "2026-08-04",
       "headline": "Australia's Social Media Ban Sees Only Small Dip in Teen Users"
     },
+    "370ef1141427da61": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-08-10",
+      "headline": "Tennessee AG's Trial Against Meta Over Teen Instagram Addiction Continues With Damaging Testimony"
+    },
     "37b5c10f5032c579": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-08-07",
@@ -35,6 +45,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-05",
       "headline": "UK Proposes Midnight Curfew and Infinite-Scroll Limits for Older Teens on Social Media"
+    },
+    "563a4f1b4344daf6": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-08-10",
+      "headline": "Tennessee's Instagram Lawsuit Against Meta Reaches Nashville Jury"
     },
     "71501bd723fb3b51": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -101,15 +116,35 @@
       "first_seen": "2026-08-04",
       "headline": "Social media companies sued over deaths of four teens as pressure, lawsuits over child safety mount"
     },
+    "e031b68d2ec011a3": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-08-10",
+      "headline": "New Mexico court orders Meta to pay $567M in landmark child-safety trial, on top of $375M jury penalty"
+    },
     "e0893ce09a031229": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-07",
       "headline": "Meta Faces 29-State Trial Over Alleged Child-Addictive Design, Set to Begin August 18 in Oakland"
     },
+    "e4e137e17537491d": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-10",
+      "headline": "UK Parliament research briefing updates status of under-16 social media ban proposal"
+    },
     "e8a500e927b10f4d": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-05",
       "headline": "EFF Warns UK's Under-16 Social Media Ban, Set for Spring 2027, Will Cause Harm"
+    },
+    "e9ebfee38b31a4dc": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-10",
+      "headline": "Social media addiction litigation tracker shows MDL growth and new state suits (Hawai'i) over youth harms"
+    },
+    "ec3850bd88695964": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-08-10",
+      "headline": "UAE Rewards-Pooling Startup Bundle Raises $5.5M Pre-Seed"
     },
     "ef1af340c40b29ae": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -120,6 +155,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-04",
       "headline": "Most Australian teens still online three months after under-16 ban, eSafety finds"
+    },
+    "ff3281098f75e16f": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-08-10",
+      "headline": "Global regulatory landscape update: Brazil, UK and US age-verification frameworks compared"
     }
   }
 }

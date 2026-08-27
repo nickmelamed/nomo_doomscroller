@@ -2,7 +2,8 @@
 
 A scheduled agent that reads a team-owned watchlist, monitors news for tracked
 competitors and partner prospects, scouts for new candidates, and posts a ranked digest
-to Slack every weekday morning. See [SPEC.md](SPEC.md) for the full design.
+to Slack Monday and Thursday mornings, each run covering the news since the last
+successful run. See [SPEC.md](SPEC.md) for the full design.
 
 The agent supports two interchangeable data-source backends, selected at runtime by
 `DATA_SOURCE`:
@@ -79,10 +80,15 @@ pytest
 
 ## Scheduling & go-live
 
-`.github/workflows/nomo_doomscroller.yml` runs the pipeline on a weekday cron
-(13:00 UTC ≈ 6:00am PT) and also exposes a manual `workflow_dispatch` trigger for
-testing. One-time setup, in the GitHub repo's **Settings → Secrets and variables →
-Actions**:
+`.github/workflows/nomo_doomscroller.yml` runs the pipeline on a twice-weekly cron
+(currently Monday/Thursday, 13:00 UTC ≈ 6:00am PT) and also exposes a manual
+`workflow_dispatch` trigger for testing. One-time setup, in the GitHub repo's
+**Settings → Secrets and variables → Actions**:
+
+To change which two days it runs, edit only the `cron:` schedule's day-of-week field
+in that workflow file — the gather window is computed dynamically from time since the
+last successful run (`main.py`'s `_effective_gather_config`), so no other file needs
+to change.
 
 - **Secrets** tab — add whichever set your active `DATA_SOURCE` needs (both sets can be
   populated at once, same as locally): `ANTHROPIC_API_KEY`, `SLACK_WEBHOOK_URL`, and

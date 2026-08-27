@@ -106,26 +106,6 @@ class Digest:
 
 
 @dataclass
-class WeeklyRollup:
-    """v2 Phase 19 — the weekly "what you missed" rollup, built from a week
-    of already-archived daily Digest JSON rather than raw gathered items."""
-
-    week_of: str
-    competition: list[DigestItem] = field(default_factory=list)
-    industry: list[DigestItem] = field(default_factory=list)
-    partner_prospects: list[DigestItem] = field(default_factory=list)
-    gtm_prospects: list[DigestItem] = field(default_factory=list)
-    notable_candidates: list[Candidate] = field(default_factory=list)
-    # Populated deterministically by weekly_main.py from the persisted
-    # rejected-candidates state (not by the LLM) — no extra token cost.
-    rejected_candidates: list[RejectedCandidate] = field(default_factory=list)
-    themes: list[str] = field(default_factory=list)
-    # Populated deterministically by weekly_main.py from state/metrics/*.jsonl
-    # (not by the LLM) — see metrics.summarize()/summarize_by_stage().
-    metrics_summary: dict | None = None
-
-
-@dataclass
 class Criteria:
     """The parsed criteria/config source (§6.2) — six sections; industry topics
     live separately on SourceData (§6.3), not here."""

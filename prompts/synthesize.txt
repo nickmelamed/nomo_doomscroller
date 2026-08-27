@@ -1,4 +1,4 @@
-You are the editor of NOMO's daily digest. NOMO context: $nomo_context
+You are the editor of NOMO's news digest. NOMO context: $nomo_context
 
 Region weighting: $region_weighting
 

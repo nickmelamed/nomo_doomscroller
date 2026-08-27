@@ -225,10 +225,13 @@ def _record_seen_stories(
 def _effective_gather_config(
     cfg: config.Config, pipeline_state: dict, now: datetime
 ) -> config.Config:
-    """v2 Phase 17: if the last successful run was longer ago than
-    NEWS_WINDOW_HOURS (e.g. a prior run failed outright), widen the
-    effective gather window to cover the gap instead of missing news that
-    fell between the two runs. No prior last_success -> unchanged."""
+    """v2 Phase 17: on the twice-weekly cadence (currently Mon/Thu — see
+    .github/workflows/nomo_doomscroller.yml), this is the routine mechanism
+    that makes each run's news window cover the gap since the last
+    successful run (Mon->Thu ~72h, Thu->Mon ~96h) — it also transparently
+    absorbs a longer gap from a prior outright failure, widening the
+    effective gather window to cover it instead of missing news that fell
+    between runs. No prior last_success -> unchanged."""
     last_success = pipeline_state.get("last_success")
     if not last_success:
         return cfg
@@ -236,11 +239,10 @@ def _effective_gather_config(
     if gap_hours <= cfg.news_window_hours:
         return cfg
     logger.info(
-        "run-gap recovery: last success %.1fh ago (> NEWS_WINDOW_HOURS=%d) — "
-        "widening gather window to %.1fh",
+        "widening gather window to cover the %.1fh since last success "
+        "(> NEWS_WINDOW_HOURS=%d)",
         gap_hours,
         cfg.news_window_hours,
-        gap_hours,
     )
     return dataclasses.replace(cfg, news_window_hours=int(gap_hours))
 

@@ -1,7 +1,12 @@
 name: NOMO Doomscroller
 on:
   schedule:
-    - cron: "0 13 * * 1-5"   # 13:00 UTC ≈ 6:00am PT, weekdays
+    # Runs twice a week — the gather window (main.py's _effective_gather_config)
+    # dynamically covers the gap since the last successful run, so it isn't tied
+    # to any particular two days. To change which days it runs, edit only the
+    # day-of-week field below (cron numbering: 0=Sun..6=Sat) — no code changes
+    # needed elsewhere.
+    - cron: "0 13 * * 1,4"   # 13:00 UTC ≈ 6:00am PT, Monday and Thursday
   workflow_dispatch: {}        # manual test runs
 permissions:
   contents: write   # needed to commit state/ back to the repo after a successful run

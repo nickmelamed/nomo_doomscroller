@@ -25,8 +25,8 @@ DEFAULT_METRICS_DIR = Path("state/metrics")
 # story isn't stuck behind an old rejection.
 REJECTION_SUPPRESSION_DAYS = 14
 # How long a rejected candidate stays in the persisted record at all (used
-# for the "worth a second look" reconsider list and the weekly rollup). Not
-# the same as the suppression window: a candidate can keep getting
+# for the "worth a second look" reconsider list). Not the same as the
+# suppression window: a candidate can keep getting
 # re-rejected and stay "fresh" here well past 14 days, as long as it keeps
 # resurfacing; it only drops out after 90 days with no fresh rejection.
 REJECTION_RETENTION_DAYS = 90
@@ -158,8 +158,8 @@ def append_metrics(
     calls: list[dict], run_date: date, dir: Path = DEFAULT_METRICS_DIR
 ) -> None:
     """Appends one JSON line per recorded API call to state/metrics/<date>.jsonl
-    — a day can have multiple runs (manual re-triggers, weekly rollup), so
-    this appends rather than overwrites like save_digest_archive does."""
+    — a day can have multiple runs (manual re-triggers), so this appends
+    rather than overwrites like save_digest_archive does."""
     if not calls:
         return
     dir.mkdir(parents=True, exist_ok=True)

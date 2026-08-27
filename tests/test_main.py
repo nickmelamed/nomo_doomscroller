@@ -389,6 +389,74 @@ def test_effective_gather_config_widens_window_after_a_stale_gap():
     assert effective.news_window_hours == 50
 
 
+def test_effective_gather_config_widens_for_mon_to_thu_gap():
+    from config import Config
+
+    cfg = Config(
+        anthropic_api_key="dummy",
+        anthropic_model="claude-sonnet-5",
+        data_source="sheets",
+        slack_webhook_url="dummy",
+        news_window_hours=24,
+        max_items_per_section=6,
+        monitor_existing_partners=False,
+        monitor_max_uses=3,
+        scout_max_uses=8,
+        synthesis_verbose_log=False,
+        github_repo=None,
+        google_sheets_id=None,
+        google_service_account_json=None,
+        sheets_url=None,
+        notion_api_key=None,
+        notion_watchlist_db_id=None,
+        notion_criteria_page_id=None,
+        notion_topics_db_id=None,
+        notion_partners_db_id=None,
+        notion_gtm_partners_db_id=None,
+        notion_db_url=None,
+    )
+    now = datetime(2026, 7, 30, 13, 0, tzinfo=timezone.utc)  # Thursday
+    mon_state = {"seen_stories": {}, "last_success": "2026-07-27T13:00:00+00:00"}  # Monday, 72h ago
+
+    effective = main._effective_gather_config(cfg, mon_state, now)
+
+    assert effective.news_window_hours == 72
+
+
+def test_effective_gather_config_widens_for_thu_to_mon_gap():
+    from config import Config
+
+    cfg = Config(
+        anthropic_api_key="dummy",
+        anthropic_model="claude-sonnet-5",
+        data_source="sheets",
+        slack_webhook_url="dummy",
+        news_window_hours=24,
+        max_items_per_section=6,
+        monitor_existing_partners=False,
+        monitor_max_uses=3,
+        scout_max_uses=8,
+        synthesis_verbose_log=False,
+        github_repo=None,
+        google_sheets_id=None,
+        google_service_account_json=None,
+        sheets_url=None,
+        notion_api_key=None,
+        notion_watchlist_db_id=None,
+        notion_criteria_page_id=None,
+        notion_topics_db_id=None,
+        notion_partners_db_id=None,
+        notion_gtm_partners_db_id=None,
+        notion_db_url=None,
+    )
+    now = datetime(2026, 8, 3, 13, 0, tzinfo=timezone.utc)  # the following Monday
+    thu_state = {"seen_stories": {}, "last_success": "2026-07-30T13:00:00+00:00"}  # Thursday, 96h ago
+
+    effective = main._effective_gather_config(cfg, thu_state, now)
+
+    assert effective.news_window_hours == 96
+
+
 def test_effective_gather_config_unchanged_within_normal_gap():
     from config import Config
 

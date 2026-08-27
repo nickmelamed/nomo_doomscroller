@@ -1,8 +1,8 @@
 """Cross-cutting call telemetry: latency, token usage, and estimated cost for
 every Anthropic API call the pipeline makes. Global collector (like the
 stdlib `logging` module) so call sites don't need to thread a collector
-object through every function signature — main.py/weekly_main.py drain it
-once at the end of a run and persist to state/metrics/YYYY-MM-DD.jsonl."""
+object through every function signature — main.py drains it once at the end
+of a run and persists to state/metrics/YYYY-MM-DD.jsonl."""
 
 from __future__ import annotations
 

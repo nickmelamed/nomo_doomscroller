@@ -1,6 +1,6 @@
 # Build Spec — NOMO Doomscroller (Competition · Industry · Partner Scouting → Slack)
 
-A scheduled agent that every weekday morning reads a team-owned watchlist, monitors news for the tracked entities, scouts the web for *new* competitors and partner prospects, and posts a ranked, sectioned digest to Slack. The watchlist is data the team owns and edits; the agent is stateless logic that reads it at runtime. Internally nicknamed **Doomscroller** — it doomscrolls so the team doesn't have to.
+A scheduled agent that runs Monday and Thursday mornings, reads a team-owned watchlist, monitors news for the tracked entities since the last run, scouts the web for *new* competitors and partner prospects, and posts a ranked, sectioned digest to Slack. The watchlist is data the team owns and edits; the agent is stateless logic that reads it at runtime. Internally nicknamed **Doomscroller** — it doomscrolls so the team doesn't have to.
 
 **Data source:** the agent reads from either **Google Sheets** or **Notion**, chosen at runtime by one config flag (`DATA_SOURCE`) — see §6.0. **v1 runs on Sheets**, since NOMO can't grant Notion workspace access while they're mid-reconfiguration; the Notion path is built in parallel, to the same contract, so switching later is a config change, not a rewrite.
 
@@ -10,11 +10,11 @@ A scheduled agent that every weekday morning reads a team-owned watchlist, monit
 
 **v1 (this spec):**
 - Read a **watchlist** (competitors, partner prospects, exclusions), a **criteria/config page**, and a **partners source** (read-only, for exclusions and reward-landscape context) at runtime — no hardcoded lists. Backed by **Google Sheets in v1**, with a parallel **Notion** implementation built to the same contract for a later switch (§6.0).
-- **Monitoring pass:** find last-24h news for each active tracked entity, plus standalone industry-trend news (policy, litigation, funding) not tied to any single tracked entity.
+- **Monitoring pass:** find news since the last successful run for each active tracked entity (Monday's run covers Thursday–Sunday; Thursday's run covers Monday–Wednesday — see §12), plus standalone industry-trend news (policy, litigation, funding) not tied to any single tracked entity.
 - **Scouting pass:** discover *new* candidate competitors and partner prospects that aren't tracked yet.
 - **Synthesize** a sectioned, ranked digest with a hard relevance bar (says "quiet day" instead of padding).
 - **Post to Slack** with a footer showing what's tracked and a link to manage the list.
-- Run on a **daily schedule**.
+- Run **twice a week (currently Monday and Thursday)**, with each run's news window dynamically covering the gap since the last successful run rather than a fixed lookback (§12).
 
 **Non-goals for v1 (see §14):** writing back to the watchlist from Slack, interactive buttons, a slash command. Discovered candidates are *surfaced for a human to approve*, never auto-added.
 
@@ -458,7 +458,12 @@ NOTION_DB_URL                # for the "manage the list" footer link
 name: NOMO Doomscroller
 on:
   schedule:
-    - cron: "0 13 * * 1-5"   # 13:00 UTC ≈ 6:00am PT, weekdays
+    # Runs twice a week — the gather window (main.py's _effective_gather_config)
+    # dynamically covers the gap since the last successful run, so it isn't tied
+    # to any particular two days. To change which days it runs, edit only the
+    # day-of-week field below (cron numbering: 0=Sun..6=Sat) — no code changes
+    # needed elsewhere.
+    - cron: "0 13 * * 1,4"   # 13:00 UTC ≈ 6:00am PT, Monday and Thursday
   workflow_dispatch: {}        # manual test runs
 jobs:
   run:
@@ -493,7 +498,7 @@ Keeping both credential sets populated as secrets from day one means switching `
 
 - **Resilience:** one entity or discovery call failing must not abort the run — log and continue with partial results.
 - **Relevance bar:** enforced in both gather and synthesis; empty results are valid and produce a quiet-day post rather than filler.
-- **Freshness:** respect `NEWS_WINDOW_HOURS`; dedupe by URL + near-duplicate headline.
+- **Freshness:** each run's effective window is the greater of `NEWS_WINDOW_HOURS` (default 24h) and the actual time since the last successful run — on the Mon/Thu cadence this naturally covers the ~72h Mon→Thu gap and the ~96h Thu→Mon gap without a fixed schedule-aware config; dedupe by URL + near-duplicate headline.
 - **Source quality:** prefer primary sources; the prompts explicitly deprioritize listicles/SEO content.
 - **No fabrication:** URLs must come from search results; discard any item whose URL wasn't returned by the tool.
 - **Observability:** log per-stage counts (entities scanned, items found, candidates surfaced, items after filtering) to stdout for the Actions log.

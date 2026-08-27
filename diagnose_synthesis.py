@@ -2,8 +2,11 @@
 logging forced on, printed to stdout. Never posts to the real Slack channel —
 Stage 6 only runs, against a separate SLACK_PREVIEW_WEBHOOK_URL, if that env
 var is explicitly set (e.g. a private test channel's webhook); left unset,
-this is exactly as safe to run repeatedly as before. See the v2 plan, Phase
-10, and the visual/content-preview follow-up.
+this is exactly as safe to run repeatedly as before. Uses the same gap-
+recovery window logic as main.py (_effective_gather_config) against the real
+persisted state, so a stale/short gap since the last real run is reflected
+here too — not just when the real pipeline runs. See the v2 plan, Phase 10,
+and the visual/content-preview follow-up.
 """
 
 from __future__ import annotations
@@ -11,14 +14,16 @@ from __future__ import annotations
 import dataclasses
 import logging
 import os
+from datetime import datetime, timezone
 
 import anthropic
 
 import config
 import slack_render
+import state as state_module
 import synthesize
 from gather import run_gather
-from main import _dedup_and_split, filter_candidates, load_source_data
+from main import _dedup_and_split, _effective_gather_config, filter_candidates, load_source_data
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +33,21 @@ def main() -> None:
     client = anthropic.Anthropic(api_key=cfg.anthropic_api_key)
 
     source_data = load_source_data(cfg)
-    monitoring_items, industry_items, candidates = run_gather(client, source_data, cfg)
+
+    try:
+        pipeline_state = state_module.load_state()
+    except Exception:
+        logger.exception("failed to load persisted state — continuing with empty state")
+        pipeline_state = {"seen_stories": {}, "last_success": None}
+
+    gather_cfg = _effective_gather_config(cfg, pipeline_state, datetime.now(timezone.utc))
+    if gather_cfg.news_window_hours != cfg.news_window_hours:
+        print(
+            f"\n(gap recovery: widening gather window to {gather_cfg.news_window_hours}h, "
+            "same as a real run would)"
+        )
+
+    monitoring_items, industry_items, candidates = run_gather(client, source_data, gather_cfg)
     deduped_monitoring, deduped_industry = _dedup_and_split(monitoring_items, industry_items)
     filtered_candidates = filter_candidates(candidates, source_data)
 

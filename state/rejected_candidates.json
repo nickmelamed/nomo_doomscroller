@@ -1,4 +1,19 @@
 {
+  "ambetter (centene) my health pays": {
+    "category": "Health insurer wellness-incentive program",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Ambetter (Centene) My Health Pays",
+    "reason": "duplicate-check placeholder",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.healthinsurance.org/obamacare/aca-health-plans-increasingly-offer-wellness-incentives/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Ambetter's My Health Pays program already pays members points redeemable for real-world value for completing wellness behaviors, demonstrating an insurer with live points-for-behavior infrastructure and budget for digital-wellness incentives \u2014 a genuine, currently-untapped gap in NOMO's insurance GTM vertical (owned by Jo\u00e3o) where no partner exists yet."
+  },
   "american youth soccer organization (ayso)": {
     "category": "Youth Sports & Athletic League",
     "confidence": "medium",
@@ -49,12 +64,12 @@
     "confidence": "medium",
     "first_rejected": "2026-08-31",
     "last_rejected": "2026-08-31",
-    "last_shown": null,
+    "last_shown": "2026-09-03",
     "name": "Aura",
     "reason": "Core product is monitoring/data reporting, not gamified rewards; weak product overlap versus NOMO's core competitor bar.",
     "region": "US",
     "reject_count": 1,
-    "shown_count": 0,
+    "shown_count": 1,
     "source_url": "https://www.aura.com/reports/state-of-the-youth-2026-digital-wellbeing-index",
     "suggested_type": "Competitor",
     "why_fits": "Aura is positioning itself as a thought-leader and data authority on teen digital wellbeing, competing for the same school/family mindshare and potential EdTech/parent partnerships NOMO targets. <cite index=\"32-1\">This 2026 State of the Youth report introduces the Digital Wellbeing Index (DWI), showing how sleep, stress, and everyday phone habits shape kids' wellbeing</cite>, and its findings show <cite index=\"32-13,32-14\">more than 60% of 16\u201317-year-olds fall into the low digital wellbeing category, while among children ages 8\u201315, fewer than 40% fall into that range</cite> \u2014 the exact teen cohort NOMO serves, making Aura a competitor for attention, data credibility, and possibly school partnerships even though its core product is monitoring rather than gamified rewards."
@@ -74,17 +89,32 @@
     "suggested_type": "Competitor",
     "why_fits": "Screen time app that gamifies focus with streaks/XP and offers tangible rewards for reducing screen time."
   },
+  "blok": {
+    "category": "Physical app blocker device",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Blok",
+    "reason": "Medium confidence; duplicative hardware-blocker concept already covered by Bloom.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.blok.so/resources/best-app-blockers-2026",
+    "suggested_type": "Competitor",
+    "why_fits": "A physical NFC-device app blocker positioned as a direct rival to Brick (already tracked) in the same hardware-enforced screen-time-reduction category, indicating the physical-blocker segment adjacent to NOMO's space is getting more crowded."
+  },
   "blue cross and blue shield of illinois (with national fitness campaign)": {
     "category": "Insurance / school wellness distribution",
     "confidence": "medium",
     "first_rejected": "2026-08-31",
     "last_rejected": "2026-08-31",
-    "last_shown": null,
+    "last_shown": "2026-09-03",
     "name": "Blue Cross and Blue Shield of Illinois (with National Fitness Campaign)",
     "reason": "Centers on fitness-court hardware/infrastructure funding, not digital wellness or screen-time; vague alignment to NOMO's product.",
     "region": "US",
     "reject_count": 1,
-    "shown_count": 0,
+    "shown_count": 1,
     "source_url": "https://www.bcbsil.com/newsroom/news-releases/2026/kewanee-schools-fitness-court",
     "suggested_type": "GTM partner prospect",
     "why_fits": "BCBSIL just partnered with a school district and National Fitness Campaign to fund digital wellness programming and free fitness infrastructure at a high school \u2014 a live example of the exact insurer + school wellness-benefit pattern NOMO's Insurance GTM vertical targets."
@@ -109,12 +139,12 @@
     "confidence": "medium",
     "first_rejected": "2026-08-31",
     "last_rejected": "2026-08-31",
-    "last_shown": null,
+    "last_shown": "2026-09-03",
     "name": "Blue365 (Blue Cross Blue Shield member wellness discount marketplace)",
     "reason": "Redundant with the Oscar Unlocks insurance-vertical candidate; less concrete product analog.",
     "region": "US",
     "reject_count": 1,
-    "shown_count": 0,
+    "shown_count": 1,
     "source_url": "https://ilhealthagents.com/carriers/bluecross-blueshield-illinois/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "BCBS's Blue365 program already distributes health and wellness discounts/perks to millions of covered members and families, offering a ready-made digital-wellness distribution channel that fits the Insurance GTM vertical's need for a wellness-platform tie-in without requiring a net-new benefit build."
@@ -139,12 +169,12 @@
     "confidence": "medium",
     "first_rejected": "2026-08-10",
     "last_rejected": "2026-08-10",
-    "last_shown": null,
+    "last_shown": "2026-09-03",
     "name": "Boys & Girls Clubs of America",
     "reason": "Partnership is about storytelling/career exposure, not screen-time or digital wellness; vague fit, medium confidence.",
     "region": "US",
     "reject_count": 1,
-    "shown_count": 0,
+    "shown_count": 1,
     "source_url": "https://app.fundz.net/agreements/boys-girls-clubs-of-america-contract-72ef6e",
     "suggested_type": "GTM partner prospect",
     "why_fits": "BGCA just announced a new two-year partnership with Versant Media Group focused on youth-centered storytelling and career exposure, showing BGCA is actively signing brand/media partnerships at the national level right now \u2014 a concrete, timely entry point for Eric's direct-relationship GTM motion into youth orgs beyond the generic example already listed."
@@ -163,6 +193,21 @@
     "source_url": "https://boysandgirlsclub.com/supporting-healthy-minds-empowering-great-futures/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "BGCA just expanded 'BGC Mindful,' a national mental-wellbeing strategy for members launched in January and scaling through 2026, showing an active, well-funded appetite for youth digital/mental wellness programming that NOMO's rewards model could plug into."
+  },
+  "brainrot (screen time control)": {
+    "category": "Screen-time gamification app",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Brainrot (Screen Time Control)",
+    "reason": "Medium confidence, niche visual-gimmick app; marginal relevance versus stronger tracked competitor analogs already selected.",
+    "region": "Other",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://mwm.ai/apps/brainrot-screen-time-control/6744338972",
+    "suggested_type": "Competitor",
+    "why_fits": "Brainrot gamifies reduced screen time with a decay mechanic: <cite index=\"41-6\">it provides a unique visual nudge with a 'cute brain avatar' that physically decays as users engage in excessive screen time, offering immediate and playful feedback to encourage mindful usage</cite>, placing it in the same behavior-gamification space as NOMO."
   },
   "city of dallas parks & recreation department": {
     "category": "Municipality",
@@ -239,6 +284,21 @@
     "suggested_type": "Rewards partner prospect",
     "why_fits": "Culture Pass is a teen-eligible (13+) municipal-adjacent rewards inventory source: it is \"a program for cardholding patrons 13 and older of Brooklyn Public Library, New York Public Library and Queens Public Library\" that lets New Yorkers \"reserve a pass and get free admission to dozens of NYC cultural institutions, including museums.\" This mirrors NOMO's museum-ticket/city-pass reward category (like GetYourGuide/Fever) but is not currently in NOMO's partner lineup, and its library/city backing also gives it secondary relevance as a Municipalities GTM entry point."
   },
+  "dairy queen": {
+    "category": "QSR treat reward (tradeable, app-redeemable)",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": "2026-09-03",
+    "name": "Dairy Queen",
+    "reason": "Redundant QSR reward type already covered by the higher-confidence Chipotle candidate.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 1,
+    "source_url": "https://beta.dealseek.com/deal-news/national-ice-cream-day-deals-freebies-2026",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "Dairy Queen offers a low-cost, app-redeemable free treat exactly like NOMO's existing McDonald's ice-cream cone partnership, making it a natural, realistic addition to the tradeable reward inventory for a teen/Gen Z audience. Current 2026 promotions show Dairy Queen's free Dilly Bar, Wendy's free Frosty and 16 Handles' free treat all require you to order or redeem through the brand's mobile app, indicating these QSR brands already have app-based reward redemption infrastructure that would integrate cheaply with NOMO's rewards catalog."
+  },
   "dallas park & recreation \"teen all access pass\" program": {
     "category": "Municipality youth-access program",
     "confidence": "high",
@@ -253,6 +313,21 @@
     "source_url": "https://www.aol.com/news/free-state-fair-texas-admission-033550615.html",
     "suggested_type": "GTM partner prospect",
     "why_fits": "A city-run program giving Dallas ISD teens free/discounted access to attractions like the State Fair of Texas \u2014 a direct municipal decision-maker relationship (Leo's Municipalities vertical) that mirrors NOMO's real-world reward model."
+  },
+  "dallas park & recreation teen all access pass program": {
+    "category": "Municipality",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Dallas Park & Recreation Teen All Access Pass Program",
+    "reason": "Redundant with Dave & Buster's coverage of the same Dallas Teen All-Access Pass program; medium confidence, narrower standalone signal.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.aol.com/news/free-state-fair-texas-admission-033550615.html",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "<cite index=\"59-8,59-9\">The Teen All Access Pass is administered by Dallas Park and Recreation and is designed to provide young students with free or discounted access to cultural, recreational and educational opportunities across the city</cite>, an active municipal teen-engagement program model directly matching NOMO's Municipalities GTM vertical."
   },
   "dallas park & recreation \u2013 teen all access pass (with state fair of texas)": {
     "category": "Municipality teen rewards/access program",
@@ -374,6 +449,21 @@
     "suggested_type": "GTM partner prospect",
     "why_fits": "Digital Virgo just expanded its telco direct-carrier-billing distribution model, launching Sandbox Group's cognitive-wellness app Focus across new markets \u2014 proving a repeatable playbook for embedding a teen/wellness app directly into carrier ecosystems, exactly the distribution motion Leo's Telco/MVNO vertical needs."
   },
+  "doomfree": {
+    "category": "Screen time gamification app",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "DoomFree",
+    "reason": "Medium confidence; duplicative habit-for-screen-time-coins mechanic already covered by higher-confidence competitor picks.",
+    "region": "All",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://apps.apple.com/app/id6758745692",
+    "suggested_type": "Competitor",
+    "why_fits": "DoomFree blocks addictive apps and issues coins for completing real-world habits that unlock screen time, with a companion mascot and streak rewards \u2014 a close gamified-screen-time-reduction competitor to NOMO's Moments system."
+  },
   "doorman": {
     "category": "App block / classroom phone-limiting tech",
     "confidence": "high",
@@ -390,19 +480,19 @@
     "why_fits": "A school-focused app-blocking competitor gaining pilot traction with a municipal school district; Watertown Public Schools 'partnered with software company Doorman on an app that links to compatible tap targets located on the door of each classroom' so that tapping a phone 'will disable the apps of their phone and the messaging app for the duration of that class' \u2014 direct overlap with NOMO's school/EdTech GTM motion and the 'app block' competitor criterion."
   },
   "flipd": {
-    "category": "Screen time / focus gamification app",
-    "confidence": "high",
+    "category": "Gamified focus/digital detox app with social leaderboard",
+    "confidence": "medium",
     "first_rejected": "2026-08-04",
-    "last_rejected": "2026-08-04",
+    "last_rejected": "2026-09-03",
     "last_shown": "2026-08-04",
     "name": "Flipd",
-    "reason": "not rejected",
-    "region": "All",
-    "reject_count": 1,
+    "reason": "Medium confidence, generic gamified focus app; largely duplicative of closer analogs already selected (BePresent, Lockin).",
+    "region": "US",
+    "reject_count": 2,
     "shown_count": 1,
-    "source_url": "https://linkdot.io/best-focus-apps/",
+    "source_url": "https://www.appswerecommend.com/best-digital-detox-apps",
     "suggested_type": "Competitor",
-    "why_fits": "Flipd directly matches NOMO's core mechanics of social accountability, leaderboards and challenges around reduced phone use: it offers phone-locking focus sessions plus \"social accountability... with focus rooms where thousands of people are working at the same time\" and \"competition boards.\" Reviews also note \"Leaderboards: Weekly rankings of users by total focus time\" and public commitment features shared on a user's profile, putting it in direct competitive overlap with NOMO's challenge/leaderboard model."
+    "why_fits": "Flipd gamifies reduced screen time via shared sessions and competition, closely mirroring NOMO's social accountability and leaderboard mechanics. Reviews note it offers a Pomodoro timer and group challenges that let you compete with friends or coworkers, and the social leaderboard adds a rare competitive edge to digital detoxing. It is not on NOMO's current tracked competitor list despite fitting the gamified screen-reduction criteria squarely."
   },
   "gabb wireless": {
     "category": "US Telcos & MVNOs (kid-safe phone/MVNO)",
@@ -494,6 +584,21 @@
     "suggested_type": "GTM partner prospect",
     "why_fits": "<cite index=\"25-6,25-7\">Guardian Life Insurance Company has embarked on partnerships with health and wellness services as part of a strategic focus on member well-being, extending Group Benefits members access to curated wellness content from partners like Peloton through its GuardianWell platform</cite>. Guardian's model of bundling third-party wellness apps (Peloton, Uber Health, Osara Health) into an employer-benefit wellness hub shows exactly the kind of 'digital-wellness fit' distribution slot NOMO could occupy \u2014 a gap since no insurer is yet in NOMO's GTM lineup."
   },
+  "habit doom": {
+    "category": "Screen time gamification app",
+    "confidence": "high",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": "2026-09-03",
+    "name": "Habit Doom",
+    "reason": "Duplicative of other habit-gated screen-time apps already represented by stronger picks (Lockin, momnt.).",
+    "region": "All",
+    "reject_count": 1,
+    "shown_count": 1,
+    "source_url": "https://apps.apple.com/mk/app/habit-doom-anti-doomscroll/id6757255783",
+    "suggested_type": "Competitor",
+    "why_fits": "A habit-gated screen time app that locks distracting apps until users complete real-world habits, directly competing on the 'earn screen time through behavior' model NOMO uses."
+  },
   "health insurer / wellness-app partnership trend (sector signal)": {
     "category": "Insurance \u2014 digital wellness partnerships",
     "confidence": "medium",
@@ -538,6 +643,21 @@
     "source_url": "https://www.edweek.org/technology/nations-2nd-largest-district-moves-to-limit-student-screen-use/2026/04",
     "suggested_type": "GTM partner prospect",
     "why_fits": "LAUSD, already named as a target account in NOMO's education vertical, just made a major policy move: <cite index=\"28-4,28-5,28-6\">the second-largest school district in the country will scale back classroom screen use under a resolution requiring the district to develop a screen time policy for implementation in the 2026-27 school year, including maximum in-school screen time limits by grade level</cite>. This creates a timely, high-visibility procurement opening for NOMO's direct district GTM motion, which currently has no listed implementation partners."
+  },
+  "little league baseball / llws": {
+    "category": "Youth Sports & Athletic League",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Little League Baseball / LLWS",
+    "reason": "Medium confidence; youth sports vertical adequately represented elsewhere; sponsorship signal not specific enough to NOMO's reward/GTM model.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://youthsportsbusinessreport.com/youth-sports-sponsorship-on-display-19-brands-activate-at-2026-little-league-world-series-fan-zone/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Little League now runs a portfolio of 25+ Official Sponsors reaching roughly two million players and one million volunteers, and just launched a Fan Pass system built into its official app that gates prizes behind first-party fan registration \u2014 exactly the large-roster, app-embedded activation model NOMO could plug Moments/rewards into via the Youth Sports GTM vertical."
   },
   "lock&stock": {
     "category": "Rewards/gamified phone-free app for students",
@@ -644,6 +764,21 @@
     "suggested_type": "Rewards partner prospect",
     "why_fits": "The Culture Pass program spans over 90 partner museums, giving free entry to institutions like the New-York Historical Society and El Museo del Barrio \u2014 exactly the type of tradeable, teen-friendly 'museum tickets/city pass' inventory NOMO already uses with partners like Fever."
   },
+  "nyc culture pass (new york public library)": {
+    "category": "City cultural-access pass program",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "NYC Culture Pass (New York Public Library)",
+    "reason": "Exact duplicate of the Culture Pass NYC candidate (same program, same underlying concept).",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://nyckidsweek.com/free-passes",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "Culture Pass is a city-backed, tradeable ticket-inventory program spanning dozens of venues, matching the 'museum tickets/city green pass' reward criteria: <cite index=\"26-9,26-10\">any NYC resident can get a free library card, used to access Culture Pass and reserve free day passes to 100+ museums and venues</cite>, offering a scalable, low-cost reward pipeline beyond NOMO's current museum partners."
+  },
   "oscar health (\"oscar unlocks\")": {
     "category": "Insurance (Distribution Partner / Direct)",
     "confidence": "medium",
@@ -658,6 +793,21 @@
     "source_url": "https://www.healthinsurance.org/obamacare/aca-health-plans-increasingly-offer-wellness-incentives/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "Oscar's new 2026 \"Oscar Unlocks\" rewards program lets members earn badges, perks, and rewards for healthy behaviors, illustrating exactly the kind of digital-wellness-fit insurer program NOMO's insurance vertical is meant to tap for distribution."
+  },
+  "oscar health (oscar unlocks)": {
+    "category": "Insurance / digital-wellness rewards program",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Oscar Health (Oscar Unlocks)",
+    "reason": "Redundant with the stronger insurance-vertical candidate (Ambetter), which has more concrete points-for-behavior mechanics; medium confidence.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.healthinsurance.org/obamacare/aca-health-plans-increasingly-offer-wellness-incentives/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Oscar launched 'Oscar Unlocks' in 2026, a rewards program where members earn badges, perks, and rewards for healthy behaviors \u2014 a digital-wellness-fit insurer actively building incentive infrastructure, matching Jo\u00e3o's insurance-vertical GTM motion (distribution partner / direct)."
   },
   "pinwheel": {
     "category": "US Telco/MVNO (teen-safe device distribution)",
@@ -734,6 +884,36 @@
     "suggested_type": "Competitor",
     "why_fits": "Qoria's Linewize/Qustodio suite is being pushed to districts for back-to-school 2026 as a family-engagement and digital-wellbeing tool bundled with filtering, directly competing for the same school-district budget and relationships NOMO targets via its 6-12 Education vertical."
   },
+  "repsforreels": {
+    "category": "Screen time gamification app",
+    "confidence": "high",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": "2026-09-03",
+    "name": "RepsForReels",
+    "reason": "Duplicative of other exercise/habit-gated screen-time-unlock apps already represented (Lockin, momnt.).",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 1,
+    "source_url": "https://repsforreels.app/",
+    "suggested_type": "Competitor",
+    "why_fits": "A newly launched app blocker that directly rewards users with screen time for completing real-world actions (AI-verified exercise), matching NOMO's core mechanic of rewarding offline behavior with unlocked access/benefits. It explicitly blocks TikTok/Instagram/YouTube until a behavior goal is met, positioning it as a gamified screen-time-reduction competitor."
+  },
+  "rogers 'screen break' (with ymca)": {
+    "category": "Telco-funded youth screen-balance program",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Rogers 'Screen Break' (with YMCA)",
+    "reason": "Region Other/Canada is exploratory-only; more a GTM-model signal than a direct product competitor; medium confidence insufficient to override weak region fit.",
+    "region": "Other",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.barchart.com/story/news/36943422/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time",
+    "suggested_type": "Competitor",
+    "why_fits": "Canadian telco Rogers launched Screen Break, a national program addressing youth screen time, naming YMCA as its first national partner and funding youth organizations to promote screen balance \u2014 this is the exact telco-plus-youth-org distribution model NOMO is pursuing (US Telcos/MVNOs and Faith-based & Youth Orgs verticals), signaling a rival already locking in a comparable partner (YMCA) in another market."
+  },
   "rogers communications": {
     "category": "Telco-funded youth screen-time program",
     "confidence": "medium",
@@ -794,6 +974,21 @@
     "suggested_type": "Rewards partner prospect",
     "why_fits": "A multi-entertainment chain offering arcade games, bowling, karaoke and billiards \u2014 a social, in-person experience category (arcade/bowling) that's completely absent from NOMO's current reward lineup of concerts, sports tickets, and apps, and fits a realistic, teen-friendly, location-based redemption model similar to the McDonald's tie-up."
   },
+  "s'moresup": {
+    "category": "Chore/screen-time reward app for families",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "S'moresUp",
+    "reason": "Medium confidence; duplicative chore/screen-time reward mechanic already covered by other selected candidates.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://timily.app/guides/earn-screen-time-app/",
+    "suggested_type": "Competitor",
+    "why_fits": "S'moresUp ties earned points directly to screen time and rewards, functioning as a reward-for-behavior competitor: <cite index=\"43-1,43-2\">kids earn points for completing chores, and those points can be exchanged for screen time, allowance, or custom rewards, with a goal-setting feature for longer-term objectives</cite>."
+  },
   "san diego unified school district": {
     "category": "K-12 school district (phone-free policy)",
     "confidence": "medium",
@@ -808,6 +1003,21 @@
     "source_url": "https://www.sandiegounified.org/about/newscenter/all_news/s_d_unified_implements_phone-_free_policy",
     "suggested_type": "GTM partner prospect",
     "why_fits": "San Diego Unified approved a phone-free school day policy for 2025-26, with the state requiring all California public districts to adopt similar policies by July 1, 2026 \u2014 creating a large, structured procurement window for accountability/rewards tools that fits NOMO's 6-12 Education vertical (owned by Jo\u00e3o)."
+  },
+  "santa fe public schools (digital wellness resolution / trading card initiative)": {
+    "category": "6\u201312 Education \u2014 District digital wellness incentive program",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Santa Fe Public Schools (Digital Wellness Resolution / Trading Card Initiative)",
+    "reason": "Single-district pilot with modest scale; medium confidence; education/policy vertical already reflected by stronger candidates.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.sfps.info/article/2881509",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "This district just rolled out its own gamified, incentive-based digital wellness program districtwide, showing exactly the kind of structured procurement and appetite for screen-time incentive programs NOMO's education vertical targets. The digital wellness initiative was developed through the leadership and vision of SFPS Board of Education President Kate Noble and Vice President Sarah Boses, who brought forward the Digital Wellness Resolution to the Board in December 2025. Since NOMO's GTM/implementation partner lineup is currently empty, a district already investing in student-facing screen-time incentives is a genuine outreach gap versus building an in-house card program."
   },
   "screen time buddy": {
     "category": "Gamified screen-time app with social accountability",
@@ -884,6 +1094,21 @@
     "suggested_type": "Rewards partner prospect",
     "why_fits": "The State Fair of Texas newly joined a city teen-pass program, providing free admission to teens, indicating willingness to offer ticket-based inventory to teen engagement programs \u2014 a strong parallel to NOMO's museum/event ticket reward categories."
   },
+  "state fair of texas / dallas teen all access pass": {
+    "category": "Attraction/event ticket reward",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": "2026-09-03",
+    "name": "State Fair of Texas / Dallas Teen All Access Pass",
+    "reason": "Narrow, single annual-event reward; redundant with Dave & Buster's coverage of the same Dallas program.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 1,
+    "source_url": "https://www.aol.com/news/free-state-fair-texas-admission-033550615.html",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "The State Fair of Texas just agreed to offer free admission to Dallas ISD teens via the city's Teen All Access Pass program, showing a major attraction willing to trade tickets for teen engagement/access \u2014 directly analogous to NOMO's existing museum/ticket reward partners (Fever, GetYourGuide) and a concrete, realistic-to-deal-with inventory source not yet in NOMO's lineup."
+  },
   "t-mobile x boys & girls clubs of america (project 10million)": {
     "category": "US Telco distribution + Youth Org hybrid",
     "confidence": "medium",
@@ -913,6 +1138,21 @@
     "source_url": "https://apps.apple.com/app/id6759011242",
     "suggested_type": "Competitor",
     "why_fits": "New app explicitly targeting tweens/teens (9-17) with a collaborative family media plan replacing pure enforcement apps, launching right as the AAP dropped hard screen-time limits in Jan 2026 \u2014 a direct positioning competitor in the teen screen-time space."
+  },
+  "tap: tech activity pact": {
+    "category": "Family screen time / teen behavior app",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "TAP: Tech Activity Pact",
+    "reason": "Medium confidence, generic family screen-time pact app; duplicative of closer competitor analogs already selected.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://apps.apple.com/ie/app/tap-tech-activity-pact/id6759011242",
+    "suggested_type": "Competitor",
+    "why_fits": "A newly launched teen-focused screen time app built around negotiated family 'pacts' rather than pure enforcement, explicitly targeting the same 9-17 age demo as NOMO and riding the same tailwind (AAP's Jan 2026 policy shift away from hard limits). It's a social-accountability/behavior-contract competitor in the school-age screen time space."
   },
   "teen arts pass (tap) \u2013 chicago": {
     "category": "Arts & culture ticket pass (teen-focused)",
@@ -1020,34 +1260,49 @@
     "why_fits": "TikTok added badges and rewards for teens who avoid the app at night, stay within daily limits, and encourage others to participate \u2014 a direct gamification of reduced-usage behavior aimed at the same teen demographic NOMO targets."
   },
   "timily": {
-    "category": "Reward-first screen-time/points economy app",
+    "category": "Reward-based screen time app",
     "confidence": "medium",
     "first_rejected": "2026-08-04",
-    "last_rejected": "2026-08-04",
+    "last_rejected": "2026-09-03",
     "last_shown": null,
     "name": "Timily",
-    "reason": "Redundant with Dayo and other reward-gamification screen-time competitors already covered; medium confidence, generic why_fits.",
+    "reason": "Medium confidence, generic family screen-time reward app; duplicative of other gamified screen-time competitors already represented (BePresent, Dayo).",
     "region": "US",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 0,
     "source_url": "https://timily.app/guides/earn-screen-time-app/",
     "suggested_type": "Competitor",
-    "why_fits": "Timily is <cite index=\"6-3,6-4\">a reward-first parental tool built around a simple premise: kids earn screen time, allowance, and other rewards by completing focus sessions, chores, and daily challenges, designed from the ground up as a motivation system rather than starting with blocking</cite>. This points-for-behavior gamification model directly competes with NOMO's Moments/rewards mechanic for the teen/family screen-time category."
+    "why_fits": "<cite index=\"18-11,18-12,18-13,18-14\">Timily is a reward-first parental tool built around kids earning screen time, allowance, and other rewards by completing focus sessions, chores, and daily challenges, using a points-based economy where parents define tasks and unlockable rewards.</cite> This gamified reward-for-reduced-screen-time model mirrors NOMO's core mechanic."
   },
   "topgolf": {
     "category": "Entertainment/experiential rewards",
     "confidence": "medium",
     "first_rejected": "2026-08-31",
     "last_rejected": "2026-08-31",
-    "last_shown": null,
+    "last_shown": "2026-09-03",
     "name": "Topgolf",
     "reason": "Too similar to the Dave & Buster's reward-partner candidate; same arcade/entertainment-venue gap already filled.",
     "region": "US",
     "reject_count": 1,
-    "shown_count": 0,
+    "shown_count": 1,
     "source_url": "https://youthsportsbusinessreport.com/topgolf-and-first-tee-renew-youth-golf-partnership-with-20-discount-through-december/",
     "suggested_type": "Rewards partner prospect",
     "why_fits": "Topgolf just renewed a youth-focused partnership offering discounted bay access/gameplay to teen members of Youth on Course through 25+ venues, showing it actively structures tradeable, teen-friendly experiential reward inventory (venue access/discounts) similar to NOMO's existing McDonald's/experience-based rewards."
+  },
+  "unitedhealthcare (student behavioral health initiative)": {
+    "category": "Insurance / Employer-Benefit Wellness",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "UnitedHealthcare (student behavioral health initiative)",
+    "reason": "Weaker fit \u2014 centers on therapist access rather than rewards/points mechanics; redundant with the stronger insurance candidate (Ambetter).",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://mgmtdigital.com/youth-mental-health-trends-2026/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "<cite index=\"43-11\">A UnitedHealthcare initiative aims to serve one million students by 2026, funneling them to licensed therapists without parental work-hour disruptions</cite>, indicating a large insurer actively building student-focused digital wellness infrastructure \u2014 a strong fit for NOMO's insurance distribution vertical."
   },
   "unpluq": {
     "category": "App-block / screen-time reduction hardware+app",
@@ -1080,19 +1335,19 @@
     "why_fits": "US Telco already partnered with a digital-wellness nonprofit (Screen Sanity) on a 'US Mode' healthier-tech-relationship initiative and basic-phone offer for families, showing a US carrier already engaging the exact vertical NOMO wants for telco distribution."
   },
   "verizon": {
-    "category": "US Telco (Distribution Partner vertical)",
+    "category": "US Telco / Distribution Partner",
     "confidence": "medium",
     "first_rejected": "2026-08-05",
-    "last_rejected": "2026-08-05",
+    "last_rejected": "2026-09-03",
     "last_shown": null,
     "name": "Verizon",
-    "reason": "Medium confidence; why_fits relies on speculative framing ('no gamified reward partner yet') rather than concrete evidence of telco appetite for a rewards mechanic like NOMO's.",
+    "reason": "Duplicate entity \u2014 same company as the higher-confidence Verizon Digital Wellness Initiatives candidate already kept.",
     "region": "US",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 0,
-    "source_url": "https://markets.financialcontent.com/pennwell.elp/article/gnwcq-2025-3-6-verizon-tells-customers-to-put-the-phone-down",
+    "source_url": "https://finance.yahoo.com/media-advertising/articles/verizon-rewards-loyalty-stokes-engagement-154049281.html",
     "suggested_type": "GTM partner prospect",
-    "why_fits": "Verizon has already publicly committed to digital-wellness programming for families and teens, hosting a Digital Wellness Summit and building initiatives with Discovery Education, AARP OATS, and Sesame Workshop \u2014 but has no gamified, reward-based screen-time reduction partner, making it a strong distribution-partner target for NOMO's telco vertical. Verizon \"is unveiling a series of initiatives aimed at promoting healthy digital habits for families\" and is \"empowering families to have peace of mind around their children\u2019s online lives...and encouraging kids to put the phones down from time to time.\""
+    "why_fits": "Verizon just overhauled its consumer engagement strategy, launching \"Verizon Shine\" \u2014 described as \"a gamified extension of the rewards programme, offering daily merchandise giveaways, event tickets, and gift cards\" \u2014 plus a cash-back \"Verizon Dollars\" program, showing a major US carrier is actively building gamified reward infrastructure and a partner network for engagement, a strong distribution-partner opening for NOMO in the US Telcos & MVNOs vertical (parallel to T-Mobile Tuesdays)."
   },
   "verizon (verizon family / digital wellness initiative)": {
     "category": "US Telco (Distribution Partner)",
@@ -1123,6 +1378,36 @@
     "source_url": "https://cryptodaily.co.uk/2026/03/wandrlust-launches-ai-powered-app-that-pays-you-to-put-your-phone-down",
     "suggested_type": "Competitor",
     "why_fits": "WandrLust launched an AI-powered app explicitly built to pay users for putting their phone down and spending time outdoors, framing itself around a 'presence economy' reward model that overlaps directly with NOMO's core value proposition."
+  },
+  "wandrlust (gary the guide)": {
+    "category": "AI-powered app rewarding offline/outdoor time",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "WandrLust (Gary the Guide)",
+    "reason": "Medium confidence with weak region fit (Other/exploratory); generic pay-to-go-outside concept without a concrete NOMO-specific comparison.",
+    "region": "Other",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://cryptodaily.co.uk/2026/03/wandrlust-launches-ai-powered-app-that-pays-you-to-put-your-phone-down",
+    "suggested_type": "Competitor",
+    "why_fits": "New AI-powered app launched in 2026 that pays/rewards users for putting their phone down and going outside instead, directly competing on the 'reward for reduced screen time' value proposition NOMO uses."
+  },
+  "whitney museum of american art (free 25 and under)": {
+    "category": "Museum / cultural attraction",
+    "confidence": "medium",
+    "first_rejected": "2026-09-03",
+    "last_rejected": "2026-09-03",
+    "last_shown": null,
+    "name": "Whitney Museum of American Art (Free 25 and Under)",
+    "reason": "Redundant with the broader Culture Pass NYC candidate, which covers NYC museum access more comprehensively.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://whitney.org/visit/free-admission",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "The Whitney offers a standing free-admission program tailor-made for a teen/Gen Z reward inventory, distinct from NOMO's existing Fever/GetYourGuide museum tie-ins: <cite index=\"22-1,22-2\">visitors get free admission during Free Friday Nights, Free Second Sundays, and every day for visitors ages 25 and under, including full access to all exhibitions on view, special programs, and iconic city views</cite>, giving NOMO tradeable, redeemable ticket inventory that fits its teen/Gen Z audience."
   },
   "ymca of greater toronto / ymca (national screen-balance partner)": {
     "category": "Faith-based & Youth Orgs",

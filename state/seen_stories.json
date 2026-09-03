@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-08-31T19:40:00.156474+00:00",
+  "last_success": "2026-09-03T17:08:19.207799+00:00",
   "seen_stories": {
     "030b32b9cc9cddf4": {
       "entity_or_topic": "Litigation against major platforms",
@@ -25,6 +25,21 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-31",
       "headline": "TikTok and ByteDance agree to $400 million settlement in DOJ/FTC children's privacy (COPPA) lawsuit"
+    },
+    "2dfe058493caa7eb": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-09-03",
+      "headline": "TikTok's 'Unusual' Kids Privacy Settlement Sidelines FTC Role"
+    },
+    "2eab2468165a5b8d": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-09-03",
+      "headline": "Analysis: Meta settlement structured to pressure TikTok, YouTube and Snap into matching teen restrictions"
+    },
+    "2fe0c784c393faef": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-09-03",
+      "headline": "Changes to Facebook and Instagram are key part of Meta's $17B settlement with the states over harm to teens"
     },
     "3c0b3b40fa76473e": {
       "entity_or_topic": "Litigation against major platforms",
@@ -85,6 +100,11 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-31",
       "headline": "Meta vs. FTC dispute continues over authority to impose new teen-data restrictions"
+    },
+    "f3214475dd408b99": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-09-03",
+      "headline": "Meta reaches ~$17.1B settlement with 51 states, agrees to teen-safety limits on Instagram/Facebook"
     },
     "fe09d943e925ba8f": {
       "entity_or_topic": "Litigation against major platforms",

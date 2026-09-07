@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-09-03T17:08:19.207799+00:00",
+  "last_success": "2026-09-07T18:18:51.879141+00:00",
   "seen_stories": {
     "030b32b9cc9cddf4": {
       "entity_or_topic": "Litigation against major platforms",
@@ -25,6 +25,11 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-31",
       "headline": "TikTok and ByteDance agree to $400 million settlement in DOJ/FTC children's privacy (COPPA) lawsuit"
+    },
+    "277fb9e82019f519": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-09-07",
+      "headline": "Post-Meta Settlement Fallout: Google and TikTok Face Pressure to Match $17B Youth Safety Deal, New AG Suits Loom"
     },
     "2dfe058493caa7eb": {
       "entity_or_topic": "Litigation against major platforms",
@@ -61,15 +66,30 @@
       "first_seen": "2026-08-31",
       "headline": "EdWeek Market Brief tracks growing wave of state and district screen-time policies"
     },
+    "72a9250c4c743662": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-07",
+      "headline": "Meta's $17.1B teen-addiction settlement adds mandatory daily time limits and overnight curfews; appeals court strips Section 230 shield for app design claims"
+    },
     "73dd59abe0dd53c3": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-08-31",
       "headline": "Senator Gallego introduces federal bill requiring parental consent for under-16 social media accounts"
     },
+    "7494a08e1d4a6549": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-09-07",
+      "headline": "Citi acquires rewards fintech Kard as banks race to deepen loyalty ecosystems"
+    },
     "7e6d905b7eb25a3a": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-31",
       "headline": "29 states' Meta lawsuit detailed alleged addictive design targeting kids"
+    },
+    "833627cfa043eb9d": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-07",
+      "headline": "California's AB 1709 heads to Governor Newsom, would strip 'addictive' feeds and autoplay for under-16 users"
     },
     "850a71b657fabd72": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -80,6 +100,11 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-08-31",
       "headline": "Meta's teen-focused settlements compound with $567M New Mexico abatement fund order"
+    },
+    "b63cf157e392dcfd": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-07",
+      "headline": "TikTok and ByteDance agree to $400M DOJ settlement over children's privacy violations"
     },
     "c68415b8426be92d": {
       "entity_or_topic": "Rewards and loyalty funding",

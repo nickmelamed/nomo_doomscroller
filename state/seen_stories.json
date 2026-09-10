@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-09-07T18:18:51.879141+00:00",
+  "last_success": "2026-09-10T17:04:31.352275+00:00",
   "seen_stories": {
     "030b32b9cc9cddf4": {
       "entity_or_topic": "Litigation against major platforms",
@@ -60,6 +60,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-08-31",
       "headline": "Meta reaches $18B settlement with 52 attorneys general over child safety claims"
+    },
+    "617ec7b995132897": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-10",
+      "headline": "Australia introduces new bill to close enforcement gaps in under-16 social media ban"
     },
     "69af21a09334d9ff": {
       "entity_or_topic": "Youth social media policy and regulation",

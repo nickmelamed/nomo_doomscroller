@@ -1,0 +1,252 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "UK moves ahead on under-16 social media restrictions under Children's Wellbeing and Schools Act",
+      "source": "House of Commons Library",
+      "summary": "UK confirms its under-16 social media ban is proceeding via new Section 214A powers in the Online Safety Act, with enforcement beginning Spring 2027, Ofcom overseeing age-assurance standards, and penalties up to 10% of global revenue. Directly relevant to NOMO's active UK pilot and CEO Leonardo's policy engagement ahead of enforcement.",
+      "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-10468/"
+    },
+    {
+      "headline": "Social media addiction litigation and settlements accelerate across US states and France",
+      "source": "Robert King Law Firm (legal industry tracker)",
+      "summary": "51 state AGs reached a $17.1B settlement with Meta over youth harm claims, France's parliament approved a under-15 social media account ban, and Boston sued Meta, ByteDance, Snap and Google over addictive design targeting minors. Signals a funding and compliance tailwind for NOMO's school-partnership pitch in its priority US market.",
+      "url": "https://www.robertkinglawfirm.com/personal-injury/social-media-addiction-lawsuit/"
+    },
+    {
+      "headline": "Connecticut AG opens investigation into messaging app Kik, citing Meta settlement precedent",
+      "source": "Connecticut Attorney General's Office",
+      "summary": "CT AG Tong opened a formal probe into Kik's age-verification and moderation practices, explicitly invoking the $17.1B Meta settlement as precedent; CT will receive $266.1M from that deal, with at least half earmarked for youth-harm remediation \u2014 a potential funding channel for digital-wellbeing programs like NOMO.",
+      "url": "https://portal.ct.gov/ag/press-releases/2026-press-releases/attorney-general-tong-announces-investigation-into-kik-messenger-app"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "School phone-storage/implementation vendor",
+      "confidence": "high",
+      "name": "Yondr",
+      "reason": "Hardware phone-pouch/implementation vendor, not a software/app-based competitor \u2014 mismatched with NOMO's established competitor set (Opal, Brick, Forest, etc.).",
+      "region": "All",
+      "reject_count": 2,
+      "shown_count": 0,
+      "source_url": "https://www.nbcnews.com/business/consumer/schools-spend-millions-yondr-pouches-store-cellphones-rcna230454",
+      "suggested_type": "Competitor",
+      "why_fits": "Yondr dominates the K-12 phone-free implementation market that NOMO's 6-12 Education vertical targets directly, with large contracts in exactly the districts NOMO would pursue (LAUSD, NYC, Chicago). Yondr operates in all 50 US states plus has offices in London and Sydney, overlapping NOMO's US/UK/AU GTM priorities."
+    },
+    {
+      "category": "Chore/screen-time reward app for families",
+      "confidence": "medium",
+      "name": "S'moresUp",
+      "reason": "Medium confidence; duplicative chore/screen-time reward mechanic already covered by other selected candidates.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://timily.app/guides/earn-screen-time-app/",
+      "suggested_type": "Competitor",
+      "why_fits": "S'moresUp ties earned points directly to screen time and rewards, functioning as a reward-for-behavior competitor: <cite index=\"43-1,43-2\">kids earn points for completing chores, and those points can be exchanged for screen time, allowance, or custom rewards, with a goal-setting feature for longer-term objectives</cite>."
+    },
+    {
+      "category": "K-12 digital wellness curriculum / school partnerships",
+      "confidence": "medium",
+      "name": "Screen Guardians",
+      "reason": "Curriculum-based model rather than an app/product competitor; weak fit against the app-block competitor bar.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://thescreenguardians.com/",
+      "suggested_type": "Competitor",
+      "why_fits": "Screen Guardians provides K-12 curriculum and school-facing digital wellness programming, positioning it as a direct rival for the same school/district partnership budgets and mindshare NOMO targets in its 6-12 Education GTM vertical, even though its model is education-based rather than app-based."
+    },
+    {
+      "category": "Experiential ticket / museum reward",
+      "confidence": "medium",
+      "name": "Museum of Ice Cream",
+      "reason": "Overlaps with existing partner Fever's museum-ticket coverage; weak differentiation as a new reward category, and its comparison to a nonexistent 'McDonald's' partner in NOMO's lineup is inaccurate.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://bestrewardsprograms.com/national-ice-cream-day-promotions/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Museum of Ice Cream runs teen/Gen-Z-friendly experiential locations offering free-entry style promos (e.g. <cite index=\"20-5\">Museum of Ice Cream (IL, NY, TX): visit for FREE Ice Cream, FREE sprinkle pool, unique swag, and more</cite>), combining the exact 'museum tickets' plus novelty ice-cream reward combo NOMO already likes (per its McDonald's ice-cream cone tie-in), and is not yet in NOMO's partner roster."
+    },
+    {
+      "category": "Teen museum/arts ticket program",
+      "confidence": "medium",
+      "name": "TeenTix",
+      "reason": "Overlaps with existing partner Fever, which already covers museum tickets \u2014 not a differentiated reward category.",
+      "region": "US",
+      "reject_count": 3,
+      "shown_count": 1,
+      "source_url": "https://www.greaterseattleonthecheap.com/discount-museum-pass/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "TeenTix is a teen-specific ticket network offering $5 admission to museums, theatre, dance, and visual arts across partner venues, filling exactly the 'museum tickets' gap in NOMO's reward lineup with an audience and price point built specifically for teens."
+    },
+    {
+      "category": "Municipal/library teen culture access program",
+      "confidence": "medium",
+      "name": "Culture Pass (NYC public libraries)",
+      "reason": "Redundant category already covered by TeenTix and existing partner Fever; narrow single-city scope.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 1,
+      "source_url": "https://www.culturepass.nyc/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Culture Pass is a teen-eligible (13+) municipal-adjacent rewards inventory source: it is \"a program for cardholding patrons 13 and older of Brooklyn Public Library, New York Public Library and Queens Public Library\" that lets New Yorkers \"reserve a pass and get free admission to dozens of NYC cultural institutions, including museums.\" This mirrors NOMO's museum-ticket/city-pass reward category (like GetYourGuide/Fever) but is not currently in NOMO's partner lineup, and its library/city backing also gives it secondary relevance as a Municipalities GTM entry point."
+    },
+    {
+      "category": "Municipality youth engagement program",
+      "confidence": "medium",
+      "name": "City of Dallas Teen All-Access Pass (Dallas Park and Recreation Dept.)",
+      "reason": "Duplicate of the City of Dallas Parks & Recreation Teen All-Access Pass candidate covering the same program; kept the more detailed entry instead.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Dallas relaunched its Teen All-Access Pass, giving 25,000 youth ages 13-17 free access to recreational and cultural attractions through city-brokered partnerships with local organizations, mirroring the Municipalities GTM vertical NOMO is pursuing for direct city partnerships."
+    },
+    {
+      "category": "Insurance \u2014 digital wellness partnerships",
+      "confidence": "medium",
+      "name": "Health insurer / wellness-app partnership trend (sector signal)",
+      "reason": "Generic industry survey statistic, not a named/concrete prospect; redundant with the more concrete Elevance Health/Anthem candidate already covering the Insurance vertical.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.lifeinsuranceinternational.com/analyst-comment/digital-health-partnerships-most-important-insurers-over-next-three-years/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Recent industry polling confirms strong near-term appetite among health insurers for exactly the kind of partnership NOMO could offer: \"41.1% of respondents identified partnerships between health insurers and mental health and wellness apps as the most important non-traditional partnership over the next three years,\" reinforcing that Insurance remains an underexploited vertical for NOMO given it has no GTM partners there yet."
+    },
+    {
+      "category": "6\u201312 Education \u2014 district screen-time initiative",
+      "confidence": "medium",
+      "name": "Horry County Schools",
+      "reason": "Smaller-scale district initiative, redundant with stronger already-included state/district examples (LAUSD, NY, CA).",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.wmbfnews.com/2026/07/01/horry-county-schools-launches-new-screen-time-initiative/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Horry County Schools launched a new 'Protected Learning' initiative with grade-specific daily screen time guidelines in classrooms, showing an active district need for a screen-time management/rewards partner."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "School phone-storage/implementation vendor",
+      "confidence": "high",
+      "name": "Yondr",
+      "reason": "Hardware phone-pouch/implementation vendor, not a software/app-based competitor \u2014 mismatched with NOMO's established competitor set (Opal, Brick, Forest, etc.).",
+      "region": "All",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.nbcnews.com/business/consumer/schools-spend-millions-yondr-pouches-store-cellphones-rcna230454",
+      "suggested_type": "Competitor",
+      "why_fits": "Yondr dominates the K-12 phone-free implementation market that NOMO's 6-12 Education vertical targets directly, with large contracts in exactly the districts NOMO would pursue (LAUSD, NYC, Chicago). Yondr operates in all 50 US states plus has offices in London and Sydney, overlapping NOMO's US/UK/AU GTM priorities."
+    },
+    {
+      "category": "Teen chore/reward app tied to screen time",
+      "confidence": "medium",
+      "name": "Kikaroo",
+      "reason": "Primarily a general teen chore/allowance app with screen-time as just one reward option; too broad and vague a fit to count as a screen-time-reduction competitor.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://kikaroo.app/blog/best-chore-apps-for-teens/",
+      "suggested_type": "Competitor",
+      "why_fits": "Kikaroo lets teens earn points toward rewards like screen time, cash, or outings for completing chores, positioning it as a gamified-reward alternative competing for the same teen habit-change use case."
+    },
+    {
+      "category": "Fitness / experiential teen reward",
+      "confidence": "medium",
+      "name": "Planet Fitness (Teen Summer Pass)",
+      "reason": "Duplicate of the separately-scouted Planet Fitness (High School Summer Pass Program) candidate \u2014 same program, no new information.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://girlfriend.aarp.org/money/saving/2026-summer-freebies-to-nab-now/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Planet Fitness is offering a free summer pass to teens ages 14-19 giving access to over 2,400 locations nationwide, a scalable, teen-specific, low-cost-to-redeem reward inventory similar in structure to NOMO's existing McDonald's ice-cream-cone model."
+    },
+    {
+      "category": "Telco / distribution partner - youth digital wellness",
+      "confidence": "medium",
+      "name": "Rogers Communications (Screen Break program)",
+      "reason": "Duplicate of the separately-scouted Rogers 'Screen Break' competitor candidate; this is an in-house telco program, not an open partnership opportunity, so it's a competitive signal rather than a GTM prospect.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://about.rogers.com/news-ideas/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Rogers, a major telecom carrier, just launched a five-year $50M national program with in-school athlete visits and youth-org grants to address excessive screen time in teens/tweens, showing telcos actively investing in exactly the youth screen-time space NOMO's Telco/MVNO GTM vertical targets."
+    },
+    {
+      "category": "State-level Education mandate",
+      "confidence": "medium",
+      "name": "Illinois (SB 2427 bell-to-bell phone ban)",
+      "reason": "A state legislative mandate, not an actionable partner entity \u2014 better characterized as a regulatory/market signal than a GTM partner prospect.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://thescreenguardians.com/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Illinois just signed a statewide law requiring bell-to-bell cellphone restrictions in public schools starting 2027-2028, creating a fresh, large-scale procurement need for implementation partners across the state's districts."
+    },
+    {
+      "category": "US Telco/MVNO",
+      "confidence": "medium",
+      "name": "T-Mobile",
+      "reason": "Indirect signal (event sponsorship of Little League World Series) doesn't demonstrate concrete partnership appetite; largely redundant with the stronger Little League International candidate.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://youthsportsbusinessreport.com/youth-sports-sponsorship-on-display-19-brands-activate-at-2026-little-league-world-series-fan-zone/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"11-5\">The 2026 Little League Baseball World Series, Presented by T-Mobile, doubles as one of the clearest snapshots available of youth sports sponsorship at the national level</cite> \u2014 direct evidence of telco appetite for youth-audience sponsorship/distribution, aligning with NOMO's Telcos & MVNOs GTM vertical (currently empty)."
+    },
+    {
+      "category": "Teen museum/arts ticket program",
+      "confidence": "medium",
+      "name": "TeenTix",
+      "reason": "Overlaps with existing partner Fever, which already covers museum tickets \u2014 not a differentiated reward category.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.greaterseattleonthecheap.com/discount-museum-pass/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "TeenTix is a teen-specific ticket network offering $5 admission to museums, theatre, dance, and visual arts across partner venues, filling exactly the 'museum tickets' gap in NOMO's reward lineup with an audience and price point built specifically for teens."
+    },
+    {
+      "category": "Experiential ticket / museum reward",
+      "confidence": "medium",
+      "name": "Museum of Ice Cream",
+      "reason": "Overlaps with existing partner Fever's museum-ticket coverage; weak differentiation as a new reward category, and its comparison to a nonexistent 'McDonald's' partner in NOMO's lineup is inaccurate.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://bestrewardsprograms.com/national-ice-cream-day-promotions/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Museum of Ice Cream runs teen/Gen-Z-friendly experiential locations offering free-entry style promos (e.g. <cite index=\"20-5\">Museum of Ice Cream (IL, NY, TX): visit for FREE Ice Cream, FREE sprinkle pool, unique swag, and more</cite>), combining the exact 'museum tickets' plus novelty ice-cream reward combo NOMO already likes (per its McDonald's ice-cream cone tie-in), and is not yet in NOMO's partner roster."
+    },
+    {
+      "category": "Regional attraction / event admission",
+      "confidence": "medium",
+      "name": "State Fair of Texas",
+      "reason": "Overlaps thematically with the stronger Dallas Teen All Access Pass candidate (same city, same teen-free-admission model); narrower one-off event with less concrete ongoing structure.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.aol.com/news/free-state-fair-texas-admission-033550615.html",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Confirmed it will offer free admission to Dallas ISD teens via a city program, showing willingness to hand out real-world teen rewards similar to NOMO's existing GetYourGuide/Odeon-style experience rewards, and it is not yet in NOMO's roster."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

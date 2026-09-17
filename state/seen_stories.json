@@ -1,35 +1,10 @@
 {
-  "last_success": "2026-09-14T18:35:01.619820+00:00",
+  "last_success": "2026-09-17T17:39:48.725513+00:00",
   "seen_stories": {
     "01b5676ffb5b5f8f": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-14",
       "headline": "UK moves ahead on under-16 social media restrictions under Children's Wellbeing and Schools Act"
-    },
-    "030b32b9cc9cddf4": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "Australia's under-16 social media ban enforcement continues with millions of accounts removed, bypass challenges emerge"
-    },
-    "19524a8eb52f7de9": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-08-31",
-      "headline": "Meta reaches roughly $18 billion settlement with US states, imposes teen time limits and school-hours notification blackout"
-    },
-    "1b60010a710a6256": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "Los Angeles Unified schools begin enforcing new screen-time limits for the 2026-27 year"
-    },
-    "20d346b65b0e4a3f": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-08-31",
-      "headline": "State age-verification and social-media-restriction laws for minors continue to expand and face litigation"
-    },
-    "251c4119f9a3415a": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "TikTok and ByteDance agree to $400 million settlement in DOJ/FTC children's privacy (COPPA) lawsuit"
     },
     "277fb9e82019f519": {
       "entity_or_topic": "Litigation against major platforms",
@@ -51,65 +26,30 @@
       "first_seen": "2026-09-03",
       "headline": "Changes to Facebook and Instagram are key part of Meta's $17B settlement with the states over harm to teens"
     },
-    "3c0b3b40fa76473e": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "Meta agrees to ~$17-18 billion settlement with 52 state AGs over teen social media addiction claims"
-    },
-    "3c8fe73e8286c07a": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "France becomes first EU country to ban social media for under-15s"
-    },
-    "52cbc2598bb0bcba": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "Meta reaches $18B settlement with 52 attorneys general over child safety claims"
-    },
     "617ec7b995132897": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-10",
       "headline": "Australia introduces new bill to close enforcement gaps in under-16 social media ban"
-    },
-    "69af21a09334d9ff": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "EdWeek Market Brief tracks growing wave of state and district screen-time policies"
     },
     "72a9250c4c743662": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-07",
       "headline": "Meta's $17.1B teen-addiction settlement adds mandatory daily time limits and overnight curfews; appeals court strips Section 230 shield for app design claims"
     },
-    "73dd59abe0dd53c3": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-08-31",
-      "headline": "Senator Gallego introduces federal bill requiring parental consent for under-16 social media accounts"
-    },
     "7494a08e1d4a6549": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-09-07",
       "headline": "Citi acquires rewards fintech Kard as banks race to deepen loyalty ecosystems"
-    },
-    "7e6d905b7eb25a3a": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "29 states' Meta lawsuit detailed alleged addictive design targeting kids"
     },
     "833627cfa043eb9d": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-07",
       "headline": "California's AB 1709 heads to Governor Newsom, would strip 'addictive' feeds and autoplay for under-16 users"
     },
-    "850a71b657fabd72": {
+    "a173dee379a0cbba": {
       "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-08-31",
-      "headline": "Meta settlement's age-verification mandates spark First Amendment and privacy backlash"
-    },
-    "992ea0685c11db58": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "Meta's teen-focused settlements compound with $567M New Mexico abatement fund order"
+      "first_seen": "2026-09-17",
+      "headline": "EU Announces Plans to Mandate Age Verification for Social Media and AI Platforms"
     },
     "a2cb70a88deffafc": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -121,45 +61,25 @@
       "first_seen": "2026-09-07",
       "headline": "TikTok and ByteDance agree to $400M DOJ settlement over children's privacy violations"
     },
+    "b9dbe6d33febd894": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-09-17",
+      "headline": "Fintech Pulse: Split Pay's $125M Raise, Perk's US Spend Launch Highlight Rewards/Payments Funding Wave"
+    },
     "bfa0a43ea7fc3803": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-14",
       "headline": "Social media addiction litigation and settlements accelerate across US states and France"
-    },
-    "c68415b8426be92d": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-08-31",
-      "headline": "Federal appeals court rules Section 230 does not shield Meta, Google, TikTok and Snapchat from addictive-design lawsuits"
-    },
-    "c72a280031c15d42": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-08-31",
-      "headline": "More than two dozen countries enacting or weighing under-16 social media bans, including Brazil"
     },
     "cc3883b36a256025": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-09-14",
       "headline": "Meta's $17.1B Multistate Settlement Continues to Shape State AG Enforcement Playbook"
     },
-    "d9772b70474fe7ba": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "UK Parliament debate and consultation on under-16 social media restrictions continues, PM Starmer says 'no option off the table'"
-    },
-    "ead2f2673492953d": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "Meta vs. FTC dispute continues over authority to impose new teen-data restrictions"
-    },
     "f3214475dd408b99": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-09-03",
       "headline": "Meta reaches ~$17.1B settlement with 51 states, agrees to teen-safety limits on Instagram/Facebook"
-    },
-    "fe09d943e925ba8f": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-08-31",
-      "headline": "UK regulators (Ofcom, ICO) press YouTube, TikTok, Meta, Snapchat on child safety after blanket under-16 ban rejected"
     }
   }
 }

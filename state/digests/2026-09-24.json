@@ -1,0 +1,228 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "UK Ofcom Faces Political Pressure Over Online Safety Act Age-Check Enforcement",
+      "source": "The Register",
+      "summary": "UK politicians, including the Children's Commissioner, are pressing Ofcom over slow enforcement of Online Safety Act age-assurance rules, with critics saying the law has made 'absolutely no difference' for kids while Ofcom points to recent actions against Telegram, TikTok and X. Given NOMO's UK pilot and CEO Leonardo's direct engagement with UK policymakers, rising enforcement pressure strengthens the case for reward-based off-social-media alternatives like NOMO.",
+      "url": "https://www.theregister.com/security/2026/09/23/british-regulator-takes-a-hard-look-at-pornhubs-apple-powered-age-checks/5298558"
+    },
+    {
+      "headline": "California Teens and Advocates Push AB 1709 to Curb Addictive Social Media Features",
+      "source": "KALW",
+      "summary": "AB 1709 would force platforms to offer non-addictive teen accounts or bar teens entirely, backed by youth advocacy groups working with Assemblymember Lowenthal's office alongside a separate Digital Wellness Education Act. This state-level policy tailwind supports NOMO's US GTM push as a compliant, pro-social alternative to addictive feed design.",
+      "url": "https://www.kalw.org/podcast/tbh-made-by-about-and-for-teenagers/2026-09-22/we-want-in-ab-1709-restricting-social-media-for-teens"
+    },
+    {
+      "headline": "Meta Appeals Ofcom's Category 1 Classification of Instagram and WhatsApp Under UK Online Safety Act",
+      "source": "Biometric Update",
+      "summary": "Meta is legally contesting Ofcom's Category 1 designation of Instagram and WhatsApp, which triggers extra child-safety duties \u2014 continued platform resistance to child-safety obligations that reinforces the political tailwind for third-party wellbeing alternatives like NOMO as trust in platform self-policing erodes.",
+      "url": "https://www.biometricupdate.com/202609/meta-appeals-ofcoms-categorization-of-instagram-whatsapp-in-effort-to-stall-osa"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "Screen-time/habit-gate app",
+      "confidence": "medium",
+      "name": "HabitUnlock",
+      "reason": "Vague, generic listicle sourcing with no clear teen-specific differentiation; medium confidence, default cut.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.habbitunlock.com/alternatives",
+      "suggested_type": "Competitor",
+      "why_fits": "A newer entrant using an earned-access mechanic close to NOMO's reward model: <cite index=\"6-1\">HabitUnlock is ranked among top apps to limit and manage screen time for adults in 2026, compared on access mechanic, platform coverage, and bypass resistance</cite>, with <cite index=\"6-6\">a 'Deep Lock' feature that removes the in-app override and survives force-quit</cite>, positioning it as a gamified-restriction competitor worth tracking."
+    },
+    {
+      "category": "Student screen-time gamification with real-world rewards",
+      "confidence": "medium",
+      "name": "LockIn",
+      "reason": "Weak region fit (Canada/Other, exploratory only) and redundant with stronger competitor entries",
+      "region": "Other",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.cbc.ca/news/canada/hamilton/lockin-app-scrolling-1.7407813",
+      "suggested_type": "Competitor",
+      "why_fits": "Founded by McMaster University students, LockIn is described as an app that helps students curb device time while rewarding users with discounts at real-life venues near campus \u2014 nearly identical mechanic to NOMO's real-world rewards model, already showing traction with 3,500 users."
+    },
+    {
+      "category": "Family screen time / teen behavior app",
+      "confidence": "medium",
+      "name": "TAP: Tech Activity Pact",
+      "reason": "Medium confidence, generic family screen-time pact app; duplicative of closer competitor analogs already selected.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://apps.apple.com/ie/app/tap-tech-activity-pact/id6759011242",
+      "suggested_type": "Competitor",
+      "why_fits": "A newly launched teen-focused screen time app built around negotiated family 'pacts' rather than pure enforcement, explicitly targeting the same 9-17 age demo as NOMO and riding the same tailwind (AAP's Jan 2026 policy shift away from hard limits). It's a social-accountability/behavior-contract competitor in the school-age screen time space."
+    },
+    {
+      "category": "Apparel / sports gear",
+      "confidence": "medium",
+      "name": "Adidas",
+      "reason": "Too similar to existing Nike/Vans apparel reward partners; medium confidence with insufficient differentiation.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.fastcompany.com/91507495/dayo-app-teen-phone-screen-time-reduction-parents-reward-starbucks-adidas",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Adidas is already funding teen screen-time rewards through competitor app Dayo's brand partnerships alongside Starbucks and Amazon, demonstrating appetite for exactly the kind of exclusive-merch/gear reward NOMO already runs with Nike and Vans, and offering a complementary apparel option for gap-filling."
+    },
+    {
+      "category": "City-wide youth arts & culture access pass",
+      "confidence": "medium",
+      "name": "Louisville Cultural Pass",
+      "reason": "Redundant with NYC Culture Pass, medium confidence",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://louisvilleky.gov/government/arts-culture/cultural-pass",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-backed program giving young people ages 0-21 and their families free access to 50+ arts and cultural venues, launching an app version in 2026 \u2014 a genuine gap versus NOMO's single-venue museum/concert partners (Fever, Odeon), offering a bundled multi-venue 'greenpass'-style reward."
+    },
+    {
+      "category": "Museum/cultural access pass",
+      "confidence": "medium",
+      "name": "NYC Culture Pass (NYC Department of Cultural Affairs / NYPL)",
+      "reason": "Duplicate of NYC Culture Pass entry",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.culturepass.nyc/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-backed 'green pass' style reward: New Yorkers reserve free admission to 90+ museums and cultural institutions via library card, and visitors under 19 get free admission to all NYC Cultural Affairs-funded institutions \u2014 tradeable, teen-friendly inventory very similar to NOMO's existing Fever/museum-ticket partnerships."
+    },
+    {
+      "category": "State government / Municipalities & States vertical",
+      "confidence": "high",
+      "name": "New York State (Governor's Office / NYSED - Distraction-Free Schools policy)",
+      "reason": "Duplicate of the NYC Public Schools / NYSED Distraction-Free Schools entry covering the same statewide law.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.governor.ny.gov/news/distraction-free-schools-governor-hochul-announces-new-york-become-largest-state-nation",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "New York became the largest state to mandate statewide bell-to-bell smartphone restrictions in K-12 schools starting the 2025-2026 school year, with districts required to publish enforcement reports \u2014 creating a state-level procurement and compliance-support opening that fits the Municipalities (and States) GTM vertical and is not yet in NOMO's partner lineup."
+    },
+    {
+      "category": "US MVNO (prepaid, youth/back-to-school focus)",
+      "confidence": "medium",
+      "name": "Boost Mobile",
+      "reason": "Generic back-to-school device deals rather than digital-wellness specific; redundant with stronger Verizon/UScellular candidates; medium confidence.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://variety.com/2026/shopping/news/boost-mobile-starter-phone-student-deals-1236822849/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"48-1\">Boost Mobile offers a variety of deals on starter phones for kids, from the iPhone 16e to the Samsung Galaxy, as part of its 2026 back-to-school push.</cite> As a large prepaid MVNO actively courting the student/family segment with back-to-school device and plan deals, Boost fits the 'Regional carriers + MVNOs \u2014 distribution at scale, embedded offerings' criterion for the US Telcos & MVNOs GTM vertical."
+    },
+    {
+      "category": "6-12 Education / school district",
+      "confidence": "medium",
+      "name": "Central Unified School District (Fresno, CA)",
+      "reason": "Single mid-size district, medium confidence, weaker and less concrete than already-kept LAUSD/NYC DOE/TEA grant candidates covering the same vertical.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.centralunified.org/parents/phone-and-device-free-schools",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Central Unified is actively rolling out a new mandated phone/device policy starting the 2026-27 school year under California's Phone-Free School Act, putting it squarely in active-procurement mode for a compliance and engagement layer\u2014exactly the buying moment NOMO's Direct Education GTM motion is built to capture."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "Live entertainment / museum tickets for teens",
+      "confidence": "medium",
+      "name": "TDF (Tickets for Teens)",
+      "reason": "Duplicate of the higher-confidence 'TDF (Theatre Development Fund) - Tickets for Teens' entry covering the same program.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://tft.tdf.org/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Theatre Development Fund runs a city-backed program giving NYC high schoolers free/low-cost Broadway, Off-Broadway, and museum tickets \u2014 a tradeable, teen-specific reward inventory analogous to NOMO's existing Fever/Ticketmaster partners, and newly expanded in summer 2026 with the NYC Mayor's office."
+    },
+    {
+      "category": "Youth org / corporate partnership hub",
+      "confidence": "medium",
+      "name": "Boys & Girls Clubs of America national partner network",
+      "reason": "Duplicate/lower-confidence version of the 'BGC Mindful' BGCA entry, which has more concrete evidence of partnership appetite.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.bgca.org/news-stories/2026/August/boys-girls-clubs-of-america-and-national-partners-rally-behind-americas-youth-this-back-to-school-season/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "BGCA just rallied a slate of national brand partners (Comcast, Charles Schwab, Michaels, Murphy USA) for back-to-school youth wellbeing programming, showing an active, structured openness to exactly the kind of brand/rewards partnership model NOMO would bring to the Faith-based & Youth Orgs vertical."
+    },
+    {
+      "category": "6-12 Education / Youth Sports & Athletic Leagues crossover",
+      "confidence": "medium",
+      "name": "National Federation of State High School Associations (NFHS)",
+      "reason": "Vague signal \u2014 only evidence is co-hosting a sports-industry conference, no concrete partnership or procurement hook.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://sfia.org/resources/tsc/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"30-1\">SFIA, NFHS, and the NCAA are co-hosting the 2026 Team Sports Conference to explore the youth and school team sports arena</cite>, showing NFHS as the governing body actively convening on youth/school sports commerce and engagement \u2014 a genuine gap versus club-level leagues (Little League/AYSO) since NFHS covers interscholastic (grade 6-12 equivalent) athletics at national scale, aligning both the Education and Youth Sports verticals NOMO currently has no partner in."
+    },
+    {
+      "category": "Youth Sports & Athletic Leagues",
+      "confidence": "medium",
+      "name": "Little League International",
+      "reason": "Too tangential \u2014 its BGCA partnership is about baseball/softball access and mentorship, not digital wellness or screen-time behavior.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://youthsportsbusinessreport.com/little-league-partnership-with-boys-girls-clubs-of-america-targets-youth-sports-access/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"12-1\">Little League International and Boys & Girls Clubs of America announced a national partnership on August 23, 2026, designed to introduce more children to baseball and softball while expanding after-school programming built around mentorship</cite>, signaling Little League is actively building cross-org, mentorship/behavior-focused partnerships \u2014 a strong-fit GTM angle for NOMO's in-school-behavior value prop, and a genuine gap since NOMO has zero GTM partners today."
+    },
+    {
+      "category": "State government / Municipalities & States vertical",
+      "confidence": "high",
+      "name": "New York State (Governor's Office / NYSED - Distraction-Free Schools policy)",
+      "reason": "Duplicate of the NYC Public Schools / NYSED Distraction-Free Schools entry covering the same statewide law.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.governor.ny.gov/news/distraction-free-schools-governor-hochul-announces-new-york-become-largest-state-nation",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "New York became the largest state to mandate statewide bell-to-bell smartphone restrictions in K-12 schools starting the 2025-2026 school year, with districts required to publish enforcement reports \u2014 creating a state-level procurement and compliance-support opening that fits the Municipalities (and States) GTM vertical and is not yet in NOMO's partner lineup."
+    },
+    {
+      "category": "Reward-gated screen time / app-blocking app",
+      "confidence": "medium",
+      "name": "RepsForReels",
+      "reason": "Mechanic rewards screen access via completing exercise \u2014 the inverse of NOMO's reward-for-time-off-social-media model, weaker overlap than other app-blockers.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://repsforreels.app/blog/best-screen-time-app-for-android-2026",
+      "suggested_type": "Competitor",
+      "why_fits": "Blocks apps until the user completes AI-verified pushups or squats, earning real screen time as a reward \u2014 a gamified 'earn access' model that competes directly for the same reduced-screen-time reward use case NOMO targets, tested recently on current Android devices."
+    },
+    {
+      "category": "City attraction / sightseeing passes",
+      "confidence": "medium",
+      "name": "Go City (multi-attraction CityPASS-style passes)",
+      "reason": "Too similar to NOMO's existing GetYourGuide partner (city attraction/experience passes) without meaningful differentiation.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://clubthrifty.com/best-city-passes-sightseeing-passes/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Go City sells all-inclusive city attraction passes (e.g., the Go City Philadelphia and Chicago passes covering dozens of top attractions), offering exactly the kind of tradeable, teen-friendly 'city green pass' reward inventory NOMO seeks, with a scalable commercial partner structure rather than a government dependency."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

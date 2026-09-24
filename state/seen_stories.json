@@ -1,40 +1,30 @@
 {
-  "last_success": "2026-09-21T18:40:16.180261+00:00",
+  "last_success": "2026-09-24T17:56:52.670928+00:00",
   "seen_stories": {
     "01b5676ffb5b5f8f": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-14",
       "headline": "UK moves ahead on under-16 social media restrictions under Children's Wellbeing and Schools Act"
     },
-    "277fb9e82019f519": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-09-07",
-      "headline": "Post-Meta Settlement Fallout: Google and TikTok Face Pressure to Match $17B Youth Safety Deal, New AG Suits Loom"
+    "2c2e3d6238c8b5b9": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-24",
+      "headline": "California Teens and Advocates Push AB 1709 to Curb Addictive Social Media Features"
     },
     "3cb08bf74e0c05bc": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
       "headline": "Meta reaches $17.1B settlement with 51 state attorneys general over teen addiction claims"
     },
+    "4ef9b4a0dbd9be12": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-09-24",
+      "headline": "Meta Appeals Ofcom's Category 1 Classification of Instagram and WhatsApp Under UK Online Safety Act"
+    },
     "617ec7b995132897": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-10",
       "headline": "Australia introduces new bill to close enforcement gaps in under-16 social media ban"
-    },
-    "72a9250c4c743662": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-07",
-      "headline": "Meta's $17.1B teen-addiction settlement adds mandatory daily time limits and overnight curfews; appeals court strips Section 230 shield for app design claims"
-    },
-    "7494a08e1d4a6549": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-09-07",
-      "headline": "Citi acquires rewards fintech Kard as banks race to deepen loyalty ecosystems"
-    },
-    "833627cfa043eb9d": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-07",
-      "headline": "California's AB 1709 heads to Governor Newsom, would strip 'addictive' feeds and autoplay for under-16 users"
     },
     "a173dee379a0cbba": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -50,11 +40,6 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
       "headline": "UK moves toward spring 2027 under-16 social media ban with parliamentary regulations expected by year-end"
-    },
-    "b63cf157e392dcfd": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-07",
-      "headline": "TikTok and ByteDance agree to $400M DOJ settlement over children's privacy violations"
     },
     "b9dbe6d33febd894": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -80,6 +65,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-09-14",
       "headline": "Meta's $17.1B Multistate Settlement Continues to Shape State AG Enforcement Playbook"
+    },
+    "e5bdcac8d2fa57d6": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-09-24",
+      "headline": "UK Ofcom Faces Political Pressure Over Online Safety Act Age-Check Enforcement"
     }
   }
 }

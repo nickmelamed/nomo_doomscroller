@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-09-24T17:56:52.670928+00:00",
+  "last_success": "2026-09-28T20:11:39.073080+00:00",
   "seen_stories": {
     "01b5676ffb5b5f8f": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -21,10 +21,10 @@
       "first_seen": "2026-09-24",
       "headline": "Meta Appeals Ofcom's Category 1 Classification of Instagram and WhatsApp Under UK Online Safety Act"
     },
-    "617ec7b995132897": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-10",
-      "headline": "Australia introduces new bill to close enforcement gaps in under-16 social media ban"
+    "5ad67598fd7fcaec": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-09-28",
+      "headline": "TikTok Settles Alabama Youth-Safety Lawsuit for at Least $100 Million Days Before Trial"
     },
     "a173dee379a0cbba": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -40,6 +40,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
       "headline": "UK moves toward spring 2027 under-16 social media ban with parliamentary regulations expected by year-end"
+    },
+    "b5d585cbbae194ad": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-09-28",
+      "headline": "Column: Meta's New Social Media Rules Should Have Started With Teens"
     },
     "b9dbe6d33febd894": {
       "entity_or_topic": "Rewards and loyalty funding",

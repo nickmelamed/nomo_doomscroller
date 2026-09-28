@@ -1,0 +1,222 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "TikTok Settles Alabama Youth-Safety Lawsuit for at Least $100 Million Days Before Trial",
+      "source": "CBS News",
+      "summary": "TikTok settled with Alabama's AG for $100M-$300M and agreed to teen-safety features just before trial, the second major US settlement in weeks after Meta's $17.1B deal. State AGs are now extracting concrete behavioral guardrails (nighttime/school-hour limits, default privacy) from platforms, validating NOMO's off-social-media reward model and strengthening its pitch to US schools and prize sponsors.",
+      "url": "https://www.cbsnews.com/news/tiktok-alabama-youth-safety-lawsuit-settlement/"
+    },
+    {
+      "headline": "Column: Meta's New Social Media Rules Should Have Started With Teens",
+      "source": "South Seattle Emerald",
+      "summary": "Seattle high schoolers critique the rollout of Meta's court-mandated teen limits (2-hour daily cap, midnight-6am blackout, silenced school-hour notifications), noting no teens were consulted and none of the $237M-$339M Washington settlement money is earmarked for classrooms or parents. Reinforces that platform-imposed throttles are seen as porous and top-down, strengthening demand for third-party, reward-based tools like NOMO that schools and families can adopt directly.",
+      "url": "https://southseattleemerald.org/voices/2026/09/24/column-metas-new-social-media-rules-should-have-started-with-teens"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "In-app gamified screen-time reduction rewards",
+      "confidence": "medium",
+      "name": "TikTok (Screen Time Rewards/Badges feature)",
+      "reason": "Duplicate of the TikTok Well-being badges candidate already included.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.euronews.com/2025/11/19/tiktok-adds-digital-well-being-features-to-help-teens-manage-screen-time-and-limit-doomscr",
+      "suggested_type": "Competitor",
+      "why_fits": "TikTok added badges and rewards for teens who avoid the app at night, stay within daily limits, and encourage others to participate \u2014 a direct gamification of reduced-usage behavior aimed at the same teen demographic NOMO targets."
+    },
+    {
+      "category": "In-app screen-time gamification feature",
+      "confidence": "medium",
+      "name": "TikTok Well-being Rewards (badges for screen-time limits)",
+      "reason": "Duplicate of TikTok (in-app digital wellbeing rewards) entry",
+      "region": "All",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.euronews.com/2025/11/19/tiktok-adds-digital-well-being-features-to-help-teens-manage-screen-time-and-limit-doomscr",
+      "suggested_type": "Competitor",
+      "why_fits": "TikTok rolled out new features that let teens earn badges for avoiding the app at night, staying within daily limits, and encouraging others to participate \u2014 a social platform now gamifying reduced usage, directly competing with NOMO's reward-for-less-screen-time value proposition among the same teen audience."
+    },
+    {
+      "category": "Reward-first screen-time / chores app",
+      "confidence": "medium",
+      "name": "Timily",
+      "reason": "Mechanic (earning screen time via chores) is a weaker/different fit than NOMO's reduce-social-media-for-rewards model; medium confidence.",
+      "region": "US",
+      "reject_count": 3,
+      "shown_count": 0,
+      "source_url": "https://timily.app/guides/earn-screen-time-app/",
+      "suggested_type": "Competitor",
+      "why_fits": "Timily is a newly prominent 2026 entrant built as a 'reward-first' system where kids earn coins for focus sessions, chores and challenges that unlock screen time or other rewards, directly overlapping with NOMO's gamified reduced-screen-time model for a youth audience."
+    },
+    {
+      "category": "City attraction / sightseeing passes",
+      "confidence": "medium",
+      "name": "Go City (multi-attraction CityPASS-style passes)",
+      "reason": "Too similar to NOMO's existing GetYourGuide partner (city attraction/experience passes) without meaningful differentiation.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://clubthrifty.com/best-city-passes-sightseeing-passes/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Go City sells all-inclusive city attraction passes (e.g., the Go City Philadelphia and Chicago passes covering dozens of top attractions), offering exactly the kind of tradeable, teen-friendly 'city green pass' reward inventory NOMO seeks, with a scalable commercial partner structure rather than a government dependency."
+    },
+    {
+      "category": "Live entertainment / museum tickets for teens",
+      "confidence": "medium",
+      "name": "TDF (Tickets for Teens)",
+      "reason": "Duplicate of the higher-confidence 'TDF (Theatre Development Fund) - Tickets for Teens' entry covering the same program.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://tft.tdf.org/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Theatre Development Fund runs a city-backed program giving NYC high schoolers free/low-cost Broadway, Off-Broadway, and museum tickets \u2014 a tradeable, teen-specific reward inventory analogous to NOMO's existing Fever/Ticketmaster partners, and newly expanded in summer 2026 with the NYC Mayor's office."
+    },
+    {
+      "category": "Museum access / teen rewards",
+      "confidence": "medium",
+      "name": "U.S. Marshals Museum Youth Admission Program",
+      "reason": "Niche single-venue reward, redundant with Met Explorer Membership, medium confidence",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://katv.com/news/local/youth-students-receive-free-general-admission-through-us-marshals-museum-program-katv-news-share-inform-public-community",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A newly launched program (sponsored by Mercy) offering free general admission every Saturday through 2026 for visitors 17 and younger, a realistic, tradeable museum-ticket reward that fits NOMO's teen/Gen Z rewards inventory."
+    },
+    {
+      "category": "6-12 Education / Municipality",
+      "confidence": "high",
+      "name": "NYC Department of Education / NYC City Council (DOHMH, DYCD)",
+      "reason": "Overlapping/duplicate of the more concrete, funded NYC Mayor's Office cell-phone-policy candidate; this one is just a hearing with less concrete detail.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://citizenportal.ai/articles/10019209/New-York/New-York-County/New-York-City/New-York-City-Council/City-Council-holds-wide-ranging-hearing-after-DOE-issues-AI-and-screen-time-guidance",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "NYC Council just held a hearing after DOE issued new 2026-27 screen-time and AI guidance with strict grade-level device-use limits, and city agencies (DOHMH, DYCD) are actively exploring phone-use limits in youth programs \u2014 a direct entry point for NOMO's district and municipality GTM motions."
+    },
+    {
+      "category": "Youth org / corporate partnership hub",
+      "confidence": "medium",
+      "name": "Boys & Girls Clubs of America national partner network",
+      "reason": "Duplicate/lower-confidence version of the 'BGC Mindful' BGCA entry, which has more concrete evidence of partnership appetite.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.bgca.org/news-stories/2026/August/boys-girls-clubs-of-america-and-national-partners-rally-behind-americas-youth-this-back-to-school-season/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "BGCA just rallied a slate of national brand partners (Comcast, Charles Schwab, Michaels, Murphy USA) for back-to-school youth wellbeing programming, showing an active, structured openness to exactly the kind of brand/rewards partnership model NOMO would bring to the Faith-based & Youth Orgs vertical."
+    },
+    {
+      "category": "Municipality (city parks & recreation)",
+      "confidence": "medium",
+      "name": "Dallas Park and Recreation Department (Mayor's Summer of Safety initiative)",
+      "reason": "Duplicate of Dallas Park & Recreation Teen All Access Pass entry",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Dallas Park and Recreation runs a Teen All-Access Pass program under the Mayor's Summer of Safety initiative, partnering with area museums/attractions to give teens free access \u2014 a live municipal model for exactly the kind of city-level, teen-engagement partnership and reward distribution NOMO could plug into."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "School/state digital-wellness curriculum & program provider",
+      "confidence": "medium",
+      "name": "ScreenStrong",
+      "reason": "Not a true product/mechanic competitor \u2014 a school curriculum/procurement nonprofit rather than a screen-time reward app, weak fit vs. the app-block/rewards competitor bar.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.wspa.com/news/state-news/south-carolina-digital-wellness-initiative/",
+      "suggested_type": "Competitor",
+      "why_fits": "Nonprofit being tapped for a proposed $17M+ South Carolina statewide digital wellness initiative for public/charter school students, showing it is actively competing for the same school/EdTech and state-level procurement relationships NOMO targets."
+    },
+    {
+      "category": "6-12 Education / Municipality",
+      "confidence": "high",
+      "name": "NYC Department of Education / NYC City Council (DOHMH, DYCD)",
+      "reason": "Overlapping/duplicate of the more concrete, funded NYC Mayor's Office cell-phone-policy candidate; this one is just a hearing with less concrete detail.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://citizenportal.ai/articles/10019209/New-York/New-York-County/New-York-City/New-York-City-Council/City-Council-holds-wide-ranging-hearing-after-DOE-issues-AI-and-screen-time-guidance",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "NYC Council just held a hearing after DOE issued new 2026-27 screen-time and AI guidance with strict grade-level device-use limits, and city agencies (DOHMH, DYCD) are actively exploring phone-use limits in youth programs \u2014 a direct entry point for NOMO's district and municipality GTM motions."
+    },
+    {
+      "category": "Telco / carrier youth digital-wellbeing program",
+      "confidence": "medium",
+      "name": "Rogers Communications (Screen Break program)",
+      "reason": "Duplicate of the same Rogers-Screen Break story captured via the YMCA candidate; region ('Other'/Canada) is weighted as exploratory-only versus the US-anchored YMCA framing.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.barchart.com/story/news/36943422/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Rogers just launched a five-year, $50M national program partnering with athletes to help youth balance screen time, validating the telco-as-distribution-partner thesis in NOMO's GTM plan (US Telcos & MVNOs vertical) and signaling carriers are actively funding teen screen-time initiatives."
+    },
+    {
+      "category": "Insurance / digital-wellness incentive program",
+      "confidence": "medium",
+      "name": "Oscar Health (\"Oscar Unlocks\" rewards program)",
+      "reason": "Redundant with the more concrete Capital Blue Cross insurance-wellness candidate; why_fits leans on generic industry-trend framing rather than a specific NOMO opportunity.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.healthinsurance.org/obamacare/aca-health-plans-increasingly-offer-wellness-incentives/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Oscar just rolled out a 2026 gamified member rewards program ('Oscar Unlocks') letting members earn badges, perks and rewards, signaling health insurers are actively building gamified wellness-incentive infrastructure \u2014 a strong entry point for NOMO's Insurance GTM vertical (owner Jo\u00e3o) to plug teen/family screen-time rewards into an existing insurer incentive rail."
+    },
+    {
+      "category": "State/Municipal policy mandate creating school-device-management demand",
+      "confidence": "medium",
+      "name": "New Jersey Department of Education (bell-to-bell device policy mandate, P.L.2025 c.195)",
+      "reason": "Duplicate of the more concrete, higher-confidence NJ DOE Phone-Free Schools Grant Program candidate covering the same policy wave.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.nj.gov/education/safety/sandp/digital/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "New Jersey now requires all public boards of education to adopt and implement a bell-to-bell personal-device policy starting the 2026-27 school year, creating a state-level procurement wave for digital wellbeing/screen-time solutions that fits NOMO's Municipalities & States GTM vertical (owner Leo) and the 6-12 Education vertical (owner Jo\u00e3o) simultaneously."
+    },
+    {
+      "category": "Screen-time reward/gamification app",
+      "confidence": "medium",
+      "name": "BePresent",
+      "reason": "Duplicate entry for the same company already kept as 'BePresent (Screen Detox Inc)' with a higher-confidence, more specific why_fits.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.marketplace.org/episode/2026/01/02/trying-to-stay-off-your-phone-theres-an-app-for-that",
+      "suggested_type": "Competitor",
+      "why_fits": "Positioned in the digital-detox app category alongside Opal, Brick, One Sec and Forest, but differentiated by a social/friends layer plus earned rewards \u2014 closely mirrors NOMO's social-accountability + rewards approach and should be tracked as a competitive entrant."
+    },
+    {
+      "category": "Youth Sports & Athletic Leagues (college-level)",
+      "confidence": "medium",
+      "name": "NCAA Division I Conferences (e.g., America East Conference)",
+      "reason": "Vague why_fits describing NCAA's own generic wellness messaging rather than a concrete partner signal; college-level audience is a weaker demographic fit than NOMO's core teen/high-school target.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.ncaa.org/what-we-do/health-safety-and-performance/mental-health/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "NCAA now runs interactive modules covering how student-athletes' online presence and social media use can bring unwanted attention and harm well-being, and individual conferences like America East already run dedicated mental-health/wellness campaigns for their athletes \u2014 a genuine gap versus NOMO's current empty GTM roster, since conference-level offices are exactly the kind of large-roster, coach/administrator-driven buyer described for the Youth Sports vertical but are not yet approached by any screen-time reward platform."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

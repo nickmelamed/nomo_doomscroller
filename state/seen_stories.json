@@ -1,10 +1,10 @@
 {
-  "last_success": "2026-09-28T20:11:39.073080+00:00",
+  "last_success": "2026-10-01T18:52:55.125105+00:00",
   "seen_stories": {
-    "01b5676ffb5b5f8f": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-14",
-      "headline": "UK moves ahead on under-16 social media restrictions under Children's Wellbeing and Schools Act"
+    "265f7f906df23e14": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-01",
+      "headline": "TikTok Reaches First State Settlement Over Teen Safety, Agrees to Usage Limits and Age Verification"
     },
     "2c2e3d6238c8b5b9": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -26,15 +26,15 @@
       "first_seen": "2026-09-28",
       "headline": "TikTok Settles Alabama Youth-Safety Lawsuit for at Least $100 Million Days Before Trial"
     },
+    "68cb64cd15e076e2": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-01",
+      "headline": "EU KIDS Act Proposal: Comprehensive Child-Safety Framework with Mandatory Age Verification"
+    },
     "a173dee379a0cbba": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-17",
       "headline": "EU Announces Plans to Mandate Age Verification for Social Media and AI Platforms"
-    },
-    "a2cb70a88deffafc": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-09-14",
-      "headline": "Connecticut AG Opens Investigation Into Messaging App Kik Over Child Safety, Citing Meta Settlement Precedent"
     },
     "b1e48307e2b1978a": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -51,11 +51,6 @@
       "first_seen": "2026-09-17",
       "headline": "Fintech Pulse: Split Pay's $125M Raise, Perk's US Spend Launch Highlight Rewards/Payments Funding Wave"
     },
-    "bfa0a43ea7fc3803": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-14",
-      "headline": "Social media addiction litigation and settlements accelerate across US states and France"
-    },
     "c3b16a5dff0ee72b": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
@@ -65,11 +60,6 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
       "headline": "Brazil's ECA Digital child-safety law implementation continues, with congressional debate on extending to a full under-16 access ban"
-    },
-    "cc3883b36a256025": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-09-14",
-      "headline": "Meta's $17.1B Multistate Settlement Continues to Shape State AG Enforcement Playbook"
     },
     "e5bdcac8d2fa57d6": {
       "entity_or_topic": "Youth social media policy and regulation",

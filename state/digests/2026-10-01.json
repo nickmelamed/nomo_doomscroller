@@ -1,0 +1,282 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "TikTok Reaches First State Settlement Over Teen Safety, Agrees to Usage Limits and Age Verification",
+      "source": "Maryland Daily Record",
+      "summary": "TikTok settled with Alabama ahead of the first state trial over teen mental health harms, agreeing to pay $100M+ and adopt usage limits and age verification \u2014 a template regulators in NOMO's core US/UK/AU markets may push other platforms toward, validating the 'screen-time reduction as a rewarded, protective behavior' thesis and strengthening the case for school/brand partnerships positioning NOMO as a compliance-friendly alternative.",
+      "url": "https://thedailyrecord.com/2026/09/28/tiktok-settles-alabama-teen-safety-measures"
+    },
+    {
+      "headline": "EU KIDS Act Proposal: Comprehensive Child-Safety Framework with Mandatory Age Verification",
+      "source": "Davis Wright Tremaine (DWT) Privacy & Security Law Blog",
+      "summary": "The EU's newly adopted KIDS Act would ban under-13 social media accounts, mandate zero-knowledge-proof age verification, and force account deactivations within six months, with fines up to 6% of global turnover. Though EU-specific, it intensifies the global regulatory wave NOMO's CEO is already engaging with in UK/US/AU policy circles, reinforcing demand for off-platform, reward-based alternatives.",
+      "url": "https://www.dwt.com/blogs/privacy--security-law-blog/2026/09/eu-kids-act-online-child-safety-proposal"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "School/state digital-wellness curriculum & program provider",
+      "confidence": "medium",
+      "name": "ScreenStrong",
+      "reason": "Not a true product/mechanic competitor \u2014 a school curriculum/procurement nonprofit rather than a screen-time reward app, weak fit vs. the app-block/rewards competitor bar.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.wspa.com/news/state-news/south-carolina-digital-wellness-initiative/",
+      "suggested_type": "Competitor",
+      "why_fits": "Nonprofit being tapped for a proposed $17M+ South Carolina statewide digital wellness initiative for public/charter school students, showing it is actively competing for the same school/EdTech and state-level procurement relationships NOMO targets."
+    },
+    {
+      "category": "App-block / screen-time reduction hardware+app",
+      "confidence": "medium",
+      "name": "Unpluq",
+      "reason": "not rejected",
+      "region": "Other",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.producthunt.com/products/unpluq",
+      "suggested_type": "Competitor",
+      "why_fits": "Unpluq is a physical-tag-plus-app system explicitly positioned to reduce screen time and compulsive phone checking, putting it in the 'app block' competitor bucket and drawing fresh attention via a April 2026 Product Hunt relaunch."
+    },
+    {
+      "category": "Gamified screen-time earning app",
+      "confidence": "medium",
+      "name": "Unrot: Earn your Screen Time",
+      "reason": "Redundant with Dayo/BePresent competitor coverage, medium confidence",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://apps.apple.com/us/app/unrot-earn-your-screen-time/id6746537171",
+      "suggested_type": "Competitor",
+      "why_fits": "A newer app store entrant that lets teens earn and 'purchase' screen time with coins, directly competing on the earn-based reward mechanic NOMO uses; user reviews describe measurable screen-time reductions after adoption."
+    },
+    {
+      "category": "City green pass / museum & attraction network",
+      "confidence": "medium",
+      "name": "Dallas Park & Recreation Teen All-Access Pass Network",
+      "reason": "Duplicate of the Dallas Teen All-Access Pass story already represented via the City of Dallas GTM entry and State Fair of Texas reward entry.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-run summer program giving teens 13-17 free admission across dozens of partner venues (zoo, arboretum, museums, golf, skating) as part of a 'Summer of Safety' initiative \u2014 matches the 'museum tickets, city green passes' reward criteria and offers a ready-made multi-venue teen reward bundle NOMO doesn't currently have."
+    },
+    {
+      "category": "City/municipal teen attraction pass (museums, zoo, recreation, culture)",
+      "confidence": "medium",
+      "name": "Dallas Teen All-Access Pass (City of Dallas Park & Recreation)",
+      "reason": "Duplicate of the same Dallas program already covered by the City of Dallas GTM candidate and State Fair of Texas reward entry.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-run teen pass program (ages 13-17) bundling free admission to museums, the zoo, arboretum, and cultural venues via local partnerships \u2014 exactly the 'city greenpass'/museum-ticket style tradeable inventory NOMO seeks, and it is actively running with fresh 2026 coverage."
+    },
+    {
+      "category": "City attraction & museum multi-passes",
+      "confidence": "medium",
+      "name": "CityPASS / Go City",
+      "reason": "Duplicate of the CityPASS entry already included.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.acg.aaa.com/connect/blogs/4c/discounts/aaa-summer-discounts-guide",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "CityPASS bundles discounted access to museums, landmarks and attractions across major US cities (Chicago, Boston, Seattle, New York, San Diego, etc.), directly matching the 'museum tickets, city green passes' reward criteria NOMO is seeking. It's an established, tradeable ticket-inventory product already distributed through partner channels like AAA, making it realistic to integrate as a scalable reward beyond NOMO's current single-museum (Fever) and single-experience (GetYourGuide) partners."
+    },
+    {
+      "category": "6-12 Education / District policy",
+      "confidence": "medium",
+      "name": "Henrico County Public Schools",
+      "reason": "Redundant, lower-profile district policy story, medium confidence",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.29news.com/2026/08/18/henrico-schools-set-new-screen-time-limits-digital-wellness-guidance/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "HCPS unveiled new 'Digital Wellness Guidance' in August 2026 setting daily technology-use limits and blocking YouTube for elementary/middle schoolers, indicating active district-level appetite for structured digital-wellness programs NOMO could plug into as an incentive layer."
+    },
+    {
+      "category": "State-level Education mandate",
+      "confidence": "medium",
+      "name": "Illinois (SB 2427 bell-to-bell phone ban)",
+      "reason": "A state legislative mandate, not an actionable partner entity \u2014 better characterized as a regulatory/market signal than a GTM partner prospect.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://thescreenguardians.com/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Illinois just signed a statewide law requiring bell-to-bell cellphone restrictions in public schools starting 2027-2028, creating a fresh, large-scale procurement need for implementation partners across the state's districts."
+    },
+    {
+      "category": "Youth Sports & Athletic League",
+      "confidence": "medium",
+      "name": "Little League Baseball / LLWS",
+      "reason": "Medium confidence; youth sports vertical adequately represented elsewhere; sponsorship signal not specific enough to NOMO's reward/GTM model.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://youthsportsbusinessreport.com/youth-sports-sponsorship-on-display-19-brands-activate-at-2026-little-league-world-series-fan-zone/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Little League now runs a portfolio of 25+ Official Sponsors reaching roughly two million players and one million volunteers, and just launched a Fan Pass system built into its official app that gates prizes behind first-party fan registration \u2014 exactly the large-roster, app-embedded activation model NOMO could plug Moments/rewards into via the Youth Sports GTM vertical."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "App block / NFC distraction blocker",
+      "confidence": "medium",
+      "name": "Foqos (and Switchly)",
+      "reason": "Free/open-source NFC blocker trend in a region outside NOMO's priority markets ('Other'); marginal signal already captured by the broader app-block competitor category.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://gokhshtein.com/news/2026-09-27-bricks-59-distraction-blocker-faces-free-and-open-source",
+      "suggested_type": "Competitor",
+      "why_fits": "A fresh wave of free/open-source NFC-based blockers is undercutting paid incumbents like Brick: <cite index=\"19-5\">Foqos, a free, open-source iOS app from Canadian developer Ali Waseem, offers a polished alternative</cite>, while <cite index=\"19-2\">Android users have Switchly, developed by Vienna-based Saltyy</cite> \u2014 new entrants worth tracking in NOMO's app-block competitive set."
+    },
+    {
+      "category": "6-12 Education district",
+      "confidence": "medium",
+      "name": "Henrico County Public Schools (HCPS)",
+      "reason": "Redundant with stronger district/state policy stories (Massachusetts, NYC) already kept; targets elementary-age limits, not a strong teen-procurement signal.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.womanmagazine.com/henrico-county-public-schools-introduce-screen-time-limits-and-digital-wellness-initiatives/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "HCPS just rolled out structured digital-wellness guidance with <cite index=\"29-5\">structured screen time limits for elementary students... starting with just 15 minutes per day for Pre-K students and increasing incrementally up to 90 minutes for third through fifth graders</cite>, making it a live, structured-procurement district prospect for NOMO's direct education GTM motion."
+    },
+    {
+      "category": "6-12 Education district",
+      "confidence": "medium",
+      "name": "Las Virgenes Unified School District",
+      "reason": "District explicitly wants to avoid gamified, engagement-driven apps \u2014 contradicts NOMO's gamified reward model, weak fit.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.theacorn.com/articles/lengthy-school-board-meeting-addresses-student-screen-policy/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "The district is actively drafting new device-use regulations, with a board meeting where <cite index=\"23-4\">district officials are seeking to minimize the time students spend on their screens while maximizing learning and achievement</cite> and explicitly flagging a desire to avoid gamified, engagement-driven apps \u2014 a timely, active-need account for NOMO's education-vertical outreach."
+    },
+    {
+      "category": "6-12 Education \u2014 Direct (state/district procurement)",
+      "confidence": "medium",
+      "name": "Kansas State Board of Education",
+      "reason": "Redundant with Massachusetts and NYC district-policy stories already covering the phone-ban-driven GTM opportunity.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.mitrmedia.com/resources/blogs/cell-phone-bans-in-schools-a-2026-policy-guide-for-k12-schools/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"35-7\">Kansas Governor Laura Kelly signed a statewide bell-to-bell cell phone ban on March 20, 2026, applying to all public and accredited nonpublic K-12 schools and requiring districts to certify compliance to the Kansas State Board of Education by September 1, 2026.</cite> The imminent compliance deadline creates urgent district-level demand for an engagement/enforcement and positive-incentive tool like NOMO, fitting the 6-12 Education direct GTM vertical."
+    },
+    {
+      "category": "Arcade / entertainment venue credits",
+      "confidence": "medium",
+      "name": "Dave & Buster's",
+      "reason": "Same underlying Dallas Teen All-Access Pass story as State Fair of Texas; lower confidence, cut as duplicate.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Dave & Buster's was just added as a new partner in Dallas's Teen All-Access Pass program alongside Dallas Love Field and the State Fair of Texas, showing it is actively building teen-access partnerships. Arcade/game-credit experiences are a genuine gap versus NOMO's current lineup of concerts, sports tickets, and apparel, and as a national chain it offers realistic, scalable tradeable inventory (game cards/credits) for a teen audience."
+    },
+    {
+      "category": "School-focused phone restriction app",
+      "confidence": "medium",
+      "name": "CLocked",
+      "reason": "Vague why_fits and thin single-district sourcing; redundant with stronger app-block competitors already included (Habit Doom, BrainWin).",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.bousd.us/article/3071114",
+      "suggested_type": "Competitor",
+      "why_fits": "A school-focused mobile app being piloted by a school district specifically to reduce phone distractions during instructional time, competing directly for the same school partnership budgets NOMO targets."
+    },
+    {
+      "category": "Gamified screen-time reward app",
+      "confidence": "medium",
+      "name": "ScreenCoach",
+      "reason": "Redundant with Dayo/Pocket Points/BrainWin gamified reward competitors already covered; generic region, no new signal.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.myscreencoach.com/",
+      "suggested_type": "Competitor",
+      "why_fits": "A 'nag-free' screen time app that gamifies good behavior with tokens, pocket-money gems, and bonus rewards for completing activities \u2014 overlaps directly with NOMO's gamified rewards-for-reduced-screen-time model."
+    },
+    {
+      "category": "City green pass / museum & attraction network",
+      "confidence": "medium",
+      "name": "Dallas Park & Recreation Teen All-Access Pass Network",
+      "reason": "Duplicate of the Dallas Teen All-Access Pass story already represented via the City of Dallas GTM entry and State Fair of Texas reward entry.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-run summer program giving teens 13-17 free admission across dozens of partner venues (zoo, arboretum, museums, golf, skating) as part of a 'Summer of Safety' initiative \u2014 matches the 'museum tickets, city green passes' reward criteria and offers a ready-made multi-venue teen reward bundle NOMO doesn't currently have."
+    },
+    {
+      "category": "Screen time reward app (points/allowance for reduced screen use)",
+      "confidence": "medium",
+      "name": "Earnie: Screen Time Control",
+      "reason": "Redundant with Dayo's points/allowance-for-screen-time model; adds no new differentiation.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=com.transeed.app&hl=en-US",
+      "suggested_type": "Competitor",
+      "why_fits": "Earnie is a screen time reward app where kids earn points for healthy offline habits that parents convert into allowances or custom incentives, directly gamifying reduced screen time in the same category as NOMO."
+    },
+    {
+      "category": "City/municipal teen attraction pass (museums, zoo, recreation, culture)",
+      "confidence": "medium",
+      "name": "Dallas Teen All-Access Pass (City of Dallas Park & Recreation)",
+      "reason": "Duplicate of the same Dallas program already covered by the City of Dallas GTM candidate and State Fair of Texas reward entry.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-run teen pass program (ages 13-17) bundling free admission to museums, the zoo, arboretum, and cultural venues via local partnerships \u2014 exactly the 'city greenpass'/museum-ticket style tradeable inventory NOMO seeks, and it is actively running with fresh 2026 coverage."
+    },
+    {
+      "category": "MVNO specializing in kids/teen phone plans",
+      "confidence": "medium",
+      "name": "US Mobile",
+      "reason": "Generic listicle-sourced claim with weak specificity; redundant with NuCel/Rogers already covering the telco-vertical signal.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.usmobile.com/blog/phone-plans-for-kids/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "US Mobile is ranked as a top kids/teen-focused MVNO plan in 2026, giving parents granular controls and flexible lines \u2014 an MVNO with an existing teen/family subscriber base that NOMO could embed its rewards program into, filling the current gap of zero GTM/distribution partners in the US Telcos & MVNOs vertical."
+    },
+    {
+      "category": "City attraction & museum multi-passes",
+      "confidence": "medium",
+      "name": "CityPASS / Go City",
+      "reason": "Duplicate of the CityPASS entry already included.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.acg.aaa.com/connect/blogs/4c/discounts/aaa-summer-discounts-guide",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "CityPASS bundles discounted access to museums, landmarks and attractions across major US cities (Chicago, Boston, Seattle, New York, San Diego, etc.), directly matching the 'museum tickets, city green passes' reward criteria NOMO is seeking. It's an established, tradeable ticket-inventory product already distributed through partner channels like AAA, making it realistic to integrate as a scalable reward beyond NOMO's current single-museum (Fever) and single-experience (GetYourGuide) partners."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

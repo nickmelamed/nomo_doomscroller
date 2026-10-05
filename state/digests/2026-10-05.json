@@ -1,0 +1,484 @@
+{
+  "competition": [
+    {
+      "headline": "University of Montana funds 125-device Brick phone-blocking program",
+      "source": "Montana Kaimin",
+      "summary": "UM's Curry Health Center bought 125 Brick NFC-blocking devices for a 'Be Here with Brick' campus program, funded by a $6,800 campus grant and including a semester loan program for students. A direct institutional win for a punitive/physical-blocking competitor in the exact higher-ed wellness space NOMO's rewards model targets.",
+      "url": "https://www.montanakaimin.com/in_print/um-uses-brick-to-combat-phone-addiction/article_73745c01-0025-4d30-956f-029422e0d975.html"
+    }
+  ],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "Meta's $17.1B teen social media settlement finalized with 51-state AG coalition",
+      "source": "News Anyway",
+      "summary": "A bipartisan coalition of 51 attorneys general secured a landmark settlement forcing Meta to adopt court-mandated defaults like time limits and nighttime blackouts. Locks in platform-side behavior change that validates NOMO's reward-for-reduced-screen-time thesis and primes schools/states to favor third-party tools that reinforce it.",
+      "url": "https://newsanyway.com/2026/10/05/meta-teen-social-media-settlement-brings-platform-overhaul-and-17bn-penalty"
+    },
+    {
+      "headline": "UK confirms under-16 social media ban with hard age checks, effective March 2027",
+      "source": "Brit Brief / Newsquawk",
+      "summary": "The UK government is preparing to mandate passport/ID-level age verification for under-16 social media access, with the ban taking effect by March 2027; restrictions for 16-17 year-olds on infinite scroll/algorithmic content remain undated. Gives NOMO's UK pilot a concrete regulatory horizon and leaves room for CEO Leonardo's ongoing policy engagement to shape scope.",
+      "url": "https://britbrief.co.uk/tech/regulation/uk-under-16-social-media-ban-march-2027-older-teens-undated.html"
+    },
+    {
+      "headline": "Canada moves toward Australia-style under-16 social media ban",
+      "source": "CBC",
+      "summary": "Ottawa's proposed under-16 ban has drawn a generally warm response, though experts flag unclear accountability mechanisms for platforms; Snap's parent company has separately signaled openness to teen time restrictions. A third major English-speaking market joins the global policy wave NOMO already tracks in US/UK/AU.",
+      "url": "https://cbc.ca/news/health/youth-screen-time-tech-companies-9.7365434"
+    },
+    {
+      "headline": "Europe pushes toward 15-year social media age limit with one-hour daily cap for 13-15s",
+      "source": "ProtoThema English",
+      "summary": "Emerging EU framework would cap teen social media use at one hour/day with overnight lockouts and no personal accounts for 13-15 year-olds. A prescriptive regulatory template that directly validates NOMO's core mechanic and could inform UK/US policy conversations.",
+      "url": "https://en.protothema.gr/2026/10/04/social-media-locked-for-teens-from-january-1-how-age-verification-will-work-and-where-platforms-and-parents-stand/"
+    },
+    {
+      "headline": "California and Australia compared as blueprints for state-level youth social media crackdowns",
+      "source": "WSBT / The National News Desk",
+      "summary": "California's new law targets addictive features (algorithms, infinite scroll, autoplay) and requires feature-free accounts for under-16s; experts warn minor-only restrictions face an 'uphill battle' given parent/peer modeling. Directly relevant cross-market read for NOMO's US GTM-now push and AU exploratory signal, reinforcing demand for school/family-level behavioral alternatives.",
+      "url": "https://wsbt.com/news/nation-world/what-can-california-other-states-learn-from-australias-youth-social-media-crackdown"
+    }
+  ],
+  "new_candidates": [
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Dayo (Dayo Deals)",
+      "region": "US",
+      "source_url": "https://www.fastcompany.com/91507495/dayo-app-teen-phone-screen-time-reduction-parents-reward-starbucks-adidas",
+      "suggested_type": "Competitor",
+      "why_fits": "Dayo pays teens cash for staying under agreed screen-time limits and already has Starbucks, Adidas, and Amazon as reward brands \u2014 the closest direct competitor to NOMO's Moments-for-offline-time model, overlapping with the same brand-reward pool NOMO taps via Nike/Vans."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Linewize EdTech Manager (Qoria)",
+      "region": "US",
+      "source_url": "http://www.prnewswire.com/news-releases/linewize-edtech-manager-launches-screen-time-feature-and-wins-tech--learning-award-of-excellence-back-to-school-2026-302894658.html",
+      "suggested_type": "Competitor",
+      "why_fits": "Linewize's newly launched district-wide Screen Time reporting feature (a Tech & Learning award winner) puts Qoria in direct competition for the same K-12 school procurement conversations NOMO needs, offering districts a monitoring-only alternative to a reward-based model."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "The Commons",
+      "region": "US",
+      "source_url": "https://www.wscuhsd.org/o/analy/article/3026572/",
+      "suggested_type": "Competitor",
+      "why_fits": "The Commons is being adopted by districts (e.g., WSCUHSD/Analy High for 2026-27) as a geofenced app-blocker for the school day \u2014 a direct rival for the same 6-12 Education contracts NOMO pursues, competing on block-first rather than reward-first positioning."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Yondr",
+      "region": "US",
+      "source_url": "https://www.overyondr.com/newyork",
+      "suggested_type": "Competitor",
+      "why_fits": "Yondr's phone pouches now anchor a bell-to-bell policy at the largest NY State district to adopt one (Lackawanna), showing physical-blocking vendors winning the same district contracts NOMO's reward model competes for."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Rogers Screen Break",
+      "region": "Other",
+      "source_url": "https://www.barchart.com/story/news/36943422/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time",
+      "suggested_type": "Competitor",
+      "why_fits": "Rogers built its own $50M, five-year national youth screen-balance program rather than seeking a distribution partner, showing telcos may choose to own this space directly instead of white-labeling a rewards layer \u2014 worth tracking as a template competitor even though Canada is exploratory-signal-only region for NOMO."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Lock&Stock",
+      "region": "Other",
+      "source_url": "https://en.wikipedia.org/wiki/Lock%26Stock",
+      "suggested_type": "Competitor",
+      "why_fits": "Lock&Stock rewards students with 'keys' for offline time, redeemable for brand discounts and scholarships, and has scaled its SecureMyScholarship model to 1,000+ universities \u2014 a close mechanical twin to NOMO's Moments system targeting the college market."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "TAP: Tech Activity Pact",
+      "region": "US",
+      "source_url": "https://apps.apple.com/app/id6759011242",
+      "suggested_type": "Competitor",
+      "why_fits": "TAP lets teens negotiate screen-time 'pacts' with parents and earn bonus rewards for follow-through via streaks \u2014 mechanically the closest new entrant to NOMO's own streaks/leaderboard/social-accountability design."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Dallas Teen All-Access Pass (Dallas Park and Recreation Department)",
+      "region": "US",
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Dallas's free Teen All-Access Pass bundles zoo, arboretum, and recreation-venue access for 13-17 year-olds \u2014 comparable experiential-pass inventory to NOMO's Fever (concerts & museums) and GetYourGuide partnerships, and realistic to approach since it's a municipal program rather than a single paid brand."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "TeenTix",
+      "region": "US",
+      "source_url": "https://www.greaterseattleonthecheap.com/discount-museum-pass/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "TeenTix's $5 teen pass covering movies, music, theatre, dance and visual art extends NOMO's Odeon/Ingresso-style entertainment rewards into an arts/theatre category it doesn't yet cover."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Go City",
+      "region": "Other",
+      "source_url": "https://en.wikipedia.org/wiki/Go_City",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Go City's bundled attraction/museum passes across 28 cities on 4 continents would broaden NOMO's Fever/GetYourGuide-style experience rewards into a scalable, multi-city format NOMO's current lineup lacks."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Sonic Drive-In",
+      "region": "US",
+      "source_url": "https://parade.com/food/sonic-rewards-program-perks",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Sonic's new loyalty program offering free fries/tots/drinks for sign-up gives NOMO cheap, high-frequency, teen-friendly reward inventory in a food & drink category where it currently has zero partners."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Planet Fitness Teen Summer Pass",
+      "region": "US",
+      "source_url": "https://girlfriend.aarp.org/money/saving/2026-summer-freebies-to-nab-now/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Planet Fitness's free teen gym pass across 2,400+ locations is a nationally scalable, low-cost reward comparable in structure to NOMO's existing Vans/Nike/Down Dog lifestyle rewards, adding physical fitness-facility access NOMO doesn't yet have."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Topgolf (via Topgolf Media Networks)",
+      "region": "US",
+      "source_url": "https://www.prnewswire.com/news-releases/topgolf-launches-topgolf-media-networks-expanding-into-sponsorship-media-and-licensing-302827849.html",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Topgolf's new Media Networks division is actively building sponsorship/licensing deals and already runs teen leadership programming at 25+ venues, making it a plausible experience-reward partner alongside NOMO's GetYourGuide/Odeon-style outings."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Young Life",
+      "region": "US",
+      "source_url": "https://www.prnewswire.com/news-releases/new-global-study-by-young-life-finds-youth-are-digitally-saturated-yet-their-relational-circles-are-shrinking-302874457.html",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Young Life's RELATE 2026 study found youth 'digitally saturated yet their relational circles are shrinking' \u2014 a direct thesis match for NOMO's offline-rewards model, and a genuine first mover for the currently-empty Faith-based & Youth Orgs GTM vertical."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "City of Dallas Parks & Recreation (Teen All Access Pass)",
+      "region": "US",
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Dallas Parks & Rec already runs the municipal infrastructure (venue partnerships, teen sign-up flow) behind its free Teen All-Access Pass, making it a ready-built Municipalities-vertical implementation partner for NOMO, which currently has zero GTM partners."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Massachusetts Dept. of Elementary & Secondary Education (Phone-Free Schools Grant)",
+      "region": "US",
+      "source_url": "https://www.boston.com/news/education/2026/09/28/another-district-bans-cellphones-as-healey-announces-1-million-in-phone-free-school-grants/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Massachusetts has already put $1M+ in phone-free school grants behind 77 districts (following a $1.3M pilot), giving NOMO a concrete state funding mechanism to plug into as the reward/accountability layer behind phone-free policy \u2014 directly filling NOMO's empty Municipalities & States GTM lineup."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "State Attorneys General Meta Settlement Fund (50-state coalition)",
+      "region": "US",
+      "source_url": "https://ag.ny.gov/press-release/2026/attorney-general-james-secures-171-billion-and-groundbreaking-reforms-meta",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "The 51-AG coalition's up-to-$17.1B Meta settlement is earmarked for youth mental-health and digital-wellbeing programs \u2014 a large, newly available funding pool states could direct toward implementation partners like NOMO, a genuine first entrant into NOMO's currently empty state/municipal GTM channel."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "Digital Schools Awards x Ygam",
+      "region": "UK",
+      "source_url": "https://www.edtechinnovationhub.com/news/digital-schools-awards-and-ygam-announce-partnership-to-strengthen-digital-wellbeing-in-schools",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "This new England/Scotland schools-network partnership delivering digital wellbeing training for 2026-27 is exactly the kind of school distribution channel NOMO's UK pilot needs, especially given CEO Leonardo's active UK policy engagement."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "California AB 3216 phone-free districts wave (e.g., Central Unified SD, Davis Joint USD)",
+      "region": "US",
+      "source_url": "https://www.centralunified.org/parents/phone-and-device-free-schools",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "California's Phone-Free Schools Act is forcing districts like Central Unified and Davis Joint USD to build 2026-27 implementation plans right now \u2014 a concrete, time-bound procurement window for NOMO's 6-12 Education vertical in its highest-weighted US market."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "LeagueApps",
+      "region": "US",
+      "source_url": "https://youthsportsbusinessreport.com/red-bull-new-york-partners-with-leagueapps-to-power-youth-soccer-registration/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "LeagueApps just became Red Bull New York's official youth-soccer registration partner, reaching 50,000+ players and families \u2014 exactly the coach/parent-touchpoint distribution NOMO needs to fill its empty Youth Sports GTM vertical without signing leagues one by one."
+    },
+    {
+      "category": null,
+      "confidence": null,
+      "name": "UnitedHealthcare",
+      "region": "US",
+      "source_url": "https://clearhealthcosts.com/blog/2026/09/your-insurer-wants-to-be-your-mental-health-care-provider-what-could-possibly-go-wrong/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "UnitedHealthcare just expanded child/family behavioral coaching to roughly 13 million eligible members, showing insurer appetite for scaled teen behavioral-health benefits \u2014 an opening for NOMO to slot in as a complementary screen-time/wellness benefit in a new Insurance distribution vertical."
+    }
+  ],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [],
+  "rejected_today": [
+    {
+      "category": "Gamified app blocker (earn-back access)",
+      "confidence": "medium",
+      "name": "BrainWin",
+      "reason": "Redundant with Dayo (kept) \u2014 same earn-back-screen-time mechanic, medium confidence with no distinguishing detail.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.financialcontent.com/article/abnewswire-2026-9-25-brainwin-launches-gamified-app-blocker-that-lets-iphone-users-earn-screen-time-through-healthy-habits-tracker",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"18-1,18-2\">BrainWin is a screen time app for iPhone that blocks distracting apps and websites until the user earns access back by completing healthy real-life tasks such as walking, reading, exercising or studying, launched to reduce doomscrolling without giving up apps entirely</cite>, a close gamified-reward mechanic analogous to NOMO's Moments system."
+    },
+    {
+      "category": "School-focused distraction-limiting app (EdTech/district partnership)",
+      "confidence": "medium",
+      "name": "The Commons",
+      "reason": "Duplicate of the higher-confidence 'The Commons (The Commons, Inc.)' entry, which was kept instead.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.wscuhsd.org/o/analy/article/3026572/",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"28-5\">Starting in the 2026-2027 school year, WSCUHSD is partnering with The Commons \u2014 a privacy-first app that helps students stay focused by limiting distracting apps during the school day</cite>, making it a direct competitor for the same 6-12 Education district partnerships NOMO is pursuing."
+    },
+    {
+      "category": "Telco youth digital-wellness program",
+      "confidence": "medium",
+      "name": "Rogers (Screen Break program)",
+      "reason": "Mischaracterized as GTM partner prospect; Rogers built its own competing program rather than a NOMO distribution channel \u2014 covered instead as a Competitor entry.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://about.rogers.com/news-ideas/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"48-3\">Rogers today announced Screen Break, a new, national program to help Canadian families address excessive screen use in youth</cite>, investing <cite index=\"48-9\">$50 million over five years into four program pillars including parental tools built into the MyRogers app</cite> \u2014 a strong proof point that telcos see value in youth screen-time initiatives, relevant to the US Telcos & MVNOs distribution vertical even though this instance is Canadian."
+    },
+    {
+      "category": "State government teen wellness/digital-health initiative",
+      "confidence": "medium",
+      "name": "New Mexico Health Care Authority (Navi teen wellness app)",
+      "reason": "Redundant with stronger state-level teen wellness GTM leads (Massachusetts, State AG settlement fund) already surfaced; cut for volume.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.hca.nm.gov/2026/06/24/new-mexico-launches-free-wellness-app-for-teens/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"49-4\">Navi offers brief, evidence-informed activities for emotional regulation, stress management and help-seeking, plus built-in safety features that connect teens to crisis resources</cite>, launched via <cite index=\"49-8\">a partnership with HCA to make sure every teen in the state has access to simple, evidence-based support</cite> \u2014 demonstrating state-level appetite for direct teen digital-wellness partnerships, matching the Municipalities (and States) GTM vertical."
+    },
+    {
+      "category": "Large school district under new phone-free mandate (6-12 Education)",
+      "confidence": "medium",
+      "name": "Fairfax County Public Schools (FCPS)",
+      "reason": "Redundant with California AB 3216 entry already covering the state phone-free-mandate GTM opportunity; cut for volume.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.fcps.edu/cellphone-policy",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"34-3\">SB108 is a new Virginia law that went into effect on July 1, 2026 and states that all schools in the state must follow a bell-to-bell phone-free policy</cite>, and <cite index=\"34-6\">FCPS's updated cellphone policy is bell to bell, meaning students at all grade levels can only use cellphones before and after school</cite> \u2014 a large, newly-mandated district actively seeking implementation solutions, fitting the direct 6-12 Education GTM vertical."
+    },
+    {
+      "category": "Coin-based screen time rewards app",
+      "confidence": "medium",
+      "name": "PlayFund",
+      "reason": "Vague why_fits ('recently updated') and redundant with multiple other earn-back screen-time competitors already represented by Dayo.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=com.screenbank.app&hl=en_GB",
+      "suggested_type": "Competitor",
+      "why_fits": "Turns real-world activities (reading, chores, outdoor play) into coins that kids spend on screen time, with badges, streaks and weekly rewards \u2014 a direct gamification/rewards-for-reduced-screen-time mechanic recently updated (Aug 2026)."
+    },
+    {
+      "category": "App blocker with reward mechanics",
+      "confidence": "medium",
+      "name": "Habit Doom",
+      "reason": "Redundant with Dayo/Lock&Stock \u2014 generic app-blocker-with-rewards mechanic, no distinguishing detail.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://habitdoom.com/blog/best-app-blockers-for-students",
+      "suggested_type": "Competitor",
+      "why_fits": "Habit Doom locks distracting apps until habits are done and frames its 'earn your screen time' model as a reward loop rather than punishment, directly overlapping with NOMO's gamified screen-time-reduction mechanic."
+    },
+    {
+      "category": "Focus timer with points/reward redemption for teens",
+      "confidence": "medium",
+      "name": "Timily",
+      "reason": "Redundant with TAP/Dayo \u2014 generic focus-timer-with-points mechanic, no unique angle.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://timily.app/guides/time-management-tools-students/",
+      "suggested_type": "Competitor",
+      "why_fits": "Timily pairs a focus timer with a reward system where teens earn points for staying focused and redeem them for screen time or custom rewards, closely mirroring NOMO's challenge-and-reward loop aimed at the same teen audience."
+    },
+    {
+      "category": "6-12 Education district (sports-team/brand co-branded wellness)",
+      "confidence": "medium",
+      "name": "School District of Philadelphia",
+      "reason": "Redundant with LeagueApps/GameChanger sports-wellness GTM angle; a single district deal is less scalable than the platform-level opportunities kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.phillytrib.com/news/the-learning-key/philly-school-district-expand-student-wellness-program-with-flyers-rallee-app/article_b8d15ab1-da94-4343-bbe4-f0287b74e5a0.html",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "The district partnered with the Philadelphia Flyers and the Rallee app to deliver student well-being programming, proving this district is actively procuring branded, gamified wellness/engagement tools for students and expanding the program district-wide."
+    },
+    {
+      "category": "Gen Z rewards marketplace/aggregator (experiences, travel, wellness)",
+      "confidence": "medium",
+      "name": "Xoxoday Loyalife",
+      "reason": "Generic global rewards aggregator with vague why_fits; doesn't ground in a concrete, teen-specific comparison like kept reward candidates.",
+      "region": "All",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.xoxoday.com/blogs/loyalife/gen-z-loyalty-programs",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Loyalife's global rewards catalog spans 10mn+ options across 150+ countries covering gift cards, experiences, travel, wellness, and charitable donations, offering a scalable inventory source in categories (broad experiences/travel/wellness aggregation) not currently represented as a single partner in NOMO's lineup."
+    },
+    {
+      "category": "US Telcos / Youth Orgs distribution model",
+      "confidence": "medium",
+      "name": "Rogers Screen Break x YMCA of Greater Toronto",
+      "reason": "Duplicate framing of Rogers Screen Break; consolidated into a single Competitor entry rather than three overlapping variants.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://about.rogers.com/news-ideas/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Rogers committed $50M over five years to a youth screen-balance program and named YMCA as its first national grant partner to get teens into in-person activity instead of scrolling \u2014 a proof-of-concept playbook for telco-funded, youth-org-delivered screen-time programs that NOMO's Telco (Leo) and Faith-based/Youth Org (Eric) verticals could emulate or partner into."
+    },
+    {
+      "category": "Youth Sports & Athletic Leagues \u2014 team management/app platform",
+      "confidence": "medium",
+      "name": "GameChanger (DICK'S Sporting Goods)",
+      "reason": "Redundant with LeagueApps \u2014 same Youth Sports platform GTM niche; kept only the stronger, more concrete LeagueApps deal.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://youthsportshq.substack.com/p/gamechanger-making-basketball-moves",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "GameChanger just expanded its platform to add club administration, streaming and highlight tools for youth basketball, deepening its embedded role with coaches and families across youth sports \u2014 the exact buyer persona (coach/parent) NOMO's Youth Sports vertical is chasing. As the YSBR newsletter put it, 'GameChanger, the DICK's Sporting Goods-owned team app, announced an expanded basketball experience that puts club administration, game streaming, and athlete highlight content on a single platform.' With no GTM partners currently signed, an integration or co-marketing deal with a platform already embedded in rosters/communications would be a strong distribution shortcut."
+    },
+    {
+      "category": "Municipal teen experiential pass (museums, zoo, arboretum, recreation venues)",
+      "confidence": "medium",
+      "name": "Dallas Park and Recreation \u2014 Teen All Access Pass",
+      "reason": "Duplicate of the higher-confidence Dallas Teen All-Access Pass entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "This is a city-run, teen-specific (ages 13-17) free-admission pass bundling a wide roster of experiential venues, precisely the kind of 'tradeable reward inventory' NOMO seeks beyond its current museum/concert partners. As described, 'Dallas Park and Recreation has teamed up with several area partners to offer teens age 13-17 FREE activities,' with participating venues including the Dallas Zoo, Dallas Arboretum, and a roller rink. Because it's a municipal program (not a single paid brand), it is realistic to approach and also double-dips into NOMO's Municipalities GTM vertical."
+    },
+    {
+      "category": "Insurance - Distribution Partner / Direct",
+      "confidence": "medium",
+      "name": "Blue Shield of California (BlueSky program)",
+      "reason": "Vague on program/partner specifics; redundant with the more concrete, larger-scale UnitedHealthcare insurance GTM lead kept instead.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.ahip.org/news/articles/health-insurance-providers-actions-concerning-mental-health",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Blue Shield's BlueSky division already runs a teen-focused digital engagement initiative with a youth nonprofit, showing insurers are actively building teen digital-wellness programs \u2014 a genuine gap where NOMO could slot in as the behavior-change/rewards layer."
+    },
+    {
+      "category": "Municipalities - Direct",
+      "confidence": "medium",
+      "name": "City of Dallas Park & Recreation Department",
+      "reason": "Duplicate of the higher-confidence City of Dallas Parks & Recreation GTM entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Runs an active 'Teen All-Access Pass' giving 13-17 year olds free access to dozens of local cultural/recreational partners, demonstrating the exact municipal teen-engagement model NOMO's Municipalities vertical targets, with no current overlap in NOMO's GTM lineup."
+    },
+    {
+      "category": "Municipalities - Direct",
+      "confidence": "medium",
+      "name": "NYC Mayor's Office / NYC Dept. of Cultural Affairs (Tickets for Teens)",
+      "reason": "Redundant with the Dallas Teen All-Access Pass municipal-pass opportunity already kept; cut for volume.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://tft.tdf.org/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "A 2026 city-led program with the Mamdani administration offering NYC high schoolers free museum and Broadway access shows a municipality actively building teen reward infrastructure, a strong analog to NOMO's Municipalities GTM vertical."
+    },
+    {
+      "category": "Fitness access reward for teens",
+      "confidence": "medium",
+      "name": "Planet Fitness",
+      "reason": "Duplicate of the Planet Fitness Teen Summer Pass entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.phila.gov/2025-05-30-the-city-and-school-district-announced-partnership-with-local-planet-fitnesss-ahead-of-high-school-summer-pass-program-for-teens/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Planet Fitness already runs a 'Summer Pass' giving teens free gym access through city/school partnerships, showing an established, teen-friendly, nationally scalable reward inventory NOMO could plug into similarly to its McDonald's ice cream model."
+    },
+    {
+      "category": "EdTech screen-time analytics platform competing for school district contracts",
+      "confidence": "high",
+      "name": "Linewize (Qoria)",
+      "reason": "Duplicate of the Linewize EdTech Manager entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "http://www.prnewswire.com/news-releases/linewize-edtech-manager-launches-screen-time-feature-and-wins-tech--learning-award-of-excellence-back-to-school-2026-302894658.html",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"1-3,1-4\">Linewize announced that EdTech Manager's Screen Time reporting feature officially launched and is now available to school districts nationwide, with the company winning a Tech & Learning Award of Excellence for Back to School 2026</cite>. <cite index=\"1-5,1-6\">Designed for K-12, EdTech Manager gives school leaders visibility into student screen time and app usage at the district, school, grade and student level</cite>, directly competing for the same school/EdTech procurement relationships NOMO targets."
+    },
+    {
+      "category": "Screen-time reward app for kids/teens",
+      "confidence": "medium",
+      "name": "Earnie",
+      "reason": "Redundant with Dayo \u2014 same points-for-offline-activities reward mechanic, no unique distinguishing detail.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=com.transeed.app&hl=en-US",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"3-2,3-4\">Earnie is a parental control and screen time reward app that turns less screen time into real motivation, with children earning points for offline activities like reading, exercising, studying and family time</cite>, a positive-reinforcement model directly analogous to NOMO's Moments system."
+    },
+    {
+      "category": "State education agency grant program",
+      "confidence": "medium",
+      "name": "New Jersey Dept. of Education Phone-Free Schools Grant Program",
+      "reason": "Redundant with the Massachusetts phone-free schools grant entry already kept; same state-grant GTM thesis.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.nj.gov/education/safety/sandp/digital/docs/2025-2026%20LOA%20Phone%20Free%20Schools%20Grant.pdf",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"18-4,18-5\">New Jersey's Phone-Free Schools Program runs July 1, 2025 through June 30, 2026, reimbursing participating districts for allowable implementation costs</cite>, including <cite index=\"18-12\">storage solutions for secure, day-long phone restriction and staff training on Bell-to-Bell policy implementation</cite>. This state-funded district rollout is a concrete procurement entry point for NOMO in the Municipalities/States and 6-12 Education verticals, currently unaddressed in the existing (empty) GTM partner lineup."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

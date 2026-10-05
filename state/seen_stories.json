@@ -1,6 +1,11 @@
 {
-  "last_success": "2026-10-01T18:52:55.125105+00:00",
+  "last_success": "2026-10-05T21:17:28.060387+00:00",
   "seen_stories": {
+    "1b5f332a22df330d": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-05",
+      "headline": "Social media adolescent-addiction MDL grows to 3,824 claims heading into October 2026"
+    },
     "265f7f906df23e14": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-01",
@@ -16,10 +21,25 @@
       "first_seen": "2026-09-21",
       "headline": "Meta reaches $17.1B settlement with 51 state attorneys general over teen addiction claims"
     },
+    "4498658d24476f3b": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-05",
+      "headline": "UK under-16 social media ban timeline clarified: March 2027, older teens undated"
+    },
+    "4df54d66f308b5ea": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-05",
+      "headline": "Loyalty Newswire: HeyMax inverts rewards model, Chase/IHG launch premium card, Revolut expands points transfers"
+    },
     "4ef9b4a0dbd9be12": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-09-24",
       "headline": "Meta Appeals Ofcom's Category 1 Classification of Instagram and WhatsApp Under UK Online Safety Act"
+    },
+    "59adcbae4c2ebccc": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-05",
+      "headline": "South African schools argue social media access restrictions before courts, raising policy questions"
     },
     "5ad67598fd7fcaec": {
       "entity_or_topic": "Litigation against major platforms",
@@ -31,10 +51,20 @@
       "first_seen": "2026-10-01",
       "headline": "EU KIDS Act Proposal: Comprehensive Child-Safety Framework with Mandatory Age Verification"
     },
-    "a173dee379a0cbba": {
+    "727cd97939892305": {
+      "entity_or_topic": "BRICK",
+      "first_seen": "2026-10-05",
+      "headline": "UM uses Brick to combat phone addiction"
+    },
+    "78e229a55f4c94e8": {
       "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-17",
-      "headline": "EU Announces Plans to Mandate Age Verification for Social Media and AI Platforms"
+      "first_seen": "2026-10-05",
+      "headline": "Ottawa moves to restrict social media for kids under 16, sparking debate over accountability"
+    },
+    "a7eaf6ec4e2d5ee6": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-05",
+      "headline": "Meta's $17.1B Teen Social Media Settlement Detailed as Part of Broader Multistate Legal Campaign"
     },
     "b1e48307e2b1978a": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -46,11 +76,6 @@
       "first_seen": "2026-09-28",
       "headline": "Column: Meta's New Social Media Rules Should Have Started With Teens"
     },
-    "b9dbe6d33febd894": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-09-17",
-      "headline": "Fintech Pulse: Split Pay's $125M Raise, Perk's US Spend Launch Highlight Rewards/Payments Funding Wave"
-    },
     "c3b16a5dff0ee72b": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-21",
@@ -61,10 +86,25 @@
       "first_seen": "2026-09-21",
       "headline": "Brazil's ECA Digital child-safety law implementation continues, with congressional debate on extending to a full under-16 access ban"
     },
+    "e115235f393925ae": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-05",
+      "headline": "Europe pushes toward 15-year social media age limit with tiered restrictions for 13-15 year-olds"
+    },
+    "e2ebd6162608ea37": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-05",
+      "headline": "What California, other US states can learn from Australia's youth social media crackdown"
+    },
     "e5bdcac8d2fa57d6": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-09-24",
       "headline": "UK Ofcom Faces Political Pressure Over Online Safety Act Age-Check Enforcement"
+    },
+    "fe46fe2b8a9641e8": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-05",
+      "headline": "UK government to unveil under-16 social media ban with 'hard' age-verification checks"
     }
   }
 }

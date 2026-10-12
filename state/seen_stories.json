@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-10-08T19:23:42.400698+00:00",
+  "last_success": "2026-10-12T21:44:56.628166+00:00",
   "seen_stories": {
     "1b5f332a22df330d": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -16,11 +16,6 @@
       "first_seen": "2026-10-01",
       "headline": "TikTok Reaches First State Settlement Over Teen Safety, Agrees to Usage Limits and Age Verification"
     },
-    "2c2e3d6238c8b5b9": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-24",
-      "headline": "California Teens and Advocates Push AB 1709 to Curb Addictive Social Media Features"
-    },
     "4498658d24476f3b": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
@@ -35,11 +30,6 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
       "headline": "Loyalty Newswire: HeyMax inverts rewards model, Chase/IHG launch premium card, Revolut expands points transfers"
-    },
-    "4ef9b4a0dbd9be12": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-09-24",
-      "headline": "Meta Appeals Ofcom's Category 1 Classification of Instagram and WhatsApp Under UK Online Safety Act"
     },
     "5325cbde78860a7b": {
       "entity_or_topic": "Litigation against major platforms",
@@ -61,6 +51,11 @@
       "first_seen": "2026-10-08",
       "headline": "Philippine Senate passes bill banning under-18s from social media"
     },
+    "5ef968974b167422": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-12",
+      "headline": "Florida presses court to force Meta to redesign Instagram/Facebook for teens, rejecting $18B multistate settlement"
+    },
     "68cb64cd15e076e2": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-01",
@@ -81,6 +76,16 @@
       "first_seen": "2026-10-08",
       "headline": "PLDT and Smart partner with Capillary to unify loyalty programs"
     },
+    "968def6104623fb4": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-12",
+      "headline": "Arizona AG Kris Mayes sues TikTok over addictive design harming minors"
+    },
+    "a6fa8a244fcf2b8d": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-12",
+      "headline": "PointsKash Announces Expanded Strategic Capital Commitment of Up to $100 Million"
+    },
     "a7eaf6ec4e2d5ee6": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-05",
@@ -91,6 +96,26 @@
       "first_seen": "2026-09-28",
       "headline": "Column: Meta's New Social Media Rules Should Have Started With Teens"
     },
+    "bcda92ad0a593a08": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-12",
+      "headline": "Experts and Advocates React to Arizona AG's TikTok Lawsuit"
+    },
+    "c324aa2f95745b3e": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-12",
+      "headline": "Florida Seeks Immediate Court-Ordered Limits on Teens' Use of Meta Platforms"
+    },
+    "ddf5a921d2d1ff4a": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-12",
+      "headline": "Florida AG Seeks Court Order Forcing Meta to Change Facebook and Instagram for Teens"
+    },
+    "df93a7f94e07b733": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-12",
+      "headline": "Arizona Attorney General Sues TikTok Over Teen Addiction Design"
+    },
     "e115235f393925ae": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-05",
@@ -100,11 +125,6 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
       "headline": "What California, other US states can learn from Australia's youth social media crackdown"
-    },
-    "e5bdcac8d2fa57d6": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-09-24",
-      "headline": "UK Ofcom Faces Political Pressure Over Online Safety Act Age-Check Enforcement"
     },
     "fe46fe2b8a9641e8": {
       "entity_or_topic": "Rewards and loyalty funding",

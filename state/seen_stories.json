@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-10-12T21:44:56.628166+00:00",
+  "last_success": "2026-10-15T17:48:30.935508+00:00",
   "seen_stories": {
     "1b5f332a22df330d": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -26,6 +26,11 @@
       "first_seen": "2026-10-08",
       "headline": "UK's Under-16 Social Media Ban Still Has No Rulebook as Ofcom's October Deadline Looms"
     },
+    "4d99e75c1e6c2292": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-15",
+      "headline": "Federal appeals court allows Florida to enforce its social media ban for under-14s"
+    },
     "4df54d66f308b5ea": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
@@ -40,11 +45,6 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
       "headline": "South African schools argue social media access restrictions before courts, raising policy questions"
-    },
-    "5ad67598fd7fcaec": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-09-28",
-      "headline": "TikTok Settles Alabama Youth-Safety Lawsuit for at Least $100 Million Days Before Trial"
     },
     "5d5bfe4d72eb4695": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -71,10 +71,20 @@
       "first_seen": "2026-10-05",
       "headline": "Ottawa moves to restrict social media for kids under 16, sparking debate over accountability"
     },
+    "80f70ff06ea38d69": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-15",
+      "headline": "Federal appeals court upholds Florida's under-14 social media account ban"
+    },
     "89e7d4dcb180c52d": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-08",
       "headline": "PLDT and Smart partner with Capillary to unify loyalty programs"
+    },
+    "89ee9314ba0e89e8": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-15",
+      "headline": "Child advocates oppose blanket social media bans, push for platform accountability instead"
     },
     "968def6104623fb4": {
       "entity_or_topic": "Litigation against major platforms",
@@ -91,10 +101,10 @@
       "first_seen": "2026-10-05",
       "headline": "Meta's $17.1B Teen Social Media Settlement Detailed as Part of Broader Multistate Legal Campaign"
     },
-    "b5d585cbbae194ad": {
+    "ac8c336115bdd839": {
       "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-09-28",
-      "headline": "Column: Meta's New Social Media Rules Should Have Started With Teens"
+      "first_seen": "2026-10-15",
+      "headline": "Philippine Senate passes bill banning social media access for under-18s"
     },
     "bcda92ad0a593a08": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -105,6 +115,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-12",
       "headline": "Florida Seeks Immediate Court-Ordered Limits on Teens' Use of Meta Platforms"
+    },
+    "d23a46c6e2f9b9f0": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-15",
+      "headline": "11th Circuit allows Georgia to enforce social media age-verification law"
     },
     "ddf5a921d2d1ff4a": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -125,6 +140,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-05",
       "headline": "What California, other US states can learn from Australia's youth social media crackdown"
+    },
+    "e46bdc37f08e8f1a": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-15",
+      "headline": "Greece tables bill setting minimum social media age at 15 with mandatory age assurance"
     },
     "fe46fe2b8a9641e8": {
       "entity_or_topic": "Rewards and loyalty funding",

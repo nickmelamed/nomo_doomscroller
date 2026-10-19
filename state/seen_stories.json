@@ -1,6 +1,16 @@
 {
-  "last_success": "2026-10-15T17:48:30.935508+00:00",
+  "last_success": "2026-10-19T19:15:50.126275+00:00",
   "seen_stories": {
+    "0e8bd032ea01f975": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-19",
+      "headline": "Global fintech funding fell 18% QoQ in Q3 2026, but mega-rounds ($100M+) captured 61% of all capital"
+    },
+    "0ef7fd06d7ce8a2d": {
+      "entity_or_topic": "BRICK",
+      "first_seen": "2026-10-19",
+      "headline": "Brick Named to TIME's Best Inventions of 2026 List"
+    },
     "1b5f332a22df330d": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-05",
@@ -11,10 +21,30 @@
       "first_seen": "2026-10-08",
       "headline": "Dfinitiv launches SmartCXP AI to build and manage loyalty program apps via AI assistants"
     },
-    "265f7f906df23e14": {
+    "28c296b8d598248f": {
       "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-10-01",
-      "headline": "TikTok Reaches First State Settlement Over Teen Safety, Agrees to Usage Limits and Age Verification"
+      "first_seen": "2026-10-19",
+      "headline": "Washington AG Drops Youth Online Protection Bill After $17.1B Nationwide Meta Settlement"
+    },
+    "2d95f605c295a025": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-19",
+      "headline": "Ofcom's \u00a315bn Online Safety Act fine ceiling against Meta goes on trial at London High Court"
+    },
+    "2df582b67e037457": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-19",
+      "headline": "Appeals court finds Florida's HB 3 teen social media limits 'likely constitutional'"
+    },
+    "2fe1a05ce27be14d": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-19",
+      "headline": "Global Platforms Paid $17 Billion in 2026 Youth-Safety Settlements as Age Bans Struggle to Curb Usage"
+    },
+    "3306c3d97856cbc7": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-19",
+      "headline": "NZ Labour pledges NZ$7 million 'Kids Off Screens' plan funding affordable offline alternatives and school tech-safety tools"
     },
     "4498658d24476f3b": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -56,11 +86,6 @@
       "first_seen": "2026-10-12",
       "headline": "Florida presses court to force Meta to redesign Instagram/Facebook for teens, rejecting $18B multistate settlement"
     },
-    "68cb64cd15e076e2": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-01",
-      "headline": "EU KIDS Act Proposal: Comprehensive Child-Safety Framework with Mandatory Age Verification"
-    },
     "727cd97939892305": {
       "entity_or_topic": "BRICK",
       "first_seen": "2026-10-05",
@@ -70,6 +95,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-05",
       "headline": "Ottawa moves to restrict social media for kids under 16, sparking debate over accountability"
+    },
+    "7a02a84bf051ac55": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-19",
+      "headline": "Florida Wins Key Appeals Ruling Allowing Enforcement of Under-14 Social Media Ban"
     },
     "80f70ff06ea38d69": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -106,6 +136,11 @@
       "first_seen": "2026-10-15",
       "headline": "Philippine Senate passes bill banning social media access for under-18s"
     },
+    "b6e096575e2c30dd": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-19",
+      "headline": "Florida Attorney General sues Discord as 'public nuisance' over child safety claims"
+    },
     "bcda92ad0a593a08": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-12",
@@ -120,6 +155,11 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-15",
       "headline": "11th Circuit allows Georgia to enforce social media age-verification law"
+    },
+    "dab00825c03e6b4d": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-19",
+      "headline": "FinTech funding tops $2.8bn in a bumper week, led by Ramp's $1.85bn raise; rewards-linked InsurTech and loyalty deals also close"
     },
     "ddf5a921d2d1ff4a": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -145,6 +185,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-15",
       "headline": "Greece tables bill setting minimum social media age at 15 with mandatory age assurance"
+    },
+    "f6c488386713e180": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-19",
+      "headline": "Federal appeals court lifts injunction, lets Georgia enforce social media age-verification law (SB 351)"
     },
     "fe46fe2b8a9641e8": {
       "entity_or_topic": "Rewards and loyalty funding",

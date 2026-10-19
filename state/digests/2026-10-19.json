@@ -1,0 +1,367 @@
+{
+  "competition": [
+    {
+      "headline": "Brick Named to TIME's Best Inventions of 2026 List",
+      "source": "TIME",
+      "summary": "TIME recognized screen-time-blocking device/app Brick (NFC tap-to-unlock mechanism) and noted it has expanded beyond iOS-only to Android, broadening its reach among the same teen/student demographic NOMO targets. Major media credibility boost intensifies competitive pressure in the digital-wellness category.",
+      "url": "https://time.com/collection/best-inventions/2026/brick/"
+    }
+  ],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "Ofcom's \u00a315bn Online Safety Act fine ceiling against Meta goes on trial at London High Court",
+      "source": "MSN (syndicated)",
+      "summary": "London High Court is weighing whether Ofcom can base its \u00a315bn Online Safety Act fine ceiling on global (vs UK-only) revenue against Meta. The outcome shapes how aggressively UK regulators can pressure platforms \u2014 directly relevant to CEO Leonardo's active UK policy engagement and NOMO's UK pilot narrative.",
+      "url": "https://www.msn.com/en-us/news/other/ofcoms-15-billion-online-safety-weapon-goes-on-trial-at-london-high-court/ar-AA2edvNY"
+    },
+    {
+      "headline": "Global Platforms Paid $17 Billion in 2026 Youth-Safety Settlements as Age Bans Struggle to Curb Usage",
+      "source": "Whalesbook",
+      "summary": "Meta, YouTube and others paid $17B in 2026 youth-safety settlements, while blunt UK and Australian age-ban laws have largely failed to curb usage due to easy bypasses \u2014 reinforcing the market gap for incentive-based tools like NOMO in exactly the markets its CEO is engaging on policy.",
+      "url": "https://www.whalesbook.com/news/English/technology/Social-Media-Giants-Pay-dollar17-Billion-Amid-Failed-Youth-Bans/6ad31c7379a16deaeaf50e60"
+    },
+    {
+      "headline": "Florida Wins Key Appeals Ruling Allowing Enforcement of Under-14 Social Media Ban",
+      "source": "Insurance Journal / AP",
+      "summary": "The 11th Circuit ruled 3-0 that Florida can enforce its under-14 social media ban and parental-consent rule for 14-15 year olds, finding addictive-design platforms can be regulated without violating the First Amendment \u2014 validating the regulatory tailwind behind NOMO's current US GTM push.",
+      "url": "https://insurancejournal.com/news/southeast/2026/10/16/889207.htm"
+    },
+    {
+      "headline": "Washington AG Drops Youth Online Protection Bill After $17.1B Nationwide Meta Settlement",
+      "source": "KUOW",
+      "summary": "A $17.1B nationwide Meta settlement imposes usage caps (two hours/day for minors, dropping to one over time) and feed-control options, leading Washington's AG to drop new legislation \u2014 validating screen-time-reduction as a regulator-endorsed substitute for new laws, useful in NOMO's US school/policy conversations.",
+      "url": "https://www.kuow.org/law/2026-10-15/washington-ag-will-not-pursue-youth-online-protection-legislation-in-wake-of-meta-settlement"
+    },
+    {
+      "headline": "Federal appeals court lifts injunction, lets Georgia enforce social media age-verification law (SB 351)",
+      "source": "CBS News (Atlanta)",
+      "summary": "The 11th Circuit vacated a year-long injunction blocking Georgia's age-verification/parental-consent law, adding to a string of pro-enforcement rulings strengthening the legal footing for state youth social-media laws relevant to NOMO's US school partnership pitch.",
+      "url": "https://www.cbsnews.com/atlanta/news/appeals-court-removes-injunction-blocking-georgias-social-media-age-verification-law/"
+    },
+    {
+      "headline": "Florida Attorney General sues Discord as 'public nuisance' over child safety claims",
+      "source": "Biometric Update",
+      "summary": "Florida's AG sued Discord over child-safety and age-verification failures, citing 2,100+ child-predator arrests in-state \u2014 continued evidence that enforcement targets platforms, reinforcing the case for NOMO's off-platform, verified-behavior model to schools and parents.",
+      "url": "https://www.biometricupdate.com/202610/florida-attorney-general-sues-discord-claims-messaging-site-is-public-nuisance"
+    },
+    {
+      "headline": "NZ Labour pledges NZ$7 million 'Kids Off Screens' plan funding affordable offline alternatives and school tech-safety tools",
+      "source": "RNZ",
+      "summary": "A political party is proposing public funding specifically for offline alternatives to teen screen time \u2014 the exact value proposition NOMO sells to schools and brands. An exploratory-region signal, but useful evidence of growing government appetite for 'off-social-media' incentive programs that NOMO can reference in UK/US/AU policy pitches.",
+      "url": "https://rnz.co.nz/news/politics_election-2026/1985304/labour-pledges-7-million-to-get-kids-off-screens-and-back-to-being-kids"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "Youth screen-time / alt-device",
+      "confidence": "medium",
+      "name": "Freckle",
+      "reason": "Vague, speculative why_fits for an early-stage alt-device/hardware startup; not a close functional match to NOMO's rewards-for-offline-time model.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://pitchbook.com/news/articles/vc-wants-limit-screen-time-backing-ai-phone-for-kids",
+      "suggested_type": "Competitor",
+      "why_fits": "A VC-backed AI phone startup for kids designed to delay full smartphone/social media access, positioning itself against excessive youth screen use; recently reported as actively fundraising with backing from Alexis Ohanian's Seven Seven Six, signaling fresh competitive momentum in the youth digital-wellbeing category NOMO operates in."
+    },
+    {
+      "category": "Cash-incentive social media abstinence program",
+      "confidence": "medium",
+      "name": "Goode Foundation Digital Detox Challenge",
+      "reason": "A cash-incentive nonprofit program rather than a scalable tech product; weak match to NOMO's app-based competitor fit bar.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://digitaldetoxchallenge.org/",
+      "suggested_type": "Competitor",
+      "why_fits": "A foundation-run program that pays students (7th\u20139th graders) cash for giving up smartphones/social media through a school year \u2014 a direct, if lower-tech, rival model to NOMO's reward-for-screen-time-reduction value proposition targeting the same teen demographic."
+    },
+    {
+      "category": "All-in-one habits/focus/screen-time blocking app",
+      "confidence": "medium",
+      "name": "Habi",
+      "reason": "Generic blog-listicle sourcing with no concrete traction or news hook; vague why_fits.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://habi.app/insights/best-screen-time-apps/",
+      "suggested_type": "Competitor",
+      "why_fits": "Combines habit building, focus timers and screen-time blocking in one app, a close feature match to NOMO's core value proposition for younger users."
+    },
+    {
+      "category": "QSR / Gen Z loyalty rewards",
+      "confidence": "medium",
+      "name": "Chipotle (Rewards on Repeat / Chipotle U)",
+      "reason": "Duplicate of the earlier Chipotle (Rewards on Repeat) candidate; consolidated into one entry.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://foodondemand.com/04142026/chipotle-eyes-gen-z-with-revamped-rewards-program/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Chipotle relaunched its loyalty program as 'Rewards on Repeat,' leaning into gamification, monthly free-food drops, and lower point thresholds specifically to court Gen Z, who now make up the largest share of restaurant loyalty signups \u2014 a tradeable, teen/Gen Z-friendly reward inventory comparable to NOMO's existing McDonald's ice cream cone tie-up and not currently in NOMO's rewards lineup."
+    },
+    {
+      "category": "City teen pass / museum & attraction access",
+      "confidence": "medium",
+      "name": "City of Dallas Teen All Access Pass (Dallas Park & Recreation)",
+      "reason": "Redundant with CityPASS and NOMO's existing Fever museum-ticket partnership; overlapping reward category.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.meetdaisy.co/calendars/the-sixth-floor-museum/events/dallas-teen-all-access-pass",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A municipal teen program (ages 13-17) bundling free admission across museums, zoo, arboretum, and attractions each summer \u2014 exactly the 'museum tickets, city green pass' style inventory NOMO already uses with Fever and could add as a city-partner reward."
+    },
+    {
+      "category": "Multi-attraction city pass",
+      "confidence": "medium",
+      "name": "Go City (CityPASS / New York Explorer Pass)",
+      "reason": "Duplicate of the earlier Go City entry and redundant with CityPASS's city-attraction-pass category.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.moma.org/visit/discounts#free-admission",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Operates bundled city attraction passes (e.g., New York Explorer Pass, C3 CityPASS covering museums and landmarks) that function like tradeable 'city green pass' reward inventory \u2014 fitting the museum-ticket/city-pass category NOMO is seeking and not currently represented in its partner roster."
+    },
+    {
+      "category": "6-12 Education \u2014 Direct (state/district procurement)",
+      "confidence": "medium",
+      "name": "Kansas State Board of Education",
+      "reason": "Redundant with Massachusetts and NYC district-policy stories already covering the phone-ban-driven GTM opportunity.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.mitrmedia.com/resources/blogs/cell-phone-bans-in-schools-a-2026-policy-guide-for-k12-schools/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"35-7\">Kansas Governor Laura Kelly signed a statewide bell-to-bell cell phone ban on March 20, 2026, applying to all public and accredited nonpublic K-12 schools and requiring districts to certify compliance to the Kansas State Board of Education by September 1, 2026.</cite> The imminent compliance deadline creates urgent district-level demand for an engagement/enforcement and positive-incentive tool like NOMO, fitting the 6-12 Education direct GTM vertical."
+    },
+    {
+      "category": "6-12 Education district",
+      "confidence": "medium",
+      "name": "Las Virgenes Unified School District",
+      "reason": "District explicitly wants to avoid gamified, engagement-driven apps \u2014 contradicts NOMO's gamified reward model, weak fit.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.theacorn.com/articles/lengthy-school-board-meeting-addresses-student-screen-policy/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "The district is actively drafting new device-use regulations, with a board meeting where <cite index=\"23-4\">district officials are seeking to minimize the time students spend on their screens while maximizing learning and achievement</cite> and explicitly flagging a desire to avoid gamified, engagement-driven apps \u2014 a timely, active-need account for NOMO's education-vertical outreach."
+    },
+    {
+      "category": "Youth Sports & Athletic Leagues \u2014 Direct",
+      "confidence": "medium",
+      "name": "Little League International",
+      "reason": "Inferential gap-based pitch (no digital-wellness partner) rather than concrete evidence of appetite; medium confidence.",
+      "region": "US",
+      "reject_count": 2,
+      "shown_count": 0,
+      "source_url": "https://youthsportsbusinessreport.com/youth-sports-sponsorship-on-display-19-brands-activate-at-2026-little-league-world-series-fan-zone/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Little League's 2026 World Series activated 19 of its 25+ Official Sponsors and introduced a digital 'Fan Pass system built into the LLWS App' that gates prize eligibility behind a QR scan, showing existing app-based gamification infrastructure but no screen-time/digital-wellness partner in its roster \u2014 a clear gap for NOMO to fill."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "School phone-free program / EdTech procurement",
+      "confidence": "medium",
+      "name": "Yondr",
+      "reason": "Mechanism (physical pouch enforcement) differs substantially from NOMO's reward-based model; medium confidence, only budget-competition overlap rather than product-level.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://civiciq.com/blog/26-states-now-require-school-cell-phone-bans-2026-k-12-policy-tracker-implementation-guide",
+      "suggested_type": "Competitor",
+      "why_fits": "As states expand bell-to-bell cell phone bans, <cite index=\"25-6,25-7\">multiple districts are actively procuring Yondr pouch systems as their phone-free enforcement solution</cite>, making Yondr a direct competitor for the same K-12 district budgets and procurement cycles NOMO targets in its 6-12 Education GTM vertical."
+    },
+    {
+      "category": "App blocker / digital detox challenge app",
+      "confidence": "medium",
+      "name": "Detox: App Blocker & Focus",
+      "reason": "Generic, low-differentiation app blocker with no notable traction; too marginal to track as a named competitor.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=ai.detoxapp.android&hl=en_GB",
+      "suggested_type": "Competitor",
+      "why_fits": "A strict app-blocking competitor that runs timed 'detox challenges' directly in the app-block space NOMO tracks as competitive. <cite index=\"13-3,13-18\">Digital detox & app blocker. Block distracting apps for 1, 7 or 21 days. Updated on 15 Oct 2026.</cite> Its positioning toward students needing screen control before exams overlaps with NOMO's teen/student focus."
+    },
+    {
+      "category": "Gamified screen-time-earning app (youth)",
+      "confidence": "medium",
+      "name": "PlayFund",
+      "reason": "Skews to younger kids/allowance use case rather than teens; mechanic redundant with other tracked candidates; medium confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://play.google.com/store/apps/details?id=com.screenbank.app&hl=en_US",
+      "suggested_type": "Competitor",
+      "why_fits": "A newly updated app (Aug 2026) that gamifies reducing/earning screen time through real-world behavior, directly competing in NOMO's core mechanic. <cite index=\"5-3,5-4\">PlayFund turns screen time into something kids earn \u2014 not something parents fight about. Kids complete real-world activities like reading, chores, or outdoor play to earn coins.</cite> It also uses badges, streaks, and savings-goal gamification similar to NOMO's reward/leaderboard mechanics."
+    },
+    {
+      "category": "Municipality / UK youth wellbeing policy",
+      "confidence": "medium",
+      "name": "Devon County Council",
+      "reason": "Early-stage ('moved a step closer', consultation pending) and redundant with stronger UK council candidates already kept (Cheshire, Edinburgh).",
+      "region": "UK",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.devon.gov.uk/news/councillors-endorse-principle-of-smartphone-ban-in-schools/?amp=1",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Devon councillors have formally endorsed a countywide student smartphone ban and are backing the Smartphone Free Childhood campaign, signaling an active local-government buyer for student digital-wellbeing solutions. <cite index=\"53-1,53-4\">A countywide ban on student smartphone use during the school day from the start of the next academic year in September 2026 has moved a step closer... The County Council will support the Smartphone Free Childhood (SFC) campaign and will aim to carry out a consultation before the start of the Spring Term.</cite>"
+    },
+    {
+      "category": "QSR loyalty program with free-item redemptions",
+      "confidence": "medium",
+      "name": "SONIC Rewards",
+      "reason": "Redundant QSR loyalty play, too similar to the stronger, higher-confidence Chipotle candidate.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://thewisemarketer.com/the-loyalty-newswire-april-20-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "SONIC's new nationwide rewards program offers free, challenge-based food redemptions comparable to NOMO's McDonald's ice-cream partnership, and is built around a mobile app that gamifies earning. <cite index=\"33-5,33-6\">SONIC is turning cravings into freebies with the launch of SONIC Rewards, a brand-new loyalty program... letting guests earn free rewards and bonuses, unlock extras with challenges and get personalized deals every time they open the app.</cite>"
+    },
+    {
+      "category": "Faith-based & Youth Orgs - screen-time/digital-wellness programming",
+      "confidence": "medium",
+      "name": "YMCA (national/local associations)",
+      "reason": "Weak region fit \u2014 centers on a Canadian telecom (Rogers) partnership, not a core NOMO market.",
+      "region": "Other",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.mlb.com/news/rogers-screen-break-school-program-begins",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "A telco-backed national screen-time reduction program just launched with YMCA as its first national partner, working with athlete ambassadors and schools on healthy screen-use programming for teens. This signals the Y network is actively open to structured, branded screen-time/digital-wellness partnerships right now, a genuine gap versus NOMO's current (nonexistent) GTM partner roster in the Faith-based & Youth Orgs vertical."
+    },
+    {
+      "category": "Teen museum & live-event ticket access program",
+      "confidence": "medium",
+      "name": "Tickets for Teens (TDF / NYC)",
+      "reason": "Duplicate of the NYC Mayor's Office & TDF student ticket program candidate already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://tft.tdf.org/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "In partnership with NYC's mayoral administration, Theatre Development Fund launched a program this year offering thousands of free and low-cost tickets to Broadway, Off-Broadway, and museums for NYC high schoolers, demonstrating a large, teen-verified ticket inventory and a government-vetted distribution model that fits NOMO's reward-partner profile (museum tickets/city-backed passes) and is not currently in NOMO's partner roster."
+    },
+    {
+      "category": "Youth Sports & Athletic Leagues \u2014 Direct",
+      "confidence": "medium",
+      "name": "Little League International",
+      "reason": "Inferential gap-based pitch (no digital-wellness partner) rather than concrete evidence of appetite; medium confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://youthsportsbusinessreport.com/youth-sports-sponsorship-on-display-19-brands-activate-at-2026-little-league-world-series-fan-zone/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Little League's 2026 World Series activated 19 of its 25+ Official Sponsors and introduced a digital 'Fan Pass system built into the LLWS App' that gates prize eligibility behind a QR scan, showing existing app-based gamification infrastructure but no screen-time/digital-wellness partner in its roster \u2014 a clear gap for NOMO to fill."
+    },
+    {
+      "category": "Gamified screen-time management",
+      "confidence": "medium",
+      "name": "ScreenCoach",
+      "reason": "Skews to younger/allowance use case, redundant with other screen-time-reward competitors already captured.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.myscreencoach.com/",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"34-3,34-5\">ScreenCoach is a nag-free screen time management app that rewards good habits, making screen time management fun and engaging as kids earn screen time tokens and pocket money gems for completing activities, including bonus rewards for good behavior.</cite> This gamified, reward-for-behavior model directly overlaps with NOMO's core mechanic, though aimed at a slightly younger household/allowance use case."
+    },
+    {
+      "category": "Cinema / entertainment rewards",
+      "confidence": "medium",
+      "name": "AMC Theatres (Flavor Maker / Gen Z program)",
+      "reason": "A marketing campaign case study rather than an actual tradeable rewards program; speculative why_fits.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://barkleyokrp.com/case-studies/amc-coca-cola-flavor-make-it-barkleyokrp/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"60-1,60-2\">AMC and Coca-Cola built a campaign turning the AMC combo into a cultural icon of teen sharing, explicitly targeting Gen Z's movie-going and concession habits</cite>, with <cite index=\"65-10\">a hook built around empowering Gen Z to unleash creativity with flavor possibilities at AMC.</cite> Gives NOMO a US cinema-ticket/snack reward option analogous to Odeon (UK) but filling a US-market gap."
+    },
+    {
+      "category": "US Telco",
+      "confidence": "medium",
+      "name": "Verizon Digital Wellness / Parenting in a Digital World / Family Plus",
+      "reason": "Duplicate of the Verizon (Parenting in a Digital World) GTM candidate already kept, with lower confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.verizon.com/about/news/introducing-verizon-family-plus-perk",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"55-2,55-3\">Verizon Family Plus is a new monthly add-on combining digital wellness and safety tools with a family-connection feature, designed to help parents manage technology use and keep households in sync.</cite> <cite index=\"53-5\">Verizon positions itself as a one-stop shop for digital wellness tools and expert advice to make back-to-school more rewarding for families,</cite> and already runs school-facing content via Discovery Education partnership, making it a logical embedded-distribution target in the US Telcos & MVNOs vertical where NOMO currently has no partner."
+    },
+    {
+      "category": "6-12 Education (district)",
+      "confidence": "medium",
+      "name": "Oakland Unified School District",
+      "reason": "District policy explicitly restricts game-like reward systems, working against NOMO's core pitch; weak fit.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://edsource.org/updates/oakland-unified-to-restrict-screen-time-next-school-year",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"71-2,71-3,71-4\">Oakland Unified's school board voted to approve a new policy restricting screen time for students next school year, banning laptop/Chromebook use during recess or lunch, and barring teachers from using programs with game-like reward systems that rely excessively on screen use.</cite> This is a fresh, non-listed district (distinct from the already-tracked LAUSD/NYC DOE examples) actively procuring screen-time policy solutions \u2014 a timely direct-outreach target for the Education vertical, though NOMO's off-screen reward angle would need positioning carefully given the district's stated wariness of in-class gamified rewards."
+    },
+    {
+      "category": "School device-management / EdTech",
+      "confidence": "medium",
+      "name": "Doorman App",
+      "reason": "Competes on school-contract budgets via a blocking mechanism, not a product-level competitor to NOMO's reward model; redundant with Yondr.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.tapinto.net/towns/jefferson/articles/jefferson-school-district-revises-phone-policy-jths-to-implement-doorman-app-program",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"54-2,54-3\">The school will be implementing a pilot program through the Doorman App, which uses the phone's internal VPN to restrict access to distracting apps</cite> as part of a district-wide phone policy pilot. This directly competes for the same school-district contracts NOMO targets in its 6-12 Education vertical, even though its mechanism is blocking rather than rewarding."
+    },
+    {
+      "category": "Museum / cultural attraction pass",
+      "confidence": "medium",
+      "name": "Miami Museum Mile Passport",
+      "reason": "Single-city, small-scale local passport program; too narrow for a national rewards partnership.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.miamilivingmagazine.com/post/miami-museum-mile-passport-offers-rewards-through-october",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"28-1,28-2\">Families exploring Downtown Miami and Watson Island can collect museum stamps for local perks, with rewards available after three visits and a museum membership raffle for those who complete the full passport</cite>. This mirrors NOMO's existing museum-ticket reward model (Fever, GetYourGuide) and offers fresh, tradeable multi-venue inventory appealing to a teen/family audience."
+    },
+    {
+      "category": "Insurance \u2014 health insurer digital-wellness",
+      "confidence": "medium",
+      "name": "Aetna",
+      "reason": "Redundant with the stronger, higher-confidence UnitedHealthcare insurance candidate.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://clearhealthcosts.com/blog/2026/09/your-insurer-wants-to-be-your-mental-health-care-provider-what-could-possibly-go-wrong/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"39-11,39-12\">Aetna announced 'Aetna Mental Health On Demand to provide real time access to care and ongoing support,' where members aged 13 and older have real-time access to a licensed clinician through chat, phone or video</cite>. As a major health insurer already building teen-focused digital wellness infrastructure, Aetna fits the Insurance distribution/direct GTM vertical and is not yet in NOMO's partner lineup."
+    },
+    {
+      "category": "Gamified screen-time/earn-screen-time app",
+      "confidence": "medium",
+      "name": "Togleam (Screen Time Chores)",
+      "reason": "Mechanic overlaps with already-captured competitors; no distinct traction signal, medium confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://timily.app/guides/earn-screen-time-app/",
+      "suggested_type": "Competitor",
+      "why_fits": "Togleam has kids complete real-world challenges with photo verification to earn screen time, emphasizing outdoor and creative tasks over chores \u2014 directly overlapping with NOMO's model of gamifying off-screen behavior through real-world challenges, and it is not on NOMO's tracked competitor list."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}

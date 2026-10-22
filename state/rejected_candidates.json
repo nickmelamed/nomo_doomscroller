@@ -225,19 +225,19 @@
     "why_fits": "BCBS's Blue365 program already distributes health and wellness discounts/perks to millions of covered members and families, offering a ready-made digital-wellness distribution channel that fits the Insurance GTM vertical's need for a wellness-platform tie-in without requiring a net-new benefit build."
   },
   "boost mobile": {
-    "category": "US MVNO (prepaid, youth/back-to-school focus)",
+    "category": "US MVNO with teen-focused plans & parental controls",
     "confidence": "medium",
     "first_rejected": "2026-09-21",
-    "last_rejected": "2026-09-21",
+    "last_rejected": "2026-10-22",
     "last_shown": "2026-09-24",
     "name": "Boost Mobile",
-    "reason": "Generic back-to-school device deals rather than digital-wellness specific; redundant with stronger Verizon/UScellular candidates; medium confidence.",
+    "reason": "Generic teen-plan marketing claim without a concrete program named; redundant with the stronger, more specific Gabb Wireless MVNO candidate already kept.",
     "region": "US",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 1,
-    "source_url": "https://variety.com/2026/shopping/news/boost-mobile-starter-phone-student-deals-1236822849/",
+    "source_url": "https://www.upphone.com/fix/best-cell-phone-plans-for-teenagers/",
     "suggested_type": "GTM partner prospect",
-    "why_fits": "<cite index=\"48-1\">Boost Mobile offers a variety of deals on starter phones for kids, from the iPhone 16e to the Samsung Galaxy, as part of its 2026 back-to-school push.</cite> As a large prepaid MVNO actively courting the student/family segment with back-to-school device and plan deals, Boost fits the 'Regional carriers + MVNOs \u2014 distribution at scale, embedded offerings' criterion for the US Telcos & MVNOs GTM vertical."
+    "why_fits": "Boost Mobile markets family-friendly unlimited plans built specifically for teens with built-in parental control tools, making it a regional-carrier-scale MVNO distribution channel that is a genuine gap versus NOMO's current empty GTM/implementation partner lineup in the US Telcos & MVNOs vertical."
   },
   "boston mayor's office \u2013 boston family days": {
     "category": "Municipalities (and States)",
@@ -403,6 +403,21 @@
     "source_url": "https://foodondemand.com/04142026/chipotle-eyes-gen-z-with-revamped-rewards-program/",
     "suggested_type": "Rewards partner prospect",
     "why_fits": "Chipotle relaunched its loyalty program as 'Rewards on Repeat,' leaning into gamification, monthly free-food drops, and lower point thresholds specifically to court Gen Z, who now make up the largest share of restaurant loyalty signups \u2014 a tradeable, teen/Gen Z-friendly reward inventory comparable to NOMO's existing McDonald's ice cream cone tie-up and not currently in NOMO's rewards lineup."
+  },
+  "cigna healthcare + personify health well-being solution": {
+    "category": "Insurance / employer-benefit digital wellness",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "Cigna Healthcare + Personify Health well-being solution",
+    "reason": "Broad employer-benefit wellness platform, not teen-specific, and vaguer ('AI-driven engagement') than the more concrete Hanover analog already kept for the Insurance vertical.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.cigna.com/employers/health-wellness-programs",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Cigna now bundles a Personify Health-powered well-being solution into its employer health plans (5-499 employees) explicitly to help members 'build healthy habits, engage with friends and family, and improve their well-being' using AI-driven engagement \u2014 showing insurers are actively building/acquiring digital-habit engagement layers for dependents and employees, which is exactly the gap NOMO's Insurance GTM vertical is meant to fill via a distribution or co-branded wellness-incentive partnership."
   },
   "city of boston \u2013 mayor's office / office of youth employment and opportunity": {
     "category": "Municipality \u2013 Youth Engagement/Employment",
@@ -1110,19 +1125,19 @@
     "why_fits": "Girl Scouts has been enlisted by Meta to sponsor a digital-wellbeing/leadership badge program reaching hundreds of thousands of youth, showing this trusted youth organization is already positioned as a channel for digital-habit education \u2014 a genuine gap for NOMO to approach directly rather than let competitors own the relationship."
   },
   "go city": {
-    "category": "Multi-attraction city pass / travel experiences",
+    "category": "Multi-attraction city pass / 'city greenpass'-style inventory",
     "confidence": "medium",
     "first_rejected": "2026-08-05",
-    "last_rejected": "2026-08-05",
+    "last_rejected": "2026-10-22",
     "last_shown": "2026-08-07",
     "name": "Go City",
-    "reason": "Medium confidence; multi-attraction pass largely overlaps with NOMO's existing GetYourGuide partner and isn't teen-specific.",
+    "reason": "Broad general-tourist pass, not teen/Gen-Z specific, and 'All' region framing is vague; redundant with the stronger, more teen-targeted TeenTix candidate kept instead.",
     "region": "All",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 1,
-    "source_url": "https://gocity.com/en/work-with-us",
+    "source_url": "https://en.wikipedia.org/wiki/Go_City",
     "suggested_type": "Rewards partner prospect",
-    "why_fits": "Go City sells multi-attraction city passes covering museums, tours and activities across 25+ global destinations, which is a genuine gap versus NOMO's current single-venue ticket partners (Fever, GetYourGuide, Odeon) \u2014 it matches the 'city greenpass' style reward inventory NOMO is looking to add."
+    "why_fits": "Go City is the world's largest tourist-pass provider, bundling 1,500+ attractions across 30+ destinations into single passes, which fits the 'museum tickets, city greenpasses' reward category NOMO already uses (Fever, GetYourGuide) and could scale that reward tier across many more cities at once."
   },
   "go city (attraction passes)": {
     "category": "Multi-attraction city pass / travel experiences",
@@ -2265,19 +2280,19 @@
     "why_fits": "S'moresUp ties earned points directly to screen time and rewards, functioning as a reward-for-behavior competitor: <cite index=\"43-1,43-2\">kids earn points for completing chores, and those points can be exchanged for screen time, allowance, or custom rewards, with a goal-setting feature for longer-term objectives</cite>."
   },
   "san diego unified school district": {
-    "category": "6-12 Education / District policy",
-    "confidence": "high",
+    "category": "6-12 Education / large urban district",
+    "confidence": "medium",
     "first_rejected": "2026-08-05",
-    "last_rejected": "2026-09-17",
+    "last_rejected": "2026-10-22",
     "last_shown": "2026-09-21",
     "name": "San Diego Unified School District",
-    "reason": "Redundant with LAUSD/NYC/NJ district-policy story already covered",
+    "reason": "Single-district instance of the same California AB 3216 mandate already captured at the statewide level; redundant and narrower in scope.",
     "region": "US",
-    "reject_count": 2,
+    "reject_count": 3,
     "shown_count": 1,
-    "source_url": "https://www.sandiegounified.org/about/newscenter/all_news/action_to_reduce_screen_time",
+    "source_url": "https://www.sandiegounified.org/about/newscenter/all_news/s_d_unified_implements_phone-_free_policy",
     "suggested_type": "GTM partner prospect",
-    "why_fits": "The district just passed a board resolution (effective the 2026-27 school year) prohibiting video-streaming on 1:1 devices and launching a year-long effort to reduce excessive digital media consumption, creating a timely opening for a rewards-based off-social-media program like NOMO to support compliance and student buy-in."
+    "why_fits": "A large urban district that implemented a districtwide phone-free school day policy under California's AB3216, explicitly framing the effort as needing 'strong partnerships between families and schools' to build healthy technology behaviors \u2014 representative of the structured-procurement wave of California districts now actively seeking off-phone engagement tools, a gap in NOMO's current (empty) GTM/implementation partner roster."
   },
   "santa fe public schools (digital wellness resolution / trading card initiative)": {
     "category": "6\u201312 Education \u2014 District digital wellness incentive program",
@@ -2339,6 +2354,21 @@
     "suggested_type": "Competitor",
     "why_fits": "Screen Guardians provides K-12 curriculum and school-facing digital wellness programming, positioning it as a direct rival for the same school/district partnership budgets and mindshare NOMO targets in its 6-12 Education GTM vertical, even though its model is education-based rather than app-based."
   },
+  "screen stoic": {
+    "category": "App blocker / gamified discipline tracker",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "Screen Stoic",
+    "reason": "Gamified app-blocker overlapping with already-kept Habit Doom and BePresent; medium confidence with no distinctive mechanic to justify a third near-duplicate.",
+    "region": "All",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://screenstoic.com/guides/best-app-blockers-screen-time-2026",
+    "suggested_type": "Competitor",
+    "why_fits": "Android app blocker with a points-based discipline score, progression tiers, and gamified intervention mechanics aimed at cutting social media and compulsive app opens, placing it squarely in the gamified screen-time-reduction competitive set."
+  },
   "screen time buddy": {
     "category": "Gamified screen-time app with social accountability",
     "confidence": "medium",
@@ -2398,6 +2428,21 @@
     "source_url": "https://www.myscreencoach.com/",
     "suggested_type": "Competitor",
     "why_fits": "<cite index=\"34-3,34-5\">ScreenCoach is a nag-free screen time management app that rewards good habits, making screen time management fun and engaging as kids earn screen time tokens and pocket money gems for completing activities, including bonus rewards for good behavior.</cite> This gamified, reward-for-behavior model directly overlaps with NOMO's core mechanic, though aimed at a slightly younger household/allowance use case."
+  },
+  "screencoach (lifetech balance)": {
+    "category": "Screen-time-for-tasks gamified reward app",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "ScreenCoach (Lifetech Balance)",
+    "reason": "Skews younger than NOMO's teen focus and duplicates the reward-for-screen-time mechanic already covered by Dayo/Habit Doom/BePresent; medium confidence.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://play.google.com/store/apps/details?id=com.lifetech_balance&hl=en_US",
+    "suggested_type": "Competitor",
+    "why_fits": "A freshly updated (Oct 2026) app that rewards kids/teens with screen time and allowance tokens for completing real-world tasks, directly competing on the 'reward for reduced/managed screen use' mechanic, though skewed slightly younger than NOMO's teen focus."
   },
   "screenstrong": {
     "category": "School/state digital-wellness curriculum & program provider",
@@ -2473,6 +2518,21 @@
     "source_url": "https://www.wspa.com/news/state-news/south-carolina-digital-wellness-initiative/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "SCDOE requested over $17 million for a statewide digital wellness initiative for public and charter school students, citing links between excessive screen use and absenteeism and anxiety \u2014 a structured, budgeted state procurement opportunity squarely in the 6-12 Education vertical NOMO is not yet tracking."
+  },
+  "stamp pass (students at museums in philly / greater philadelphia cultural alliance)": {
+    "category": "Museum/cultural access pass for teens",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "STAMP Pass (Students at Museums in Philly / Greater Philadelphia Cultural Alliance)",
+    "reason": "Single-city (Philadelphia) museum pass overlapping with the broader, multi-category TeenTix candidate; redundant, narrower reward inventory.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://philaculture.org/about-us/press-room/news/museums-now-free-for-philadelphia-high-schoolers/",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "A newly launched, free teen-only pass giving students access to a bundle of 12 museums and attractions in a single city \u2014 exactly the 'museum tickets / city-pass' style tradeable inventory NOMO seeks, and a gap versus NOMO's current single-venue ticket partners like Fever and Odeon."
   },
   "state fair of texas": {
     "category": "Regional attraction / event admission",
@@ -2565,19 +2625,19 @@
     "why_fits": "TAP is a newly launched app built around collaborative family media plans for tweens/teens (ages 9-17), positioning itself against enforcement-only screen time apps \u2014 a direct overlap with NOMO's teen behavior-change space and a potential EdTech/family-market competitor."
   },
   "tap: tech activity pact": {
-    "category": "Family screen time / teen behavior app",
+    "category": "Gamified screen-time accountability app",
     "confidence": "medium",
     "first_rejected": "2026-09-03",
-    "last_rejected": "2026-09-03",
+    "last_rejected": "2026-10-22",
     "last_shown": "2026-09-24",
     "name": "TAP: Tech Activity Pact",
-    "reason": "Medium confidence, generic family screen-time pact app; duplicative of closer competitor analogs already selected.",
+    "reason": "Family screen-time streak app overlapping with already-kept BePresent/Habit Doom competitors; medium confidence, no standout differentiator.",
     "region": "US",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 1,
-    "source_url": "https://apps.apple.com/ie/app/tap-tech-activity-pact/id6759011242",
+    "source_url": "https://apps.apple.com/app/id6759011242",
     "suggested_type": "Competitor",
-    "why_fits": "A newly launched teen-focused screen time app built around negotiated family 'pacts' rather than pure enforcement, explicitly targeting the same 9-17 age demo as NOMO and riding the same tailwind (AAP's Jan 2026 policy shift away from hard limits). It's a social-accountability/behavior-contract competitor in the school-age screen time space."
+    "why_fits": "A teen/family screen-time app built around accountability check-ins and streaks where consistent follow-through builds a family streak and parents can send bonus rewards for effort, closely mirroring NOMO's social-accountability-and-rewards mechanic for reducing screen time."
   },
   "tdf (tickets for teens)": {
     "category": "Live entertainment / museum tickets for teens",
@@ -2638,6 +2698,21 @@
     "source_url": "https://www.greaterseattleonthecheap.com/discount-museum-pass/",
     "suggested_type": "Rewards partner prospect",
     "why_fits": "TeenTix offers <cite index=\"35-4\">a FREE TeenTix Pass to get into movies, music, theatre, dance, visual art, and more for just $5</cite>, with <cite index=\"35-9,35-10\">thousands of teenagers who use TeenTix every month... good until your 20th birthday</cite> \u2014 a teen-dedicated, multi-category cultural access pass that fills a gap versus NOMO's single-venue partners (Odeon, Ingresso, Fever) by bundling several experience categories a teen audience already trusts."
+  },
+  "texas children's health plan (healthy rewards program)": {
+    "category": "Insurance / youth wellness incentives",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "Texas Children's Health Plan (Healthy Rewards Program)",
+    "reason": "Wellness-visit incentive is a weaker behavioral analog than Hanover's SmartPath and redundant within the Insurance GTM vertical; cut to avoid duplicating the stronger insurance candidate.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.texaschildrenshealthplan.org/news/provider-alert/healthy-rewardsvalue-added-services-2025-2026",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "This health plan already operates a teen-specific incentive, a Young Adult Wellness Visit Reward for ages 16-21 paid via reward cards, demonstrating an insurer actively rewarding teen wellness behaviors \u2014 a strong digital-wellness fit for NOMO's insurance distribution vertical (Jo\u00e3o)."
   },
   "textnow": {
     "category": "US MVNO / free wireless carrier",
@@ -2775,19 +2850,19 @@
     "why_fits": "Togleam has kids complete real-world challenges with photo verification to earn screen time, emphasizing outdoor and creative tasks over chores \u2014 directly overlapping with NOMO's model of gamifying off-screen behavior through real-world challenges, and it is not on NOMO's tracked competitor list."
   },
   "topgolf": {
-    "category": "Entertainment venue / gameplay credits & discounts",
+    "category": "Entertainment / experiential gift cards",
     "confidence": "medium",
     "first_rejected": "2026-08-31",
-    "last_rejected": "2026-09-21",
+    "last_rejected": "2026-10-22",
     "last_shown": "2026-09-03",
     "name": "Topgolf",
-    "reason": "Narrow golf-specific niche partnership, medium confidence, redundant with the stronger Six Flags amusement-experience candidate.",
+    "reason": "Generic experiential gift-card fit without clear teen-specific audience evidence; doesn't clearly add value over existing experience partners (GetYourGuide, Odeon).",
     "region": "US",
-    "reject_count": 2,
+    "reject_count": 3,
     "shown_count": 1,
-    "source_url": "https://press.topgolf.com/2026-07-23-TOPGOLF-AND-FIRST-TEE-STRENGTHEN-COMMITMENT-TO-GROWING-GOLF,-SHAPING-TOMORROWS-LEADERS",
+    "source_url": "https://www.groupon.com/coupons/topgolf",
     "suggested_type": "Rewards partner prospect",
-    "why_fits": "Topgolf just renewed (July 2026) a youth-focused partnership with First Tee offering $20 gameplay discounts and venue access for teen participants across 25+ venues nationwide, demonstrating tradeable, teen-oriented experience inventory (gameplay credits/discounts) in a golf/entertainment-venue category not currently represented in NOMO's reward lineup."
+    "why_fits": "Topgolf offers a tradeable rewards infrastructure (gift cards, referral credits, membership perks) with broad gift-card-exchange partnerships and a teen/young-adult audience, fitting NOMO's model of exclusive-experience rewards like its existing Odeon and GetYourGuide partners."
   },
   "truce family": {
     "category": "Device/app management for schools & families",
@@ -2938,6 +3013,21 @@
     "source_url": "https://www.bgca.org/news-stories/2025/February/unplugging/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "UScellular already runs a joint youth digital-wellbeing campaign with Boys & Girls Clubs of America (Global Day of Unplugging), showing an existing telco-to-youth-org activation pattern that NOMO could plug into as a distribution partner in the Telco/MVNO vertical, complementing the Faith-based & Youth Orgs channel."
+  },
+  "uscellular x boys & girls clubs of america (global day of unplugging)": {
+    "category": "Telco + Youth Org digital wellbeing program",
+    "confidence": "medium",
+    "first_rejected": "2026-10-22",
+    "last_rejected": "2026-10-22",
+    "last_shown": null,
+    "name": "UScellular x Boys & Girls Clubs of America (Global Day of Unplugging)",
+    "reason": "Campaign-level precedent (a joint awareness day), not a concrete signable distribution channel; medium confidence without a clear single partner target.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.bgca.org/news-stories/2025/February/unplugging/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "UScellular partners with Boys & Girls Clubs of America to promote 'Global Day of Unplugging,' encouraging families and kids toward healthier tech habits \u2014 a live precedent combining NOMO's Telco (Leo) and Faith-based & Youth Orgs (Eric) GTM verticals that NOMO could approach for distribution or co-programming."
   },
   "uscellular x screen sanity": {
     "category": "Telco-backed digital wellness partnership",

@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-10-19T19:15:50.126275+00:00",
+  "last_success": "2026-10-22T18:05:58.098563+00:00",
   "seen_stories": {
     "0e8bd032ea01f975": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -10,11 +10,6 @@
       "entity_or_topic": "BRICK",
       "first_seen": "2026-10-19",
       "headline": "Brick Named to TIME's Best Inventions of 2026 List"
-    },
-    "1b5f332a22df330d": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-05",
-      "headline": "Social media adolescent-addiction MDL grows to 3,824 claims heading into October 2026"
     },
     "21df97a24409b20b": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -46,11 +41,6 @@
       "first_seen": "2026-10-19",
       "headline": "NZ Labour pledges NZ$7 million 'Kids Off Screens' plan funding affordable offline alternatives and school tech-safety tools"
     },
-    "4498658d24476f3b": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-05",
-      "headline": "UK under-16 social media ban timeline clarified: March 2027, older teens undated"
-    },
     "4a3715e784f45526": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-08",
@@ -61,40 +51,25 @@
       "first_seen": "2026-10-15",
       "headline": "Federal appeals court allows Florida to enforce its social media ban for under-14s"
     },
-    "4df54d66f308b5ea": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-05",
-      "headline": "Loyalty Newswire: HeyMax inverts rewards model, Chase/IHG launch premium card, Revolut expands points transfers"
-    },
     "5325cbde78860a7b": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-08",
       "headline": "Long Island school districts continue to join lawsuits against social media companies"
-    },
-    "59adcbae4c2ebccc": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-05",
-      "headline": "South African schools argue social media access restrictions before courts, raising policy questions"
     },
     "5d5bfe4d72eb4695": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-08",
       "headline": "Philippine Senate passes bill banning under-18s from social media"
     },
+    "5e5c8e4808fddb5c": {
+      "entity_or_topic": "BRICK",
+      "first_seen": "2026-10-22",
+      "headline": "Brick Launches 'Brick Night' to Automatically Block Distracting Apps in the Bedroom"
+    },
     "5ef968974b167422": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-12",
       "headline": "Florida presses court to force Meta to redesign Instagram/Facebook for teens, rejecting $18B multistate settlement"
-    },
-    "727cd97939892305": {
-      "entity_or_topic": "BRICK",
-      "first_seen": "2026-10-05",
-      "headline": "UM uses Brick to combat phone addiction"
-    },
-    "78e229a55f4c94e8": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-05",
-      "headline": "Ottawa moves to restrict social media for kids under 16, sparking debate over accountability"
     },
     "7a02a84bf051ac55": {
       "entity_or_topic": "Litigation against major platforms",
@@ -106,6 +81,16 @@
       "first_seen": "2026-10-15",
       "headline": "Federal appeals court upholds Florida's under-14 social media account ban"
     },
+    "86fb93edc0012e40": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-22",
+      "headline": "Meta Sued in Australia Class Action Over Alleged Social Media Harm to Children"
+    },
+    "884098dcd4ef399d": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-22",
+      "headline": "Proposals to ban social media for children \u2014 UK Parliament research briefing update"
+    },
     "89e7d4dcb180c52d": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-08",
@@ -116,25 +101,40 @@
       "first_seen": "2026-10-15",
       "headline": "Child advocates oppose blanket social media bans, push for platform accountability instead"
     },
+    "8fc6cf899fb1048b": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-10-22",
+      "headline": "Australia to Sue Meta and TikTok for Failing to Enforce Under-16 Social Media Ban"
+    },
     "968def6104623fb4": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-12",
       "headline": "Arizona AG Kris Mayes sues TikTok over addictive design harming minors"
+    },
+    "9cc606c092cbd88b": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-10-22",
+      "headline": "Federal court clears Georgia's under-16 social media law as critics warn Supreme Court fight looms"
+    },
+    "a049ed737245297a": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-22",
+      "headline": "Teen Social Media Bans: What Australia's First Data Shows"
     },
     "a6fa8a244fcf2b8d": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-12",
       "headline": "PointsKash Announces Expanded Strategic Capital Commitment of Up to $100 Million"
     },
-    "a7eaf6ec4e2d5ee6": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-10-05",
-      "headline": "Meta's $17.1B Teen Social Media Settlement Detailed as Part of Broader Multistate Legal Campaign"
-    },
     "ac8c336115bdd839": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-15",
       "headline": "Philippine Senate passes bill banning social media access for under-18s"
+    },
+    "af7e54827a423993": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-22",
+      "headline": "Australia Set to Sue Facebook, TikTok in Child-Safety Push"
     },
     "b6e096575e2c30dd": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -145,6 +145,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-12",
       "headline": "Experts and Advocates React to Arizona AG's TikTok Lawsuit"
+    },
+    "bece78d84a50165d": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-10-22",
+      "headline": "TikTok staff raised child safety alarms. Court records show executives failed to act"
     },
     "c324aa2f95745b3e": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -171,16 +176,6 @@
       "first_seen": "2026-10-12",
       "headline": "Arizona Attorney General Sues TikTok Over Teen Addiction Design"
     },
-    "e115235f393925ae": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-05",
-      "headline": "Europe pushes toward 15-year social media age limit with tiered restrictions for 13-15 year-olds"
-    },
-    "e2ebd6162608ea37": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-05",
-      "headline": "What California, other US states can learn from Australia's youth social media crackdown"
-    },
     "e46bdc37f08e8f1a": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-15",
@@ -190,11 +185,6 @@
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-19",
       "headline": "Federal appeals court lifts injunction, lets Georgia enforce social media age-verification law (SB 351)"
-    },
-    "fe46fe2b8a9641e8": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-05",
-      "headline": "UK government to unveil under-16 social media ban with 'hard' age-verification checks"
     }
   }
 }

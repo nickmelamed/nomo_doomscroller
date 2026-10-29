@@ -134,6 +134,21 @@
     "suggested_type": "Competitor",
     "why_fits": "Aura is positioning itself as a thought-leader and data authority on teen digital wellbeing, competing for the same school/family mindshare and potential EdTech/parent partnerships NOMO targets. <cite index=\"32-1\">This 2026 State of the Youth report introduces the Digital Wellbeing Index (DWI), showing how sleep, stress, and everyday phone habits shape kids' wellbeing</cite>, and its findings show <cite index=\"32-13,32-14\">more than 60% of 16\u201317-year-olds fall into the low digital wellbeing category, while among children ages 8\u201315, fewer than 40% fall into that range</cite> \u2014 the exact teen cohort NOMO serves, making Aura a competitor for attention, data credibility, and possibly school partnerships even though its core product is monitoring rather than gamified rewards."
   },
+  "ayso (american youth soccer organization)": {
+    "category": "Youth Sports & Athletic Leagues",
+    "confidence": "medium",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "AYSO (American Youth Soccer Organization)",
+    "reason": "Generic youth-sports program expansion with no clear tie to screen-time reduction or digital wellness; vague why_fits.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://ayso.org/ayso-blog/ayso-play-expands-the-ayso-experience-into-new-communities/?post_id=32781",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "AYSO PLAY! is actively launching new community partnerships (e.g., with the Greater Tampa Boys & Girls Club after-school program running 5 days/week) as of May 2026, demonstrating an open, relationship-driven partnership posture that fits the parent/coach-buyer, large-roster profile of the Youth Sports vertical NOMO has yet to activate."
+  },
   "bepresent": {
     "category": "Screen-time reward/gamification app",
     "confidence": "medium",
@@ -478,6 +493,21 @@
     "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
     "suggested_type": "GTM partner prospect",
     "why_fits": "Runs an active 'Teen All-Access Pass' giving 13-17 year olds free access to dozens of local cultural/recreational partners, demonstrating the exact municipal teen-engagement model NOMO's Municipalities vertical targets, with no current overlap in NOMO's GTM lineup."
+  },
+  "city of dallas park and recreation department": {
+    "category": "Municipalities",
+    "confidence": "medium",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "City of Dallas Park and Recreation Department",
+    "reason": "Generic municipal teen-access pass not tied to screen-time or digital-wellness behavior; why_fits is speculative rather than concrete.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Runs an annual Teen All-Access Pass giving 13-17 year olds free access to dozens of cultural/recreational venues via city-brokered partnerships \u2014 exactly the municipal teen-engagement infrastructure NOMO's Municipalities vertical could plug into or co-brand with."
   },
   "city of dallas parks & recreation (teen all access pass)": {
     "category": "Municipal teen engagement program",
@@ -2204,6 +2234,21 @@
     "suggested_type": "Rewards partner prospect",
     "why_fits": "Planet Fitness is offering a free summer pass to teens ages 14-19 giving access to over 2,400 locations nationwide, a scalable, teen-specific, low-cost-to-redeem reward inventory similar in structure to NOMO's existing McDonald's ice-cream-cone model."
   },
+  "planet fitness high school summer pass (with nyc doe)": {
+    "category": "National fitness brand \u2013 free teen access reward",
+    "confidence": "medium",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "Planet Fitness High School Summer Pass (with NYC DOE)",
+    "reason": "Duplicate of the nationwide Planet Fitness Free Teen Summer Pass candidate already kept.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://portal.311.nyc.gov/article/?kanumber=KA-03582",
+    "suggested_type": "Rewards partner prospect",
+    "why_fits": "A scalable, teen-specific free-access program where <cite index=\"30-1\">New York City teens ages 14 to 19 can get free access to Planet Fitness clubs across the five boroughs</cite>, run in direct partnership with the city school system. This mirrors the McDonald's-style 'free perk' model NOMO already uses and offers a nationally recognizable, teen-friendly reward with existing precedent for city/school-level rollout."
+  },
   "playfund": {
     "category": "Gamified screen-time-earning app (youth)",
     "confidence": "medium",
@@ -2383,6 +2428,21 @@
     "source_url": "https://finviz.com/news/270336/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time",
     "suggested_type": "GTM partner prospect",
     "why_fits": "Directly validates the US Telcos & MVNOs GTM thesis (Leo's vertical): a major carrier is now funding youth screen-time balance at scale. <cite index=\"38-1\">Rogers today announced Screen Break, a new, national program to help Canadian families address excessive screen use in youth</cite>, framed around <cite index=\"38-2\">\"connectivity brings us together... but excessive screen time is a real concern for our customers,\" said Tony Staffieri, President and CEO, Rogers</cite>. While Canadian (outside the priority BR/US/UK/AU regions), this is a strong proof point/comparable for pitching US telcos on embedded screen-time-reward offerings, or a direct outreach target for future expansion."
+  },
+  "rogers communications \u2013 'screen break' program": {
+    "category": "Telco youth digital-wellness initiative",
+    "confidence": "medium",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "Rogers Communications \u2013 'Screen Break' program",
+    "reason": "Weak region fit \u2014 Canada/'Other' is not an active or near-term NOMO market; offered only as a speculative telco analog, not a concrete opportunity.",
+    "region": "Other",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://about.rogers.com/news-ideas/rogers-launches-five-year-50-million-national-program-to-help-youth-balance-screen-time/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Rogers launched a five-year, $50M national program partnering with pro athletes and the YMCA to help Canadian teens balance screen time, signaling that major telcos are actively investing in youth screen-time initiatives and validating NOMO's telco/MVNO distribution thesis (Leo's vertical) \u2014 a strong analog or potential cross-border scouting lead as US telcos consider similar plays."
   },
   "rogers screen break": {
     "category": "Telco-backed youth screen-time program",
@@ -2640,19 +2700,19 @@
     "why_fits": "Nonprofit being tapped for a proposed $17M+ South Carolina statewide digital wellness initiative for public/charter school students, showing it is actively competing for the same school/EdTech and state-level procurement relationships NOMO targets."
   },
   "screentreat": {
-    "category": "Gamified screen-time / task-reward app",
+    "category": "Reward-for-screen-time EdTech app",
     "confidence": "medium",
     "first_rejected": "2026-08-05",
-    "last_rejected": "2026-09-17",
+    "last_rejected": "2026-10-29",
     "last_shown": "2026-08-10",
     "name": "ScreenTreat",
-    "reason": "Weak region fit (EU/Other, exploratory only) and redundant with stronger competitor entries already kept",
+    "reason": "Vague, early-stage EU startup with no concrete traction or funding details beyond a generic description; too marginal to track.",
     "region": "Other",
-    "reject_count": 3,
+    "reject_count": 4,
     "shown_count": 1,
     "source_url": "https://screentreat.app/",
     "suggested_type": "Competitor",
-    "why_fits": "An EU-funded (NextGenerationEU EdTech grant) startup where kids earn screen time and see supportive off-screen prompts, a gamified reward mechanic that overlaps with NOMO's core loop, positioning it as an emerging EdTech-adjacent competitor."
+    "why_fits": "An EU-funded EdTech startup building an app that turns kids' screen time into a reward for completing real-world tasks, directly competing on the 'reward reduced screen time' mechanic and on EdTech-sector grant funding."
   },
   "scrolltoll": {
     "category": "Gamified app-block/effort-to-unlock app",
@@ -2850,19 +2910,19 @@
     "why_fits": "Theatre Development Fund runs a city-backed program giving NYC high schoolers free/low-cost Broadway, Off-Broadway, and museum tickets \u2014 a tradeable, teen-specific reward inventory analogous to NOMO's existing Fever/Ticketmaster partners, and newly expanded in summer 2026 with the NYC Mayor's office."
   },
   "tdf tickets for teens (nyc)": {
-    "category": "Free museum/cultural institution access for teens",
+    "category": "Performing arts & museum access (teen-specific, city-backed)",
     "confidence": "medium",
     "first_rejected": "2026-09-07",
-    "last_rejected": "2026-09-07",
+    "last_rejected": "2026-10-29",
     "last_shown": "2026-09-07",
     "name": "TDF Tickets for Teens (NYC)",
-    "reason": "Redundant with existing Fever museum-ticket partnership; thin differentiation.",
+    "reason": "Duplicate of the same NYC Mayor's Office/TDF program, kept as a GTM partner prospect instead of a rewards prospect.",
     "region": "US",
-    "reject_count": 1,
+    "reject_count": 2,
     "shown_count": 1,
     "source_url": "https://tft.tdf.org/",
     "suggested_type": "Rewards partner prospect",
-    "why_fits": "TDF's Tickets for Teens gives NYC high schoolers no-cost access to museums and cultural institutions via a digital membership card, a close match to NOMO's existing museum-ticket reward pattern (e.g., Fever) and a realistic, teen-specific tradeable reward inventory not yet in NOMO's lineup."
+    "why_fits": "A city-government-backed teen membership program offering free admission to major NYC institutions (AMNH, Brooklyn Museum, Met, Bronx Zoo, Lincoln Center, etc.) via a digital membership card \u2014 broader, teen-exclusive cultural inventory than NOMO's current Fever/Ticketmaster lineup, and it already has municipal buy-in that could streamline a NOMO partnership."
   },
   "teen arts pass (tap) \u2013 chicago": {
     "category": "Arts & culture ticket pass (teen-focused)",
@@ -3284,6 +3344,21 @@
     "suggested_type": "GTM partner prospect",
     "why_fits": "Verizon just overhauled its consumer engagement strategy, launching \"Verizon Shine\" \u2014 described as \"a gamified extension of the rewards programme, offering daily merchandise giveaways, event tickets, and gift cards\" \u2014 plus a cash-back \"Verizon Dollars\" program, showing a major US carrier is actively building gamified reward infrastructure and a partner network for engagement, a strong distribution-partner opening for NOMO in the US Telcos & MVNOs vertical (parallel to T-Mobile Tuesdays)."
   },
+  "verizon (digital wellness lab partnership)": {
+    "category": "US Telco",
+    "confidence": "medium",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "Verizon (Digital Wellness Lab partnership)",
+    "reason": "Redundant with the more concrete, higher-confidence Verizon Phone-Free Fund candidate; this version is just webinar content, not a program partnership.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://digitalwellnesslab.org/blog/",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "<cite index=\"48-2\">The Digital Wellness Lab and Verizon present Healthy Digital Habits: free family webinars</cite> and <cite index=\"52-7\">this topic is explored in more detail by Bea Moise, a cognitive specialist for Verizon's Parenting in a Digital World</cite>, showing Verizon is actively building a youth digital-wellness content/education program \u2014 a natural distribution-partner entry point for NOMO in the Telco vertical, which is otherwise untapped in the current GTM lineup."
+  },
   "verizon (verizon family / digital wellness initiative)": {
     "category": "US Telco (Distribution Partner)",
     "confidence": "high",
@@ -3328,6 +3403,21 @@
     "source_url": "https://www.verizon.com/about/news/introducing-verizon-family-plus-perk",
     "suggested_type": "GTM partner prospect",
     "why_fits": "<cite index=\"55-2,55-3\">Verizon Family Plus is a new monthly add-on combining digital wellness and safety tools with a family-connection feature, designed to help parents manage technology use and keep households in sync.</cite> <cite index=\"53-5\">Verizon positions itself as a one-stop shop for digital wellness tools and expert advice to make back-to-school more rewarding for families,</cite> and already runs school-facing content via Discovery Education partnership, making it a logical embedded-distribution target in the US Telcos & MVNOs vertical where NOMO currently has no partner."
+  },
+  "verizon digital wellness initiative / #halfthestory phone-free fund": {
+    "category": "US Telco \u2013 Distribution Partner / School Digital Wellness Program",
+    "confidence": "high",
+    "first_rejected": "2026-10-29",
+    "last_rejected": "2026-10-29",
+    "last_shown": null,
+    "name": "Verizon Digital Wellness Initiative / #HalfTheStory Phone-Free Fund",
+    "reason": "Exact duplicate of the Verizon (Digital Wellness / Phone-Free Fund) candidate, same program and source.",
+    "region": "US",
+    "reject_count": 1,
+    "shown_count": 0,
+    "source_url": "https://www.verizon.com/about/news/students-organize-screen-free-connection-hunt",
+    "suggested_type": "GTM partner prospect",
+    "why_fits": "Verizon is actively funding student-led, in-school digital wellness projects: students <cite index=\"56-2\">applied for a mini-grant from The Phone-Free Fund, an initiative of the nonprofit organization #HalfTheStory, in partnership with the Verizon Digital Wellness initiative</cite>, and these students sit on <cite index=\"56-9\">the organization's Teen Tech Council, which brings teen leaders together to design and implement solutions that foster real-world connection and community in their schools</cite>. This is a live, teen-focused, screen-time-reduction distribution channel at a major US carrier not yet in NOMO's GTM lineup \u2014 a strong fit for the Telco/MVNO vertical."
   },
   "vodafone (\"18 before 18\" digital wellbeing campaign)": {
     "category": "Telco / youth digital wellbeing distribution",

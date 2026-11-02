@@ -1,5 +1,5 @@
 {
-  "last_success": "2026-10-29T19:04:26.436181+00:00",
+  "last_success": "2026-11-02T22:22:30.650356+00:00",
   "seen_stories": {
     "0e8bd032ea01f975": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -76,11 +76,6 @@
       "first_seen": "2026-10-29",
       "headline": "What Georgia's Role in $17.1 Billion Meta Settlement Means for Social Media Addiction Lawsuits"
     },
-    "4d99e75c1e6c2292": {
-      "entity_or_topic": "Litigation against major platforms",
-      "first_seen": "2026-10-15",
-      "headline": "Federal appeals court allows Florida to enforce its social media ban for under-14s"
-    },
     "58f75d72ba67893c": {
       "entity_or_topic": "BRICK",
       "first_seen": "2026-10-26",
@@ -95,6 +90,11 @@
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-29",
       "headline": "Pennsylvania signs statewide 'bell-to-bell' school cellphone ban"
+    },
+    "793a66d9a7e2996b": {
+      "entity_or_topic": "BRICK",
+      "first_seen": "2026-11-02",
+      "headline": "Brick Night blocks selected apps inside a Bluetooth zone"
     },
     "7a02a84bf051ac55": {
       "entity_or_topic": "Litigation against major platforms",
@@ -116,11 +116,6 @@
       "first_seen": "2026-10-26",
       "headline": "Ofcom Admits UK Online Safety Act Has Not Reduced Children's Exposure to Harmful Content"
     },
-    "80f70ff06ea38d69": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-15",
-      "headline": "Federal appeals court upholds Florida's under-14 social media account ban"
-    },
     "86fb93edc0012e40": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-22",
@@ -131,15 +126,25 @@
       "first_seen": "2026-10-22",
       "headline": "Proposals to ban social media for children \u2014 UK Parliament research briefing update"
     },
-    "89ee9314ba0e89e8": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-15",
-      "headline": "Child advocates oppose blanket social media bans, push for platform accountability instead"
+    "8e6d1627fe52b063": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-11-02",
+      "headline": "Snap settles with two teen plaintiffs mid-trial in LA social media addiction case"
     },
     "8fc6cf899fb1048b": {
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-22",
       "headline": "Australia to Sue Meta and TikTok for Failing to Enforce Under-16 Social Media Ban"
+    },
+    "954bfbf514e540f5": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-11-02",
+      "headline": "UK default overnight social media curfews for 16-17 year olds take effect as spring 2027 under-16 ban advances"
+    },
+    "9c03c7e239a0c039": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-11-02",
+      "headline": "Snap settles lawsuit with two US teens over alleged social media addiction"
     },
     "9cc606c092cbd88b": {
       "entity_or_topic": "Rewards and loyalty funding",
@@ -161,10 +166,15 @@
       "first_seen": "2026-10-26",
       "headline": "Pennsylvania Governor Shapiro signs statewide bell-to-bell school cell phone ban"
     },
-    "ac8c336115bdd839": {
-      "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-15",
-      "headline": "Philippine Senate passes bill banning social media access for under-18s"
+    "a852537487554c66": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-11-02",
+      "headline": "Australia's under-16 social media ban faces first major High Court challenge"
+    },
+    "af0640ab3b1a0ebc": {
+      "entity_or_topic": "Youth social media policy and regulation",
+      "first_seen": "2026-11-02",
+      "headline": "High Court hearings open as Australia introduces separate digital duty of care bill"
     },
     "af7e54827a423993": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -175,6 +185,11 @@
       "entity_or_topic": "Litigation against major platforms",
       "first_seen": "2026-10-29",
       "headline": "Australia's Under-16 Social Media Ban Cut Kids' Accounts Nearly 20%, but Half of Holdouts Got No Age Check"
+    },
+    "b6d833f1204ccf5f": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-11-02",
+      "headline": "High Court to consider whether Australia's under-16s social media ban is unconstitutional"
     },
     "b6e096575e2c30dd": {
       "entity_or_topic": "Youth social media policy and regulation",
@@ -191,30 +206,40 @@
       "first_seen": "2026-10-22",
       "headline": "TikTok staff raised child safety alarms. Court records show executives failed to act"
     },
+    "c7e81d20769cf335": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-11-02",
+      "headline": "Meta settles second lawsuit over alleged social media addiction among teens"
+    },
     "cc33d31081d36d11": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-29",
       "headline": "Meta and Snap go to trial over youth social media addiction claims"
     },
-    "d23a46c6e2f9b9f0": {
-      "entity_or_topic": "Youth social media policy and regulation",
-      "first_seen": "2026-10-15",
-      "headline": "11th Circuit allows Georgia to enforce social media age-verification law"
+    "d8d7acfc60457ff5": {
+      "entity_or_topic": "Litigation against major platforms",
+      "first_seen": "2026-11-02",
+      "headline": "Meta settles with second teen plaintiff, leaving Snap as sole defendant ahead of trial"
     },
     "dab00825c03e6b4d": {
       "entity_or_topic": "Rewards and loyalty funding",
       "first_seen": "2026-10-19",
       "headline": "FinTech funding tops $2.8bn in a bumper week, led by Ramp's $1.85bn raise; rewards-linked InsurTech and loyalty deals also close"
     },
-    "e46bdc37f08e8f1a": {
+    "e45b802c48f57d39": {
       "entity_or_topic": "Rewards and loyalty funding",
-      "first_seen": "2026-10-15",
-      "headline": "Greece tables bill setting minimum social media age at 15 with mandatory age assurance"
+      "first_seen": "2026-11-02",
+      "headline": "Ofcom warns children may bypass UK social media ban"
     },
     "ec6722381ad3a826": {
       "entity_or_topic": "Youth social media policy and regulation",
       "first_seen": "2026-10-29",
       "headline": "Australia's under-16 social media ban cut account ownership nearly 20%, but 81.5% of children still used restricted platforms"
+    },
+    "ee2049ecd1df8387": {
+      "entity_or_topic": "Rewards and loyalty funding",
+      "first_seen": "2026-11-02",
+      "headline": "Legal challenge to Australia's social media ban starts in High Court"
     },
     "f6c488386713e180": {
       "entity_or_topic": "Youth social media policy and regulation",

@@ -1,0 +1,390 @@
+{
+  "competition": [],
+  "gtm_prospects": [],
+  "industry": [
+    {
+      "headline": "Meta, Google and TikTok sue to block California's under-16 'addictive feed' law (AB 1709)",
+      "source": "NPR",
+      "summary": "Google, Meta and TikTok filed federal suits to block AB 1709, which bars under-16 personalized feeds/autoplay starting Jan 1, 2027 (with a July 2027 deadline to extend age-checks to existing devices), arguing First Amendment and parental-rights violations. This is the sharpest near-term US regulatory flashpoint on addictive teen feed design, directly validating NOMO's 'reward for time off addictive feeds' pitch as it pushes its US go-to-market.",
+      "url": "https://www.npr.org/2026/11/07/nx-s1-6032764/google-meta-and-tiktok-sue-to-block-california-youth-social-media-law"
+    },
+    {
+      "headline": "UK government weighs extending under-16 social media ban to Vinted and eBay",
+      "source": "MLex",
+      "summary": "Culture Secretary Lisa Nandy said the UK is 'looking seriously' at folding marketplace apps Vinted and eBay into the under-16 social media ban over grooming concerns tied to messaging features; the core ban (Instagram, TikTok, X, Snapchat, etc.) still takes effect March 2027. Directly touches NOMO's UK pilot market and CEO Leonardo's policy-advocacy role, signaling regulators will broaden scope quickly.",
+      "url": "https://www.mlex.com/mlex/technology/articles/2547833"
+    },
+    {
+      "headline": "State AGs use Meta's $17.1B settlement and TikTok litigation to force durable product change",
+      "source": "Law360",
+      "summary": "Analysis argues state attorneys general are increasingly using settlements and litigation (Meta's reported $17.1B deal, ongoing TikTok suits) to mandate durable product and policy changes rather than just extract fines \u2014 a trend that could create regulatory tailwinds for reward-based, off-platform engagement tools like NOMO.",
+      "url": "https://www.law360.com/cybersecurity-privacy/articles/2547290"
+    },
+    {
+      "headline": "California appeals court dismisses school districts' negligence claims against Meta, TikTok, Snap, YouTube",
+      "source": "Bloomberg Law",
+      "summary": "A California appeals court affirmed dismissal of negligence/nuisance claims brought by school districts across four states over alleged youth mental-health harms from social platforms. As litigation avenues close, schools are more likely to turn to proactive interventions \u2014 reinforcing NOMO's pitch as a practical alternative to the courts.",
+      "url": "https://news.bloomberglaw.com/business-and-practice/meta-snap-tiktok-beat-school-districts-addiction-state-suits-34"
+    },
+    {
+      "headline": "Ofcom ramps up child-safety enforcement pressure ahead of UK's under-16 ban",
+      "source": "Ofcom",
+      "summary": "Ofcom reiterated that child protection is non-negotiable and warned of enforcement action against platforms that don't step up, following Snapchat's anti-grooming rollout, ahead of the UK's under-16 social media ban taking effect spring 2027. Sustains a receptive UK policy backdrop for NOMO's pilot and CEO engagement.",
+      "url": "https://www.ofcom.org.uk/online-safety/protecting-children/ofcom-provides-update-following-its-call-to-action-on-tech-industry-to-improve-protections-for-children"
+    },
+    {
+      "headline": "Australia's High Court hears Reddit-led constitutional challenge to under-16 social media ban",
+      "source": "Al Jazeera",
+      "summary": "Reddit and the Digital Freedom Project argued the ban infringes political communication rights, while the government defended it on mental-health grounds, noting five million accounts closed since the ban began. A bellwether case for whether age-based bans survive legal challenge, relevant to AU (an exploratory NOMO market) and feeding into UK/US policy debates.",
+      "url": "https://www.aljazeera.com/news/2026/11/4/australian-government-defends-social-media-ban-for-under-16s-in-court"
+    }
+  ],
+  "new_candidates": [],
+  "partner_prospects": [],
+  "quiet_day": false,
+  "reconsider": [
+    {
+      "category": "Screen-time blocking/redirect app",
+      "confidence": "medium",
+      "name": "Jomo",
+      "reason": "Already part of NOMO's baseline tracked competitor set (JOMO is explicitly named in the existing competitor fit bar), not a new candidate.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://habitdoom.com/blog/digital-wellbeing-daily-habits",
+      "suggested_type": "Competitor",
+      "why_fits": "Jomo is an active iOS screen-time app using ManagedSettings enforcement with 'redirect prompts' and 'alternative activity reminders' as a lighter-touch alternative to blockers like Opal, placing it squarely in the same gamified screen-time-reduction category NOMO competes in, yet it is not yet in NOMO's tracked competitor list."
+    },
+    {
+      "category": "Focus session / habit app for students",
+      "confidence": "medium",
+      "name": "Kohru",
+      "reason": "Generic blog-listicle sourcing with no concrete traction or news hook; vague why_fits.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://habitdoom.com/blog/best-screen-time-apps-android",
+      "suggested_type": "Competitor",
+      "why_fits": "Markets itself around cross-device Focus Sessions and habit cues targeted at students and ADHD users, a direct feature overlap with NOMO's student-focused challenge model."
+    },
+    {
+      "category": "K-12 screen time analytics / EdTech platform",
+      "confidence": "medium",
+      "name": "Linewize (Qoria) EdTech Manager",
+      "reason": "Redundant with higher-confidence school-compliance competitors already kept (The Commons, LockedIn Technologies); medium confidence.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://finance.yahoo.com/technology/articles/linewize-edtech-manager-launches-screen-120000771.html",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"59-3,59-4\">Linewize announced that EdTech Manager's Screen Time reporting feature officially launched and is now available to school districts nationwide, won a Tech & Learning Award of Excellence.</cite> <cite index=\"59-5,59-6\">It gives school leaders a complete view of how students spend time on school-provided devices, with breakdowns at the district, school, grade and student level.</cite> As a nationally-deployed K-12 screen-time product, it competes directly for the same district/EdTech procurement budgets and mindshare NOMO targets in the 6-12 Education vertical."
+    },
+    {
+      "category": "Municipal teen activity/attraction pass",
+      "confidence": "medium",
+      "name": "City of Dallas Teen All-Access Pass (Dallas Park & Recreation)",
+      "reason": "Duplicate of the other City of Dallas Teen All-Access Pass candidate entry; merged into a single candidate.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"29-3,29-4\">The City of Dallas Teen All-Access Pass gives youth ages 13 to 17 access to popular recreational and cultural attractions at no cost, made possible through partnerships with local cultural, recreational and entertainment groups</cite>, directly matching the 'city green pass' reward-type example (free zoo, museum, arboretum, skating rink access) NOMO already seeks, and is a fresh, recurring 2026 program."
+    },
+    {
+      "category": "Multi-attraction city pass / travel bundle",
+      "confidence": "medium",
+      "name": "CityPASS (Boston, feat. Museum of Fine Arts)",
+      "reason": "Duplicate of the higher-confidence 'CityPASS (Boston / MFA partnership)' candidate.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.citybuzz.co/2026/04/14/museum-of-fine-arts-boston-joins-citypass-program-expanding-cultural-access-for-visitors/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "CityPASS bundles discounted, mobile tickets across multiple top attractions (aquarium, museums, observation decks, zoo) in major US cities \u2014 matching the 'city greenpass'-style tradeable travel/attraction inventory NOMO seeks, which its current single-venue partners (Fever, GetYourGuide) don't fully replicate at city-bundle scale."
+    },
+    {
+      "category": "Teen museum/attraction pass network",
+      "confidence": "medium",
+      "name": "Greater Philadelphia Cultural Alliance (STAMP Pass)",
+      "reason": "Overlaps with other museum-pass candidates (Carnegie) already kept; redundant.",
+      "region": "US",
+      "reject_count": 2,
+      "shown_count": 0,
+      "source_url": "https://philaculture.org/about-us/press-room/news/museums-now-free-for-philadelphia-high-schoolers/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Runs STAMP, a free-admission pass giving Philadelphia teens access to 12 museums and cultural attractions citywide, exactly the kind of museum-ticket/city-pass reward inventory NOMO already sources via Fever and GetYourGuide."
+    },
+    {
+      "category": "Municipalities/States \u2014 statewide phone-free schools policy",
+      "confidence": "high",
+      "name": "Washington State \u2014 Governor's Office (Phone-Free Schools Act)",
+      "reason": "Legislation not yet passed and redundant with other state-level mandate stories (CA, TX, MA) already kept.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://governor.wa.gov/news/2026/governor-ferguson-launches-phone-free-schools-act-spokane-event",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "A state-level executive is actively pushing phone-free school legislation and citing concrete student phone-use data, signaling an open door for a rewards-based implementation partner (vs. pure restriction) to support districts statewide \u2014 a direct fit for the Municipalities/States vertical. Governor Ferguson released details of the Phone-Free Schools Act, citing that teenagers spend roughly a quarter of the school day on their phones."
+    },
+    {
+      "category": "Youth-led digital wellbeing nonprofit",
+      "confidence": "medium",
+      "name": "#HalfTheStory (Teen Tech Council / Phone-Free Fund)",
+      "reason": "Duplicate/overlapping with the Verizon Digital Wellness candidate (same underlying program).",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://www.verizon.com/about/news/students-organize-screen-free-connection-hunt",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"58-6,58-7,58-8\">The Phone-Free Fund, an initiative of the nonprofit organization #HalfTheStory, helps students become empowered digital citizens through youth-led educational programs, with teen leaders on its Teen Tech Council designing solutions that foster real-world connection in their schools.</cite> This is a youth-org with an existing funded network of student ambassadors running screen-free/offline challenges in schools nationwide \u2014 a near-perfect relationship-driven implementation partner adjacent to the Faith-based & Youth Orgs vertical, and a very recent (16-day-old) signal."
+    },
+    {
+      "category": "Youth-org & state-level digital wellness coalition",
+      "confidence": "medium",
+      "name": "#HalfTheStory / New York Teen Tech Council",
+      "reason": "Duplicate/overlapping with the '#HalfTheStory (California Innovation Council)' candidate.",
+      "region": "US",
+      "reject_count": 1,
+      "shown_count": 0,
+      "source_url": "https://ny1.com/nyc/all-boroughs/the-rush-hour/2025/07/28/nonprofit-launches-teen-empowerment-program-to-encourage-screen-free-learning",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "A statewide New York initiative pairing teens with elected officials on digital wellness and phone-free learning policy, run with nonprofit #HalfTheStory \u2014 fits both the Faith-based & Youth Orgs vertical (Eric) and Municipalities/States vertical (Leo) as a trusted, policy-connected implementation partner not currently in NOMO's GTM roster."
+    }
+  ],
+  "rejected_today": [
+    {
+      "category": "Multi-attraction city pass (museums & culture)",
+      "confidence": "medium",
+      "name": "CityPASS",
+      "reason": "Too similar to existing Fever/GetYourGuide museum-ticket inventory; weak differentiation.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://media.citypass.com/media-room/news/explore-the-museum-of-fine-arts-boston-with-the-bostoncitypass-ticket",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "CityPASS bundles discounted mobile tickets to top museums and cultural attractions across major US cities (Boston, Chicago, NY), matching NOMO's 'museum tickets, city green passes' style reward criteria and offering a scalable, teen-friendly tradeable ticket inventory beyond current partners like Fever and GetYourGuide."
+    },
+    {
+      "category": "Municipal youth engagement program",
+      "confidence": "medium",
+      "name": "City of Dallas Teen All-Access Pass",
+      "reason": "Duplicate of the Dallas Teen Pass program, kept as a Rewards partner prospect instead of this GTM framing.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.cbsnews.com/texas/news/dallas-texas-teen-all-access-pass-6-29-2026/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "Dallas Park and Recreation's teen pass program gives 13-17 year olds free access to cultural, recreational and entertainment venues via partnerships with local organizations \u2014 a model municipal youth-wellness initiative that fits NOMO's Municipalities GTM vertical and could be approached directly for a city-level rewards/engagement tie-in."
+    },
+    {
+      "category": "K-12 digital literacy/cyber-safety EdTech platform",
+      "confidence": "medium",
+      "name": "Hackersjack",
+      "reason": "Indirect/vague fit \u2014 illustrates a partnership pattern with competitor Yondr rather than a concrete opportunity for NOMO itself.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.overyondr.com/blog/phone-free-schools-hackersjack-partnership",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"43-1,43-2\">The Hackersjack platform is K-12, student-focused, research-based, and correlated to multiple state standards, and just announced an exclusive partnership with Yondr pairing phone-free environments with a standards-aligned cyber safety curriculum</cite> - a complementary EdTech player already bundling with a phone-policy vendor, showing an open lane for NOMO to pursue a similar district-level co-partnership in the 6-12 Education vertical."
+    },
+    {
+      "category": "Gamified student wellness/rewards app",
+      "confidence": "medium",
+      "name": "Rallee (with Philadelphia Flyers/NHL)",
+      "reason": "Duplicate of the other Rallee/Philadelphia Flyers entry kept under new_candidates.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.phillytrib.com/news/the-learning-key/philly-school-district-expand-student-wellness-program-with-flyers-rallee-app/article_b8d15ab1-da94-4343-bbe4-f0287b74e5a0.html",
+      "suggested_type": "Competitor",
+      "why_fits": "<cite index=\"17-2,17-8\">The School District of Philadelphia has partnered with the Philadelphia Flyers and Rallee, an interactive app that blends physical activity with learning, with the app featuring 'Flyers World,' a themed experience with games, rewards'</cite> - a rewards/gamification app actively winning district-level school partnerships, directly competing for the same procurement channel NOMO targets."
+    },
+    {
+      "category": "School-district-backed youth screen-time reduction initiative",
+      "confidence": "medium",
+      "name": "Roaring Fork Digital Wellness Coalition / Tin Can phones",
+      "reason": "A community/device-distribution initiative, not a digital product competitor; weak fit to the competitor bar.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.aspendailynews.com/news/roaring-fork-digital-wellness-coalition-aims-to-reduce-youth-screen-time-19626e1a",
+      "suggested_type": "Competitor",
+      "why_fits": "A newly formed coalition of school and community partners is distributing alternative \"dumb\" devices to cut youth screen time, a direct community/school-based alternative to app-based reward models. The coalition comprises members from across the Aspen School District, the Aspen Country Day School and other local valley partners, and is one of the first major projects of the newly founded coalition aimed at reducing youth screen time."
+    },
+    {
+      "category": "Multi-attraction city museum/experience pass",
+      "confidence": "medium",
+      "name": "Miami Museum Mile Passport",
+      "reason": "Overlaps with existing museum-ticket reward category (Fever); small regional scope adds little differentiation.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.miamilivingmagazine.com/post/miami-museum-mile-passport-offers-rewards-through-october",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A city-run multi-venue passport program offering tradeable stamp-based rewards across five Miami attractions, filling a 'city pass / local attraction' gap distinct from NOMO's existing single-venue museum/concert partners. Families can collect museum stamps for local perks, with rewards available after three visits and a museum membership raffle for those who complete the full passport."
+    },
+    {
+      "category": "UK Telco / MVNO distribution",
+      "confidence": "medium",
+      "name": "EE (UK mobile carrier)",
+      "reason": "Speculative \u2014 cites research on teen behavior, not an actual partnership opening or program; too vague to count as a GTM prospect.",
+      "region": "UK",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://itbrief.co.uk/story/young-people-plan-to-sidestep-uk-s-under-16-social-ban",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "EE is actively researching teen behavior around the UK's under-16 social media ban, signaling direct interest in the youth digital-wellbeing space exactly as NOMO's UK policy-linked GTM push is ramping up, making it a timely distribution-partner target for Leo's Telcos vertical. EE has published research suggesting many young people are preparing to sidestep the UK's planned social media ban for under-16s, finding that 42% of 11 to 15-year-olds expect to move to apps outside the rules."
+    },
+    {
+      "category": "Screen-time rewards marketplace app",
+      "confidence": "high",
+      "name": "Dayo Deals",
+      "reason": "Duplicate of the Dayo (Dayo Deals) entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.fastcompany.com/91507495/dayo-app-teen-phone-screen-time-reduction-parents-reward-starbucks-adidas",
+      "suggested_type": "Competitor",
+      "why_fits": "App-based service that lets teens earn real brand rewards (Starbucks, Adidas, Amazon) for reducing screen time and social media use, directly overlapping NOMO's reward-for-less-screen-time model and brand-partner approach."
+    },
+    {
+      "category": "Gamified + social accountability screen-time app",
+      "confidence": "medium",
+      "name": "Screen Time Buddy",
+      "reason": "Weak sourcing (self-promotional listicle) without strong independent evidence to support medium confidence.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.screentimebuddy.com/blog/best-screen-time-apps-2026",
+      "suggested_type": "Competitor",
+      "why_fits": "Combines gamification, social accountability ('Powergroups'), and coin-based rewards into one app aimed at students and friend groups wanting to collectively reduce screen time, a near-direct mechanic match to NOMO's Moments/leaderboard system."
+    },
+    {
+      "category": "Teen focus/reward points app",
+      "confidence": "medium",
+      "name": "Timily",
+      "reason": "Generic, weakly sourced (own guides page) and redundant with stronger competitor candidates already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://timily.app/guides/time-management-tools-students/",
+      "suggested_type": "Competitor",
+      "why_fits": "Teen-focused focus-timer app where points earned for staying off distracting apps are redeemable for screen time or custom real-world rewards, directly competing for the same reward-for-reduced-screen-time positioning as NOMO."
+    },
+    {
+      "category": "Teen museum/attraction pass network",
+      "confidence": "medium",
+      "name": "Greater Philadelphia Cultural Alliance (STAMP Pass)",
+      "reason": "Overlaps with other museum-pass candidates (Carnegie) already kept; redundant.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://philaculture.org/about-us/press-room/news/museums-now-free-for-philadelphia-high-schoolers/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "Runs STAMP, a free-admission pass giving Philadelphia teens access to 12 museums and cultural attractions citywide, exactly the kind of museum-ticket/city-pass reward inventory NOMO already sources via Fever and GetYourGuide."
+    },
+    {
+      "category": "App-block / gamified habit-completion app",
+      "confidence": "medium",
+      "name": "Habit Doom",
+      "reason": "Weakly sourced (own blog) and redundant with stronger app-block/competitor candidates already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://habitdoom.com/blog/best-app-blockers-for-students",
+      "suggested_type": "Competitor",
+      "why_fits": "Habit Doom locks distracting apps by default and only unlocks them when users complete real-world habits, directly overlapping with NOMO's reward-for-offline-time model and marketed specifically to students/teens wanting a hard lock."
+    },
+    {
+      "category": "App block / focus gamification",
+      "confidence": "medium",
+      "name": "AppBlock",
+      "reason": "Generic, weakly sourced listicle mention; not distinctive enough versus stronger competitor candidates kept.",
+      "region": "All",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://bestforandroid.com/smartphone-addiction-breaking-apps/",
+      "suggested_type": "Competitor",
+      "why_fits": "AppBlock is a maturing app-blocking tool with strict schedule/location-based profiles and a 'turns focus time into a small game' positioning, squarely matching the explicit 'app block' competitor criteria."
+    },
+    {
+      "category": "Museum / exclusive teen events",
+      "confidence": "medium",
+      "name": "Guggenheim Teen Circle / GuggTeens",
+      "reason": "Overlaps with Carnegie's broader reciprocal teen-membership offer; redundant single-city museum perk.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.aam-us.org/feed/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "The Guggenheim's free Teen Circle membership for ages 13-18 provides access to exclusive events, performances, and group activities for members and their friends, which is tradeable, teen-specific reward inventory not currently covered by NOMO's museum/event partners."
+    },
+    {
+      "category": "School phone-free program / EdTech screen-time vendor",
+      "confidence": "medium",
+      "name": "The Commons (phone-free campus platform)",
+      "reason": "Duplicate/same entity as The Commons App entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.lockedinapp.co/resources/best-apps-to-limit-student-phone-use",
+      "suggested_type": "Competitor",
+      "why_fits": "A campus 'School Mode' phone-restriction platform founded by a former Yondr school-partnerships lead, already live in 10 schools across five states, competing directly for the same 6-12 Education district/school procurement relationships NOMO targets as its top GTM vertical."
+    },
+    {
+      "category": "Free teen museum/cultural admission program",
+      "confidence": "medium",
+      "name": "Tickets for Teens (TDF)",
+      "reason": "Overlaps with existing museum-ticket category and other museum-pass candidates already kept; redundant.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://tft.tdf.org/offers",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "A teen-focused program offering free museum and library admission (American Museum of Natural History, Brooklyn Museum, Bronx Museum, Staten Island Museum, etc.), directly matching NOMO's 'museum tickets' reward category and its core teen/Gen Z audience fit."
+    },
+    {
+      "category": "Faith-based & Youth Orgs",
+      "confidence": "medium",
+      "name": "YMCA (national network / local branches)",
+      "reason": "Vaguer, more generically sourced version of the Coastal Horizons YMCA example already kept; redundant.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://www.ymcagreensboro.org/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"69-5,69-6\">YMCA of Greensboro's 'Beat Your Best Fall Wellness Challenge' runs an 8-week challenge with weekly themes including Screen Time, Sleep, Nutrition, and Stress Management.</cite> <cite index=\"74-5,74-6\">YMCA branches already run app-based challenge/leaderboard programs where members compete and win prizes.</cite> This shows live appetite inside the Youth Orgs vertical (Eric's territory) for exactly the challenge/leaderboard/reward mechanics NOMO offers, making it a strong relationship-driven direct target beyond the already-named example account."
+    },
+    {
+      "category": "6-12 Education - state/municipal funding channel",
+      "confidence": "medium",
+      "name": "Massachusetts AG Phone Free Schools Support Grant (and similar state grant programs)",
+      "reason": "Duplicate/broader restatement of the Massachusetts AG grant entry already kept.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://wror.com/2026/10/30/17-massachusetts-school-districts-get-625k-in-state-grants-for-phone-free-learning/",
+      "suggested_type": "GTM partner prospect",
+      "why_fits": "<cite index=\"33-1,33-2\">Massachusetts Attorney General Andrea Joy Campbell's office awarded more than $625,000 to 17 school districts statewide to strengthen phone-free learning environments, via a Phone Free School Support Grant launched to help public schools create distraction-free environments.</cite> <cite index=\"34-1\">Texas, Massachusetts, New Jersey, Pennsylvania and Colorado are all using state grants to help schools prepare for 2026-27 phone-free policies.</cite> These state AG/education-agency grant programs are an emerging, currently-untapped procurement channel for the 6-12 Education vertical (Jo\u00e3o's territory) that sits alongside direct district outreach and could fund NOMO pilots or rewards budgets."
+    },
+    {
+      "category": "QSR / free treat reward",
+      "confidence": "medium",
+      "name": "Dairy Queen",
+      "reason": "Low-value, generic freebie (free scoop for app download) with little strategic differentiation or partnership substance.",
+      "region": "US",
+      "reject_count": 0,
+      "shown_count": 0,
+      "source_url": "https://hip2save.com/deals/best-free-food-apps/",
+      "suggested_type": "Rewards partner prospect",
+      "why_fits": "<cite index=\"32-17,32-18\">Dairy Queen's app gives users a free scoop of ice cream just for downloading the app and signing up for mobile deals</cite>, making it a low-cost, teen-friendly treat reward directly parallel to NOMO's existing McDonald's ice-cream-cone partnership and realistic to execute via an app-redeemable offer."
+    }
+  ],
+  "tracking_counts": {
+    "competitors": 5,
+    "gtm_prospects": 0,
+    "partner_prospects": 0
+  }
+}
